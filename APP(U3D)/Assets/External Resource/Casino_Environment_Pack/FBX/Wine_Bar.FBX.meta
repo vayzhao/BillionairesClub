@@ -1,0 +1,171 @@
+fileFormatVersion: 2
+guid: 304d3ab4372f9df4780ad9886e45cd5f
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Box001
+    100002: Cylinder013
+    100004: Object002
+    100006: Object004
+    100008: Object005
+    100010: Object006
+    100012: //RootNode
+    100014: Box002
+    100016: Cylinder014
+    100018: Object007
+    100020: Object008
+    100022: Object009
+    100024: Object010
+    100026: Bar_Door_01
+    100028: Bar_Door_02
+    100030: Bar_Drawer_01
+    100032: Bar_Drawer_02
+    400000: Box001
+    400002: Cylinder013
+    400004: Object002
+    400006: Object004
+    400008: Object005
+    400010: Object006
+    400012: //RootNode
+    400014: Box002
+    400016: Cylinder014
+    400018: Object007
+    400020: Object008
+    400022: Object009
+    400024: Object010
+    400026: Bar_Door_01
+    400028: Bar_Door_02
+    400030: Bar_Drawer_01
+    400032: Bar_Drawer_02
+    2300000: Box001
+    2300002: Cylinder013
+    2300004: Object002
+    2300006: Object004
+    2300008: Object005
+    2300010: Object006
+    2300012: Box002
+    2300014: Cylinder014
+    2300016: Object007
+    2300018: Object008
+    2300020: Object009
+    2300022: Object010
+    2300024: Bar_Door_01
+    2300026: Bar_Door_02
+    2300028: Bar_Drawer_01
+    2300030: Bar_Drawer_02
+    2300032: //RootNode
+    3300000: Box001
+    3300002: Cylinder013
+    3300004: Object002
+    3300006: Object004
+    3300008: Object005
+    3300010: Object006
+    3300012: Box002
+    3300014: Cylinder014
+    3300016: Object007
+    3300018: Object008
+    3300020: Object009
+    3300022: Object010
+    3300024: Bar_Door_01
+    3300026: Bar_Door_02
+    3300028: Bar_Drawer_01
+    3300030: Bar_Drawer_02
+    3300032: //RootNode
+    4300000: Box001
+    4300002: Cylinder013
+    4300004: Object002
+    4300006: Object004
+    4300008: Object005
+    4300010: Object006
+    4300012: Cylinder014
+    4300014: Object007
+    4300016: Object008
+    4300018: Object009
+    4300020: Object010
+    4300022: Box002
+    4300024: Wine_Bar
+    4300026: Bar_Door_02
+    4300028: Bar_Door_01
+    4300030: Bar_Drawer_02
+    4300032: Bar_Drawer_01
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+    normalCalculationMode: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

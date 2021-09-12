@@ -1,0 +1,142 @@
+fileFormatVersion: 2
+guid: 71fb7dae436f33144a553b9168a46339
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Box018
+    100002: //RootNode
+    100004: Object011
+    100006: Wall_Low004
+    100008: Cashier 1
+    100010: Object012
+    100012: Text
+    100014: Cashier_Door
+    100016: Cashier_HalfDoor
+    100018: Cashier_Text
+    100020: Cashier
+    100022: Cashier_Frame
+    400000: Box018
+    400002: //RootNode
+    400004: Object011
+    400006: Wall_Low004
+    400008: Cashier 1
+    400010: Object012
+    400012: Text
+    400014: Cashier_Door
+    400016: Cashier_HalfDoor
+    400018: Cashier_Text
+    400020: Cashier
+    400022: Cashier_Frame
+    2300000: Box018
+    2300002: Object011
+    2300004: Wall_Low004
+    2300006: Cashier 1
+    2300008: Object012
+    2300010: Text
+    2300012: Cashier_Door
+    2300014: Cashier_HalfDoor
+    2300016: Cashier_Text
+    2300018: Cashier
+    2300020: Cashier_Frame
+    3300000: Box018
+    3300002: Object011
+    3300004: Wall_Low004
+    3300006: Cashier 1
+    3300008: Object012
+    3300010: Text
+    3300012: Cashier_Door
+    3300014: Cashier_HalfDoor
+    3300016: Cashier_Text
+    3300018: Cashier
+    3300020: Cashier_Frame
+    4300000: Wall_Low004
+    4300002: Object011
+    4300004: Box018
+    4300006: Text
+    4300008: Object012
+    4300010: Cashier
+    4300012: Cashier_Text
+    4300014: Cashier_HalfDoor
+    4300016: Cashier_Door
+    4300018: Cashier_Frame
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+    normalCalculationMode: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

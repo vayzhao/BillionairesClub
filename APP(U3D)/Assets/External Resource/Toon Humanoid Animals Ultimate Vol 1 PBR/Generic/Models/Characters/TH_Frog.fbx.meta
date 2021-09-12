@@ -1,0 +1,204 @@
+fileFormatVersion: 2
+guid: ef894c6fa4c1cc74f8d180fd10529c83
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Head
+    100002: Hips
+    100004: LeftArm
+    100006: LeftEye
+    100008: LeftEyeLids
+    100010: LeftFoot
+    100012: LeftForeArm
+    100014: LeftHand
+    100016: LeftHandIndex1
+    100018: LeftHandIndex2
+    100020: LeftHandIndex3
+    100022: LeftHandMiddle1
+    100024: LeftHandMiddle2
+    100026: LeftHandMiddle3
+    100028: LeftHandPinky1
+    100030: LeftHandPinky2
+    100032: LeftHandPinky3
+    100034: LeftHandThumb1
+    100036: LeftHandThumb2
+    100038: LeftHandThumb3
+    100040: LeftLeg
+    100042: LeftShoulder
+    100044: LeftToeBase
+    100046: LeftUpLeg
+    100048: Neck
+    100050: RightArm
+    100052: RightEye
+    100054: RightEyeLids
+    100056: RightFoot
+    100058: RightForeArm
+    100060: RightHand
+    100062: RightHandIndex1
+    100064: RightHandIndex2
+    100066: RightHandIndex3
+    100068: RightHandMiddle1
+    100070: RightHandMiddle2
+    100072: RightHandMiddle3
+    100074: RightHandPinky1
+    100076: RightHandPinky2
+    100078: RightHandPinky3
+    100080: RightHandThumb1
+    100082: RightHandThumb2
+    100084: RightHandThumb3
+    100086: RightLeg
+    100088: RightShoulder
+    100090: RightToeBase
+    100092: RightUpLeg
+    100094: Spine
+    100096: Spine1
+    100098: Spine2
+    100100: Spine3
+    100102: //RootNode
+    400000: Head
+    400002: Hips
+    400004: LeftArm
+    400006: LeftEye
+    400008: LeftEyeLids
+    400010: LeftFoot
+    400012: LeftForeArm
+    400014: LeftHand
+    400016: LeftHandIndex1
+    400018: LeftHandIndex2
+    400020: LeftHandIndex3
+    400022: LeftHandMiddle1
+    400024: LeftHandMiddle2
+    400026: LeftHandMiddle3
+    400028: LeftHandPinky1
+    400030: LeftHandPinky2
+    400032: LeftHandPinky3
+    400034: LeftHandThumb1
+    400036: LeftHandThumb2
+    400038: LeftHandThumb3
+    400040: LeftLeg
+    400042: LeftShoulder
+    400044: LeftToeBase
+    400046: LeftUpLeg
+    400048: Neck
+    400050: RightArm
+    400052: RightEye
+    400054: RightEyeLids
+    400056: RightFoot
+    400058: RightForeArm
+    400060: RightHand
+    400062: RightHandIndex1
+    400064: RightHandIndex2
+    400066: RightHandIndex3
+    400068: RightHandMiddle1
+    400070: RightHandMiddle2
+    400072: RightHandMiddle3
+    400074: RightHandPinky1
+    400076: RightHandPinky2
+    400078: RightHandPinky3
+    400080: RightHandThumb1
+    400082: RightHandThumb2
+    400084: RightHandThumb3
+    400086: RightLeg
+    400088: RightShoulder
+    400090: RightToeBase
+    400092: RightUpLeg
+    400094: Spine
+    400096: Spine1
+    400098: Spine2
+    400100: Spine3
+    400102: //RootNode
+    2100000: TH_Frog_Body
+    4300000: TH_Frog
+    9500000: //RootNode
+    13700000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TH_Frog_Body
+    second: {fileID: 2100000, guid: 6a178edc79187d3418bc3a8f40549cc6, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 90
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: Hips
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
