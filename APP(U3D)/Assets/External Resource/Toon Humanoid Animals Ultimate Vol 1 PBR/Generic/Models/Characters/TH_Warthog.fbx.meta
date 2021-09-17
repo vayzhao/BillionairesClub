@@ -1,137 +1,395 @@
 fileFormatVersion: 2
 guid: 32c4cbb70e332f94db194e521a450e76
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Head
-    100002: Hips
-    100004: LeftArm
-    100006: LeftEar1
-    100008: LeftEar2
-    100010: LeftEar3
-    100012: LeftEye
-    100014: LeftEyeLids
-    100016: LeftFoot
-    100018: LeftForeArm
-    100020: LeftHand
-    100022: LeftHandIndex1
-    100024: LeftHandIndex2
-    100026: LeftHandIndex3
-    100028: LeftHandMiddle1
-    100030: LeftHandMiddle2
-    100032: LeftHandMiddle3
-    100034: LeftHandPinky1
-    100036: LeftHandPinky2
-    100038: LeftHandPinky3
-    100040: LeftHandThumb1
-    100042: LeftHandThumb2
-    100044: LeftHandThumb3
-    100046: LeftLeg
-    100048: LeftShoulder
-    100050: LeftToeBase
-    100052: LeftUpLeg
-    100054: Neck
-    100056: RightArm
-    100058: RightEar1
-    100060: RightEar2
-    100062: RightEar3
-    100064: RightEye
-    100066: RightEyeLids
-    100068: RightFoot
-    100070: RightForeArm
-    100072: RightHand
-    100074: RightHandIndex1
-    100076: RightHandIndex2
-    100078: RightHandIndex3
-    100080: RightHandMiddle1
-    100082: RightHandMiddle2
-    100084: RightHandMiddle3
-    100086: RightHandPinky1
-    100088: RightHandPinky2
-    100090: RightHandPinky3
-    100092: RightHandThumb1
-    100094: RightHandThumb2
-    100096: RightHandThumb3
-    100098: RightLeg
-    100100: RightShoulder
-    100102: RightToeBase
-    100104: RightUpLeg
-    100106: Spine
-    100108: Spine1
-    100110: Spine2
-    100112: Spine3
-    100114: //RootNode
-    100116: LeftEar4
-    100118: New_Ground_Plane_Object
-    100120: RightEar4
-    100122: TH_Warthog
-    400000: Head
-    400002: Hips
-    400004: LeftArm
-    400006: LeftEar1
-    400008: LeftEar2
-    400010: LeftEar3
-    400012: LeftEye
-    400014: LeftEyeLids
-    400016: LeftFoot
-    400018: LeftForeArm
-    400020: LeftHand
-    400022: LeftHandIndex1
-    400024: LeftHandIndex2
-    400026: LeftHandIndex3
-    400028: LeftHandMiddle1
-    400030: LeftHandMiddle2
-    400032: LeftHandMiddle3
-    400034: LeftHandPinky1
-    400036: LeftHandPinky2
-    400038: LeftHandPinky3
-    400040: LeftHandThumb1
-    400042: LeftHandThumb2
-    400044: LeftHandThumb3
-    400046: LeftLeg
-    400048: LeftShoulder
-    400050: LeftToeBase
-    400052: LeftUpLeg
-    400054: Neck
-    400056: RightArm
-    400058: RightEar1
-    400060: RightEar2
-    400062: RightEar3
-    400064: RightEye
-    400066: RightEyeLids
-    400068: RightFoot
-    400070: RightForeArm
-    400072: RightHand
-    400074: RightHandIndex1
-    400076: RightHandIndex2
-    400078: RightHandIndex3
-    400080: RightHandMiddle1
-    400082: RightHandMiddle2
-    400084: RightHandMiddle3
-    400086: RightHandPinky1
-    400088: RightHandPinky2
-    400090: RightHandPinky3
-    400092: RightHandThumb1
-    400094: RightHandThumb2
-    400096: RightHandThumb3
-    400098: RightLeg
-    400100: RightShoulder
-    400102: RightToeBase
-    400104: RightUpLeg
-    400106: Spine
-    400108: Spine1
-    400110: Spine2
-    400112: Spine3
-    400114: //RootNode
-    400116: LeftEar4
-    400118: New_Ground_Plane_Object
-    400120: RightEar4
-    400122: TH_Warthog
-    4300000: TH_Warthog
-    9500000: //RootNode
-    13700000: //RootNode
-    13700002: TH_Warthog
-    2186277476908879412: ImportLogs
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Head
+  - first:
+      1: 100002
+    second: Hips
+  - first:
+      1: 100004
+    second: LeftArm
+  - first:
+      1: 100006
+    second: LeftEar1
+  - first:
+      1: 100008
+    second: LeftEar2
+  - first:
+      1: 100010
+    second: LeftEar3
+  - first:
+      1: 100012
+    second: LeftEye
+  - first:
+      1: 100014
+    second: LeftEyeLids
+  - first:
+      1: 100016
+    second: LeftFoot
+  - first:
+      1: 100018
+    second: LeftForeArm
+  - first:
+      1: 100020
+    second: LeftHand
+  - first:
+      1: 100022
+    second: LeftHandIndex1
+  - first:
+      1: 100024
+    second: LeftHandIndex2
+  - first:
+      1: 100026
+    second: LeftHandIndex3
+  - first:
+      1: 100028
+    second: LeftHandMiddle1
+  - first:
+      1: 100030
+    second: LeftHandMiddle2
+  - first:
+      1: 100032
+    second: LeftHandMiddle3
+  - first:
+      1: 100034
+    second: LeftHandPinky1
+  - first:
+      1: 100036
+    second: LeftHandPinky2
+  - first:
+      1: 100038
+    second: LeftHandPinky3
+  - first:
+      1: 100040
+    second: LeftHandThumb1
+  - first:
+      1: 100042
+    second: LeftHandThumb2
+  - first:
+      1: 100044
+    second: LeftHandThumb3
+  - first:
+      1: 100046
+    second: LeftLeg
+  - first:
+      1: 100048
+    second: LeftShoulder
+  - first:
+      1: 100050
+    second: LeftToeBase
+  - first:
+      1: 100052
+    second: LeftUpLeg
+  - first:
+      1: 100054
+    second: Neck
+  - first:
+      1: 100056
+    second: RightArm
+  - first:
+      1: 100058
+    second: RightEar1
+  - first:
+      1: 100060
+    second: RightEar2
+  - first:
+      1: 100062
+    second: RightEar3
+  - first:
+      1: 100064
+    second: RightEye
+  - first:
+      1: 100066
+    second: RightEyeLids
+  - first:
+      1: 100068
+    second: RightFoot
+  - first:
+      1: 100070
+    second: RightForeArm
+  - first:
+      1: 100072
+    second: RightHand
+  - first:
+      1: 100074
+    second: RightHandIndex1
+  - first:
+      1: 100076
+    second: RightHandIndex2
+  - first:
+      1: 100078
+    second: RightHandIndex3
+  - first:
+      1: 100080
+    second: RightHandMiddle1
+  - first:
+      1: 100082
+    second: RightHandMiddle2
+  - first:
+      1: 100084
+    second: RightHandMiddle3
+  - first:
+      1: 100086
+    second: RightHandPinky1
+  - first:
+      1: 100088
+    second: RightHandPinky2
+  - first:
+      1: 100090
+    second: RightHandPinky3
+  - first:
+      1: 100092
+    second: RightHandThumb1
+  - first:
+      1: 100094
+    second: RightHandThumb2
+  - first:
+      1: 100096
+    second: RightHandThumb3
+  - first:
+      1: 100098
+    second: RightLeg
+  - first:
+      1: 100100
+    second: RightShoulder
+  - first:
+      1: 100102
+    second: RightToeBase
+  - first:
+      1: 100104
+    second: RightUpLeg
+  - first:
+      1: 100106
+    second: Spine
+  - first:
+      1: 100108
+    second: Spine1
+  - first:
+      1: 100110
+    second: Spine2
+  - first:
+      1: 100112
+    second: Spine3
+  - first:
+      1: 100114
+    second: //RootNode
+  - first:
+      1: 100116
+    second: LeftEar4
+  - first:
+      1: 100118
+    second: New_Ground_Plane_Object
+  - first:
+      1: 100120
+    second: RightEar4
+  - first:
+      1: 100122
+    second: TH_Warthog
+  - first:
+      4: 400000
+    second: Head
+  - first:
+      4: 400002
+    second: Hips
+  - first:
+      4: 400004
+    second: LeftArm
+  - first:
+      4: 400006
+    second: LeftEar1
+  - first:
+      4: 400008
+    second: LeftEar2
+  - first:
+      4: 400010
+    second: LeftEar3
+  - first:
+      4: 400012
+    second: LeftEye
+  - first:
+      4: 400014
+    second: LeftEyeLids
+  - first:
+      4: 400016
+    second: LeftFoot
+  - first:
+      4: 400018
+    second: LeftForeArm
+  - first:
+      4: 400020
+    second: LeftHand
+  - first:
+      4: 400022
+    second: LeftHandIndex1
+  - first:
+      4: 400024
+    second: LeftHandIndex2
+  - first:
+      4: 400026
+    second: LeftHandIndex3
+  - first:
+      4: 400028
+    second: LeftHandMiddle1
+  - first:
+      4: 400030
+    second: LeftHandMiddle2
+  - first:
+      4: 400032
+    second: LeftHandMiddle3
+  - first:
+      4: 400034
+    second: LeftHandPinky1
+  - first:
+      4: 400036
+    second: LeftHandPinky2
+  - first:
+      4: 400038
+    second: LeftHandPinky3
+  - first:
+      4: 400040
+    second: LeftHandThumb1
+  - first:
+      4: 400042
+    second: LeftHandThumb2
+  - first:
+      4: 400044
+    second: LeftHandThumb3
+  - first:
+      4: 400046
+    second: LeftLeg
+  - first:
+      4: 400048
+    second: LeftShoulder
+  - first:
+      4: 400050
+    second: LeftToeBase
+  - first:
+      4: 400052
+    second: LeftUpLeg
+  - first:
+      4: 400054
+    second: Neck
+  - first:
+      4: 400056
+    second: RightArm
+  - first:
+      4: 400058
+    second: RightEar1
+  - first:
+      4: 400060
+    second: RightEar2
+  - first:
+      4: 400062
+    second: RightEar3
+  - first:
+      4: 400064
+    second: RightEye
+  - first:
+      4: 400066
+    second: RightEyeLids
+  - first:
+      4: 400068
+    second: RightFoot
+  - first:
+      4: 400070
+    second: RightForeArm
+  - first:
+      4: 400072
+    second: RightHand
+  - first:
+      4: 400074
+    second: RightHandIndex1
+  - first:
+      4: 400076
+    second: RightHandIndex2
+  - first:
+      4: 400078
+    second: RightHandIndex3
+  - first:
+      4: 400080
+    second: RightHandMiddle1
+  - first:
+      4: 400082
+    second: RightHandMiddle2
+  - first:
+      4: 400084
+    second: RightHandMiddle3
+  - first:
+      4: 400086
+    second: RightHandPinky1
+  - first:
+      4: 400088
+    second: RightHandPinky2
+  - first:
+      4: 400090
+    second: RightHandPinky3
+  - first:
+      4: 400092
+    second: RightHandThumb1
+  - first:
+      4: 400094
+    second: RightHandThumb2
+  - first:
+      4: 400096
+    second: RightHandThumb3
+  - first:
+      4: 400098
+    second: RightLeg
+  - first:
+      4: 400100
+    second: RightShoulder
+  - first:
+      4: 400102
+    second: RightToeBase
+  - first:
+      4: 400104
+    second: RightUpLeg
+  - first:
+      4: 400106
+    second: Spine
+  - first:
+      4: 400108
+    second: Spine1
+  - first:
+      4: 400110
+    second: Spine2
+  - first:
+      4: 400112
+    second: Spine3
+  - first:
+      4: 400114
+    second: //RootNode
+  - first:
+      4: 400116
+    second: LeftEar4
+  - first:
+      4: 400118
+    second: New_Ground_Plane_Object
+  - first:
+      4: 400120
+    second: RightEar4
+  - first:
+      4: 400122
+    second: TH_Warthog
+  - first:
+      43: 4300000
+    second: TH_Warthog
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: //RootNode
+  - first:
+      137: 13700002
+    second: TH_Warthog
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -144,7 +402,7 @@ ModelImporter:
       name: TH_Warthog_Body
     second: {fileID: 2100000, guid: 5154d056ccdc0f248aede33d1152e46b, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -177,25 +435,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 90
     normalImportMode: 1
@@ -204,10 +469,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -217,13 +482,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: Hips
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
