@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using TMPro;
+using System;
 using UnityEngine;
-using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CharacterSelection : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class CharacterSelection : MonoBehaviour
     public Transform modelHolder;
     [Tooltip("A tag that shows the name of the model")]
     public TextMeshProUGUI nameTag;
+    [Tooltip("A gameobject that holds all the buttons")]
+    public GameObject[] buttons;
 
     [Header("Prefab Data")]
     [Tooltip("Names of all models")]
@@ -23,6 +26,7 @@ public class CharacterSelection : MonoBehaviour
     private int styleIndex;      // the style of current model
     private int prefabIndex;     // accurate index of the model style
     private Transform model;     // model displayed in the window
+    private bool hasSelected;    // determine whether or not the user has selected a character
     private float rotationAngle; // Y value of model's current eulerAngles
 
     // Update is called once per frame
@@ -80,13 +84,13 @@ public class CharacterSelection : MonoBehaviour
     void RotateModel()
     {
         // return if the character selection window is hidden
-        if (!content.activeSelf)
+        if (!content.activeSelf || hasSelected)
             return;
 
         // lock position and rotate
         rotationAngle -= 50f * Time.deltaTime;
-        model.transform.localPosition = Vector3.zero;
-        model.transform.eulerAngles = new Vector3(0f, rotationAngle, 0f);
+        //model.transform.localPosition = Vector3.zero;
+        modelHolder.transform.eulerAngles = new Vector3(0f, rotationAngle, 0f);
 
     }
 
@@ -97,6 +101,7 @@ public class CharacterSelection : MonoBehaviour
     public void EditModelIndex(int change)
     {
         // update model index
+        styleIndex = 0;
         modelIndex += change;
 
         // fix the index when it is smaller than the minimum
@@ -121,6 +126,45 @@ public class CharacterSelection : MonoBehaviour
         SwapModel();
     }
 
+    /// <summary>
+    /// Method for the user to final select the character
+    /// Disable all other irrelevant buttons and lock rotation
+    /// </summary>
+    public void Ready()
+    {
+        // switch hasSelected boolean to be true
+        hasSelected = true;
 
+        // disable irrelevant buttons
+        foreach (var obj in buttons)
+            obj.SetActive(false);
 
+        // play push-up animation
+        model.gameObject.GetComponent<Animator>().SetTrigger("Selected");
+
+        // lock rotation angle 
+        StartCoroutine(LockRotation());
+    }
+
+    /// <summary>
+    /// A coroutine to lock rotation angle and force it to face the camera
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator LockRotation()
+    {
+        // obtain current y euler angle
+        var yEuler = modelHolder.localEulerAngles.y;
+
+        // keep spining y euler angle back to 0
+        while (yEuler != 315f)
+        {
+            yEuler = Mathf.MoveTowardsAngle(yEuler, 315f, 5f);    
+            modelHolder.transform.localEulerAngles = Vector3.up * yEuler;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        // start to load in 2 seconds
+        yield return new WaitForSeconds(2f);
+        FindObjectOfType<Loading>().Setup(model);
+    }
 }

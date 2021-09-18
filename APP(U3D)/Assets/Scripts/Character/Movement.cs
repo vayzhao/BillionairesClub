@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         cc = GetComponent<CharacterController>();        
     }
 
@@ -39,9 +39,10 @@ public class Movement : MonoBehaviour
 
     void Turn()
     {
-        var mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * 500f;
-        var mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * 500f;
+        var mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * 400f;
+        var mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * 400f;
         transform.Rotate(Vector3.up * mouseX);
+        Cursor.visible = false;
     }
 
 }
