@@ -16,12 +16,6 @@ public class CharacterSelection : MonoBehaviour
     [Tooltip("A gameobject that holds all the buttons")]
     public GameObject[] buttons;
 
-    [Header("Prefab Data")]
-    [Tooltip("Names of all models")]
-    public string[] names;
-    [Tooltip("Prefab objects of all models")]
-    public GameObject[] prefabs;
-
     private int modelIndex;      // the index of current model
     private int styleIndex;      // the style of current model
     private int prefabIndex;     // accurate index of the model style
@@ -46,11 +40,11 @@ public class CharacterSelection : MonoBehaviour
             styleIndex = 0;
 
             // create a clone model from the first prefab
-            model = Instantiate(prefabs[0], modelHolder).transform;
+            model = Instantiate(BB.GetModelPrefab(0), modelHolder).transform;
             model.transform.eulerAngles = new Vector3(0f, rotationAngle, 0f);
 
             // reset name tag
-            nameTag.text = names[0];            
+            nameTag.text = BB.modelName[0];            
         }
         else
         {
@@ -72,7 +66,7 @@ public class CharacterSelection : MonoBehaviour
 
         // get prefab index and swap model
         prefabIndex = (modelIndex * 3) + styleIndex;
-        model = Instantiate(prefabs[prefabIndex], modelHolder).transform;
+        model = Instantiate(BB.GetModelPrefab(prefabIndex), modelHolder).transform;
 
         // synchronize position & rotation seamlessly
         RotateModel();
@@ -113,7 +107,7 @@ public class CharacterSelection : MonoBehaviour
 
         // swap model prefab and update name tag
         SwapModel();
-        nameTag.text = names[modelIndex];
+        nameTag.text = BB.modelName[modelIndex];
     }
 
     /// <summary>
@@ -142,6 +136,9 @@ public class CharacterSelection : MonoBehaviour
         // play push-up animation
         model.gameObject.GetComponent<Animator>().SetTrigger("Selected");
 
+        // save model prefab in player prefabs
+        PlayerPrefs.SetString("CharacterModelPrefab", BB.modelPath[prefabIndex]);
+
         // lock rotation angle 
         StartCoroutine(LockRotation());
     }
@@ -165,6 +162,6 @@ public class CharacterSelection : MonoBehaviour
 
         // start to load in 2 seconds
         yield return new WaitForSeconds(2f);
-        FindObjectOfType<Loading>().Setup(model);
+        FindObjectOfType<LoadingBar>().Setup(model);
     }
 }
