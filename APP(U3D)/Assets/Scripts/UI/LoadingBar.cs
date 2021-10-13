@@ -59,15 +59,18 @@ public class LoadingBar : MonoBehaviour
 
         // display the first loading message
         MessageRefresh();
-        
+
+        // delte current event system
+        Destroy(FindObjectOfType<UnityEngine.EventSystems.EventSystem>().gameObject);
+
         // load the ingame scene
-        SceneManager.LoadScene(BB.SCENE_INGAME, LoadSceneMode.Additive);        
+        SceneManager.LoadScene(Blackboard.SCENE_INCASINO, LoadSceneMode.Additive);
 
         // constantly load the progress bar
         while (progress < 1f) 
         {
             // update loading bar progress to player prefs
-            progress += (Time.deltaTime / BB.loadEstimate);
+            progress += (Time.deltaTime / Blackboard.loadEstimate);
             PlayerPrefs.SetFloat("LoadingBarProgress", progress);
 
             // increment message refresh timer and check to see 
@@ -75,6 +78,10 @@ public class LoadingBar : MonoBehaviour
             messageRefreshTimer += Time.deltaTime;
             if (messageRefreshTimer > messageRefreshRate)
                 MessageRefresh();
+
+            // force progress to be not greater than 1f
+            if (progress > 1f)
+                progress = 1f;
 
             // update slider value & text
             slider.value = progress;

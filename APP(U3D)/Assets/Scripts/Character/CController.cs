@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CController : MonoBehaviour
+public class CController : Player
 {
     [Header("Movement Setting")]
     [Tooltip("Speed for walking forward")]
@@ -20,6 +20,7 @@ public class CController : MonoBehaviour
     private Animator animator;              // a component that handles all the animation staff
     private SeatManager seatManager;        // a manager that handle all the seats in the scene
     private CharacterController controller; // a controller that handles all the movement function
+    private bool isFrozen;                  // determine whether or not the user has control of the character
 
     /// <summary>
     /// Dependencies of Sitting Function
@@ -31,6 +32,9 @@ public class CController : MonoBehaviour
     private Vector3 oldModelRot;   // model rotation before sit
     private Vector3 oldParentPos;  // parent position before sit
     private Vector3 oldParentRot;  // parent rotation before sit
+
+    private const float DISTANCE_SIT = 2f;      // effective distance for sitting command
+    private const float RATE_SIT_DETECT = 0.2f; // how often the script scans seats around the character
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +57,10 @@ public class CController : MonoBehaviour
     {
         // detect camera rotation 
         Turn();
+
+        // return if the character is fronzen
+        if (isFrozen)
+            return;
 
         // if the character is sitting, detect stand up function and terminate 
         if (isSiting)
@@ -131,16 +139,20 @@ public class CController : MonoBehaviour
     {
         // increase the timer and check if it is time to scan for seats
         seatScanTimer += Time.deltaTime;
-        if (seatScanTimer > BB.RATE_SIT_DETECT)
+        if (seatScanTimer > RATE_SIT_DETECT)
         {
             // set hasAvailableSeat to false by default and check if there is any 
             // available seat within a certain distance
             seat = null;
-            hasAvailableSeat = false;
-            for (int i = 0; i < seatManager.availableSeats.Count; i++)
+            hasAvailableSeat = false;            
+            for (int i = 0; i < seatManager.availableSeats.Count + seatManager.userSeats.Count; i++)
             {
-                seat = seatManager.availableSeats[i];
-                if (Vector3.Distance(seat.transform.position, transform.position) <= BB.DISTANCE_SIT)
+                // find the accordance seat
+                seat = i < seatManager.availableSeats.Count ?
+                    seatManager.availableSeats[i] :
+                    seatManager.userSeats[i - seatManager.availableSeats.Count];
+
+                if (Vector3.Distance(seat.transform.position, transform.position) <= DISTANCE_SIT)
                 {
                     // once an available seat is found, switch the boolean to true and return
                     hasAvailableSeat = true;
@@ -161,8 +173,9 @@ public class CController : MonoBehaviour
         // check through all conditions for siting action
         if (Input.GetKeyDown(KeyCode.Space)
             && hasAvailableSeat
-            && seatManager.availableSeats.Contains(seat)
-            && Vector3.Distance(seat.transform.position, transform.position) <= BB.DISTANCE_SIT) 
+            && (seatManager.availableSeats.Contains(seat)
+                || seatManager.userSeats.Contains(seat))
+            && Vector3.Distance(seat.transform.position, transform.position) <= DISTANCE_SIT) 
         {
             // switch sitting state to be true, unparent model and reset move state
             isSiting = true;
@@ -180,7 +193,24 @@ public class CController : MonoBehaviour
             transform.position = seat.transform.position;
 
             // finally sit down
-            seat.SitDown(animator, model);
+            seat.SitDown(this, animator, model);
+
+            // check to see if this seat has binded to any table
+            var table = seat.GetTable();
+
+            // return if the table does not exsit
+            if (table == null)
+                return;
+
+            // return if the table has no game type
+            if (table.gameType == GameType.None)
+                return;
+
+            // otherwise, freezee the character
+            isFrozen = true;
+
+            // load into game
+            FindObjectOfType<Loading>().LoadIntoGame(table);
         }
     }
 
@@ -209,5 +239,4 @@ public class CController : MonoBehaviour
         // finally stand up
         seat.StandUp(animator);
     }
-
 }

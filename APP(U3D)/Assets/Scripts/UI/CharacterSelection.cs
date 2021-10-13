@@ -40,11 +40,11 @@ public class CharacterSelection : MonoBehaviour
             styleIndex = 0;
 
             // create a clone model from the first prefab
-            model = Instantiate(BB.GetModelPrefab(0), modelHolder).transform;
+            model = Instantiate(Blackboard.GetModelPrefab(0), modelHolder).transform;
             model.transform.eulerAngles = new Vector3(0f, rotationAngle, 0f);
 
             // reset name tag
-            nameTag.text = BB.modelName[0];            
+            nameTag.text = Blackboard.modelName[0];            
         }
         else
         {
@@ -66,7 +66,7 @@ public class CharacterSelection : MonoBehaviour
 
         // get prefab index and swap model
         prefabIndex = (modelIndex * 3) + styleIndex;
-        model = Instantiate(BB.GetModelPrefab(prefabIndex), modelHolder).transform;
+        model = Instantiate(Blackboard.GetModelPrefab(prefabIndex), modelHolder).transform;
 
         // synchronize position & rotation seamlessly
         RotateModel();
@@ -107,7 +107,7 @@ public class CharacterSelection : MonoBehaviour
 
         // swap model prefab and update name tag
         SwapModel();
-        nameTag.text = BB.modelName[modelIndex];
+        nameTag.text = Blackboard.modelName[modelIndex];
     }
 
     /// <summary>
@@ -137,7 +137,7 @@ public class CharacterSelection : MonoBehaviour
         model.gameObject.GetComponent<Animator>().SetTrigger("Selected");
 
         // save model prefab in player prefabs
-        PlayerPrefs.SetString("CharacterModelPrefab", BB.modelPath[prefabIndex]);
+        PlayerPrefs.SetInt("CharacterModelIndex", prefabIndex);
 
         // lock rotation angle 
         StartCoroutine(LockRotation());

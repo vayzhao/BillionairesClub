@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class NPCController : MonoBehaviour
+public class NPCController : Player
 {
     /// <summary>
     /// Core components
@@ -23,7 +23,10 @@ public class NPCController : MonoBehaviour
     {
         // create model for the npc
         model = transform.GetChild(0);
-        Instantiate(BB.GetModelPrefab(modelIndex), transform.GetChild(0));
+        Instantiate(Blackboard.GetModelPrefab(modelIndex), transform.GetChild(0));
+
+        // save model index
+        this.modelIndex = modelIndex;
 
         // get animator component
         animator = GetComponentInChildren<Animator>();
@@ -46,7 +49,7 @@ public class NPCController : MonoBehaviour
         col.enabled = false;
 
         // finally sit donw
-        seat.SitDown(animator, model);
+        seat.SitDown(this, animator, model);
     }
 
     /// <summary>
@@ -64,5 +67,24 @@ public class NPCController : MonoBehaviour
 
         // finally stand up 
         seat.StandUp(animator);        
+    }
+
+    /// <summary>
+    /// Method to designate a npc character to sit on a seat
+    /// without modifying any data on that seat
+    /// </summary>
+    /// <param name="seat"></param>
+    public void IssueSitDownOrderForTableGame(Seat seat)
+    {
+        // disable the collider
+        col.enabled = false;
+
+        // set character animation
+        animator.SetInteger("Sit", seat.hasArmrest ? 2 : 1);
+
+        // stick character model to the seat
+        model.transform.parent = seat.transform;
+        model.transform.localPosition = Vector3.zero;
+        model.transform.localEulerAngles = Vector3.zero;
     }
 }

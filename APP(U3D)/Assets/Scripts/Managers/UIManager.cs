@@ -4,13 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum SceneType
-{
-    Homepage,
-    InCasino,
-    InGame
-}
-
 public class UIManager : MonoBehaviour
 {
     [Header("Option")]
@@ -26,7 +19,7 @@ public class UIManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {        
         // initialize the background page
         switch (sceneType)
         {
