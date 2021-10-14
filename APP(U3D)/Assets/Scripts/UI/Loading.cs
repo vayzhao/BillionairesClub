@@ -90,7 +90,7 @@ public class Loading : MonoBehaviour
             // create a test player
             var player = new Player();
             player.modelIndex = PlayerPrefs.GetInt("CharacterModelIndex");
-            player.chip = 10000;
+            player.chip = 1500;
             player.gem = 50;
             Blackboard.thePlayer = player;
         }
@@ -440,8 +440,8 @@ public class Loading : MonoBehaviour
 
         // initialize player's default chip and gem
         Blackboard.thePlayer = obj_character.GetComponent<Player>();
-        Blackboard.thePlayer.chip = 15000;
-        Blackboard.thePlayer.gem = 200;
+        Blackboard.thePlayer.chip = 1500;
+        Blackboard.thePlayer.gem = 50;
     }
 
     /// <summary>

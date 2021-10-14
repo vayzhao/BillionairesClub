@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public int modelIndex;
+    [HideInInspector]
+    public PlayerBoard playerBoard;
 
     private int chipRed;
     private int chipBlue;
@@ -27,6 +29,19 @@ public class Player : MonoBehaviour
             + chipBlack * 100;
     }
 
+    /// <summary>
+    /// Method to increase or decrease a player's chip amount
+    /// update playerboard data if this player is a user
+    /// </summary>
+    /// <param name="amount">the amount of chip change</param>
+    public void EditPlayerChip(int amount)
+    {
+        // modify chip amount
+        chip += amount;
 
+        // update playerboard information
+        if (!isNPC)
+            playerBoard.UpdateValue();
+    }
 
 }

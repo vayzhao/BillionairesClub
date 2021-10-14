@@ -16,11 +16,47 @@ namespace TexasBonus
         public Sprite defaultTexture;
         [Tooltip("Player's hand image")]
         public Image[] cardTexture;
-        [Space(25f)]
-        
+        [Space(25f)]        
+        [Tooltip("Text objects that show the amount of money that the players bet")]
         public TextMeshProUGUI[] betLabels;
-        public TextMeshProUGUI[] handRankLabel;
-        public TextMeshProUGUI dealerHandRankLabel;
+        [Tooltip("Text objects that show the hand-rank of the players hand")]
+        public GameObject[] handRankLabel;
+        [Tooltip("")]
+        public GameObject dealerHandRankLabel;
+        [Header("Sprite Asset")]
+        public Sprite labelSpriteForWin;
+        public Sprite labelSpriteForLose;
+        public Sprite labelSpriteForStandoff;
+
+        private Image dealerLabelBg;
+        private Image[] playerLabelBg;
+        private TextMeshProUGUI dealerLabelText;
+        private TextMeshProUGUI[] playerLabelText;
+
+        /// <summary>
+        /// Method to setup the label controllers
+        /// </summary>
+        public void Setup()
+        {
+            // get player amount
+            var playerCount = handRankLabel.Length;
+
+            // find the label background image and text components
+            playerLabelBg = new Image[playerCount];
+            playerLabelText = new TextMeshProUGUI[playerCount];
+            for (int i = 0; i < playerCount; i++)
+            {
+                playerLabelBg[i] = handRankLabel[i].GetComponent<Image>();
+                playerLabelText[i] = handRankLabel[i].GetComponentInChildren<TextMeshProUGUI>();
+            }
+
+            // find the label background image and text components for the dealer
+            dealerLabelBg = dealerHandRankLabel.GetComponent<Image>();
+            dealerLabelText = dealerHandRankLabel.GetComponentInChildren<TextMeshProUGUI>();
+
+            // reset the label controller
+            Reset();
+        }
 
         /// <summary>
         /// Method to reset labels, it is called then a round finished
@@ -28,37 +64,29 @@ namespace TexasBonus
         public void Reset()
         {
             // hide the panel object & title
-            panel.enabled = false;
-            title.enabled = false;
-
-            // reset card textures and disable it
-            cardTexture[0].sprite = defaultTexture;
-            cardTexture[1].sprite = defaultTexture;
-            cardTexture[0].enabled = false;
-            cardTexture[1].enabled = false;
-
-            // hide all labels
-            for (int i = 0; i < betLabels.Length; i++)
-                betLabels[i].text = "";
-            for (int i = 0; i < handRankLabel.Length; i++)
-                handRankLabel[i].text = "";
-            dealerHandRankLabel.text = "";
+            HideOtherLabels();
+            HideHandRankPanel();
         }
 
         /// <summary>
-        /// Method to display player hand pannel, it is called after the player receive cards
+        /// Method to display player hand-rank pannel, it is called after the player receive cards
         /// </summary>
         public void Display()
         {
             // display the panel & title
             panel.enabled = true;
             title.enabled = true;
+            cardTexture[0].sprite = defaultTexture;
+            cardTexture[1].sprite = defaultTexture;
 
             // reset title text
             title.text = "";
         }
 
-        public void HideHandPanel()
+        /// <summary>
+        /// Method to hide local player's hadn-rank panel
+        /// </summary>
+        public void HideHandRankPanel()
         {
             panel.enabled = false;
             title.enabled = false;
@@ -66,34 +94,84 @@ namespace TexasBonus
             cardTexture[1].enabled = false;
         }
 
-        public void ShowBet(int index, int amount)
+        /// <summary>
+        /// Method to hide all labels in the game
+        /// </summary>
+        private void HideOtherLabels()
         {
-            betLabels[index].text = amount.ToString("C0");
+            // hide all bet labels
+            for (int i = 0; i < betLabels.Length; i++)
+                SetBetLabel(i);
+
+            // hide all player hand rank label
+            for (int i = 0; i < handRankLabel.Length; i++)
+                SetHandRankLabel(i, false);
+
+            // hide dealer's hand rank labels
+            SetHandRankLabelForDealer(false);
         }
 
-        public void HideBet(int index)
+
+        /// <summary>
+        /// Method to display / hide the bet chip label for players
+        /// </summary>
+        /// <param name="index">the player index</param>
+        /// <param name="amount">the amount of money</param>
+        public void SetBetLabel(int index, int amount = 0)
         {
-            betLabels[index].text = "";
+            betLabels[index].text = amount > 0 ? amount.ToString("C0") : "";
         }
 
-        public void ShowHandRank(int index, string message)
+        /// <summary>
+        /// Method to display / hide the hand rank label for players
+        /// </summary>
+        /// <param name="index">the player index</param>
+        /// <param name="status">true to display false to hide</param>
+        /// <param name="message">message to display at the label</param>
+        public void SetHandRankLabel(int index, bool status, string message = "")
         {
-            handRankLabel[index].text = message;
+            playerLabelText[index].text = message;
+            handRankLabel[index].SetActive(status);
         }
 
-        public void HideHandRank(int index)
+        /// <summary>
+        /// Method to display / hide the hand rank label for the dealer
+        /// </summary>
+        /// <param name="status">true to display false to hide</param>
+        /// <param name="message">message to display at the label</param>
+        public void SetHandRankLabelForDealer(bool status, string message = "")
         {
-            handRankLabel[index].text = "";
+            dealerLabelText.text = message;
+            dealerHandRankLabel.SetActive(status);
         }
 
-        public void ShowDealerHankRank(string message)
-        {
-            dealerHandRankLabel.text = message;
-        }
 
-        public void HideDealerHandRank()
+        /// <summary>
+        /// Method to switch player and dealer's hand-rank panel, the sprite used
+        /// to display the panel based on the given result
+        /// Green for win, Red for lose, Purple for standoff
+        /// </summary>
+        /// <param name="playerIndex">index of the compared player</param>
+        /// <param name="result">result of the comparison</param>
+        public void SetHandRankLabelColor(int playerIndex, Result result)
         {
-            dealerHandRankLabel.text = "";
+            switch (result)
+            {
+                case Result.Win:
+                    dealerLabelBg.sprite = labelSpriteForLose;
+                    playerLabelBg[playerIndex].sprite = labelSpriteForWin;
+                    break;
+                case Result.Lose:
+                    dealerLabelBg.sprite = labelSpriteForWin;
+                    playerLabelBg[playerIndex].sprite = labelSpriteForLose;
+                    break;
+                case Result.Standoff:
+                    dealerLabelBg.sprite = labelSpriteForStandoff;
+                    playerLabelBg[playerIndex].sprite = labelSpriteForStandoff;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

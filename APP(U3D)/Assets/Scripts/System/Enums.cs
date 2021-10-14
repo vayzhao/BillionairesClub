@@ -65,3 +65,10 @@ public enum Rank
     StraightFlush,
     RoyalFlush
 }
+
+public enum Result
+{
+    Win,
+    Lose,
+    Standoff
+}

@@ -7,12 +7,13 @@ namespace TexasBonus
 {
     public class HandStrength
     {
-        private List<Card> cards;
-        private Rank rank;
-        private Value value;
-        private Value subValue;
-        private Suit suit;
-        private Card[] bestHand;
+        public Rank rank;            // determine the level of this hand 
+        private Suit suit;           // 
+        private Value value;         //
+        private Value subValue;      //
+        private Card[] bestHand;     //
+        private List<Card> cards;    //
+        private int bonusMultiplier; //
 
         public HandStrength()
         {
@@ -20,6 +21,10 @@ namespace TexasBonus
             bestHand = new Card[5];
         }
 
+        /// <summary>
+        /// Method to reset hand strength calculate, it is called at
+        /// the start of every round
+        /// </summary>
         public void Reset()
         {
             // remove all cards cache
@@ -80,7 +85,7 @@ namespace TexasBonus
             // find if the player has the same suit of card * 5
             var flush = cards.GroupBy(x => x.suit).Where(x => x.Count() >= 5);
 
-            // if a flush is found, try tof find a straight then
+            // if a flush is found, check to see if there is a straight within the flush
             if (flush.Any())
             {
                 // get the flush cards
@@ -284,7 +289,9 @@ namespace TexasBonus
             }
         }
 
-
+        /// <summary>
+        /// Methods to find best 5 cards within 7 cards
+        /// </summary>
         private void FindBestHand()
         {
             switch (rank)
@@ -422,7 +429,90 @@ namespace TexasBonus
             // set value to be the max value in start hand
             value = Card.Max(cards);
 
+            // calculate bonus mulitplier
+            CalculateBonus();
+
             return true; 
+        }
+
+        /// <summary>
+        /// Method to calculate player's bonus multiplier, it is called
+        /// when the first 2 cards are revealed
+        /// </summary>
+        public void CalculateBonus()
+        {
+            // initialize multiplier
+            bonusMultiplier = 0;
+
+            // high-hand bonus (Ace + King/Queen/Jack)
+            if (rank == Rank.HighHand && value == Value.ACE)
+            {
+                // determine whether or not the first 2 cards are same suit
+                var isSameSuit = cards[0].suit == cards[1].suit;
+
+                // ACE + KING
+                if (subValue == Value.KING)
+                {
+                    bonusMultiplier = isSameSuit ? 25 : 15;
+                }
+                // ACE + QUEEN / JACK
+                else if (subValue == Value.QUEEN || subValue == Value.JACK) 
+                {
+                    bonusMultiplier = isSameSuit ? 20 : 5;
+                }
+            }
+            // pair bonus
+            else if (rank == Rank.OnePair)
+            {
+                // pair of ACE
+                if (value == Value.ACE)
+                {
+                    bonusMultiplier = 30;
+                }
+                // pair of KING / QUEEN / JACK
+                else if (value == Value.KING || value == Value.QUEEN || value == Value.JACK)
+                {
+                    bonusMultiplier = 10;
+                }
+                // any pair, other than a pair of aces, kings, queens or jacks
+                else
+                {
+                    bonusMultiplier = 3;
+                }
+            }
+        }
+        public int GetBonusMultiplier() { return bonusMultiplier; }
+
+        /// <summary>
+        /// Method to compare player's hand and dealer's hand,
+        /// if one's hand rank is greater than the others, return result
+        /// if their hand-ranks are equal, compare the value of the bestHand
+        /// if their bestHand have the same value, return standoff
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="dealer"></param>
+        /// <returns></returns>
+        public static Result Compare(HandStrength player, HandStrength dealer)
+        {
+            // when two hands are not equal, return either win or lose
+            if (player.rank != dealer.rank)
+                return player.rank > dealer.rank ? Result.Win : Result.Lose;
+
+            // in this case, two hands are equal, we need to check through all
+            // the elements in bestHand to determine which hand is greater than 
+            // the other
+            for (int i = 0; i < 5; i++)
+            {
+                // skip when the 'n' element's value is equal
+                if (player.bestHand[i].value == dealer.bestHand[i].value)
+                    continue;
+
+                // otherwise, return either win or lose
+                return player.bestHand[i].value > dealer.bestHand[i].value ? Result.Win : Result.Lose;
+            }
+
+            // if all the comparison above are passed, then the result can be standoff only
+            return Result.Standoff;
         }
 
         /// <summary>

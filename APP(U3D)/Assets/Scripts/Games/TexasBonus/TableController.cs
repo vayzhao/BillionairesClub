@@ -183,13 +183,34 @@ namespace TexasBonus
                     obj = Instantiate(pref_redChip, wagerObj[playerId][wagerIndex].transform);
                 }
 
-                obj.transform.localPosition = new Vector3(height, height, height);
+                obj.transform.localPosition = new Vector3(0f, height, 0f);
                 obj.transform.localEulerAngles = new Vector3(-90f, angle, 0f);
 
-                height += 0.0075f;
+                height += 0.01f;
                 angle += 20f;
             }
         }
+        public void MultiplyWagerModel(int playerId, int wagerIndex, int multiplier)
+        {
+            var parent = wagerObj[playerId][wagerIndex].transform;
+            var childCount = parent.transform.childCount;
+            var height = parent.GetChild(childCount - 1).localPosition.y;
+            var angle = parent.GetChild(childCount - 1).localEulerAngles.y;
+
+            for (int i = 0; i < multiplier; i++)
+            {
+                for (int j = 0; j < childCount; j++)
+                {
+                    height += 0.01f;
+                    angle += 20f;
+
+                    var obj = Instantiate(parent.GetChild(j), parent);
+                    obj.transform.localPosition = new Vector3(0f, height, 0f);
+                    obj.transform.localEulerAngles = new Vector3(-90f, angle, 0f);
+                }
+            }            
+        }
+
 
         public void RemoveWagerModel()
         {
@@ -218,7 +239,7 @@ namespace TexasBonus
             playerCardsObj[index].HideCard();
 
             // hide bet label
-            labelController.HideBet(index);
+            labelController.SetBetLabel(index);
         }
 
         public IEnumerator DetermineFoldedPlayer()
@@ -289,7 +310,7 @@ namespace TexasBonus
             {
                 for (int j = 0; j < gameManager.players.Length; j++)
                 {
-                    if (gameManager.players[i] == null)
+                    if (gameManager.players[j] == null)
                         continue;
 
                     var index = playerCards[j][i].GetCardIndex();
@@ -357,16 +378,79 @@ namespace TexasBonus
             dealerHandStrengh.AddCard(communityCards[3]);
             dealerHandStrengh.AddCard(communityCards[4]);
             dealerHandStrengh.Recompute();
-            labelController.ShowDealerHankRank(dealerHandStrengh.ToString("<color=#00FF01><size=80%>"));
+            labelController.SetHandRankLabelForDealer(true, dealerHandStrengh.ToString("<color=#00FF01><size=80%>"));
         }
 
-        public void ShowPlayerCards(int index)
+        public void BonusReward(int index)
         {
-            playerCardsObj[index].ShowCard();
-            labelController.ShowHandRank(index, handStrengths[index].ToString("<color=#00FF01><size=80%>"));
+            // get bonus wager & multiplier
+            var bonusWager = playerAction.bets[index].bonusWager;
+            var multiplier = handStrengths[index].GetBonusMultiplier();
 
+            // only continue when the player has bet on bonus and trigger bonus reward
+            if (!(bonusWager > 0 && multiplier > 0))
+                return;
+
+            // multiply bonus wager
+            MultiplyWagerModel(index, 4, multiplier);
+
+            // reward the player
+            gameManager.players[index].EditPlayerChip(bonusWager * (multiplier + 1));
+        }
+
+        public void Compare(int index)
+        {
+            // get the result of comparison
+            var result = HandStrength.Compare(handStrengths[index], dealerHandStrengh);
+
+            // display the card models
+            playerCardsObj[index].ShowCard();
+
+            // display the hand rank panel
+            labelController.SetHandRankLabelColor(index, result);            
+            labelController.SetHandRankLabel(index, true, handStrengths[index].ToString("<color=#00FF01><size=80%>"));
+
+            // if the player is an actual player, hide its hand rank panel UI
             if (!gameManager.players[index].isNPC)
-                labelController.HideHandPanel();
+                labelController.HideHandRankPanel();
+
+            if (result == Result.Win)
+            {
+                var reward = playerAction.bets[index].anteWager;
+
+                if (handStrengths[index].rank >= Rank.Flush)
+                {
+                    MultiplyWagerModel(index, 0, 1);
+                    reward += playerAction.bets[index].anteWager;
+                }
+                if (playerAction.bets[index].flopWager > 0)
+                {
+                    MultiplyWagerModel(index, 1, 1);
+                    reward += playerAction.bets[index].flopWager * 2;
+                }
+                if (playerAction.bets[index].turnWager > 0)
+                {
+                    MultiplyWagerModel(index, 2, 1);
+                    reward += playerAction.bets[index].turnWager * 2;
+                }
+                if (playerAction.bets[index].riverWager > 0)
+                {
+                    MultiplyWagerModel(index, 3, 1);
+                    reward += playerAction.bets[index].riverWager * 2;
+                }
+
+                // modify player's chip amount
+                gameManager.players[index].EditPlayerChip(reward);
+            }
+            else if (result == Result.Standoff)
+            {
+                gameManager.players[index].EditPlayerChip(
+                    playerAction.bets[index].anteWager +
+                    playerAction.bets[index].flopWager +
+                    playerAction.bets[index].turnWager +
+                    playerAction.bets[index].riverWager);
+            }
+                
         }
 
         public void HidePlayerCards(int index)
@@ -375,7 +459,7 @@ namespace TexasBonus
                 return;
 
             HidePlayerBetAndCards(index);
-            labelController.HideHandRank(index);
+            labelController.SetHandRankLabel(index, false);
         }
         
     }

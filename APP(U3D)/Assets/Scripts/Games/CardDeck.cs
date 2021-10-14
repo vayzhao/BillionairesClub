@@ -28,22 +28,13 @@ public class CardDeck
 
         cards.Add(new Card(Suit.Diamond,Value.TWO));
         cards.Add(new Card(Suit.Diamond, Value.THREE));
-        cards.Add(new Card(Suit.Diamond, Value.TEN));
-        cards.Add(new Card(Suit.Diamond, Value.JACK));
-        cards.Add(new Card(Suit.Diamond, Value.QUEEN));
-        cards.Add(new Card(Suit.Diamond, Value.KING));
-        cards.Add(new Card(Suit.Diamond, Value.ACE));
+        cards.Add(new Card(Suit.Diamond, Value.FOUR));
+        cards.Add(new Card(Suit.Diamond, Value.FIVE));
+        cards.Add(new Card(Suit.Diamond, Value.SIX));
+        cards.Add(new Card(Suit.Diamond, Value.SEVEN));
         cards.Add(new Card(Suit.Diamond, Value.EIGHT));
-        cards.Add(new Card(Suit.Diamond, Value.NINE));
-        cards.Add(new Card(Suit.Diamond, Value.TWO));
-        cards.Add(new Card(Suit.Diamond, Value.THREE));
-        cards.Add(new Card(Suit.Diamond, Value.TEN));
-        cards.Add(new Card(Suit.Diamond, Value.JACK));
-        cards.Add(new Card(Suit.Diamond, Value.QUEEN));
-        cards.Add(new Card(Suit.Diamond, Value.KING));
         cards.Add(new Card(Suit.Diamond, Value.ACE));
-        cards.Add(new Card(Suit.Diamond, Value.EIGHT));
-        cards.Add(new Card(Suit.Diamond, Value.NINE));
+        cards.Add(new Card(Suit.Heart, Value.ACE));
     }
 
     public void Shuffle()

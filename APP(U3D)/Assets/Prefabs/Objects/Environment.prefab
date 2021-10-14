@@ -18651,7 +18651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2541746535906091168, guid: 8e7c22fcd1f5b1a438d7c212274a8f03, type: 3}
       propertyPath: seatAvailablity
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2541746535906091168, guid: 8e7c22fcd1f5b1a438d7c212274a8f03, type: 3}
       propertyPath: availableGuarantee
@@ -25797,7 +25797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2541746535906091168, guid: 8e7c22fcd1f5b1a438d7c212274a8f03, type: 3}
       propertyPath: seatAvailablity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e7c22fcd1f5b1a438d7c212274a8f03, type: 3}

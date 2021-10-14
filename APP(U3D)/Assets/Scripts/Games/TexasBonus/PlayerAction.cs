@@ -96,13 +96,16 @@ namespace TexasBonus
             bets[currentPlayerIndex].bonusWager = value;
 
             tableController.CreateWagerModel(currentPlayerIndex, 4, value);
+            gameManager.players[currentPlayerIndex].EditPlayerChip(-value);
 
         }
 
         public void BetBonusWager_AI(int playerIndex)
         {
-            bets[playerIndex].bonusWager = 5;
-            tableController.CreateWagerModel(playerIndex, 4, 5);
+            var value = 5;
+            bets[playerIndex].bonusWager = value;
+            tableController.CreateWagerModel(playerIndex, 4, value);
+            gameManager.players[playerIndex].EditPlayerChip(-value);
         }
 
         public void BetAnteWager(int value)
@@ -113,8 +116,8 @@ namespace TexasBonus
             bets[currentPlayerIndex].anteWager = value;
 
             tableController.CreateWagerModel(currentPlayerIndex, 0, value);
-
-            labelController.ShowBet(currentPlayerIndex, bets[currentPlayerIndex].GetTotal());
+            gameManager.players[currentPlayerIndex].EditPlayerChip(-value);
+            labelController.SetBetLabel(currentPlayerIndex, bets[currentPlayerIndex].GetTotal());
         }
 
         public void BetAnteWager_AI(int playerIndex)
@@ -123,8 +126,8 @@ namespace TexasBonus
 
             bets[playerIndex].anteWager = value;
             tableController.CreateWagerModel(playerIndex, 0, value);
-
-            labelController.ShowBet(playerIndex, bets[playerIndex].GetTotal());
+            gameManager.players[playerIndex].EditPlayerChip(-value);
+            labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal());
         }
 
         public void Bet()
@@ -137,21 +140,24 @@ namespace TexasBonus
             {
                 case BetType.Flop:
                     bets[currentPlayerIndex].flopWager = bets[currentPlayerIndex].anteWager * 2;
-                    tableController.CreateWagerModel(currentPlayerIndex, 1, bets[currentPlayerIndex].anteWager * 2);                    
+                    tableController.CreateWagerModel(currentPlayerIndex, 1, bets[currentPlayerIndex].anteWager * 2);
+                    gameManager.players[currentPlayerIndex].EditPlayerChip(bets[currentPlayerIndex].anteWager * -2);
                     break;
                 case BetType.Turn:
                     bets[currentPlayerIndex].turnWager = bets[currentPlayerIndex].anteWager * 1;
                     tableController.CreateWagerModel(currentPlayerIndex, 2, bets[currentPlayerIndex].anteWager * 1);
+                    gameManager.players[currentPlayerIndex].EditPlayerChip(bets[currentPlayerIndex].anteWager * -1);
                     break;
                 case BetType.River:
                     bets[currentPlayerIndex].riverWager = bets[currentPlayerIndex].anteWager * 1;
                     tableController.CreateWagerModel(currentPlayerIndex, 3, bets[currentPlayerIndex].anteWager * 1);
+                    gameManager.players[currentPlayerIndex].EditPlayerChip(bets[currentPlayerIndex].anteWager * -1);
                     break;
                 default:
                     break;
             }
 
-            labelController.ShowBet(currentPlayerIndex, bets[currentPlayerIndex].GetTotal());
+            labelController.SetBetLabel(currentPlayerIndex, bets[currentPlayerIndex].GetTotal());
         }
 
         public void Bet_AI(BetType betType, int playerIndex)
@@ -161,20 +167,23 @@ namespace TexasBonus
                 case BetType.Flop:
                     bets[playerIndex].flopWager = bets[playerIndex].anteWager * 2;
                     tableController.CreateWagerModel(playerIndex, 1, bets[playerIndex].anteWager * 2);
+                    gameManager.players[playerIndex].EditPlayerChip(bets[playerIndex].anteWager * -2);
                     break;
                 case BetType.Turn:
                     bets[playerIndex].turnWager = bets[playerIndex].anteWager * 1;
                     tableController.CreateWagerModel(playerIndex, 2, bets[playerIndex].anteWager * 1);
+                    gameManager.players[playerIndex].EditPlayerChip(bets[playerIndex].anteWager * -1);
                     break;
                 case BetType.River:
                     bets[playerIndex].riverWager = bets[playerIndex].anteWager * 1;
                     tableController.CreateWagerModel(playerIndex, 3, bets[playerIndex].anteWager * 1);
+                    gameManager.players[playerIndex].EditPlayerChip(bets[playerIndex].anteWager * -1);
                     break;
                 default:
                     break;
             }
 
-            labelController.ShowBet(playerIndex, bets[playerIndex].GetTotal());
+            labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal());
         }
         
         public void Fold()
@@ -184,7 +193,7 @@ namespace TexasBonus
             group_anteWager.SetActive(false);
             group_betOrFold.SetActive(false);
 
-            labelController.HideHandPanel();
+            labelController.HideHandRankPanel();
             tableController.playerCardsObj[currentPlayerIndex].SetActive(true);
         }
 

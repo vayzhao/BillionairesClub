@@ -17,11 +17,11 @@ namespace TexasBonus
         [HideInInspector]
         public Player[] players;
 
-        private GameObject obj_readyBtn;
-        private TableInformation tableInfo;
-        private TableController tableController;
-        private PlayerAction playerAction;
-        private LabelController labelController;
+        private GameObject obj_readyBtn;          // a button that allows you to enter the game
+        private TableInformation tableInfo;       // a script that handles information of the players 
+        private TableController tableController;  // a script that handles all the 3D models used on the table 
+        private PlayerAction playerAction;        // a script that handles betting decision in the game
+        private LabelController labelController;  // a script that handles all the UI-text objects in the scene
 
         /// <summary>
         /// Method to setup the game manager for texas bonus
@@ -37,8 +37,8 @@ namespace TexasBonus
             tableController = FindObjectOfType<TableController>();
 
             // create game object for player hand
-            labelController = Instantiate(pref_labelController, canvas).GetComponent<LabelController>();            
-            labelController.Reset();
+            labelController = Instantiate(pref_labelController, canvas).GetComponent<LabelController>();
+            labelController.Setup();
             tableController.labelController = labelController;
 
             // bind relative script to each other
@@ -85,13 +85,20 @@ namespace TexasBonus
             StartCoroutine(Round());
         }
 
+        /// <summary>
+        /// Core Game Loop function
+        /// An infinite whileloop to keep the game going
+        /// </summary>
+        /// <returns></returns>
         IEnumerator Round()
         {
+            // initialize round number
             var round = 0;
             while (true)
             {
+                // increment round
                 round++;
-                Debug.Log($"Round{round} start!");
+
                 playerAction.ResetBet();
                 tableController.Shuffle();
                 tableController.HidePlayerHand();
@@ -117,8 +124,7 @@ namespace TexasBonus
                 yield return tableController.RevealDealerHand(0);
                 yield return tableController.RevealDealerHand(1);
                 tableController.ComputeDealerHandStrength();
-                yield return Comparing();
-                
+                yield return Comparing();                
             }
         }
 
@@ -314,6 +320,9 @@ namespace TexasBonus
                 // increment checkIndex
                 checkIndex++;
 
+                // hide everything for the previous compared player
+                tableController.HidePlayerCards(checkIndex - 1);
+
                 // skip this iteration if the 'n' player is empty or folded
                 if (players[checkIndex] == null || playerAction.bets[checkIndex].hasFolded)
                 {
@@ -322,14 +331,16 @@ namespace TexasBonus
                     continue;
                 }
 
-                tableController.ShowPlayerCards(checkIndex);
-                tableController.HidePlayerCards(checkIndex - 1);
+                // compare player's hand strength
+                tableController.BonusReward(checkIndex);
+                tableController.Compare(checkIndex);                
                 yield return new WaitForSeconds(Blackboard.WAIT_TIME_COMPARE);
             }
+
+            // hide everything from the last compared player
             tableController.HidePlayerCards(checkIndex);
 
             //Debug.Log("Compare");
-            yield return new WaitForSeconds(3f);
         }
 
 

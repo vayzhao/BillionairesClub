@@ -26,6 +26,9 @@ public class PlayerBoard : MonoBehaviour
         // bind player to this script
         this.player = player;
 
+        // bind this playerboard to the player
+        player.playerBoard = this;
+
         // update portrait sprite 
         portrait.sprite = Blackboard.GetPortraitPrefab(player.modelIndex);
 
