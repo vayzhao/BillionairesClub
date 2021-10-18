@@ -5,29 +5,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Main")]
+    [Tooltip("Determine whether or not the player is a NPC")]
     public bool isNPC;
+
+    [Header("Property")]
+    [Tooltip("The amount of money this player has")]
     public int chip;
+    [Tooltip("The amount of chip this player has")]
     public int gem;
 
     [HideInInspector]
-    public int modelIndex;
+    public int modelIndex;          // index of player's model
     [HideInInspector]
-    public PlayerBoard playerBoard;
-
-    private int chipRed;
-    private int chipBlue;
-    private int chipYellow;
-    private int chipPink;
-    private int chipBlack;
-    
-    public int GetTotalChip()
-    {
-        return chipRed * 5
-            + chipBlue * 10
-            + chipYellow * 20
-            + chipPink * 50
-            + chipBlack * 100;
-    }
+    public PlayerBoard playerBoard; // the player board binded to this player
 
     /// <summary>
     /// Method to increase or decrease a player's chip amount

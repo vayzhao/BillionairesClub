@@ -8,12 +8,12 @@ namespace TexasBonus
     public class HandStrength
     {
         public Rank rank;            // determine the level of this hand 
-        private Suit suit;           // 
-        private Value value;         //
-        private Value subValue;      //
-        private Card[] bestHand;     //
-        private List<Card> cards;    //
-        private int bonusMultiplier; //
+        private Suit suit;           // suit of the combination (it is only used when the hand-rank is flush or straight flush)
+        private Value value;         // the biggest value of this hand
+        private Value subValue;      // the second biggest value of this hand
+        private Card[] bestHand;     // the 5 best card out of 7 cards
+        private List<Card> cards;    // the 7 cards (2 player's hand + 5 community cards)
+        private int bonusMultiplier; // the bonus multiplier 
 
         public HandStrength()
         {
@@ -52,8 +52,11 @@ namespace TexasBonus
         /// </summary>
         public void Recompute()
         {
+            // return if the player has 2 cards only (in this case community cards are not revealed)
             if (StartHand()) 
                 return;
+
+            // find the highest hand-rank within current hand
             if (rank <= Rank.OnePair) 
                 CheckOnePair();
             if (rank <= Rank.TwoPairs) 
@@ -70,7 +73,43 @@ namespace TexasBonus
                 CheckFourOfAKind();
             if (rank <= Rank.StraightFlush) 
                 CheckStraightFlush();
-            FindBestHand();
+
+            // when highest hand-rank is found, find the best 5 cards within current hand
+            switch (rank)
+            {
+                case Rank.HighHand:
+                    BestHandHighHand();
+                    break;
+                case Rank.OnePair:
+                    BestHandOnePair();
+                    break;
+                case Rank.TwoPairs:
+                    BestHandTwoPair();
+                    break;
+                case Rank.ThreeOfAKind:
+                    BestHandThreeOfAKind();
+                    break;
+                case Rank.Straight:
+                    BestHandStraight();
+                    break;
+                case Rank.Flush:
+                    BestHandFlush();
+                    break;
+                case Rank.FullHouse:
+                    BestHandFullHouse();
+                    break;
+                case Rank.FourOfAKind:
+                    BestHandFourOfAKind();
+                    break;
+                case Rank.StraightFlush:
+                    BestHandStraightFlush();
+                    break;
+                case Rank.RoyalFlush:
+                    BestHandStraightFlush();
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
@@ -128,6 +167,15 @@ namespace TexasBonus
                 }
             }
         }
+        private void BestHandStraightFlush()
+        {
+            var straightFlush = cards.Select(x => x).Where(x => x.suit == suit && x.value <= value).OrderByDescending(x => x.value).Distinct().Take(5).ToArray();
+            bestHand[0] = straightFlush[0];
+            bestHand[1] = straightFlush[1];
+            bestHand[2] = straightFlush[2];
+            bestHand[3] = straightFlush[3];
+            bestHand[4] = straightFlush[4];
+        }
 
         /// <summary>
         /// Method to determine if the player has a quads
@@ -147,6 +195,16 @@ namespace TexasBonus
                 rank = Rank.FourOfAKind;
                 value = quads.Max(x => x.Key);
             }
+        }
+        private void BestHandFourOfAKind()
+        {
+            var quads = cards.Select(x => x).Where(x => x.value == value).ToArray();
+            var rest = cards.Select(x => x).Where(x => x.value != value).OrderByDescending(x => x.value).First();
+            bestHand[0] = quads[0];
+            bestHand[1] = quads[1];
+            bestHand[2] = quads[2];
+            bestHand[3] = quads[3];
+            bestHand[4] = rest;
         }
 
         /// <summary>
@@ -173,6 +231,16 @@ namespace TexasBonus
                 subValue = pairs.Where(x => x.Key != value).Max(x => x.Key);
             }
         }
+        private void BestHandFullHouse()
+        {
+            var trips = cards.Select(x => x).Where(x => x.value == value).ToArray();
+            var pair = cards.Select(x => x).Where(x => x.value == subValue).ToArray();
+            bestHand[0] = trips[0];
+            bestHand[1] = trips[1];
+            bestHand[2] = trips[2];
+            bestHand[3] = pair[0];
+            bestHand[4] = pair[1];
+        }
 
         /// <summary>
         /// Method to determine if the player has a flush
@@ -189,6 +257,15 @@ namespace TexasBonus
                 suit = flushes.Single().Key;
                 value = cards.Where(x => x.suit == suit).Max(x => x.value);
             }
+        }
+        private void BestHandFlush()
+        {
+            var flush = cards.Select(x => x).Where(x => x.suit == suit).OrderByDescending(x => x.value).Take(5).ToArray();
+            bestHand[0] = flush[0];
+            bestHand[1] = flush[1];
+            bestHand[2] = flush[2];
+            bestHand[3] = flush[3];
+            bestHand[4] = flush[4];
         }
 
         /// <summary>
@@ -234,6 +311,15 @@ namespace TexasBonus
                 }
             }
         }
+        private void BestHandStraight()
+        {
+            var straight = cards.Select(x => x).Where(x => x.value <= value).OrderByDescending(x => x.value).Distinct().Take(5).ToArray();
+            bestHand[0] = straight[0];
+            bestHand[1] = straight[1];
+            bestHand[2] = straight[2];
+            bestHand[3] = straight[3];
+            bestHand[4] = straight[4];
+        }
 
         /// <summary>
         /// Method to determine if the player has a trips
@@ -254,6 +340,16 @@ namespace TexasBonus
                 value = trips.Max(x => x.Key);
             }
         }
+        private void BestHandThreeOfAKind()
+        {
+            var trips = cards.Select(x => x).Where(x => x.value == value).ToArray();
+            var rest = cards.Select(x => x).Where(x => x.value != value).OrderByDescending(x => x.value).Take(2).ToArray();
+            bestHand[0] = trips[0];
+            bestHand[1] = trips[1];
+            bestHand[2] = trips[2];
+            bestHand[3] = rest[0];
+            bestHand[4] = rest[1];
+        }
 
         /// <summary>
         /// Method to determine if the player has two pairs
@@ -270,7 +366,17 @@ namespace TexasBonus
                 value = pairs.Max(x => x.Key);
                 subValue = pairs.Where(x => x.Key != value).Max(x => x.Key);
             }
-
+        }
+        private void BestHandTwoPair()
+        {
+            var pair = cards.Select(x => x).Where(x => x.value == value).ToArray();
+            var subPair = cards.Select(x => x).Where(x => x.value == subValue).ToArray();
+            var rest = cards.Select(x => x).Where(x => x.value != value && x.value != subValue).OrderByDescending(x => x.value).First();
+            bestHand[0] = pair[0];
+            bestHand[1] = pair[1];
+            bestHand[2] = subPair[0];
+            bestHand[3] = subPair[1];
+            bestHand[4] = rest;
         }
 
         /// <summary>
@@ -287,116 +393,6 @@ namespace TexasBonus
                 rank = Rank.OnePair;
                 value = pairs.Max(x => x.Key);
             }
-        }
-
-        /// <summary>
-        /// Methods to find best 5 cards within 7 cards
-        /// </summary>
-        private void FindBestHand()
-        {
-            switch (rank)
-            {
-                case Rank.HighHand:
-                    BestHandHighHand();
-                    break;
-                case Rank.OnePair:
-                    BestHandOnePair();
-                    break;
-                case Rank.TwoPairs:
-                    BestHandTwoPair();
-                    break;
-                case Rank.ThreeOfAKind:
-                    BestHandThreeOfAKind();
-                    break;
-                case Rank.Straight:
-                    BestHandStraight();
-                    break;
-                case Rank.Flush:
-                    BestHandFlush();
-                    break;
-                case Rank.FullHouse:
-                    BestHandFullHouse();
-                    break;
-                case Rank.FourOfAKind:
-                    BestHandFourOfAKind();
-                    break;
-                case Rank.StraightFlush:
-                    BestHandStraightFlush();
-                    break;
-                case Rank.RoyalFlush:
-                    BestHandStraightFlush();
-                    break;
-                default:
-                    break;
-            }
-        }
-        private void BestHandStraightFlush()
-        {
-            var straightFlush = cards.Select(x => x).Where(x => x.suit == suit && x.value <= value).OrderByDescending(x => x.value).Distinct().Take(5).ToArray();
-            bestHand[0] = straightFlush[0];
-            bestHand[1] = straightFlush[1];
-            bestHand[2] = straightFlush[2];
-            bestHand[3] = straightFlush[3];
-            bestHand[4] = straightFlush[4];
-        }
-        private void BestHandFourOfAKind()
-        {
-            var quads = cards.Select(x => x).Where(x => x.value == value).ToArray();
-            var rest = cards.Select(x => x).Where(x => x.value != value).OrderByDescending(x => x.value).First();
-            bestHand[0] = quads[0];
-            bestHand[1] = quads[1];
-            bestHand[2] = quads[2];
-            bestHand[3] = quads[3];
-            bestHand[4] = rest;
-        }
-        private void BestHandFullHouse()
-        {
-            var trips = cards.Select(x => x).Where(x => x.value == value).ToArray();
-            var pair = cards.Select(x => x).Where(x => x.value == subValue).ToArray();
-            bestHand[0] = trips[0];
-            bestHand[1] = trips[1];
-            bestHand[2] = trips[2];
-            bestHand[3] = pair[0];
-            bestHand[4] = pair[1];
-        }
-        private void BestHandFlush()
-        {
-            var flush = cards.Select(x => x).Where(x => x.suit == suit).OrderByDescending(x => x.value).Take(5).ToArray();
-            bestHand[0] = flush[0];
-            bestHand[1] = flush[1];
-            bestHand[2] = flush[2];
-            bestHand[3] = flush[3];
-            bestHand[4] = flush[4];
-        }
-        private void BestHandStraight()
-        {
-            var straight = cards.Select(x => x).Where(x => x.value <= value).OrderByDescending(x => x.value).Distinct().Take(5).ToArray();
-            bestHand[0] = straight[0];
-            bestHand[1] = straight[1];
-            bestHand[2] = straight[2];
-            bestHand[3] = straight[3];
-            bestHand[4] = straight[4];
-        }
-        private void BestHandThreeOfAKind()
-        {
-            var trips = cards.Select(x => x).Where(x => x.value == value).ToArray();
-            var rest = cards.Select(x => x).Where(x => x.value != value).OrderByDescending(x => x.value).Take(2).ToArray();
-            bestHand[0] = trips[0];
-            bestHand[1] = trips[1];
-            bestHand[2] = trips[2];
-            bestHand[3] = rest[0];
-            bestHand[4] = rest[1];
-        }
-        private void BestHandTwoPair()
-        {
-            var pair = cards.Select(x => x).Where(x => x.value == value).ToArray();
-            var subPair = cards.Select(x => x).Where(x => x.value == subValue).ToArray();
-            var rest = cards.Select(x => x).Where(x => x.value != value && x.value != subValue).OrderByDescending(x => x.value).First();
-            bestHand[0] = pair[0];
-            bestHand[1] = pair[1];
-            bestHand[2] = subPair[0];
-            bestHand[3] = subPair[1];
-            bestHand[4] = rest;
         }
         private void BestHandOnePair()
         {
@@ -426,8 +422,10 @@ namespace TexasBonus
             // determine the starting hand strengh
             rank = cards[0].SameValue(cards[1]) ? Rank.OnePair : Rank.HighHand;
 
-            // set value to be the max value in start hand
-            value = Card.Max(cards);
+            // find the value and sub value
+            var sortedHand = cards.OrderByDescending(x => x.value).ToArray();
+            value = sortedHand[0].value;
+            subValue = sortedHand[1].value;
 
             // calculate bonus mulitplier
             CalculateBonus();
@@ -439,7 +437,7 @@ namespace TexasBonus
         /// Method to calculate player's bonus multiplier, it is called
         /// when the first 2 cards are revealed
         /// </summary>
-        public void CalculateBonus()
+        private void CalculateBonus()
         {
             // initialize multiplier
             bonusMultiplier = 0;
@@ -523,9 +521,9 @@ namespace TexasBonus
         {
             return rank.GetName() + "\n" + GetBestHandString();
         }
-        public string ToString(string color)
+        public string ToString(string prefix)
         {
-            return rank.GetName() + "\n" + color + GetBestHandString();
+            return rank.GetName() + "\n" + prefix + GetBestHandString();
         }
         public string GetInitialHandString()
         {

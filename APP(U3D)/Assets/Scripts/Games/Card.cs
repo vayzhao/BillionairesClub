@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Card
 {
-    public Suit suit;
-    public Value value;
-    public GameObject gameObj;
+    public Suit suit;   // suit of this card
+    public Value value; // value of this card
 
     public Card(Suit suit, Value value)
     {
@@ -14,23 +13,20 @@ public class Card
         this.value = value;
     }
 
-    public int GetCardIndex()
-    {
-        return ((int)suit * 13) + (int)value;
-    }
-    
-    public bool SameValue(Card other)
-    {
-        return this.value == other.value;
-    }
+    public int GetCardIndex() { return ((int)suit * 13) + (int)value; }
 
-    public bool SameSuit(Card other)
-    {
-        return this.suit == other.suit;
-    }
+    public bool SameValue(Card other) { return this.value == other.value; }
 
+    public bool SameSuit(Card other) { return this.suit == other.suit; }
+
+    /// <summary>
+    /// Method to find the card that has the maximum value within a list of cards
+    /// </summary>
+    /// <param name="cards">the list of cards</param>
+    /// <returns></returns>
     public static Value Max(List<Card> cards)
     {
+        // initialize index & max value
         var index = 0;
         var maxValue = -1;
         for (int i = 0; i < cards.Count; i++)

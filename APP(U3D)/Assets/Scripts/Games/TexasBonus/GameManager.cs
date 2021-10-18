@@ -15,7 +15,7 @@ namespace TexasBonus
         public GameObject pref_readyBtn;
 
         [HideInInspector]
-        public Player[] players;
+        public Player[] players;                  // data for all players
 
         private GameObject obj_readyBtn;          // a button that allows you to enter the game
         private TableInformation tableInfo;       // a script that handles information of the players 
@@ -99,33 +99,64 @@ namespace TexasBonus
                 // increment round
                 round++;
 
-                playerAction.ResetBet();
-                tableController.Shuffle();
-                tableController.HidePlayerHand();
-                tableController.TurnCardsBack();
-                yield return tableController.DealInitialCards();                
+                // reset the game
+                ResetGame();
+
+                // deal 2 dealers card and 5 community card (in face-down)
+                yield return tableController.DealInitialCards();          
+                
+                // ask for the bonus wager
                 yield return BonusWagerBet();
+
+                // deal 2 cards for each player (in face-down)
                 yield return tableController.DealPlayerCards();
+
+                // ask for the ante wager and reveal player's start hand
                 yield return AnteWagerBet();
                 tableController.RevealPlayerCards();
+
+                // ask for decision on flop bet
                 yield return FlopBet();
+
+                // take away folded player's card and chip
                 yield return tableController.DetermineFoldedPlayer();
 
+                // skip this game if all player has folded
                 if (tableController.allPlayerFolded)
                     continue;
-                                    
+
+                // otherwise reveal the flop cards
                 yield return tableController.RevealCommunityCard(0, false);
                 yield return tableController.RevealCommunityCard(1, false);
                 yield return tableController.RevealCommunityCard(2, true);
-                yield return TurnBet();
+
+                // ask for decision on turn bet and reveal the turn card
+                yield return TurnBet();               
                 yield return tableController.RevealCommunityCard(3, true);
+
+                // ask for decision on river bet and reveal the river card
                 yield return RiverBet();
                 yield return tableController.RevealCommunityCard(4, true);
-                yield return tableController.RevealDealerHand(0);
-                yield return tableController.RevealDealerHand(1);
-                tableController.ComputeDealerHandStrength();
+
+                // reveal dealers hand and compute its hand-rank
+                yield return tableController.RevealDealerHand();
+
+                // compare player's hand-rank and dealer's hand-rank
                 yield return Comparing();                
             }
+        }
+
+        /// <summary>
+        /// Method to reset the game, it is called everytime when a new 
+        /// round starts
+        /// </summary>
+        void ResetGame()
+        {
+            // reset player action's data
+            playerAction.ResetBet();
+
+            // reset table controller's data
+            tableController.ResetTable();
         }
 
         /// <summary>
@@ -142,32 +173,28 @@ namespace TexasBonus
                 checkIndex++;
 
                 // skip this iteration if the 'n' player is empty
-                if (players[checkIndex] == null) {
-                    //Debug.Log($"Player{checkIndex} is empty");                    
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_EMPTY);
+                if (players[checkIndex] == null)
                     continue;
-                }
 
+                // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    //Debug.Log($"Player{checkIndex} has made a decision");
                     playerAction.BetBonusWager_AI(checkIndex);
                     yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
                     continue;
                 }
 
+                // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.BonusWager, checkIndex);
                 while (playerAction.isWaiting)
-                {
-                    //Debug.Log("Wait for player to make decision");
                     yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
-                }
             }
-
-            //Debug.Log("BonusWager");
-            yield return new WaitForSeconds(Time.deltaTime);
         }
 
+        /// <summary>
+        /// Method to scan through player array and ask for ante wager
+        /// </summary>
+        /// <returns></returns>
         IEnumerator AnteWagerBet()
         {
             var checkIndex = -1;
@@ -178,32 +205,27 @@ namespace TexasBonus
 
                 // skip this iteration if the 'n' player is empty
                 if (players[checkIndex] == null)
-                {
-                    //Debug.Log($"Player{checkIndex} is empty");
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_EMPTY);
                     continue;
-                }
 
+                // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    //Debug.Log($"Player{checkIndex} has made a decision");
                     playerAction.BetAnteWager_AI(checkIndex);
                     yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
                     continue;
                 }
 
+                // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.AnteWager, checkIndex);
                 while (playerAction.isWaiting)
-                {
-                    //Debug.Log("Wait for player to make decision");
                     yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
-                }
             }
-
-            //Debug.Log("AnteWager");
-            yield return new WaitForSeconds(Time.deltaTime);
         }
 
+        /// <summary>
+        /// Method to scan through player array and ask for flop wager
+        /// </summary>
+        /// <returns></returns>
         IEnumerator FlopBet()
         {
             var checkIndex = -1;
@@ -214,33 +236,27 @@ namespace TexasBonus
 
                 // skip this iteration if the 'n' player is empty
                 if (players[checkIndex] == null)
-                {
-                    //Debug.Log($"Player{checkIndex} is empty");
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_EMPTY);
                     continue;
-                }
 
+                // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    //Debug.Log($"Player{checkIndex} has made a decision");
                     playerAction.Bet_AI(BetType.Flop, checkIndex);
-                    //playerAction.Fold_AI(checkIndex);
                     yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
                     continue;
                 }
 
+                // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.Flop, checkIndex);
                 while (playerAction.isWaiting)
-                {
-                    //Debug.Log("Wait for player to make decision");
                     yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
-                }
             }
-
-            //Debug.Log("Flop");
-            yield return new WaitForSeconds(Time.deltaTime);
         }
 
+        /// <summary>
+        /// Method to scan through player array and ask for turn wager
+        /// </summary>
+        /// <returns></returns>
         IEnumerator TurnBet()
         {
             var checkIndex = -1;
@@ -250,33 +266,28 @@ namespace TexasBonus
                 checkIndex++;
 
                 // skip this iteration if the 'n' player is empty
-                if (players[checkIndex] == null || playerAction.PlayerHasFolded(checkIndex))
-                {
-                    //Debug.Log($"Player{checkIndex} is empty");
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_EMPTY);
+                if (players[checkIndex] == null || playerAction.bets[checkIndex].hasFolded)
                     continue;
-                }
 
+                // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    //Debug.Log($"Player{checkIndex} has made a decision");
                     playerAction.Bet_AI(BetType.Turn, checkIndex);
                     yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
                     continue;
                 }
 
+                // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.Turn, checkIndex);
                 while (playerAction.isWaiting)
-                {
-                    //Debug.Log("Wait for player to make decision");
                     yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
-                }
             }
-
-            //Debug.Log("Turn");
-            yield return new WaitForSeconds(Time.deltaTime);
         }
 
+        /// <summary>
+        /// Method to scan through player array and ask for river wager
+        /// </summary>
+        /// <returns></returns>
         IEnumerator RiverBet()
         {
             var checkIndex = -1;
@@ -286,32 +297,29 @@ namespace TexasBonus
                 checkIndex++;
 
                 // skip this iteration if the 'n' player is empty
-                if (players[checkIndex] == null || playerAction.PlayerHasFolded(checkIndex))
-                {
-                    //Debug.Log($"Player{checkIndex} is empty");
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_EMPTY);
+                if (players[checkIndex] == null || playerAction.bets[checkIndex].hasFolded)
                     continue;
-                }
 
+                // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    //Debug.Log($"Player{checkIndex} has made a decision");
                     playerAction.Bet_AI(BetType.River, checkIndex);
                     yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
                     continue;
                 }
 
+                // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.River, checkIndex);
                 while (playerAction.isWaiting)
-                {
-                    //Debug.Log("Wait for player to make decision");
                     yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
-                }
             }
-            //Debug.Log("River");
-            yield return new WaitForSeconds(Time.deltaTime);
         }
 
+        /// <summary>
+        /// Method to scan through player array and compare hand-rank between the player
+        /// and the dealer
+        /// </summary>
+        /// <returns></returns>
         IEnumerator Comparing()
         {
             var checkIndex = -1;
@@ -325,11 +333,7 @@ namespace TexasBonus
 
                 // skip this iteration if the 'n' player is empty or folded
                 if (players[checkIndex] == null || playerAction.bets[checkIndex].hasFolded)
-                {
-                    //Debug.Log($"Player{checkIndex} is empty");
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_EMPTY);
                     continue;
-                }
 
                 // compare player's hand strength
                 tableController.BonusReward(checkIndex);
@@ -339,31 +343,6 @@ namespace TexasBonus
 
             // hide everything from the last compared player
             tableController.HidePlayerCards(checkIndex);
-
-            //Debug.Log("Compare");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

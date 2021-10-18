@@ -19,9 +19,9 @@ public class TableInformation : MonoBehaviour
     public Seat[] seats;
     
     [HideInInspector]
-    public SeatManager seatManager;
+    public SeatManager seatManager; // the seat manager script
     [HideInInspector]
-    public Player[] players;
+    public Player[] players;        // data for all players in this table
 
     /// <summary>
     /// A method to bind table information to all the related seats

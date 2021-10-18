@@ -5,13 +5,13 @@ using UnityEngine;
 public class SeatManager : MonoBehaviour
 {
     [HideInInspector]
-    public List<Seat> allSeats;
+    public List<Seat> allSeats;       // all seats
     [HideInInspector]
-    public List<Seat> availableSeats;
+    public List<Seat> dealerSeats;    // seats that can be used by dealers only
+    [HideInInspector]   
+    public List<Seat> userSeats;      // seats that can be used by user player only
     [HideInInspector]
-    public List<Seat> dealerSeats;
-    [HideInInspector]
-    public List<Seat> userSeats;
+    public List<Seat> availableSeats; // remaining seats for both npc and player
 
     /// <summary>
     /// Method to initialize the seat manager

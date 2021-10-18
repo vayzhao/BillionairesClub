@@ -4,13 +4,14 @@ using UnityEngine;
 
 public struct Bet
 {
-    public int bonusWager;
-    public int anteWager;
-    public int flopWager;
-    public int turnWager;
-    public int riverWager;
-    public bool hasFolded;
+    public int bonusWager;  // amount of money the player bets on bouns
+    public int anteWager;   // amount of money the player bets on ante
+    public int flopWager;   // amount of money the player bets on flop
+    public int turnWager;   // amount of money the player bets on turn
+    public int riverWager;  // amount of money the player bets on river
+    public bool hasFolded;  // determine whether or not the player has folded in this round
 
+    // reset all types of wager to initial
     public void Reset()
     {
         bonusWager = 0;
@@ -21,11 +22,11 @@ public struct Bet
         hasFolded = false;
     }
 
-    public int GetTotal()
-    {
-        return anteWager + flopWager + turnWager + riverWager;
-    }
-
+    /// <summary>
+    /// Method to sum the amount of bet in ante, flop, turn and river
+    /// </summary>
+    /// <returns></returns>
+    public int GetTotal() { return anteWager + flopWager + turnWager + riverWager; }
 
 
 

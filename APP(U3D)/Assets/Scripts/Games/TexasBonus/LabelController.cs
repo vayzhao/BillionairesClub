@@ -19,19 +19,22 @@ namespace TexasBonus
         [Space(25f)]        
         [Tooltip("Text objects that show the amount of money that the players bet")]
         public TextMeshProUGUI[] betLabels;
-        [Tooltip("Text objects that show the hand-rank of the players hand")]
+        [Tooltip("Text objects that show the hand-rank of the players")]
         public GameObject[] handRankLabel;
-        [Tooltip("")]
+        [Tooltip("Text object that shows the hand-rank of the dealer")]
         public GameObject dealerHandRankLabel;
         [Header("Sprite Asset")]
+        [Tooltip("Background sprite for hand-rank label when win")]
         public Sprite labelSpriteForWin;
+        [Tooltip("Background sprite for hand-rank label when lose")]
         public Sprite labelSpriteForLose;
+        [Tooltip("Background sprite for hand-rank label when standoff")]
         public Sprite labelSpriteForStandoff;
 
-        private Image dealerLabelBg;
-        private Image[] playerLabelBg;
-        private TextMeshProUGUI dealerLabelText;
-        private TextMeshProUGUI[] playerLabelText;
+        private Image dealerLabelBg;               // image to display hand-rank label's background 
+        private Image[] playerLabelBg;             // image to display hand-rank label's background 
+        private TextMeshProUGUI dealerLabelText;   // text to display hand-rank label's text 
+        private TextMeshProUGUI[] playerLabelText; // text to display hand-rank label's text
 
         /// <summary>
         /// Method to setup the label controllers
@@ -65,33 +68,7 @@ namespace TexasBonus
         {
             // hide the panel object & title
             HideOtherLabels();
-            HideHandRankPanel();
-        }
-
-        /// <summary>
-        /// Method to display player hand-rank pannel, it is called after the player receive cards
-        /// </summary>
-        public void Display()
-        {
-            // display the panel & title
-            panel.enabled = true;
-            title.enabled = true;
-            cardTexture[0].sprite = defaultTexture;
-            cardTexture[1].sprite = defaultTexture;
-
-            // reset title text
-            title.text = "";
-        }
-
-        /// <summary>
-        /// Method to hide local player's hadn-rank panel
-        /// </summary>
-        public void HideHandRankPanel()
-        {
-            panel.enabled = false;
-            title.enabled = false;
-            cardTexture[0].enabled = false;
-            cardTexture[1].enabled = false;
+            SetLocalHandRankPanelVisibility(false);
         }
 
         /// <summary>
@@ -111,6 +88,26 @@ namespace TexasBonus
             SetHandRankLabelForDealer(false);
         }
 
+        /// <summary>
+        /// Method to modify hand-rank panel's visibility
+        /// </summary>
+        /// <param name="state">true to display, false to hide</param>
+        public void SetLocalHandRankPanelVisibility(bool state)
+        {
+            // set states for hand-rank panel components
+            panel.enabled = state;
+            title.enabled = state;
+            cardTexture[0].enabled = state;
+            cardTexture[1].enabled = state;
+
+            // when enabling, reset sprite for cardTexture and title text
+            if (state)
+            {
+                title.text = "";
+                cardTexture[0].sprite = defaultTexture;
+                cardTexture[1].sprite = defaultTexture;
+            }
+        }
 
         /// <summary>
         /// Method to display / hide the bet chip label for players
