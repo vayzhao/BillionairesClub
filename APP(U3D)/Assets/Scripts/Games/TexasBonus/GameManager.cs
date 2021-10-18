@@ -13,6 +13,8 @@ namespace TexasBonus
         public GameObject pref_labelController;
         [Tooltip("A prefab object that holds the ready button")]
         public GameObject pref_readyBtn;
+        [Tooltip("A prefab object that holds the UI manager")]
+        public GameObject pref_uiManager;
 
         [HideInInspector]
         public Player[] players;                  // data for all players
@@ -22,7 +24,7 @@ namespace TexasBonus
         private TableController tableController;  // a script that handles all the 3D models used on the table 
         private PlayerAction playerAction;        // a script that handles betting decision in the game
         private LabelController labelController;  // a script that handles all the UI-text objects in the scene
-
+        private UIManager uiManager;              // a script that handles all interactable UI components
         /// <summary>
         /// Method to setup the game manager for texas bonus
         /// </summary>
@@ -52,6 +54,9 @@ namespace TexasBonus
             obj_readyBtn = Instantiate(pref_readyBtn, canvas);
             obj_readyBtn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => GameStart());
             obj_readyBtn.SetActive(false);
+
+            // create the UI manager
+            uiManager = Instantiate(pref_uiManager, canvas).GetComponent<UIManager>();
         }
 
         /// <summary>
@@ -80,6 +85,9 @@ namespace TexasBonus
 
             // display labels on the table
             tableController.DisplayTableLabel();
+
+            // enable the intractable UI components
+            uiManager.SetInitButtonVisbility(true);
 
             // start a round
             StartCoroutine(Round());

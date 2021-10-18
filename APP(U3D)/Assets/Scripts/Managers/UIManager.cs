@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
             case SceneType.InCasino:
                 break;
             case SceneType.InGame:
+                initPage = new UIPage(initButtons);
                 break;
             default:
                 break;
@@ -79,5 +80,13 @@ public class UIManager : MonoBehaviour
         // close current page if it has a previous page
         if (currentPage.prevPage != null)
             ClosePage();
+    }
+
+    /// <summary>
+    /// Method to modify the init buttons visibility
+    /// </summary>
+    public void SetInitButtonVisbility(bool state)
+    {
+        initButtons.SetActive(state);
     }
 }

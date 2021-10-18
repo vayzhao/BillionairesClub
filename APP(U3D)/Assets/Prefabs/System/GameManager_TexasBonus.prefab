@@ -46,4 +46,5 @@ MonoBehaviour:
   pref_PlayerAction: {fileID: 5446357018551181112, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
   pref_labelController: {fileID: 6031004726975428313, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
   pref_readyBtn: {fileID: 8017850631713423442, guid: c54c358e1397b534bba89a80b48c514a, type: 3}
+  pref_uiManager: {fileID: 6932235123458729215, guid: 99c03d49960d0b643b61fc651aa91bb1, type: 3}
   players: []
