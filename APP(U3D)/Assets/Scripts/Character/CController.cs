@@ -239,4 +239,14 @@ public class CController : Player
         // finally stand up
         seat.StandUp(animator);
     }
+
+    /// <summary>
+    /// Method to reset model's parent
+    /// </summary>
+    public void ReBindModel()
+    {
+        model.parent = this.transform;
+        model.localPosition = Vector3.zero;
+        model.parent = null;
+    }
 }

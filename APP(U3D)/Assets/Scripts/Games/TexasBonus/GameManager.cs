@@ -55,7 +55,7 @@ namespace TexasBonus
             obj_readyBtn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => GameStart());
             obj_readyBtn.SetActive(false);
 
-            // create the UI manager
+            // create the UI manager and register event for stand up button
             uiManager = Instantiate(pref_uiManager, canvas).GetComponent<UIManager>();
         }
 

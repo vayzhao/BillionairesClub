@@ -19,12 +19,7 @@ public class Instruction : MonoBehaviour
 
     private int currentPage; // index of current page
 
-    void Start()
-    {
-        Reset();
-    }
-
-    private void Reset()
+    public void Reset()
     {
         // reset current page 
         currentPage = 0;
@@ -62,15 +57,6 @@ public class Instruction : MonoBehaviour
         ResetButtonState();
     }
     
-    /// <summary>
-    /// Method to close the instruction panel
-    /// </summary>
-    public void Close()
-    {
-        Reset();
-        GetComponentInParent<UIManager>().ClosePage();
-    }
-
     /// <summary>
     /// Method to reset button's state
     /// </summary>

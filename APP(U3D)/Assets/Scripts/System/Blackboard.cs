@@ -16,6 +16,7 @@ public static class Blackboard
     public const string SCENE_HOMEPAGE = "Homepage";
     public const string SCENE_INCASINO = "Casino";
     public const string SCENE_TEXAS = "TexasBonus";
+    public static string SCENE_PREVIOUS = SCENE_HOMEPAGE;
 
     public static float loadEstimate = 1f;
 

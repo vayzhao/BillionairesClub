@@ -45,6 +45,13 @@ public class UIPage
         {
             MonoBehaviour.FindObjectOfType<CharacterSelection>().SetActive(value);
         }
+        else if (tag == "Instruction")
+        {
+            if (value)
+                MonoBehaviour.FindObjectOfType<Instruction>().Reset();
+
+            holder.SetActive(value);    
+        }
         else
         {
             holder.SetActive(value);

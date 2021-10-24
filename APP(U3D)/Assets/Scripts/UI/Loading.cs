@@ -42,12 +42,15 @@ public class Loading : MonoBehaviour
     private GameObject obj_manager;
     private GameObject obj_playerBoard;
     private List<LoadData> loadData;
+    public List<GameObject> visibleObjs;
 
     private bool isDebugMode;
 
     void Start()
     {
         DebugMode();
+
+        visibleObjs = new List<GameObject>();
 
         switch (sceneType)
         {
@@ -209,8 +212,14 @@ public class Loading : MonoBehaviour
         }
 
         // unload casino scene if it is not in debug mode
-        if (!isDebugMode && sceneType != SceneType.InCasino)
-            SceneManager.UnloadSceneAsync(Blackboard.SCENE_INCASINO);
+        //if (!isDebugMode && sceneType != SceneType.InCasino)
+        //    SceneManager.UnloadSceneAsync(Blackboard.SCENE_INCASINO);
+        // unload the previous scene if it is loaded
+        if (Blackboard.SCENE_PREVIOUS != ""
+            && SceneManager.GetSceneByName(Blackboard.SCENE_PREVIOUS).isLoaded)
+        {
+            SceneManager.UnloadSceneAsync(Blackboard.SCENE_PREVIOUS);
+        }
 
         // start the game
         switch (sceneType)
@@ -265,7 +274,7 @@ public class Loading : MonoBehaviour
             case GameType.None:
                 break;
             case GameType.TexasBonus:
-                sceneName = Blackboard.SCENE_TEXAS;
+                sceneName = Blackboard.SCENE_TEXAS;                
                 break;
             default:
                 break;
@@ -274,8 +283,53 @@ public class Loading : MonoBehaviour
         // store player's information in that table
         table.SaveSeatsInfo();
 
+        // hide visble object from the old scene
+        HideVisibleObjects();
+
         // start loading coroutine
         StartCoroutine(SubLoading(sceneName));
+    }
+
+    /// <summary>
+    /// Method to load from games to casino
+    /// </summary>
+    public void LoadBackToCasino()
+    {
+        // before loading back to the casino, we have to remove all the seat components
+        // so that the seat manager in casino scene will not capture seats from the game scene
+        var seats = FindObjectsOfType<Seat>();
+        for (int i = seats.Length - 1; i >= 0 ; i--)
+            Destroy(seats[i]);
+
+        // hide visble object from the old scene
+        HideVisibleObjects();
+
+        // start loading coroutine
+        StartCoroutine(SubLoading(Blackboard.SCENE_INCASINO));
+    }
+
+    /// <summary>
+    /// Method to hide all the visible object from the current scene. It is called before loading a 
+    /// new scene. The purpose of this that is because new object will be spawning into the new scene
+    /// when loading it, we don't want the camera from the old scene to be able to see objects in the 
+    /// new scene, that's why we move all the visible objects and the camera from the old scene, to a
+    /// place that is really far away from the new scene.
+    /// </summary>
+    void HideVisibleObjects()
+    {
+        while (visibleObjs.Count > 0)
+        {
+            // move the object
+            var pos = visibleObjs[0].transform.position;
+            pos.y -= 99f;
+            visibleObjs[0].transform.position = pos;
+
+            // if this object is a player character controller, re-bind its model to the parent
+            visibleObjs[0].GetComponent<CController>()?.ReBindModel();
+
+            // remove the object from the list
+            visibleObjs.RemoveAt(0);
+        }
     }
 
     /// <summary>
@@ -296,7 +350,8 @@ public class Loading : MonoBehaviour
         PlayerPrefs.SetFloat("LoadingBarProgress", progress);
 
         // disable light component from this scene
-        FindObjectOfType<Light>().enabled = false;
+        foreach (var light in FindObjectsOfType<Light>())
+            light.enabled = false;
 
         // load the specific scene 
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
@@ -332,6 +387,10 @@ public class Loading : MonoBehaviour
 
         // setup spawn holder
         Blackboard.SetupSpawnHolder();
+
+        // add the spawned object into the visible object list
+        visibleObjs.Add(environment);
+        visibleObjs.Add(Blackboard.spawnHolder.gameObject);
     }
 
     /// <summary>
@@ -352,7 +411,6 @@ public class Loading : MonoBehaviour
     {
         obj_playerBoard = Instantiate(pref_playerBoard, canvas);
         obj_playerBoard.SetActive(false);
-
     }
 
     /// <summary>
@@ -398,6 +456,9 @@ public class Loading : MonoBehaviour
 
         // save model index
         obj_character.GetComponent<Player>().modelIndex = index;
+
+        // add the spawned object into the visible object list
+        visibleObjs.Add(obj_character);
     }
 
     /// <summary>
@@ -429,9 +490,15 @@ public class Loading : MonoBehaviour
     /// </summary>
     void GameStart_Casino()
     {
-        // unload the casino scene if it is loaded
-        if (SceneManager.GetSceneByName(Blackboard.SCENE_HOMEPAGE).isLoaded)
-            SceneManager.UnloadSceneAsync(Blackboard.SCENE_HOMEPAGE);
+        // unload the previous scene if it is loaded
+        if (Blackboard.SCENE_PREVIOUS != ""
+            && SceneManager.GetSceneByName(Blackboard.SCENE_PREVIOUS).isLoaded)
+        {
+            SceneManager.UnloadSceneAsync(Blackboard.SCENE_PREVIOUS);
+        }
+
+        // setup previous scene name
+        Blackboard.SCENE_PREVIOUS = Blackboard.SCENE_INCASINO;
 
         // set character to be active and move it to the start position
         obj_character.SetActive(true);
@@ -462,6 +529,9 @@ public class Loading : MonoBehaviour
     void GameStart_Texas()
     {
         obj_manager.GetComponent<TexasBonus.GameManager>().FinishedLoading();
+
+        // setup previous scene name
+        Blackboard.SCENE_PREVIOUS = Blackboard.SCENE_TEXAS;
     }
     #endregion
 
