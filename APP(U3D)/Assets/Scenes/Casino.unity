@@ -359,5 +359,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8954841039940104150, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
+--- !u!1 &8954841039732259609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8954841039940104149, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
+  m_PrefabInstance: {fileID: 8954841039732259608}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8954841039732259610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954841039732259609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1288e66e5baadaf44a9450e8a490cb02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneType: 1
+  gameType: 0
+  canvas: {fileID: 613520862}
+  pref_fadeSprite: {fileID: 9166924747962388787, guid: 5fdf441114d9f33499ad598142e97c54, type: 3}
+  pref_playerBoard: {fileID: 4683724205653464973, guid: 972d27d06b7f210419db20eafd4da30d, type: 3}
+  pref_subLoadingBar: {fileID: 8994583291677604014, guid: ed005a5d4768e7d4cbe7df1f63f54c2e, type: 3}
+  pref_environment: {fileID: 1671138450904387636, guid: d755b9ebe5af1fa489313822a460be76, type: 3}
+  pref_character: {fileID: 851202821819492493, guid: 07d30c641b4bf01449a10eff5eb06099, type: 3}
+  pref_manager: {fileID: 1099410216693067132, guid: b3d56c5c5f6466b47bea397fa04a6fdc, type: 3}

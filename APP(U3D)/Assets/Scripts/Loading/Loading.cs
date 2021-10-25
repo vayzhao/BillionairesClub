@@ -1,57 +1,57 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LoadData
-{
-    public float atPercentage;         // start to load this data at ??% of the total loading progress
-    public delegate void loadMethod(); // loading method to call for this loadData
-    public loadMethod method;          // the stored method
-
-    // Method to instantiate a LoadData
-    public LoadData(float atPercentage, loadMethod method)
-    {
-        this.atPercentage = atPercentage;
-        this.method = method;
-    }
-}
-
+/// <summary>
+/// A class to handle the process of loading & spawning when switching from
+/// a scene to another
+/// </summary>
 public class Loading : MonoBehaviour
 {
     [Header("Scene Settings")]
+    [Tooltip("Type of this scene")]
     public SceneType sceneType;
+    [Tooltip("Type of this game (only select this when sceneType is InGame)")]
     public GameType gameType;
 
     [Header("UI Elements")]
+    [Tooltip("The canvas transform, which holds all the UI objects")]
     public Transform canvas;
+    [Tooltip("A white ssprite that is used when switching scene from one to another")]
     public Image pref_fadeSprite;
+    [Tooltip("A game object that contains the player board UI")]
     public GameObject pref_playerBoard;
+    [Tooltip("A game object that contains the sub-loading bar")]
     public GameObject pref_subLoadingBar;
 
     [Header("Prefab Objects")]
+    [Tooltip("The prefab object for the environment in this scene")]
     public GameObject pref_environment;    
+    [Tooltip("The prefab object for player's character")]
     public GameObject pref_character;    
+    [Tooltip("The prefab object for the core manager in this scene")]
     public GameObject pref_manager;
 
-    private GameObject obj_environment;
-    private GameObject obj_character;
-    private GameObject obj_manager;
-    private GameObject obj_playerBoard;
-    private List<LoadData> loadData;
-    public List<GameObject> visibleObjs;
-
-    private bool isDebugMode;
+    private Loader loader;                // a class that contains all sort of methods to spawn objects 
+    private GameObject obj_environment;   // a variable to record the environmental objects
+    private GameObject obj_character;     // a variable to record the player's character
+    private GameObject obj_manager;       // a variable to record the core manager for this scene
+    private GameObject obj_playerBoard;   // a variable to record the player board
+    private List<GameObject> visibleObjs; // a list to store all the visible object, when intend to load a new scene,
+                                          // hide all visble objects from the old scene
 
     void Start()
     {
+        // check to see if this scene is being tested
         DebugMode();
 
+        // initialize visible object list
         visibleObjs = new List<GameObject>();
 
+        // check what type of scene it is loading
         switch (sceneType)
         {
             case SceneType.Homepage:
@@ -82,15 +82,28 @@ public class Loading : MonoBehaviour
     /// </summary>
     void DebugMode()
     {
+        // return if this program has been checked
+        if (Blackboard.debugChecked)
+            return;
+
+        // otherwise set debugChecked to true
+        Blackboard.debugChecked = true;
+
+        // check to see if the user is entering this scene in an appropriate way
+        // (e.g. 
+        //       Homepage -> Casino
+        //       Casino -> InGame
         if ((sceneType == SceneType.InCasino && !SceneManager.GetSceneByName(Blackboard.SCENE_HOMEPAGE).isLoaded)
             || (sceneType == SceneType.InGame && !SceneManager.GetSceneByName(Blackboard.SCENE_INCASINO).isLoaded))
         {
-            isDebugMode = true;
+            // switch debug mode on
+            Blackboard.isDebugMode = true;
             Debug.Log("Debug Mode is on!");
+
+            // run the progress bar in debug mode
             StartCoroutine(ProgressRunner());
 
-
-            // create a test player
+            // create a player for play testing
             var player = new Player();
             player.modelIndex = PlayerPrefs.GetInt("CharacterModelIndex");
             player.chip = 1500;
@@ -117,12 +130,12 @@ public class Loading : MonoBehaviour
     /// </summary>
     void LoadCasinoScene()
     {
-        // setup load data list
-        loadData = new List<LoadData>();
-        loadData.Add(new LoadData(0.20f, LoadSceneEnvironment));
-        loadData.Add(new LoadData(0.40f, LoadCharacterController));
-        loadData.Add(new LoadData(0.60f, LoadCasinoManager));
-        loadData.Add(new LoadData(0.80f, LoadPlayerBoard));
+        // setup a loader
+        loader = new Loader();
+        loader.RegisterLoadingMethod(0.2f, LoadSceneEnvironment);
+        loader.RegisterLoadingMethod(0.4f, LoadCharacterController);
+        loader.RegisterLoadingMethod(0.6f, LoadCasinoManager);
+        loader.RegisterLoadingMethod(0.8f, LoadPlayerBoard);
 
         // set this scene to be active
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(Blackboard.SCENE_INCASINO));
@@ -136,12 +149,12 @@ public class Loading : MonoBehaviour
     /// </summary>
     void LoadTexasBonus()
     {
-        // setup load data list
-        loadData = new List<LoadData>();
-        loadData.Add(new LoadData(0.20f, LoadSceneEnvironment));
-        loadData.Add(new LoadData(0.40f, LoadTableCharacters));
-        loadData.Add(new LoadData(0.60f, LoadTexasBonusManager));
-        loadData.Add(new LoadData(0.80f, LoadPlayerBoard));
+        // setup a loader
+        loader = new Loader();
+        loader.RegisterLoadingMethod(0.2f, LoadSceneEnvironment);
+        loader.RegisterLoadingMethod(0.4f, LoadTableCharacters);
+        loader.RegisterLoadingMethod(0.6f, LoadTexasBonusManager);
+        loader.RegisterLoadingMethod(0.8f, LoadPlayerBoard);
 
         // set this cene to be active 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(Blackboard.SCENE_TEXAS));
@@ -164,9 +177,9 @@ public class Loading : MonoBehaviour
         while (progress < 1f)
         {
             // check to see if the current progress percentage is
-            // ready to load the next loadData
-            if (loadData.IsReady(progress))
-                loadData.Run();
+            // ready to invoke the next load method
+            if (loader.IsReady(progress))
+                loader.Run();
 
             // get the updated loading bar progress
             progress = PlayerPrefs.GetFloat("LoadingBarProgress");
@@ -211,9 +224,6 @@ public class Loading : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
-        // unload casino scene if it is not in debug mode
-        //if (!isDebugMode && sceneType != SceneType.InCasino)
-        //    SceneManager.UnloadSceneAsync(Blackboard.SCENE_INCASINO);
         // unload the previous scene if it is loaded
         if (Blackboard.SCENE_PREVIOUS != ""
             && SceneManager.GetSceneByName(Blackboard.SCENE_PREVIOUS).isLoaded)
@@ -221,7 +231,7 @@ public class Loading : MonoBehaviour
             SceneManager.UnloadSceneAsync(Blackboard.SCENE_PREVIOUS);
         }
 
-        // start the game
+        // officially start the scene
         switch (sceneType)
         {
             case SceneType.Homepage:
@@ -528,6 +538,7 @@ public class Loading : MonoBehaviour
     /// </summary>
     void GameStart_Texas()
     {
+        // call the finished loading method and ready to start the game
         obj_manager.GetComponent<TexasBonus.GameManager>().FinishedLoading();
 
         // setup previous scene name

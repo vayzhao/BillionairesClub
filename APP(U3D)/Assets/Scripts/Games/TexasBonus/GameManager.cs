@@ -89,7 +89,7 @@ namespace TexasBonus
             // enable the intractable UI components
             uiManager.SetInitButtonVisbility(true);
 
-            // start a round
+            // start the game loop coroutine
             StartCoroutine(Round());
         }
 

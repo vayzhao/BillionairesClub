@@ -9,6 +9,7 @@ TagManager:
   - CharacterSelection
   - Seat
   - Instruction
+  - Interactable
   layers:
   - Default
   - TransparentFX

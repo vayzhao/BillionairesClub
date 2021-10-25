@@ -2949,7 +2949,7 @@ GameObject:
   - component: {fileID: 889968513591170742}
   - component: {fileID: 6747327597233705744}
   - component: {fileID: 998431380038559490}
-  - component: {fileID: 5855841948809884424}
+  - component: {fileID: 4838529349762349425}
   m_Layer: 5
   m_Name: Btn_Standup
   m_TagString: Untagged
@@ -3059,7 +3059,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5855841948809884424
+--- !u!114 &4838529349762349425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3068,7 +3068,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3228087091036207277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4b01ae31e5d004692a60d7b9cc7cbd, type: 3}
+  m_Script: {fileID: 11500000, guid: 1819d05a096325b4e805cfe7271d7a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3382664733084571883

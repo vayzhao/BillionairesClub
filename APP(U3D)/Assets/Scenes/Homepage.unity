@@ -4582,7 +4582,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4590,14 +4589,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &963194226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -8227,18 +8218,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1995003424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99352f6e9d5a89141a7f6a5272b1bff0, type: 3}
+  m_Script: {fileID: 11500000, guid: c21e727757b06924ba5e7339200ef556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1423292539}
   loadingText: {fileID: 2065011413}
   loadingContent: {fileID: 1895627269}
   loadingMessages:
-  - Asking contact number from a dealer...
-  - "Ordering an expensive cigar\u2026"
+  - Ordering an expensive cigar...
   - Making marks on cards...
-  - "Collaborating with a friend for \"Soft Playing\"\u2026"
-  - "Hiding or stealing chips\u2026"
+  - Exchanging poker chips
+  - Washing hands...
   messageRefreshRate: 3
 --- !u!1 &1995672556
 GameObject:

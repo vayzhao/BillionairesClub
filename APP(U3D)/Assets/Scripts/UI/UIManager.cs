@@ -14,8 +14,9 @@ public class UIManager : MonoBehaviour
     [Tooltip("The initial buttons in homepage")]
     public GameObject initButtons;
 
-    private UIPage initPage;    // the background window
-    private UIPage currentPage; // the current displayed window
+    private UIPage initPage;           // the background window
+    private UIPage currentPage;        // the current displayed window
+    private GameObject[] interactable; // an array to store all interactable UI objects from the scene
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,9 @@ public class UIManager : MonoBehaviour
 
         // set current page to be the init page
         currentPage = initPage;
+
+        // find the interactable object in the scene
+        FindInteractable();
     }
 
     // Update is called once per frame
@@ -85,8 +89,27 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// Method to modify the init buttons visibility
     /// </summary>
-    public void SetInitButtonVisbility(bool state)
+    public void SetInitButtonVisbility(bool flag)
     {
-        initButtons.SetActive(state);
+        initButtons.SetActive(flag);
+    }
+
+    /// <summary>
+    /// Method to get all interactable UI objects in the scene
+    /// </summary>
+    private void FindInteractable()
+    {
+        interactable = GameObject.FindGameObjectsWithTag("Interactable");
+    }
+
+    /// <summary>
+    /// Method to modify the interactable object's visibiilty
+    /// </summary>
+    public void SetInteractableVisibility(bool flag)
+    {
+        for (int i = 0; i < interactable.Length; i++)
+        {
+            interactable[i].SetActive(flag);
+        }
     }
 }

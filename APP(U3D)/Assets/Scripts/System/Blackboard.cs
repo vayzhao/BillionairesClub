@@ -20,6 +20,9 @@ public static class Blackboard
 
     public static float loadEstimate = 1f;
 
+    public static bool isDebugMode = false;
+    public static bool debugChecked = false;
+
     #region Player
     public static Player thePlayer;
     #endregion

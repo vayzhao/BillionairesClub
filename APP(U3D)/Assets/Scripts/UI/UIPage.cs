@@ -34,42 +34,61 @@ public class UIPage
     /// <summary>
     /// Display / Hide the window based on the given value
     /// </summary>
-    /// <param name="value">True to display, false to hide</param>
-    public void Display(bool value)
+    /// <param name="flag">True to display, false to hide</param>
+    public void Display(bool flag)
     {
         if (tag == "Buttons")
         {
-            SetButtonsState(value);
+            SetButtonsState(flag);
+            SetGameState(flag);
         }
         else if (tag == "CharacterSelection")
         {
-            MonoBehaviour.FindObjectOfType<CharacterSelection>().SetActive(value);
+            MonoBehaviour.FindObjectOfType<CharacterSelection>().SetActive(flag);
         }
         else if (tag == "Instruction")
         {
-            if (value)
+            if (flag)
                 MonoBehaviour.FindObjectOfType<Instruction>().Reset();
 
-            holder.SetActive(value);    
+            holder.SetActive(flag);    
         }
         else
         {
-            holder.SetActive(value);
+            holder.SetActive(flag);
         }
     }
 
     /// <summary>
     /// Enable / Disable buttons based on the given value
     /// </summary>
-    /// <param name="value"></param>
-    void SetButtonsState(bool value)
+    /// <param name="flag"></param>
+    void SetButtonsState(bool flag)
     {
         foreach (var btn in holder.GetComponentsInChildren<Button>())
         {
-            btn.enabled = value;
-            btn.image.sprite = value ?
+            btn.enabled = flag;
+            btn.image.sprite = flag ?
                 btn.spriteState.pressedSprite :
                 btn.spriteState.disabledSprite;
         }
+    }
+    
+    /// <summary>
+    /// Pause / Resume the game when some buttons are pressed
+    /// </summary>
+    /// <param name="flag"></param>
+    void SetGameState(bool flag)
+    {
+        // first, find the ui manager from the scene
+        var uiManager = MonoBehaviour.FindObjectOfType<UIManager>();
+
+        // if uiManager is not found or it is not an InGame scene, return
+        if (uiManager == null || uiManager.sceneType != SceneType.InGame)
+            return;
+
+        // otherwise, pause / resume the game
+        Time.timeScale = flag ? 1f : 0f;
+        uiManager.SetInteractableVisibility(flag);
     }
 }
