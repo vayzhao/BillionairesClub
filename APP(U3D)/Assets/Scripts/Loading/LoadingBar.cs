@@ -55,7 +55,7 @@ public class LoadingBar : MonoBehaviour
         messageRefreshTimer = 0f;
 
         // update loading bar progress to player prefs
-        PlayerPrefs.SetFloat("LoadingBarProgress", progress);
+        Storage.SaveFloat(Const.LOCAL_PLAYER, StorageType.Progress, progress);
 
         // display the first loading message
         MessageRefresh();
@@ -64,14 +64,14 @@ public class LoadingBar : MonoBehaviour
         Destroy(FindObjectOfType<UnityEngine.EventSystems.EventSystem>().gameObject);
 
         // load the ingame scene
-        SceneManager.LoadScene(Blackboard.SCENE_INCASINO, LoadSceneMode.Additive);
+        SceneManager.LoadScene(Const.SCENE_INCASINO, LoadSceneMode.Additive);
 
         // constantly load the progress bar
         while (progress < 1f) 
         {
             // update loading bar progress to player prefs
             progress += (Time.deltaTime / Blackboard.loadEstimate);
-            PlayerPrefs.SetFloat("LoadingBarProgress", progress);
+            Storage.SaveFloat(Const.LOCAL_PLAYER, StorageType.Progress, progress);
 
             // increment message refresh timer and check to see 
             // if it is needed to refresh loading message

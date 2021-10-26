@@ -72,3 +72,15 @@ public enum Result
     Lose,
     Standoff
 }
+
+public enum StorageType
+{
+    Chip,
+    Gem,
+    ModelIndex,
+    Progress,
+    PlayerState,
+    Position,
+    Rotation,
+    HasRecord
+}

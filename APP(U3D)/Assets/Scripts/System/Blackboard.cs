@@ -7,24 +7,14 @@ using UnityEngine;
 /// BB (Blackboard)
 /// </summary>
 public static class Blackboard 
-{
-    public const float WAIT_TIME_EMPTY = 0.05f;
-    public const float WAIT_TIME_DEAL = 0.25f;
-    public const float WAIT_TIME_DECISION = 0.1f;
-    public const float WAIT_TIME_COMPARE = 3f;
-
-    public const string SCENE_HOMEPAGE = "Homepage";
-    public const string SCENE_INCASINO = "Casino";
-    public const string SCENE_TEXAS = "TexasBonus";
-    public static string SCENE_PREVIOUS = SCENE_HOMEPAGE;
-
+{   
+    public static string SCENE_PREVIOUS = Const.SCENE_HOMEPAGE;
     public static float loadEstimate = 1f;
-
     public static bool isDebugMode = false;
     public static bool debugChecked = false;
 
     #region Player
-    public static Player thePlayer;
+    public static Player localPlayer;
     #endregion
 
     #region Spawn Holder

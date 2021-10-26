@@ -93,8 +93,8 @@ public class Loading : MonoBehaviour
         // (e.g. 
         //       Homepage -> Casino
         //       Casino -> InGame
-        if ((sceneType == SceneType.InCasino && !SceneManager.GetSceneByName(Blackboard.SCENE_HOMEPAGE).isLoaded)
-            || (sceneType == SceneType.InGame && !SceneManager.GetSceneByName(Blackboard.SCENE_INCASINO).isLoaded))
+        if ((sceneType == SceneType.InCasino && !SceneManager.GetSceneByName(Const.SCENE_HOMEPAGE).isLoaded)
+            || (sceneType == SceneType.InGame && !SceneManager.GetSceneByName(Const.SCENE_INCASINO).isLoaded))
         {
             // switch debug mode on
             Blackboard.isDebugMode = true;
@@ -104,21 +104,20 @@ public class Loading : MonoBehaviour
             StartCoroutine(ProgressRunner());
 
             // create a player for play testing
-            var player = new Player();
-            player.modelIndex = PlayerPrefs.GetInt("CharacterModelIndex");
-            player.chip = 1500;
-            player.gem = 50;
-            Blackboard.thePlayer = player;
+            Blackboard.localPlayer = new Player();
+            Blackboard.localPlayer.modelIndex = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.ModelIndex);
+            Blackboard.localPlayer.chip = Const.DEFAULT_CHIP;
+            Blackboard.localPlayer.gem = Const.DEFAULT_GEM;
         }
     }
     IEnumerator ProgressRunner()
     {   
         var progress = 0f;
-        PlayerPrefs.SetFloat("LoadingBarProgress", progress);
+        Storage.SaveFloat(Const.LOCAL_PLAYER, StorageType.Progress, progress);
         while (progress < 1f)
         {
             progress += (Time.deltaTime / Blackboard.loadEstimate);
-            PlayerPrefs.SetFloat("LoadingBarProgress", progress);
+            Storage.SaveFloat(Const.LOCAL_PLAYER, StorageType.Progress, progress);
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
@@ -138,7 +137,7 @@ public class Loading : MonoBehaviour
         loader.RegisterLoadingMethod(0.8f, LoadPlayerBoard);
 
         // set this scene to be active
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(Blackboard.SCENE_INCASINO));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(Const.SCENE_INCASINO));
 
         // start the loading coroutine
         StartCoroutine(Load());
@@ -157,7 +156,7 @@ public class Loading : MonoBehaviour
         loader.RegisterLoadingMethod(0.8f, LoadPlayerBoard);
 
         // set this cene to be active 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(Blackboard.SCENE_TEXAS));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(Const.SCENE_TEXAS));
 
         // start the loading coroutine
         StartCoroutine(Load());
@@ -182,13 +181,13 @@ public class Loading : MonoBehaviour
                 loader.Run();
 
             // get the updated loading bar progress
-            progress = PlayerPrefs.GetFloat("LoadingBarProgress");
+            progress = Storage.LoadFloat(Const.LOCAL_PLAYER, StorageType.Progress);
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
         // set fade delay time, if takes 2 seconds wait time to fade when transiting
         // from homepage scene to casino scene
-        var fadeDelay = SceneManager.GetSceneByName(Blackboard.SCENE_HOMEPAGE).isLoaded ? 2f : 0f;
+        var fadeDelay = SceneManager.GetSceneByName(Const.SCENE_HOMEPAGE).isLoaded ? 2f : 0f;
 
         // start to fade in and out after n seconds
         yield return new WaitForSeconds(fadeDelay);
@@ -284,7 +283,7 @@ public class Loading : MonoBehaviour
             case GameType.None:
                 break;
             case GameType.TexasBonus:
-                sceneName = Blackboard.SCENE_TEXAS;                
+                sceneName = Const.SCENE_TEXAS;                
                 break;
             default:
                 break;
@@ -315,7 +314,7 @@ public class Loading : MonoBehaviour
         HideVisibleObjects();
 
         // start loading coroutine
-        StartCoroutine(SubLoading(Blackboard.SCENE_INCASINO));
+        StartCoroutine(SubLoading(Const.SCENE_INCASINO));
     }
 
     /// <summary>
@@ -356,8 +355,8 @@ public class Loading : MonoBehaviour
         slider.value = 0f;
 
         // reset progress value in player prefs
-        var progress = 0f;        
-        PlayerPrefs.SetFloat("LoadingBarProgress", progress);
+        var progress = 0f;
+        Storage.SaveFloat(Const.LOCAL_PLAYER, StorageType.Progress, progress);
 
         // disable light component from this scene
         foreach (var light in FindObjectsOfType<Light>())
@@ -371,7 +370,7 @@ public class Loading : MonoBehaviour
         {
             // update loading bar progress to player prefs
             progress += (Time.deltaTime / Blackboard.loadEstimate);
-            PlayerPrefs.SetFloat("LoadingBarProgress", progress);
+            Storage.SaveFloat(Const.LOCAL_PLAYER, StorageType.Progress, progress);
 
             // update slider value & text
             slider.value = progress;
@@ -432,7 +431,7 @@ public class Loading : MonoBehaviour
         obj_playerBoard.SetActive(true);
 
         // bind the player to the player board
-        obj_playerBoard.GetComponent<PlayerBoard>().BindToPlayer(Blackboard.thePlayer);
+        obj_playerBoard.GetComponent<PlayerBoard>().BindToPlayer(Blackboard.localPlayer);
 
         // check to see whether or not to lock the cursor
         if (cursorLock)
@@ -460,7 +459,7 @@ public class Loading : MonoBehaviour
         obj_character.name = "Player";
 
         // and then load the character model asset
-        var index = PlayerPrefs.GetInt("CharacterModelIndex");
+        var index = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.ModelIndex);
         var asset = Blackboard.GetModelPrefab(index);
         Instantiate(asset, obj_character.transform.GetChild(0));
 
@@ -508,17 +507,35 @@ public class Loading : MonoBehaviour
         }
 
         // setup previous scene name
-        Blackboard.SCENE_PREVIOUS = Blackboard.SCENE_INCASINO;
+        Blackboard.SCENE_PREVIOUS = Const.SCENE_INCASINO;
 
-        // set character to be active and move it to the start position
+        // set character to be active and bind it to the blackboard
         obj_character.SetActive(true);
-        obj_character.transform.position = new Vector3(0.7f, 0f, -13f);
-        obj_character.transform.eulerAngles = Vector3.zero;
+        Blackboard.localPlayer = obj_character.GetComponent<Player>();
+        
+        // check to see if this player has previously entered the casino
+        if (Storage.LoadBool(Const.LOCAL_PLAYER,StorageType.HasRecord))
+        {
+            // if yes, move the character to previous position & rotation
+            obj_character.transform.position = 
+                Storage.LoadVector3(Const.LOCAL_PLAYER, StorageType.Position);
+            obj_character.transform.eulerAngles = 
+                Storage.LoadVector3(Const.LOCAL_PLAYER, StorageType.Rotation);
 
-        // initialize player's default chip and gem
-        Blackboard.thePlayer = obj_character.GetComponent<Player>();
-        Blackboard.thePlayer.chip = 1500;
-        Blackboard.thePlayer.gem = 50;
+            // load player's data
+            Blackboard.localPlayer.gem = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.Gem);
+            Blackboard.localPlayer.chip = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.Chip);
+        }
+        else
+        {
+            // otherwise, initialize character's position & rotation
+            obj_character.transform.position = new Vector3(0.7f, 0f, -13f);
+            obj_character.transform.eulerAngles = Vector3.zero;
+
+            // initialize player's default chip and gem
+            Blackboard.localPlayer.gem = Const.DEFAULT_GEM;
+            Blackboard.localPlayer.chip = Const.DEFAULT_CHIP;
+        }
     }
 
     /// <summary>
@@ -542,7 +559,7 @@ public class Loading : MonoBehaviour
         obj_manager.GetComponent<TexasBonus.GameManager>().FinishedLoading();
 
         // setup previous scene name
-        Blackboard.SCENE_PREVIOUS = Blackboard.SCENE_TEXAS;
+        Blackboard.SCENE_PREVIOUS = Const.SCENE_TEXAS;
     }
     #endregion
 

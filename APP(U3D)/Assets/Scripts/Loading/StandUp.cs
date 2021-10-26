@@ -35,6 +35,9 @@ public class StandUp : MonoBehaviour
         uiManager.SetInitButtonVisbility(false);
         uiManager.SetInteractableVisibility(false);
 
+        // record player's current data (e.g. poker chip & gem)
+        StorePlayerData();
+
         // stop game loop couroutine
         switch (loading.gameType)
         {
@@ -49,5 +52,14 @@ public class StandUp : MonoBehaviour
 
         // start loading back to the casino
         loading.LoadBackToCasino();
+    }
+
+    /// <summary>
+    /// Method to store local player's data before leaving the table
+    /// </summary>
+    private void StorePlayerData()
+    {
+        Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.Chip, Blackboard.localPlayer.chip);
+        Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.Gem, Blackboard.localPlayer.gem);
     }
 }

@@ -188,14 +188,14 @@ namespace TexasBonus
                 if (players[checkIndex].isNPC)
                 {
                     playerAction.BetBonusWager_AI(checkIndex);
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
 
                 // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.BonusWager, checkIndex);
                 while (playerAction.isWaiting)
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
             }
         }
 
@@ -219,14 +219,14 @@ namespace TexasBonus
                 if (players[checkIndex].isNPC)
                 {
                     playerAction.BetAnteWager_AI(checkIndex);
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
 
                 // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.AnteWager, checkIndex);
                 while (playerAction.isWaiting)
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
             }
         }
 
@@ -250,14 +250,14 @@ namespace TexasBonus
                 if (players[checkIndex].isNPC)
                 {
                     playerAction.Bet_AI(BetType.Flop, checkIndex);
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
 
                 // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.Flop, checkIndex);
                 while (playerAction.isWaiting)
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
             }
         }
 
@@ -281,14 +281,14 @@ namespace TexasBonus
                 if (players[checkIndex].isNPC)
                 {
                     playerAction.Bet_AI(BetType.Turn, checkIndex);
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
 
                 // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.Turn, checkIndex);
                 while (playerAction.isWaiting)
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
             }
         }
 
@@ -312,14 +312,14 @@ namespace TexasBonus
                 if (players[checkIndex].isNPC)
                 {
                     playerAction.Bet_AI(BetType.River, checkIndex);
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
 
                 // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.River, checkIndex);
                 while (playerAction.isWaiting)
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
             }
         }
 
@@ -346,7 +346,7 @@ namespace TexasBonus
                 // compare player's hand strength
                 tableController.BonusReward(checkIndex);
                 tableController.Compare(checkIndex);                
-                yield return new WaitForSeconds(Blackboard.WAIT_TIME_COMPARE);
+                yield return new WaitForSeconds(Const.WAIT_TIME_COMPARE);
             }
 
             // hide everything from the last compared player

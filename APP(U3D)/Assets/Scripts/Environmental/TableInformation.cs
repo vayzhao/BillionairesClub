@@ -44,7 +44,7 @@ public class TableInformation : MonoBehaviour
 
         // get the dealer information
         var dealerModelndex = dealerSeat.GetPlayer().modelIndex;
-        PlayerPrefs.SetInt($"{prefix}dealerModelIndex", dealerModelndex);
+        Storage.SaveInt(Const.DEALER_PLAYER, StorageType.ModelIndex, dealerModelndex);
 
         // check other player's index
         var playerIndexs = new int[seats.Length];
@@ -54,17 +54,16 @@ public class TableInformation : MonoBehaviour
             var player = seats[i].GetPlayer();
             if (player != null)
             {
-                // if this seat has player on it, save player's 
-                // information into this seat
-                PlayerPrefs.SetInt($"{prefix}player{i}chip", player.chip);
-                PlayerPrefs.SetInt($"{prefix}player{i}gem", player.gem);
-                PlayerPrefs.SetInt($"{prefix}player{i}modelIndex", player.modelIndex);
-                PlayerPrefs.SetInt($"{prefix}player{i}statu", player.isNPC ? 2 : 1);
+                // if this seat has player on it, save player's info
+                Storage.SaveInt(i, StorageType.Chip, player.chip);
+                Storage.SaveInt(i, StorageType.Gem, player.gem);
+                Storage.SaveInt(i, StorageType.ModelIndex, player.modelIndex);
+                Storage.SaveInt(i, StorageType.PlayerState, player.isNPC ? 2 : 1);
             }
             else
             {
-                // otherwise, set this seat's player statu to be 0                
-                PlayerPrefs.SetInt($"{prefix}player{i}statu", 0);
+                // otherwise, set player i state to be 0
+                Storage.SaveInt(i, StorageType.PlayerState, 0);
             }
         }
     }
@@ -79,31 +78,31 @@ public class TableInformation : MonoBehaviour
         var prefix = GetAddressPrefix();
 
         // get the dealer information
-        var dealerModelIndex = PlayerPrefs.GetInt($"{prefix}dealerModelIndex");
+        var dealerModelIndex = Storage.LoadInt(Const.DEALER_PLAYER, StorageType.ModelIndex);
         CreateCharacter(dealerSeat, dealerModelIndex);
 
         // create an array to hold all the players
         players = new Player[seats.Length];
         for (int i = 0; i < players.Length; i++)
         {
-            // get the specific player statu
+            // get the specific player state
             // 0:empty
             // 1:player
             // 2:npc-player
-            var playerStatu = PlayerPrefs.GetInt($"{prefix}player{i}statu");
+            var playerState = Storage.LoadInt(i, StorageType.PlayerState);
 
             // check to see if this seat has player on it
             // if it does, spawn a model to repersent the player
-            if (playerStatu != 0)
+            if (playerState != 0)
             {
-                players[i] = CreateCharacter(seats[i], PlayerPrefs.GetInt($"{prefix}player{i}modelIndex"));
-                players[i].isNPC = playerStatu == 2 ? true : false;
-                players[i].gem = PlayerPrefs.GetInt($"{prefix}player{i}gem");
-                players[i].chip = PlayerPrefs.GetInt($"{prefix}player{i}chip");
+                players[i] = CreateCharacter(seats[i], Storage.LoadInt(i, StorageType.ModelIndex));
+                players[i].isNPC = playerState == 2 ? true : false;
+                players[i].gem = Storage.LoadInt(i, StorageType.Gem);
+                players[i].chip = Storage.LoadInt(i, StorageType.Chip);
 
                 // bind the user player to blackboard
-                if (playerStatu == 1)
-                    Blackboard.thePlayer = players[i];                
+                if (playerState == 1)
+                    Blackboard.localPlayer = players[i];                
             }
         }
     }

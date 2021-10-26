@@ -136,8 +136,11 @@ public class CharacterSelection : MonoBehaviour
         // play push-up animation
         model.gameObject.GetComponent<Animator>().SetTrigger("Selected");
 
-        // save model prefab in player prefabs
-        PlayerPrefs.SetInt("CharacterModelIndex", prefabIndex);
+        // save model prefab in player prefabs       
+        Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.ModelIndex, prefabIndex);
+
+        // reset player's record
+        Storage.SaveBool(Const.LOCAL_PLAYER, StorageType.HasRecord, false);
 
         // lock rotation angle 
         StartCoroutine(LockRotation());

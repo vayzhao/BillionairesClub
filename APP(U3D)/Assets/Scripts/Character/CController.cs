@@ -177,6 +177,11 @@ public class CController : Player
                 || seatManager.userSeats.Contains(seat))
             && Vector3.Distance(seat.transform.position, transform.position) <= DISTANCE_SIT) 
         {
+            // before actually sit down, store the position and rotation of the character
+            Storage.SaveBool(Const.LOCAL_PLAYER, StorageType.HasRecord, true);
+            Storage.SaveVector3(Const.LOCAL_PLAYER, StorageType.Position, transform.position);
+            Storage.SaveVector3(Const.LOCAL_PLAYER, StorageType.Rotation, transform.eulerAngles);
+
             // switch sitting state to be true, unparent model and reset move state
             isSiting = true;
             model.parent = null;

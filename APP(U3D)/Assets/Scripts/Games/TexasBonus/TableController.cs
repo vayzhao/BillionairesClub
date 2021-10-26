@@ -316,7 +316,7 @@ namespace TexasBonus
                 // if the 'n' player has folded, take away his wager and cards
                 if (playerAction.bets[i].hasFolded)
                 {
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_DEAL);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);
                     HidePlayerBetAndCards(i);
                 }
                 // otherwise, as long as at least one player has not folded,
@@ -339,7 +339,7 @@ namespace TexasBonus
             {
                 dealerHand[i] = cardDeck.DrawACard();
                 dealerCardsObj[i].SetCard(dealerHand[i]);
-                yield return new WaitForSeconds(Blackboard.WAIT_TIME_DEAL);
+                yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);
             }
 
             // dealing community cards
@@ -347,7 +347,7 @@ namespace TexasBonus
             {
                 communityCards[i] = cardDeck.DrawACard();
                 communityCardsObj[i].SetCard(communityCards[i]);
-                yield return new WaitForSeconds(Blackboard.WAIT_TIME_DEAL);                
+                yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);                
             }
         }
 
@@ -378,7 +378,7 @@ namespace TexasBonus
                     if (!gameManager.players[j].isNPC)
                         labelController.cardTexture[i].enabled = true;
 
-                    yield return new WaitForSeconds(Blackboard.WAIT_TIME_EMPTY);
+                    yield return new WaitForSeconds(Const.WAIT_TIME_EMPTY);
                 }
             }
         }
@@ -453,7 +453,7 @@ namespace TexasBonus
                         labelController.title.text = handStrengths[i].ToString();
                 }
             }           
-            yield return new WaitForSeconds(Blackboard.WAIT_TIME_DEAL);
+            yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);
         }
 
         /// <summary>
@@ -470,7 +470,7 @@ namespace TexasBonus
 
                 // set the card to be face-up
                 dealerCardsObj[i].transform.localEulerAngles = new Vector3(-90f, 0f, 0f);
-                yield return new WaitForSeconds(Blackboard.WAIT_TIME_DEAL);
+                yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);
             }
 
             // recompute dealer's hand-rank
