@@ -15,11 +15,11 @@ C:/Users/35109/Desktop/Commonly Used/School/AnimalPokerParty/APP(U3D)
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-51507
+50207
 Successfully changed project path to: C:/Users/35109/Desktop/Commonly Used/School/AnimalPokerParty/APP(U3D)
 C:/Users/35109/Desktop/Commonly Used/School/AnimalPokerParty/APP(U3D)
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 95.21 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 100.68 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.0f1 (c7b5465681fb)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/Resources/UnitySubsystems
@@ -36,168 +36,1528 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56800
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56096
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.0f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.008617 seconds.
+Registered in 0.007132 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 100.21 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 99.25 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  7.695 seconds
+- Completed reload, in  4.267 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.004185 seconds.
+Registered in 0.004056 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 109.66 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 103.04 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.278 seconds
+- Completed reload, in  1.173 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
-Refreshing native plugins compatible for Editor in 1.38 ms, found 0 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 1.72 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2451 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 126.9 MB.
-System memory in use after: 127.1 MB.
+System memory in use before: 126.7 MB.
+System memory in use after: 126.9 MB.
 
 Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 2900.
-Total: 2.978300 ms (FindLiveObjects: 0.339300 ms CreateObjectMapping: 0.193200 ms MarkObjects: 2.330700 ms  DeleteObjects: 0.113500 ms)
+Total: 3.026500 ms (FindLiveObjects: 0.366900 ms CreateObjectMapping: 0.177100 ms MarkObjects: 2.314000 ms  DeleteObjects: 0.166800 ms)
 
 ========================================================================
 Received Import Request.
-  path: Assets/Resource
-  artifactKey: Guid(1fd4c148b5f116c42b82eb408329c374) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resource using Guid(1fd4c148b5f116c42b82eb408329c374) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd0ad7c37b758c0c4220bbf6f5bce6e0') in 0.010054 seconds
-  Import took 0.015219 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003782 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.83 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.131 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.25 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 121.5 MB.
-System memory in use after: 121.7 MB.
-
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2903.
-Total: 2.611000 ms (FindLiveObjects: 0.584900 ms CreateObjectMapping: 0.201500 ms MarkObjects: 1.711600 ms  DeleteObjects: 0.111800 ms)
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Pack_V1 Pro(Blue)
+  artifactKey: Guid(bb197b88b4f2013469fa02fe515314c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Pack_V1 Pro(Blue) using Guid(bb197b88b4f2013469fa02fe515314c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d7221547448cbfef393e6fe011b84c2') in 0.013560 seconds
+  Import took 0.019825 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 145.624239 seconds.
-  path: Assets/Resource/Models
-  artifactKey: Guid(828bb1f7c0636af4fb3415557b641582) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resource/Models using Guid(828bb1f7c0636af4fb3415557b641582) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aeac86da977053e2c4cd515396fa96af') in 0.008659 seconds
-  Import took 0.014256 seconds .
+  Time since last request: 12.681068 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Purple_n.png
+  artifactKey: Guid(c7052e8d8484b53478610ccd1e14e638) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Purple_n.png using Guid(c7052e8d8484b53478610ccd1e14e638) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1bceb24a215e523a6e6b231aaa61d5a6') in 0.117044 seconds
+  Import took 0.124470 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.029082 seconds.
-  path: Assets/Resource/Models
-  artifactKey: Guid(828bb1f7c0636af4fb3415557b641582) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resource/Models using Guid(828bb1f7c0636af4fb3415557b641582) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aeac86da977053e2c4cd515396fa96af') in 0.006742 seconds
-  Import took 0.012663 seconds .
+  Time since last request: 0.000536 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Purple_s.png
+  artifactKey: Guid(5734fc581912d20418197fb686acf979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Purple_s.png using Guid(5734fc581912d20418197fb686acf979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db9ce47a1335022205d7432f6546b37e') in 0.018240 seconds
+  Import took 0.023697 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.138191 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Red_n.png
+  artifactKey: Guid(d1c5c1db69418de419aa68fabda8a473) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Red_n.png using Guid(d1c5c1db69418de419aa68fabda8a473) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '45ace4047cf5392628d72f174d0ea78c') in 0.015794 seconds
+  Import took 0.021720 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000522 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Yellow_n.png
+  artifactKey: Guid(9f4e16bc266095a46b0b9d2a32ebe5f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Yellow_n.png using Guid(9f4e16bc266095a46b0b9d2a32ebe5f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'decb3c95300a2c11177c0e91ee7cc484') in 0.018385 seconds
+  Import took 0.023804 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000578 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Yellow_s.png
+  artifactKey: Guid(1845f17054908a54692919a4e36db42c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Yellow_s.png using Guid(1845f17054908a54692919a4e36db42c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06cdd1502cdff36db1445dbe6ba49bb9') in 0.021763 seconds
+  Import took 0.027009 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000512 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Red_s.png
+  artifactKey: Guid(41108ada6f66fc44b859b92002a0926d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Red_s.png using Guid(41108ada6f66fc44b859b92002a0926d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92e1be54fb7f22959b4a5dfb81335096') in 0.023696 seconds
+  Import took 0.030465 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000523 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Blue_s.png
+  artifactKey: Guid(53c6b0ad03b0eab4b808ce89f2f31a86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Blue_s.png using Guid(53c6b0ad03b0eab4b808ce89f2f31a86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1c786d2bb080e3de18500c7c967c1ac') in 0.026324 seconds
+  Import took 0.034372 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000477 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Orange_n.png
+  artifactKey: Guid(fe4eab4eb5f1d04418304ed2ae8bfbe9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Orange_n.png using Guid(fe4eab4eb5f1d04418304ed2ae8bfbe9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd28f6d4dfa3b47a9cc468461b79fb69c') in 0.020690 seconds
+  Import took 0.026019 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000585 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Cyan_n.png
+  artifactKey: Guid(575bb406a22f6904798f9fe7ae05c427) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Cyan_n.png using Guid(575bb406a22f6904798f9fe7ae05c427) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70ab9ca494d8d6fb9137c6b7abc20116') in 0.019251 seconds
+  Import took 0.025216 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000557 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Cyan_s.png
+  artifactKey: Guid(20ebb3763d9aedc46b9efdf28eb4351c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Cyan_s.png using Guid(20ebb3763d9aedc46b9efdf28eb4351c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '953e5bbbb57891b3e861631fc422129b') in 0.022999 seconds
+  Import took 0.028582 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000500 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Yellow_s.png
+  artifactKey: Guid(1845f17054908a54692919a4e36db42c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect01Yellow_s.png using Guid(1845f17054908a54692919a4e36db42c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06cdd1502cdff36db1445dbe6ba49bb9') in 0.016278 seconds
+  Import took 0.021037 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000407 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Gray.png
+  artifactKey: Guid(c4240aec36a50464481ed2c7121ece64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Gray.png using Guid(c4240aec36a50464481ed2c7121ece64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9bb0b3121ef901ae748e3fccce8633bd') in 0.020632 seconds
+  Import took 0.026003 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000503 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Blue_n.png
+  artifactKey: Guid(9ff0ba96b174daf42bef4e7511b37d48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Blue_n.png using Guid(9ff0ba96b174daf42bef4e7511b37d48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb3a541c57ebc91dfcce7efdcdd94cd9') in 0.018993 seconds
+  Import took 0.025000 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000455 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Green_s.png
+  artifactKey: Guid(0fd88d5465aaf134593c18ac882823d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Green_s.png using Guid(0fd88d5465aaf134593c18ac882823d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3b479b0f0bd4f913c8f023ce22a26d2') in 0.017378 seconds
+  Import took 0.022847 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000419 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Yellow_n.png
+  artifactKey: Guid(c75cfaf5cf975994b9e4a7a9b2761b86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Yellow_n.png using Guid(c75cfaf5cf975994b9e4a7a9b2761b86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe199ca8b83be0b671e7ba67af4d95cb') in 0.018068 seconds
+  Import took 0.023111 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000475 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Purple_s.png
+  artifactKey: Guid(13cab00c60e03e74f879f8a290fe40bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Purple_s.png using Guid(13cab00c60e03e74f879f8a290fe40bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1cc4869fc04c75a9e00ca5979825cc8d') in 0.021063 seconds
+  Import took 0.026468 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000484 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Icon_DividingLine01.png
+  artifactKey: Guid(2174c84acdc89044896a1da207312462) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Icon_DividingLine01.png using Guid(2174c84acdc89044896a1da207312462) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e46c5be63021bfe4763d9359ed56ef1') in 0.018401 seconds
+  Import took 0.025795 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000456 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Icon_DividingLine02.png
+  artifactKey: Guid(e13d165088797d14e92e3b5bbfcca013) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Icon_DividingLine02.png using Guid(e13d165088797d14e92e3b5bbfcca013) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b75d0ebacd0216d9a7f986286aa8f14') in 0.018968 seconds
+  Import took 0.027075 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000419 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Red_s.png
+  artifactKey: Guid(1b4c59ef986034242bfe59c83b8443ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Red_s.png using Guid(1b4c59ef986034242bfe59c83b8443ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7822076d2e673d274fd61484b248ee8a') in 0.019103 seconds
+  Import took 0.024611 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000658 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Yellow_s.png
+  artifactKey: Guid(5929ff81dd8e03f46937d1d28d129898) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Yellow_s.png using Guid(5929ff81dd8e03f46937d1d28d129898) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7511298affdedf578fb4586c538a287b') in 0.018841 seconds
+  Import took 0.023530 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000434 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Orange_s.png
+  artifactKey: Guid(cee8d8e6928ea234891fdb4015d79a52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Orange_s.png using Guid(cee8d8e6928ea234891fdb4015d79a52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e64ca1693cd6b8b910ae0684a26d3826') in 0.017778 seconds
+  Import took 0.023364 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000455 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Gray.png
+  artifactKey: Guid(c4240aec36a50464481ed2c7121ece64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Gray.png using Guid(c4240aec36a50464481ed2c7121ece64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9bb0b3121ef901ae748e3fccce8633bd') in 0.016803 seconds
+  Import took 0.021341 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000458 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Purple_n.png
+  artifactKey: Guid(91dcc8dce21ec464b989b0e84a001b11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Purple_n.png using Guid(91dcc8dce21ec464b989b0e84a001b11) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f62808c121931453f8a09aef06dea9d') in 0.017808 seconds
+  Import took 0.023411 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000390 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Blue_d.png
+  artifactKey: Guid(84eaf2858ade3ca4dae1574d04166fc6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Blue_d.png using Guid(84eaf2858ade3ca4dae1574d04166fc6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10e6c4d16f394af57477f7345e6d15ec') in 0.022601 seconds
+  Import took 0.027564 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000440 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Blue_n.png
+  artifactKey: Guid(8bfbfe158974d9d458884d821045f082) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Blue_n.png using Guid(8bfbfe158974d9d458884d821045f082) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ae6e1c9fccf0e5a76b296e137495e73') in 0.023055 seconds
+  Import took 0.028923 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000407 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Green_n.png
+  artifactKey: Guid(1c2921979bfb0564aa119ce8463f08cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Green_n.png using Guid(1c2921979bfb0564aa119ce8463f08cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9dac15dfb8bad3266fbf1408bd41ee17') in 0.020616 seconds
+  Import took 0.026288 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000530 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Gray_n.png
+  artifactKey: Guid(42ea99cd6f2094e43af998773eb8879c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Gray_n.png using Guid(42ea99cd6f2094e43af998773eb8879c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05ead0ae253d467c7835b0604a61bc30') in 0.019369 seconds
+  Import took 0.025285 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000681 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Green_d.png
+  artifactKey: Guid(34e24a4bd710b37439daac52d5a81080) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Green_d.png using Guid(34e24a4bd710b37439daac52d5a81080) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3b1518bf3b8d418deebd88a32a1bd03') in 0.021840 seconds
+  Import took 0.028154 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000502 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Blue_p.png
+  artifactKey: Guid(131adcb72d5e7cb47bfe1fe8bba81dff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Blue_p.png using Guid(131adcb72d5e7cb47bfe1fe8bba81dff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64e2b04b5e1a677bb2db08e6e4d3575d') in 0.020555 seconds
+  Import took 0.026189 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000442 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Gray_p.png
+  artifactKey: Guid(e7e06361904337942980100bdd2b891a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Gray_p.png using Guid(e7e06361904337942980100bdd2b891a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e61e7ed3c56874a32b8ee1320d8e84ce') in 0.022035 seconds
+  Import took 0.026228 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000464 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Gray_d.png
+  artifactKey: Guid(68f396edbe9979f489845e028effd633) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Gray_d.png using Guid(68f396edbe9979f489845e028effd633) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cedf586c95f618fbafa543c3841d17ad') in 0.019110 seconds
+  Import took 0.024336 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000394 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Icon_DividingLine03.png
+  artifactKey: Guid(655d3446ef7c55842be27497359ce831) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Icon_DividingLine03.png using Guid(655d3446ef7c55842be27497359ce831) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '612b88dfdeac7230c44d572bfad1ce30') in 0.018498 seconds
+  Import took 0.023016 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000408 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Green_p.png
+  artifactKey: Guid(5e46ab94caa2b8e478b46f69a7a45278) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Green_p.png using Guid(5e46ab94caa2b8e478b46f69a7a45278) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a190722becce7b27962233dd6a1167be') in 0.020575 seconds
+  Import took 0.025203 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000341 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Purple_p.png
+  artifactKey: Guid(309a063f81495534b9aad554bda4a445) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Purple_p.png using Guid(309a063f81495534b9aad554bda4a445) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd643c71560fa67bf9765ad989afe7b6') in 0.018558 seconds
+  Import took 0.023081 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000357 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Yellow_d.png
+  artifactKey: Guid(617c1aa65a76dc643bdffbdeb5551faf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Yellow_d.png using Guid(617c1aa65a76dc643bdffbdeb5551faf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f64fd0bdf3d9a71a770728bf13e2b387') in 0.034555 seconds
+  Import took 0.038752 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000316 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Yellow_n.png
+  artifactKey: Guid(5c244d9174a4cbb4fa27be559ea8448d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Yellow_n.png using Guid(5c244d9174a4cbb4fa27be559ea8448d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8563b58b84b2cc85961bcce40ea70f91') in 0.022717 seconds
+  Import took 0.027647 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000424 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Yellow_p.png
+  artifactKey: Guid(dc3ce0ad6733560489e9bc5f1d652c40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Yellow_p.png using Guid(dc3ce0ad6733560489e9bc5f1d652c40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58d8c6654550fd78b199503c75f30923') in 0.024254 seconds
+  Import took 0.030291 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000528 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Blue_d.png
+  artifactKey: Guid(1b3931d448f062e4fa45d6f2935f7a95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Blue_d.png using Guid(1b3931d448f062e4fa45d6f2935f7a95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '680b4ee83554a7452eb704ebb5ee40a1') in 0.030510 seconds
+  Import took 0.038325 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000400 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Blue_n.png
+  artifactKey: Guid(83211f1dc8040904eba5a42fab488e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Blue_n.png using Guid(83211f1dc8040904eba5a42fab488e18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8ebac1cc55b9d1485f46ca5778190a0') in 0.023646 seconds
+  Import took 0.028527 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000409 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Purple_n.png
+  artifactKey: Guid(c314d3d13231dd647b0ea91022090cc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Purple_n.png using Guid(c314d3d13231dd647b0ea91022090cc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '176c987b3fe430bafef8a0987c740ed9') in 0.017865 seconds
+  Import took 0.024209 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000416 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Red_n.png
+  artifactKey: Guid(21a686a0a588a5446a810fa973c0349d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Red_n.png using Guid(21a686a0a588a5446a810fa973c0349d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0535a0eb69f8dd7da882b38746d997c4') in 0.022415 seconds
+  Import took 0.027358 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000534 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Red_d.png
+  artifactKey: Guid(1c38cbde9e4e46247b58e30dbe0121bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Red_d.png using Guid(1c38cbde9e4e46247b58e30dbe0121bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '251abf3cd54e337294f3e515ab352937') in 0.020913 seconds
+  Import took 0.029243 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000432 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Purple_d.png
+  artifactKey: Guid(591b48e6e2dffc64c90986b00deb52d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Purple_d.png using Guid(591b48e6e2dffc64c90986b00deb52d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd48f68016460565353702f2e2325c990') in 0.020774 seconds
+  Import took 0.025841 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000357 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Red_n.png
+  artifactKey: Guid(7ae7d567a1a64864c9adca4a4e393b61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Red_n.png using Guid(7ae7d567a1a64864c9adca4a4e393b61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05ec4541fccc2633dc1fdad2ed2b36ef') in 0.021942 seconds
+  Import took 0.026143 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000409 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Gray_n.png
+  artifactKey: Guid(2a98f365e5e39444891b33f4408bc3b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Gray_n.png using Guid(2a98f365e5e39444891b33f4408bc3b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43725de185b766d2fb50d451362f5520') in 0.023422 seconds
+  Import took 0.029396 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000381 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Gray_d.png
+  artifactKey: Guid(fe597f334a79feb49a3bbb0397c935fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Gray_d.png using Guid(fe597f334a79feb49a3bbb0397c935fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '699f57c09bebd238c6a2bde0a030839b') in 0.020433 seconds
+  Import took 0.026120 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000554 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Gray_p.png
+  artifactKey: Guid(ba18b36580ce7f4418e7542baacfd068) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Gray_p.png using Guid(ba18b36580ce7f4418e7542baacfd068) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df562c05e369e42287400b749237818e') in 0.020419 seconds
+  Import took 0.028153 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000390 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Green_n.png
+  artifactKey: Guid(c8e81cdf6dc736e468f112b92892c097) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Green_n.png using Guid(c8e81cdf6dc736e468f112b92892c097) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1633c4a6a47212ee51d36e4a99755ee3') in 0.023651 seconds
+  Import took 0.028198 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000415 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Blue_p.png
+  artifactKey: Guid(f0f1d4fc24f392640ab469e0fc14fd24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Blue_p.png using Guid(f0f1d4fc24f392640ab469e0fc14fd24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '444240082654b969e44ac8b642ee4a53') in 0.021325 seconds
+  Import took 0.027513 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000459 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Green_d.png
+  artifactKey: Guid(86b88ae0244982545a06aaaf22ef22b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Green_d.png using Guid(86b88ae0244982545a06aaaf22ef22b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ff3d4bf7141d62bcb0100e8bf45c3df') in 0.020810 seconds
+  Import took 0.026309 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000400 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Red_p.png
+  artifactKey: Guid(2f652181836eb1b46b6c0241898d4374) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton01Red_p.png using Guid(2f652181836eb1b46b6c0241898d4374) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43cfe3239ade2f08bbf855bec35ab1b3') in 0.022297 seconds
+  Import took 0.028033 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000478 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Green_n.png
+  artifactKey: Guid(ce88f9b348968b54bb96aecf421644ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/Btn_WeaponSelect02Green_n.png using Guid(ce88f9b348968b54bb96aecf421644ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd85f52cf0b4b238d12c656195c4b70d') in 0.015720 seconds
+  Import took 0.022872 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.059642 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Green_p.png
+  artifactKey: Guid(3de2a046fc481b3448a0513dfa69050e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Green_p.png using Guid(3de2a046fc481b3448a0513dfa69050e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be74b12b1e32401949dc7d0de677d2cc') in 0.017157 seconds
+  Import took 0.022644 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000364 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Purple_d.png
+  artifactKey: Guid(be06db7d3a5308145a0279d2dc12325a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Purple_d.png using Guid(be06db7d3a5308145a0279d2dc12325a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'faef036f365c93310dd3542bd63d680f') in 0.021914 seconds
+  Import took 0.026783 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000374 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Red_d.png
+  artifactKey: Guid(6381605d09d6aed449714f81902411b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Red_d.png using Guid(6381605d09d6aed449714f81902411b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0991c42812591390907a19b60a402b23') in 0.019386 seconds
+  Import took 0.024243 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000367 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Purple_d.png
+  artifactKey: Guid(be06db7d3a5308145a0279d2dc12325a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Purple_d.png using Guid(be06db7d3a5308145a0279d2dc12325a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'faef036f365c93310dd3542bd63d680f') in 0.017143 seconds
+  Import took 0.021555 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000462 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Green_p.png
+  artifactKey: Guid(3de2a046fc481b3448a0513dfa69050e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Green_p.png using Guid(3de2a046fc481b3448a0513dfa69050e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be74b12b1e32401949dc7d0de677d2cc') in 0.015603 seconds
+  Import took 0.021126 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000437 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Purple_n.png
+  artifactKey: Guid(cb8314b4205d1f04ea422636a91bfd60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Purple_n.png using Guid(cb8314b4205d1f04ea422636a91bfd60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f84444a22d3b42358e540c9d165901c3') in 0.026968 seconds
+  Import took 0.032107 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000391 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Red_n.png
+  artifactKey: Guid(5515ebd347dd83640ac92dfde9ec7c64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Red_n.png using Guid(5515ebd347dd83640ac92dfde9ec7c64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '689821ac0d8743a0752d0bffb16b3e54') in 0.016764 seconds
+  Import took 0.021938 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000426 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Purple_p.png
+  artifactKey: Guid(dd595c1a05e7c6347904889c7e2c42dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Purple_p.png using Guid(dd595c1a05e7c6347904889c7e2c42dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '62267ce996e9f8c58ae3c5c88e218e63') in 0.018163 seconds
+  Import took 0.026303 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.238525 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Red_p.png
+  artifactKey: Guid(0c1996ad48e3067438acb71bb858a2d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Red_p.png using Guid(0c1996ad48e3067438acb71bb858a2d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30e24f9889d088a3e0bc5199d04b625e') in 0.020549 seconds
+  Import took 0.026152 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000445 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Yellow_d.png
+  artifactKey: Guid(c23babb545db887449b735d3e7df2534) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Yellow_d.png using Guid(c23babb545db887449b735d3e7df2534) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a03fc94c4d922a4faf25c03e4ce2d8e6') in 0.017414 seconds
+  Import took 0.022700 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000563 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Yellow_n.png
+  artifactKey: Guid(d7f61398df7999f48a4a06b77faa2e3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Yellow_n.png using Guid(d7f61398df7999f48a4a06b77faa2e3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb69a30a25c0f490d2a90fc92b050eee') in 0.019989 seconds
+  Import took 0.025517 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.045581 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Yellow_p.png
+  artifactKey: Guid(10e97972cf241f34f8b475d9e3f0e015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton02Yellow_p.png using Guid(10e97972cf241f34f8b475d9e3f0e015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b14fba8e75b9deae46b8ca2e3469a5b') in 0.016820 seconds
+  Import took 0.021540 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000375 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Blue_n.png
+  artifactKey: Guid(bd2f2e24f6b5ed14cbfcbdb1162508fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Blue_n.png using Guid(bd2f2e24f6b5ed14cbfcbdb1162508fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0791cc09e1626ec6c0487a046cc5bb9f') in 0.022311 seconds
+  Import took 0.027524 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000548 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Blue_d.png
+  artifactKey: Guid(57ecd9c0ad13b85489938b1babf825cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Blue_d.png using Guid(57ecd9c0ad13b85489938b1babf825cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c828b38340c8e3a7ccdfdb83669963d') in 0.020226 seconds
+  Import took 0.025673 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.408292 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Blue_p.png
+  artifactKey: Guid(38d71d83840f54e43bf51ae2fb8dfd86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Blue_p.png using Guid(38d71d83840f54e43bf51ae2fb8dfd86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7b9524d1993ec0bd6d4e1683ccd9fb0') in 0.016226 seconds
+  Import took 0.021685 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000474 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Gray_n.png
+  artifactKey: Guid(b38b2f10cbac39e429bc3066deaa480f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Gray_n.png using Guid(b38b2f10cbac39e429bc3066deaa480f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '772c3c550b3b05d5c2a490c5b20ceae4') in 0.017004 seconds
+  Import took 0.024316 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000442 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Gray_d.png
+  artifactKey: Guid(bf5db43fe3571194491024ad2301540b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Gray_d.png using Guid(bf5db43fe3571194491024ad2301540b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fdb44c1aa852821c2671dacbb542bcd3') in 0.019639 seconds
+  Import took 0.028083 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.487092 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Gray_p.png
+  artifactKey: Guid(f545b71bb63b0e74f88d4793280a9969) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Gray_p.png using Guid(f545b71bb63b0e74f88d4793280a9969) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc3a02b3aabb809aa19f8f5ebefde1b3') in 0.031444 seconds
+  Import took 0.036438 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000539 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Green_n.png
+  artifactKey: Guid(bdc5af0dc1be32946a7ed955689e1db9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Green_n.png using Guid(bdc5af0dc1be32946a7ed955689e1db9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '907bb6a746b07aa58c6a52b4b155bea0') in 0.016672 seconds
+  Import took 0.021246 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000471 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Purple_d.png
+  artifactKey: Guid(c801cca381eeee941ada7f239175b009) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Purple_d.png using Guid(c801cca381eeee941ada7f239175b009) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e69c05cdadee850a9ef3c3fba898c5c') in 0.023765 seconds
+  Import took 0.029298 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000408 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Purple_n.png
+  artifactKey: Guid(4d8bebca4f264054499e0f1ddf845d94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Purple_n.png using Guid(4d8bebca4f264054499e0f1ddf845d94) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe5d87671acb7763a61a23cf7125bc92') in 0.018437 seconds
+  Import took 0.023821 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000408 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Green_p.png
+  artifactKey: Guid(7031e9ca1635e2b44a90bc36dd361039) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Green_p.png using Guid(7031e9ca1635e2b44a90bc36dd361039) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '04d2bc8d745036139c5a7a92a343e7d8') in 0.021452 seconds
+  Import took 0.028887 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000426 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Green_d.png
+  artifactKey: Guid(5b31f3be920b29343951ed9e258bc565) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Green_d.png using Guid(5b31f3be920b29343951ed9e258bc565) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a1a2a15919fc62818a2e252785df04d') in 0.021583 seconds
+  Import took 0.026874 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.131470 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Purple_p.png
+  artifactKey: Guid(e1ec64d164d6c2142a589a90c1868914) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Purple_p.png using Guid(e1ec64d164d6c2142a589a90c1868914) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8570cbd82b19529ed8541d51cd3daae6') in 0.016366 seconds
+  Import took 0.022476 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000518 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Red_d.png
+  artifactKey: Guid(b297741ad67ebb54495653b68e6ae909) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Red_d.png using Guid(b297741ad67ebb54495653b68e6ae909) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e298e581aea1fd92daf97ab1cd4ee469') in 0.017572 seconds
+  Import took 0.025940 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000464 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Red_n.png
+  artifactKey: Guid(791cc7534356f2a478fe4c10dc6bfcf0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Red_n.png using Guid(791cc7534356f2a478fe4c10dc6bfcf0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b845ef000bff400b6e24e4765d97ce5') in 0.019673 seconds
+  Import took 0.024504 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.027340 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Red_p.png
+  artifactKey: Guid(a473f137ec418f04dbaec6de10b24b9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Red_p.png using Guid(a473f137ec418f04dbaec6de10b24b9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60709a21843efee747aed2ff78d75e81') in 0.019633 seconds
+  Import took 0.024881 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000430 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Yellow_d.png
+  artifactKey: Guid(0d6d06e4846eca44c99fd63152100d0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Yellow_d.png using Guid(0d6d06e4846eca44c99fd63152100d0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11c321d535de2b3332ae824c7956de44') in 0.024358 seconds
+  Import took 0.029727 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000439 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Yellow_n.png
+  artifactKey: Guid(b6c1467e72736624bacee611ddf11406) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Yellow_n.png using Guid(b6c1467e72736624bacee611ddf11406) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a6bc7356b033d6447c343c8632ab2e3d') in 0.017747 seconds
+  Import took 0.023235 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.008081 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Yellow_n.png
+  artifactKey: Guid(b6c1467e72736624bacee611ddf11406) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Yellow_n.png using Guid(b6c1467e72736624bacee611ddf11406) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a6bc7356b033d6447c343c8632ab2e3d') in 0.014760 seconds
+  Import took 0.019385 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.240417 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Yellow_p.png
+  artifactKey: Guid(6e8e2dc14ed49b0459ddcc6da90eb59a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton03Yellow_p.png using Guid(6e8e2dc14ed49b0459ddcc6da90eb59a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd31f00d6bb6d88f2dc1e426713cfc959') in 0.018688 seconds
+  Import took 0.023505 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000394 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Blue_d.png
+  artifactKey: Guid(816633aafc90b7b43b434bb8fe857f7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Blue_d.png using Guid(816633aafc90b7b43b434bb8fe857f7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '557047bda72c38357aa07f96c51c6b05') in 0.017038 seconds
+  Import took 0.021215 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000484 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Blue_n.png
+  artifactKey: Guid(7277d1e74048fd945ac44e84156bf8c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Blue_n.png using Guid(7277d1e74048fd945ac44e84156bf8c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '119bec6ebf49ab5e1d58d50782da88ad') in 0.024606 seconds
+  Import took 0.029467 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.023512 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Blue_p.png
+  artifactKey: Guid(03a4e45f3b3759d448559e67edf377c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Blue_p.png using Guid(03a4e45f3b3759d448559e67edf377c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '223936d889a7a8d1c9455210448404c0') in 0.021928 seconds
+  Import took 0.027670 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000373 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Gray_d.png
+  artifactKey: Guid(b5c41730440a7f04bbc9f9a03a615d93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Gray_d.png using Guid(b5c41730440a7f04bbc9f9a03a615d93) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16eb52a0f79b4b8f749fb04d3b7f4cf4') in 0.018762 seconds
+  Import took 0.023298 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000567 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Gray_n.png
+  artifactKey: Guid(680ffc80c3de26340b0277c4ab79ac70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Gray_n.png using Guid(680ffc80c3de26340b0277c4ab79ac70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ab881717e15e1b9a57cba7b52fbaa9ba') in 0.020199 seconds
+  Import took 0.025677 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.140231 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Gray_p.png
+  artifactKey: Guid(ed98126fffc1070499931d7646b3fe4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Gray_p.png using Guid(ed98126fffc1070499931d7646b3fe4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '816a5138d2da428dfa3dee2b018c7fe9') in 0.018587 seconds
+  Import took 0.023901 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000531 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Green_p.png
+  artifactKey: Guid(7df8ade3d367b2247a2ea9c5f5a93ddf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Green_p.png using Guid(7df8ade3d367b2247a2ea9c5f5a93ddf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5aeb81b0b71cb777dd4fa720a5508419') in 0.019237 seconds
+  Import took 0.023953 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000394 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Purple_d.png
+  artifactKey: Guid(2b710dd2e9f78d44da4bbbad8b8f3f87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Purple_d.png using Guid(2b710dd2e9f78d44da4bbbad8b8f3f87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '782da0fe65f29bed51313bd3e36136d0') in 0.020665 seconds
+  Import took 0.028737 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000412 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Green_n.png
+  artifactKey: Guid(431f6566d0c6b774da17b06c80649bdb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Green_n.png using Guid(431f6566d0c6b774da17b06c80649bdb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0854545715ee35aecf8054f920b6916b') in 0.019640 seconds
+  Import took 0.024643 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000408 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Purple_n.png
+  artifactKey: Guid(3cb18dea56dc8f44d96b2c2cae9425e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Purple_n.png using Guid(3cb18dea56dc8f44d96b2c2cae9425e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '675c1552a5e2270baee08bd40f60b052') in 0.024483 seconds
+  Import took 0.029676 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000412 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Green_d.png
+  artifactKey: Guid(411afe2ffca738b4fab448125c4db123) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Green_d.png using Guid(411afe2ffca738b4fab448125c4db123) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ede25b185f6fa825e02b2224cefbf9a') in 0.019343 seconds
+  Import took 0.025324 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.111462 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Purple_p.png
+  artifactKey: Guid(d4c56e62ca7302946a759403104aa798) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Purple_p.png using Guid(d4c56e62ca7302946a759403104aa798) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a93320091db330f414aee2be5123f28') in 0.017695 seconds
+  Import took 0.022610 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000456 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Red_d.png
+  artifactKey: Guid(d44fafd74d56ea744a68749d4193da58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Red_d.png using Guid(d44fafd74d56ea744a68749d4193da58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1fc3a4851d7f3b02c96c35f79d413409') in 0.023054 seconds
+  Import took 0.028059 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000399 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Red_p.png
+  artifactKey: Guid(781da6e79ae55364ea000cf2e9ca7c50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Red_p.png using Guid(781da6e79ae55364ea000cf2e9ca7c50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9bca16bbbd3d90aadf5ac1377b31111f') in 0.018955 seconds
+  Import took 0.024588 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000358 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Purple_p.png
+  artifactKey: Guid(d4c56e62ca7302946a759403104aa798) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Purple_p.png using Guid(d4c56e62ca7302946a759403104aa798) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a93320091db330f414aee2be5123f28') in 0.015464 seconds
+  Import took 0.019548 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000387 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Red_d.png
+  artifactKey: Guid(d44fafd74d56ea744a68749d4193da58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Red_d.png using Guid(d44fafd74d56ea744a68749d4193da58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1fc3a4851d7f3b02c96c35f79d413409') in 0.015725 seconds
+  Import took 0.020105 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000445 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Yellow_p.png
+  artifactKey: Guid(833f3150cc30ee941ae2cd2656eb1fb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Yellow_p.png using Guid(833f3150cc30ee941ae2cd2656eb1fb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b0d52a4fa6eaed1d0046839a2cf401e') in 0.020608 seconds
+  Import took 0.025647 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000604 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Red_n.png
+  artifactKey: Guid(2c1fdd85476b6e5428b20d4827902695) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Red_n.png using Guid(2c1fdd85476b6e5428b20d4827902695) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80c78e4bf06d1a16de4bc0701f65faf6') in 0.019381 seconds
+  Import took 0.024470 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000537 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Yellow_n.png
+  artifactKey: Guid(9ed91df67fbd88c428514c2e1489a5f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Yellow_n.png using Guid(9ed91df67fbd88c428514c2e1489a5f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1237ff81cf033e15cd367225012b6f8e') in 0.021016 seconds
+  Import took 0.026405 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000438 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Blue_d.png
+  artifactKey: Guid(dee1f871a4f9adf44a249982b546575c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Blue_d.png using Guid(dee1f871a4f9adf44a249982b546575c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86dbee25392b69c10a2049f4c1d7c067') in 0.019325 seconds
+  Import took 0.023587 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000420 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Yellow_d.png
+  artifactKey: Guid(7068d4b9960cb0248833536e6ecfbba6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton04Yellow_d.png using Guid(7068d4b9960cb0248833536e6ecfbba6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd834551fbd9919421856b61d7efe729b') in 0.022457 seconds
+  Import took 0.028301 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000407 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Blue_n.png
+  artifactKey: Guid(bf07449c9ba0eb346a6126faeef11aa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Blue_n.png using Guid(bf07449c9ba0eb346a6126faeef11aa4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a3245a5e81ea6c17d9b4bf4b8e7e4aa') in 0.018925 seconds
+  Import took 0.027370 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.094050 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Blue_p.png
+  artifactKey: Guid(cbc9a4e96ddc50b48aa8b7741ca1f11f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Blue_p.png using Guid(cbc9a4e96ddc50b48aa8b7741ca1f11f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '716a7257cb41a4c9764015bc67389893') in 0.017004 seconds
+  Import took 0.021909 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000466 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Gray_d.png
+  artifactKey: Guid(ae39eeb7c9d9aaa4da7c0909ac388a59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Gray_d.png using Guid(ae39eeb7c9d9aaa4da7c0909ac388a59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cbf8ca2239b7ee8ab2270a3072092ae3') in 0.019801 seconds
+  Import took 0.024234 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000358 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Gray_n.png
+  artifactKey: Guid(15d6cecd36fde604b899c81d048414d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Gray_n.png using Guid(15d6cecd36fde604b899c81d048414d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82cbe1459461c659d8e161c10c3807f3') in 0.019450 seconds
+  Import took 0.024215 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.509475 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Gray_p.png
+  artifactKey: Guid(d5eee375e83771f49bdaad177db9fe51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Gray_p.png using Guid(d5eee375e83771f49bdaad177db9fe51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '209f0116d421cfcabca798b323e270ef') in 0.024304 seconds
+  Import took 0.030571 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000396 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Green_n.png
+  artifactKey: Guid(cebc70f5f0d6aca42bb9eb0518dd460e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Green_n.png using Guid(cebc70f5f0d6aca42bb9eb0518dd460e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adf141066b21b4360c4faff9268fcc2f') in 0.017929 seconds
+  Import took 0.022325 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000388 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Purple_d.png
+  artifactKey: Guid(55db55edc34447545bf51822662f8358) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Purple_d.png using Guid(55db55edc34447545bf51822662f8358) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f02823ab64d7000b16249a5e080b1a54') in 0.021359 seconds
+  Import took 0.026816 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000478 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Red_n.png
+  artifactKey: Guid(5a606ee69a4110f4ebb8f927671b060a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Red_n.png using Guid(5a606ee69a4110f4ebb8f927671b060a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a25652cf0edc51022cfa0e859ac754a') in 0.017204 seconds
+  Import took 0.022257 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000385 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Purple_p.png
+  artifactKey: Guid(e3634b22b14b8534cb14c2623d1a2e2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Purple_p.png using Guid(e3634b22b14b8534cb14c2623d1a2e2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff7a414730d9bf07b115328d5cf96833') in 0.025979 seconds
+  Import took 0.030240 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000368 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Red_d.png
+  artifactKey: Guid(3af32f64cea60934294ac79cc69d6773) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Red_d.png using Guid(3af32f64cea60934294ac79cc69d6773) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa8da647c5c7b32a9838362fd4294247') in 0.017382 seconds
+  Import took 0.021882 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000500 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Purple_n.png
+  artifactKey: Guid(a45103378eda90d4d8a3def79090e27d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Purple_n.png using Guid(a45103378eda90d4d8a3def79090e27d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7507a3e0c0968a3e1abe936fcce5ebcb') in 0.021489 seconds
+  Import took 0.026660 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000303 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Green_d.png
+  artifactKey: Guid(dd5fb6c7eff5abe48823058ffb9e4eaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Green_d.png using Guid(dd5fb6c7eff5abe48823058ffb9e4eaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a538bdd8761bbf9185c3fcb0eabadf72') in 0.016382 seconds
+  Import took 0.021490 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000435 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Green_p.png
+  artifactKey: Guid(bee22bd07187e3b45a4ad7c18f6dbf0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Green_p.png using Guid(bee22bd07187e3b45a4ad7c18f6dbf0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e44eab06403197d50634583079d2fa7') in 0.021435 seconds
+  Import took 0.026882 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.065929 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Red_p.png
+  artifactKey: Guid(1ff0ee365cf39f547bfb2c8e9fdee99d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Red_p.png using Guid(1ff0ee365cf39f547bfb2c8e9fdee99d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ecc12095bbd5f81278f26264fa7791c') in 0.020310 seconds
+  Import took 0.025063 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000364 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Blue_p.png
+  artifactKey: Guid(2344886d92c214d42a27171cc241881b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Blue_p.png using Guid(2344886d92c214d42a27171cc241881b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '628aad7f9150b5a6b7464606d94f2178') in 0.028055 seconds
+  Import took 0.033791 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000383 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Cyan_n.png
+  artifactKey: Guid(e1b89f935e22f9445aa496038bc4fea3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Cyan_n.png using Guid(e1b89f935e22f9445aa496038bc4fea3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e66c309dd8946b320e98a2fe01bf348f') in 0.018268 seconds
+  Import took 0.023380 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000356 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Yellow_d.png
+  artifactKey: Guid(351f8bee4d319c441bcacb922fac821c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Yellow_d.png using Guid(351f8bee4d319c441bcacb922fac821c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68b13a1bb5a298d894c36af297de8b86') in 0.019807 seconds
+  Import took 0.023973 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000514 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Cyan_p.png
+  artifactKey: Guid(f528ce560d63f524c8847bbbad23e1d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Cyan_p.png using Guid(f528ce560d63f524c8847bbbad23e1d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1079c615231e913209b724188135da94') in 0.016951 seconds
+  Import took 0.021940 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000380 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Blue_n.png
+  artifactKey: Guid(5284a3567eb45c341b6f2b08723fcc43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Blue_n.png using Guid(5284a3567eb45c341b6f2b08723fcc43) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a15e6eab2df95bc1a5e210e7f3e56096') in 0.019576 seconds
+  Import took 0.024113 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000408 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Yellow_n.png
+  artifactKey: Guid(de9b921ce0f94fa4db29a31f39f8243d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Yellow_n.png using Guid(de9b921ce0f94fa4db29a31f39f8243d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '42091fc789ffb731f00a23697b5fae57') in 0.021017 seconds
+  Import took 0.026396 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000324 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Red_p.png
+  artifactKey: Guid(1ff0ee365cf39f547bfb2c8e9fdee99d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Red_p.png using Guid(1ff0ee365cf39f547bfb2c8e9fdee99d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ecc12095bbd5f81278f26264fa7791c') in 0.016590 seconds
+  Import took 0.020662 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000390 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Gray_n.png
+  artifactKey: Guid(86900e230e8c20e4b8817ea7bbf999c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Gray_n.png using Guid(86900e230e8c20e4b8817ea7bbf999c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c0a9c8be464cc0774b5a402ec68ca87e') in 0.015932 seconds
+  Import took 0.021177 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000353 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Yellow_p.png
+  artifactKey: Guid(87f871a730d467343b9e54ac1cb80317) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/LargeButton05Yellow_p.png using Guid(87f871a730d467343b9e54ac1cb80317) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1279d9b072be77044003a3dfb81e3762') in 0.020009 seconds
+  Import took 0.025095 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.081935 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Gray_p.png
+  artifactKey: Guid(a4997fad0267dfb4aab527b96020a533) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Gray_p.png using Guid(a4997fad0267dfb4aab527b96020a533) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c642e727ca786a194f425b32ef67a892') in 0.015755 seconds
+  Import took 0.020233 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000374 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Green_n.png
+  artifactKey: Guid(8afb1b39c55b4af4696141ac28968d2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Green_n.png using Guid(8afb1b39c55b4af4696141ac28968d2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b6407f235eef4c4a40ff3c948ad96fd') in 0.015394 seconds
+  Import took 0.020156 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000371 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Red_p.png
+  artifactKey: Guid(b2d7d4e07a44cfe48bd4e86648168364) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Red_p.png using Guid(b2d7d4e07a44cfe48bd4e86648168364) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e97dc01205f2bcf5deda3a8fb321393') in 0.020322 seconds
+  Import took 0.026348 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000542 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Green_n.png
+  artifactKey: Guid(8afb1b39c55b4af4696141ac28968d2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Green_n.png using Guid(8afb1b39c55b4af4696141ac28968d2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b6407f235eef4c4a40ff3c948ad96fd') in 0.012464 seconds
+  Import took 0.017176 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000588 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01White_2.png
+  artifactKey: Guid(3d4933a44508e6346abd7afa1bf33481) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01White_2.png using Guid(3d4933a44508e6346abd7afa1bf33481) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6c2cc196aaa481371a260939d8b96799') in 0.020253 seconds
+  Import took 0.025105 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000447 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01White_1.png
+  artifactKey: Guid(c05ab26cedc0ee7459d8ffdb16624958) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01White_1.png using Guid(c05ab26cedc0ee7459d8ffdb16624958) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '069d53767da365d3f6186a5766389d43') in 0.018063 seconds
+  Import took 0.022894 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000435 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Green_p.png
+  artifactKey: Guid(479f76e31ccb6814eb431ffab016fedb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Green_p.png using Guid(479f76e31ccb6814eb431ffab016fedb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '801f9ffe6f905d6b6909d9a85f9552e9') in 0.022244 seconds
+  Import took 0.028941 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000422 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Red_n.png
+  artifactKey: Guid(1ff26cf2d2b98f144b18648ce4412a9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Red_n.png using Guid(1ff26cf2d2b98f144b18648ce4412a9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65868823ece0a8431e3adb31501529a5') in 0.016568 seconds
+  Import took 0.023939 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000468 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Purple_n.png
+  artifactKey: Guid(78ad133ea94fbcb4b82db48730ad0432) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Purple_n.png using Guid(78ad133ea94fbcb4b82db48730ad0432) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d3a78108262daed8123e37d349016c2') in 0.018856 seconds
+  Import took 0.023658 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000396 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Gray_p.png
+  artifactKey: Guid(a4997fad0267dfb4aab527b96020a533) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Gray_p.png using Guid(a4997fad0267dfb4aab527b96020a533) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c642e727ca786a194f425b32ef67a892') in 0.012935 seconds
+  Import took 0.017694 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.002756 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Purple_p.png
+  artifactKey: Guid(3b62aad4b4686724084243fff03d1f6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Purple_p.png using Guid(3b62aad4b4686724084243fff03d1f6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8bb06600d4818409e08effa9e01910bb') in 0.019045 seconds
+  Import took 0.024376 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.019053 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Yellow_n.png
+  artifactKey: Guid(887ba2753c481594490693581a1bd54a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Yellow_n.png using Guid(887ba2753c481594490693581a1bd54a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b4e1e20702ab040d4324c44e2ae7e15') in 0.016778 seconds
+  Import took 0.024829 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000411 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Blue_n.png
+  artifactKey: Guid(bacf41be43d2fca43a7c5ebdddd6fd1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Blue_n.png using Guid(bacf41be43d2fca43a7c5ebdddd6fd1e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8fbc8be78559fe2e8d875ab01c0aca9') in 0.017595 seconds
+  Import took 0.023472 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001812 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Yellow_p.png
+  artifactKey: Guid(b13d9e0b3bd3c1e48971ca50940d9bef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton01Yellow_p.png using Guid(b13d9e0b3bd3c1e48971ca50940d9bef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3095443c0af75b6c54c8436fbbbbac18') in 0.017803 seconds
+  Import took 0.022722 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000354 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Cyan_n.png
+  artifactKey: Guid(785d8bfa7e72919478a85e2690542e0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Cyan_n.png using Guid(785d8bfa7e72919478a85e2690542e0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84863e7ffa1ef29b5964f2d630b0bf41') in 0.017981 seconds
+  Import took 0.025067 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000495 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Cyan_p.png
+  artifactKey: Guid(31ebacf51f129b04881d52155115b0e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Cyan_p.png using Guid(31ebacf51f129b04881d52155115b0e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db0c5e2d013bc45ae3ef45a34f2bb7f1') in 0.015697 seconds
+  Import took 0.020790 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000439 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Green_n.png
+  artifactKey: Guid(7df23fbfe084b904b8560a7221c91ddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Green_n.png using Guid(7df23fbfe084b904b8560a7221c91ddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9499f3816a99e795cbdcb7b4237d5a65') in 0.020368 seconds
+  Import took 0.025797 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000458 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Gray_p.png
+  artifactKey: Guid(2357d2a3b0f2c2b46a8523f235891424) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Gray_p.png using Guid(2357d2a3b0f2c2b46a8523f235891424) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad0160dd1e7fc0f0881353a8e334e591') in 0.015762 seconds
+  Import took 0.020831 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000425 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Blue_p.png
+  artifactKey: Guid(898e4473ea18aa942ae50f77055bcfee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Blue_p.png using Guid(898e4473ea18aa942ae50f77055bcfee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b1ec645343d80dedf039f7fdd767c22') in 0.019013 seconds
+  Import took 0.023639 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000368 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Gray_n.png
+  artifactKey: Guid(e0cb5a3cafd1f154dbfb3115fc9a6626) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Gray_n.png using Guid(e0cb5a3cafd1f154dbfb3115fc9a6626) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a9f97917546830150b1b1138757372b') in 0.016356 seconds
+  Import took 0.020796 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.050954 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Green_p.png
+  artifactKey: Guid(e0ad26ddf9b1f6a44a03e47a1091e75f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Green_p.png using Guid(e0ad26ddf9b1f6a44a03e47a1091e75f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0743a6c47c1ed2ea089f633b4fb65f07') in 0.019894 seconds
+  Import took 0.025163 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000344 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Purple_p.png
+  artifactKey: Guid(61f5931378558c54990ec4100ba324dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Purple_p.png using Guid(61f5931378558c54990ec4100ba324dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25874b5747f45d156c7e0556d0543a38') in 0.015573 seconds
+  Import took 0.020092 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000365 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Red_p.png
+  artifactKey: Guid(018c80eff8fa52f44b2187e927e1a686) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Red_p.png using Guid(018c80eff8fa52f44b2187e927e1a686) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d7aa05ddb5de72a75d15a31a97fd25a') in 0.020969 seconds
+  Import took 0.025147 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000437 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Red_n.png
+  artifactKey: Guid(bd8dafaaf3f36fa4b80e8823ca4534e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Red_n.png using Guid(bd8dafaaf3f36fa4b80e8823ca4534e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '45bae3d0a4dd82519307b8496529a4dd') in 0.017672 seconds
+  Import took 0.021788 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000485 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02White_1.png
+  artifactKey: Guid(8d6dc968ce5d1124b89b83ce4df10bcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02White_1.png using Guid(8d6dc968ce5d1124b89b83ce4df10bcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7760080401cd59c6e2a502fb7f08638d') in 0.021797 seconds
+  Import took 0.026674 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000444 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Purple_n.png
+  artifactKey: Guid(9935a457332addc438a06d5885b75796) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Purple_n.png using Guid(9935a457332addc438a06d5885b75796) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a479209a2420ad938d3e23f611405293') in 0.016300 seconds
+  Import took 0.021372 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.049301 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02White_2.png
+  artifactKey: Guid(63ab8f43c126b87458f4f43a5de54d5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02White_2.png using Guid(63ab8f43c126b87458f4f43a5de54d5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3668dceb09dff48a9d108ca4fa80338a') in 0.020938 seconds
+  Import took 0.025172 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000324 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Yellow_n.png
+  artifactKey: Guid(d469745e573127840899c7f56041de30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Yellow_n.png using Guid(d469745e573127840899c7f56041de30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4049a9768be93befe18faae5cd4b0d3') in 0.015044 seconds
+  Import took 0.019517 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000450 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Yellow_p.png
+  artifactKey: Guid(0f9936cea331a1a4a81c1b0045c5e4bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Yellow_p.png using Guid(0f9936cea331a1a4a81c1b0045c5e4bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2de00f0d651f1e21d05ba6ef45cdf87e') in 0.021067 seconds
+  Import took 0.027010 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000553 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Yellow_n.png
+  artifactKey: Guid(d469745e573127840899c7f56041de30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02Yellow_n.png using Guid(d469745e573127840899c7f56041de30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4049a9768be93befe18faae5cd4b0d3') in 0.013543 seconds
+  Import took 0.018525 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000422 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02White_2.png
+  artifactKey: Guid(63ab8f43c126b87458f4f43a5de54d5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton02White_2.png using Guid(63ab8f43c126b87458f4f43a5de54d5a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3668dceb09dff48a9d108ca4fa80338a') in 0.015943 seconds
+  Import took 0.020235 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000433 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Gray_p.png
+  artifactKey: Guid(253255c1d764ac843b53ecf258cc86c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Gray_p.png using Guid(253255c1d764ac843b53ecf258cc86c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6c6ee3f5f14279e8c791b72bf8414ad') in 0.020746 seconds
+  Import took 0.025943 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000401 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Gray_n.png
+  artifactKey: Guid(c9b397a81c36709438bfcb7fbc95b8fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Gray_n.png using Guid(c9b397a81c36709438bfcb7fbc95b8fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf9a3becc6b8d5a3ccbdf9ac5e5b303f') in 0.019825 seconds
+  Import took 0.025149 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000483 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Cyan_n.png
+  artifactKey: Guid(9de4354cb256e3c408f18e6209cdd83f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Cyan_n.png using Guid(9de4354cb256e3c408f18e6209cdd83f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ae22d03dcfdfbf7360016f5f4c87296') in 0.017660 seconds
+  Import took 0.022582 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000421 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Cyan_p.png
+  artifactKey: Guid(21c2cd11fd7ad6449a95ad980a6c19bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Cyan_p.png using Guid(21c2cd11fd7ad6449a95ad980a6c19bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f57d5ffdd8f84496aeba8891475f455b') in 0.022937 seconds
+  Import took 0.027775 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000326 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Blue_p.png
+  artifactKey: Guid(b1aa35f9eb1cd7e43834e18dc2173353) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Blue_p.png using Guid(b1aa35f9eb1cd7e43834e18dc2173353) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dadd95ffd6f94639847e35417cb0c855') in 0.016062 seconds
+  Import took 0.020987 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000405 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Blue_n.png
+  artifactKey: Guid(935579d89db10ba4fb4d76e4c02ee857) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Blue_n.png using Guid(935579d89db10ba4fb4d76e4c02ee857) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd08a7282a5f1a2ac3073140e55a40693') in 0.020477 seconds
+  Import took 0.026425 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.030807 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Green_n.png
+  artifactKey: Guid(27ed69ecf8bef7c488fd716105fb958c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Green_n.png using Guid(27ed69ecf8bef7c488fd716105fb958c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dba80f94498af29768fd37e1153da50f') in 0.019385 seconds
+  Import took 0.024023 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000460 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03White_02.png
+  artifactKey: Guid(00dcd21748fe7434fbc72586d12a66e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03White_02.png using Guid(00dcd21748fe7434fbc72586d12a66e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '152aa859ad3538d300376b4157ea2b46') in 0.018859 seconds
+  Import took 0.023258 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000370 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Purple_n.png
+  artifactKey: Guid(4d67b9725568dde4fb776e08e8138bc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Purple_n.png using Guid(4d67b9725568dde4fb776e08e8138bc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f51b38bc780fbd8eca2c3fd8f87f184d') in 0.028466 seconds
+  Import took 0.033314 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000397 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Red_p.png
+  artifactKey: Guid(1388b65837d99014699015e99cc76650) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Red_p.png using Guid(1388b65837d99014699015e99cc76650) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1081c7f01ff41f3762e0798dd2eb7915') in 0.022523 seconds
+  Import took 0.026819 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000357 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03White_01.png
+  artifactKey: Guid(9e4ccf9f1fd720f44be6db4f62090056) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03White_01.png using Guid(9e4ccf9f1fd720f44be6db4f62090056) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60327e14d12fa8ea0df2d35dbd5c4547') in 0.016264 seconds
+  Import took 0.021026 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000405 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Green_p.png
+  artifactKey: Guid(1ee17ce8f1aa15148831a727efd37243) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Green_p.png using Guid(1ee17ce8f1aa15148831a727efd37243) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c36e3a29dee8bd8e150edc1f26a84a5d') in 0.022388 seconds
+  Import took 0.027480 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000337 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Red_n.png
+  artifactKey: Guid(821ec6dd487a44840a317e70e7655b04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Red_n.png using Guid(821ec6dd487a44840a317e70e7655b04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '481745ae16e4e27da930d71cfdb354ac') in 0.016832 seconds
+  Import took 0.024308 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000370 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Yellow_n.png
+  artifactKey: Guid(7e084c362ae3b43438822da8614fa19c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Yellow_n.png using Guid(7e084c362ae3b43438822da8614fa19c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8cbfd3ccf0fc206f4d659f9608491d67') in 0.018208 seconds
+  Import took 0.022991 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000360 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Purple_p.png
+  artifactKey: Guid(3f4433bd5a00c654db5535e2e1594d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Purple_p.png using Guid(3f4433bd5a00c654db5535e2e1594d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a3b777084d8b307601f8fdea0a05947') in 0.021999 seconds
+  Import took 0.026826 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000489 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Yellow_n.png
+  artifactKey: Guid(7e084c362ae3b43438822da8614fa19c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Yellow_n.png using Guid(7e084c362ae3b43438822da8614fa19c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8cbfd3ccf0fc206f4d659f9608491d67') in 0.012885 seconds
+  Import took 0.017140 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.943257 seconds.
+  path: Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Yellow_p.png
+  artifactKey: Guid(8205574c37d4b9c408c44ffe81914761) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/External Resource/SCI-FI UI Pack Pro/SCI-FI UI Components/Textures/Button/MenuButton03Yellow_p.png using Guid(8205574c37d4b9c408c44ffe81914761) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b4463ea9cc10393b932f5bb0a2cc3863') in 0.022261 seconds
+  Import took 0.029801 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003840 seconds.
+Registered in 0.003540 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.82 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.89 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.109 seconds
+- Completed reload, in  1.091 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.33 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 2.72 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 121.5 MB.
-System memory in use after: 121.7 MB.
+System memory in use before: 124.4 MB.
+System memory in use after: 124.6 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2906.
-Total: 8.520400 ms (FindLiveObjects: 2.560500 ms CreateObjectMapping: 0.380000 ms MarkObjects: 5.459700 ms  DeleteObjects: 0.114400 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2935.
+Total: 2.427200 ms (FindLiveObjects: 0.349600 ms CreateObjectMapping: 0.153200 ms MarkObjects: 1.850300 ms  DeleteObjects: 0.073200 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.004892 seconds.
+Registered in 0.003714 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.99 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.84 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.157 seconds
+- Completed reload, in  1.057 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.02 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 1.01 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 121.6 MB.
-System memory in use after: 121.7 MB.
+System memory in use before: 124.4 MB.
+System memory in use after: 124.6 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2909.
-Total: 2.347100 ms (FindLiveObjects: 0.386600 ms CreateObjectMapping: 0.117300 ms MarkObjects: 1.770800 ms  DeleteObjects: 0.070700 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2938.
+Total: 3.230200 ms (FindLiveObjects: 0.641800 ms CreateObjectMapping: 0.216600 ms MarkObjects: 2.282900 ms  DeleteObjects: 0.086900 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003721 seconds.
+Registered in 0.004048 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.19 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.84 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.321 seconds
+- Completed reload, in  1.066 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.06 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.90 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 121.6 MB.
-System memory in use after: 121.8 MB.
+System memory in use before: 124.5 MB.
+System memory in use after: 124.6 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2912.
-Total: 2.498700 ms (FindLiveObjects: 0.440400 ms CreateObjectMapping: 0.243600 ms MarkObjects: 1.744400 ms  DeleteObjects: 0.069100 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2941.
+Total: 4.500800 ms (FindLiveObjects: 0.308100 ms CreateObjectMapping: 0.141400 ms MarkObjects: 3.946700 ms  DeleteObjects: 0.102900 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003335 seconds.
+Registered in 0.003373 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.94 ms, found 0 plugins.
@@ -206,22 +1566,70 @@ Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.053 seconds
+- Completed reload, in  1.050 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 0.90 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 1.45 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 121.5 MB.
-System memory in use after: 121.7 MB.
+System memory in use before: 124.5 MB.
+System memory in use after: 124.7 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2915.
-Total: 2.870900 ms (FindLiveObjects: 0.687400 ms CreateObjectMapping: 0.282000 ms MarkObjects: 1.788300 ms  DeleteObjects: 0.111600 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2944.
+Total: 2.689300 ms (FindLiveObjects: 0.594000 ms CreateObjectMapping: 0.150000 ms MarkObjects: 1.862600 ms  DeleteObjects: 0.081500 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.004783 seconds.
+Registered in 0.005823 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.87 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.065 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.39 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.4 MB.
+System memory in use after: 124.6 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2947.
+Total: 2.578300 ms (FindLiveObjects: 0.328400 ms CreateObjectMapping: 0.134000 ms MarkObjects: 1.989700 ms  DeleteObjects: 0.124700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004010 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.83 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.039 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.89 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.5 MB.
+System memory in use after: 124.7 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2950.
+Total: 2.645500 ms (FindLiveObjects: 0.541700 ms CreateObjectMapping: 0.161700 ms MarkObjects: 1.853000 ms  DeleteObjects: 0.087200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003441 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.85 ms, found 0 plugins.
@@ -230,78 +1638,310 @@ Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.068 seconds
+- Completed reload, in  1.055 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.18 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.5 MB.
+System memory in use after: 124.7 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2953.
+Total: 2.934700 ms (FindLiveObjects: 0.391000 ms CreateObjectMapping: 0.161800 ms MarkObjects: 2.307700 ms  DeleteObjects: 0.073100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003841 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.05 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.085 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
 Refreshing native plugins compatible for Editor in 0.86 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 121.6 MB.
-System memory in use after: 121.8 MB.
+System memory in use before: 124.5 MB.
+System memory in use after: 124.7 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2918.
-Total: 2.491400 ms (FindLiveObjects: 0.357000 ms CreateObjectMapping: 0.132200 ms MarkObjects: 1.891500 ms  DeleteObjects: 0.109100 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2956.
+Total: 2.198300 ms (FindLiveObjects: 0.297100 ms CreateObjectMapping: 0.109000 ms MarkObjects: 1.679300 ms  DeleteObjects: 0.110900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004208 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.86 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.051 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.89 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.5 MB.
+System memory in use after: 124.7 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2959.
+Total: 3.061900 ms (FindLiveObjects: 0.405600 ms CreateObjectMapping: 0.316200 ms MarkObjects: 2.247500 ms  DeleteObjects: 0.091000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004315 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.98 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.107 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.42 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.4 MB.
+System memory in use after: 124.6 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2962.
+Total: 2.985900 ms (FindLiveObjects: 0.543600 ms CreateObjectMapping: 0.285100 ms MarkObjects: 2.081200 ms  DeleteObjects: 0.074400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004362 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.63 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.289 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.93 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.5 MB.
+System memory in use after: 124.7 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2965.
+Total: 2.881100 ms (FindLiveObjects: 0.565800 ms CreateObjectMapping: 0.179200 ms MarkObjects: 2.044000 ms  DeleteObjects: 0.089700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003397 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.99 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.045 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.94 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.5 MB.
+System memory in use after: 124.7 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2968.
+Total: 3.622800 ms (FindLiveObjects: 1.045600 ms CreateObjectMapping: 0.119900 ms MarkObjects: 2.384500 ms  DeleteObjects: 0.070700 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 166.490362 seconds.
-  path: Assets/Resources
-  artifactKey: Guid(919f82c195205eb429a47bdcf3b7d6e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources using Guid(919f82c195205eb429a47bdcf3b7d6e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa363ffe254bb628c569dab15084884d') in 0.015729 seconds
-  Import took 0.022746 seconds .
+  Time since last request: 1378.828416 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa118353af4fb3273f3213bdcc78fd97') in 0.154194 seconds
+  Import took 0.160172 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.739293 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80d23d5ac82281b38da59a3b963e4c15') in 0.059974 seconds
+  Import took 0.065881 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.946026 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eee7aed74c4ec27f7a8df82ab8b09095') in 0.057952 seconds
+  Import took 0.064745 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.948759 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '931e99b8e272ed3b21d11935fe3bb7ba') in 0.050774 seconds
+  Import took 0.056193 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.811102 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f2962c139ad867247aea87d18a66131') in 0.053180 seconds
+  Import took 0.061247 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003766 seconds.
+Registered in 0.003689 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.34 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.94 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.172 seconds
+- Completed reload, in  1.120 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 0.97 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.98 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 121.6 MB.
-System memory in use after: 121.8 MB.
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2921.
-Total: 3.812900 ms (FindLiveObjects: 0.372400 ms CreateObjectMapping: 0.324300 ms MarkObjects: 2.911000 ms  DeleteObjects: 0.203600 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2971.
+Total: 3.455800 ms (FindLiveObjects: 0.682800 ms CreateObjectMapping: 0.212600 ms MarkObjects: 2.429200 ms  DeleteObjects: 0.129800 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 34.968817 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c5ed54fe9d167feb7fe094b7bb3c630') in 0.136582 seconds
+  Import took 0.142270 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.398577 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99e68ace9f495bb244c7fc95cee1c0af') in 0.049532 seconds
+  Import took 0.055103 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.004176 seconds.
+Registered in 0.009977 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.06 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.83 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.101 seconds
+- Completed reload, in  1.094 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 0.90 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 5.77 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 121.6 MB.
-System memory in use after: 121.8 MB.
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2924.
-Total: 2.171700 ms (FindLiveObjects: 0.289900 ms CreateObjectMapping: 0.229800 ms MarkObjects: 1.572200 ms  DeleteObjects: 0.078500 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2974.
+Total: 2.951800 ms (FindLiveObjects: 0.360500 ms CreateObjectMapping: 0.174200 ms MarkObjects: 2.335200 ms  DeleteObjects: 0.080100 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003877 seconds.
+Registered in 0.004205 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.86 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.104 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.87 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.6 MB.
+System memory in use after: 124.8 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2977.
+Total: 2.459900 ms (FindLiveObjects: 0.417900 ms CreateObjectMapping: 0.189900 ms MarkObjects: 1.749100 ms  DeleteObjects: 0.101800 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 426.995011 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dec415c285265ad87eb98e3c0b9c2b4a') in 0.147212 seconds
+  Import took 0.152970 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.142275 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6cbf84d6d3326d6aba563d250ef0e82f') in 0.060915 seconds
+  Import took 0.067174 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.947587 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a8524cc5ce7db26031620ec48296ba1') in 0.059627 seconds
+  Import took 0.067512 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.832430 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b48be6f97d598b8b7e77a56a660b693d') in 0.057094 seconds
+  Import took 0.062826 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.189457 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '252d00a341b96a320a02108821f960a6') in 0.054520 seconds
+  Import took 0.061075 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003904 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.91 ms, found 0 plugins.
@@ -310,38 +1950,22 @@ Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.171 seconds
+- Completed reload, in  1.142 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.22 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 1.37 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 121.6 MB.
-System memory in use after: 121.8 MB.
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2927.
-Total: 7.273200 ms (FindLiveObjects: 0.388800 ms CreateObjectMapping: 0.182200 ms MarkObjects: 6.599300 ms  DeleteObjects: 0.101100 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 114.501517 seconds.
-  path: Assets/Resources/Models/TH_Bull_01.prefab
-  artifactKey: Guid(b15c7c740268c024e992b1c3df2243fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Models/TH_Bull_01.prefab using Guid(b15c7c740268c024e992b1c3df2243fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3e0b9c9cdd98b848e57d671065bb289') in 0.304887 seconds
-  Import took 0.314808 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.991447 seconds.
-  path: Assets/Resources/Models/TH_Bull_01.prefab
-  artifactKey: Guid(b15c7c740268c024e992b1c3df2243fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Models/TH_Bull_01.prefab using Guid(b15c7c740268c024e992b1c3df2243fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3e0b9c9cdd98b848e57d671065bb289') in 0.152245 seconds
-  Import took 0.181935 seconds .
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2980.
+Total: 3.522300 ms (FindLiveObjects: 0.421400 ms CreateObjectMapping: 0.340300 ms MarkObjects: 2.683500 ms  DeleteObjects: 0.075200 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.004482 seconds.
+Registered in 0.003720 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 1.04 ms, found 0 plugins.
@@ -350,182 +1974,358 @@ Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.112 seconds
+- Completed reload, in  1.602 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.11 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 1.16 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 138.5 MB.
-System memory in use after: 138.7 MB.
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2938.
-Total: 2.736400 ms (FindLiveObjects: 0.467800 ms CreateObjectMapping: 0.164600 ms MarkObjects: 2.002600 ms  DeleteObjects: 0.099400 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2983.
+Total: 2.820900 ms (FindLiveObjects: 0.454300 ms CreateObjectMapping: 0.261500 ms MarkObjects: 2.026100 ms  DeleteObjects: 0.075500 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003777 seconds.
+Registered in 0.004309 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.65 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.88 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.067 seconds
+- Completed reload, in  1.107 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.93 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2986.
+Total: 6.687800 ms (FindLiveObjects: 0.541900 ms CreateObjectMapping: 0.249000 ms MarkObjects: 5.776100 ms  DeleteObjects: 0.119200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003563 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.91 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.120 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.04 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2989.
+Total: 2.898700 ms (FindLiveObjects: 0.447700 ms CreateObjectMapping: 0.156000 ms MarkObjects: 2.220100 ms  DeleteObjects: 0.073800 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 452.447675 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32c47b2058cc37b0c949ea434b846e4a') in 0.158952 seconds
+  Import took 0.165259 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.676221 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea3e85208029c24b59ae49dd8c912861') in 0.058049 seconds
+  Import took 0.067337 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.523494 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f125cce1cceed5e460d78d4756df6e1') in 0.061947 seconds
+  Import took 0.068458 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.553248 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7f06dfcd6bdb3bd28d959b25b47049a') in 0.053140 seconds
+  Import took 0.060320 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.730385 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f40f77abdcc361c114fd30f739b01044') in 0.058632 seconds
+  Import took 0.064071 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001645 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f40f77abdcc361c114fd30f739b01044') in 0.058347 seconds
+  Import took 0.064552 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.839565 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e99194205f11aad7bb07513d29dc880c') in 0.061431 seconds
+  Import took 0.067552 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004695 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.71 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.310 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.20 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.6 MB.
+System memory in use after: 124.8 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2992.
+Total: 4.114700 ms (FindLiveObjects: 0.514000 ms CreateObjectMapping: 0.239400 ms MarkObjects: 3.260300 ms  DeleteObjects: 0.090000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004344 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.88 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.116 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.14 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2995.
+Total: 6.046100 ms (FindLiveObjects: 0.474800 ms CreateObjectMapping: 0.242300 ms MarkObjects: 5.169400 ms  DeleteObjects: 0.157400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004231 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.31 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.258 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.38 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2998.
+Total: 6.182100 ms (FindLiveObjects: 0.513500 ms CreateObjectMapping: 0.204000 ms MarkObjects: 5.378500 ms  DeleteObjects: 0.084400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007374 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.04 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.304 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
 Refreshing native plugins compatible for Editor in 1.01 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 138.6 MB.
-System memory in use after: 138.8 MB.
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2941.
-Total: 6.340300 ms (FindLiveObjects: 0.394900 ms CreateObjectMapping: 0.151300 ms MarkObjects: 5.701800 ms  DeleteObjects: 0.089500 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3001.
+Total: 2.641400 ms (FindLiveObjects: 0.367200 ms CreateObjectMapping: 0.183600 ms MarkObjects: 2.017100 ms  DeleteObjects: 0.072200 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003515 seconds.
+Registered in 0.003997 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.83 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.84 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.062 seconds
+- Completed reload, in  1.045 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 0.96 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 138.6 MB.
-System memory in use after: 138.8 MB.
-
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2944.
-Total: 3.120700 ms (FindLiveObjects: 0.556200 ms CreateObjectMapping: 0.242300 ms MarkObjects: 2.203300 ms  DeleteObjects: 0.117600 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003743 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.29 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.125 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.13 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 138.6 MB.
-System memory in use after: 138.8 MB.
-
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2947.
-Total: 2.369200 ms (FindLiveObjects: 0.366400 ms CreateObjectMapping: 0.191700 ms MarkObjects: 1.741300 ms  DeleteObjects: 0.067900 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003472 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.95 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.161 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 0.94 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 138.6 MB.
-System memory in use after: 138.8 MB.
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2950.
-Total: 3.501200 ms (FindLiveObjects: 0.828200 ms CreateObjectMapping: 0.348800 ms MarkObjects: 2.215600 ms  DeleteObjects: 0.106700 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3004.
+Total: 3.254000 ms (FindLiveObjects: 0.628000 ms CreateObjectMapping: 0.336400 ms MarkObjects: 2.211200 ms  DeleteObjects: 0.076800 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 145.519028 seconds.
-  path: Assets/Resources/Sprites
-  artifactKey: Guid(5120e4a4978e5a74e85f7007afd012ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Sprites using Guid(5120e4a4978e5a74e85f7007afd012ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8390baefb2e4c4b228c11ef31bfeaf93') in 0.009073 seconds
-  Import took 0.014836 seconds .
+  Time since last request: 615.363660 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4417d610640be7a933826d7162325cfc') in 0.120408 seconds
+  Import took 0.127391 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.027173 seconds.
-  path: Assets/Resources/Sprites
-  artifactKey: Guid(5120e4a4978e5a74e85f7007afd012ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Sprites using Guid(5120e4a4978e5a74e85f7007afd012ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8390baefb2e4c4b228c11ef31bfeaf93') in 0.006219 seconds
-  Import took 0.013738 seconds .
+  Time since last request: 5.040701 seconds.
+  path: Assets/Prefabs/UI/Player's Action[TexasBonus].prefab
+  artifactKey: Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI/Player's Action[TexasBonus].prefab using Guid(681e72ee0b0d22f4aa29c9d67875c9b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7c8a4fe5a65227a56b5ee74d9b77777') in 0.057980 seconds
+  Import took 0.063299 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003402 seconds.
+Registered in 0.004042 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.99 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.98 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.102 seconds
+- Completed reload, in  1.523 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 0.88 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 1.04 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 138.6 MB.
-System memory in use after: 138.7 MB.
+System memory in use before: 124.6 MB.
+System memory in use after: 124.8 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2953.
-Total: 2.367700 ms (FindLiveObjects: 0.471300 ms CreateObjectMapping: 0.228900 ms MarkObjects: 1.591000 ms  DeleteObjects: 0.074200 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3007.
+Total: 6.345900 ms (FindLiveObjects: 0.367900 ms CreateObjectMapping: 0.228900 ms MarkObjects: 5.670100 ms  DeleteObjects: 0.077200 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.005068 seconds.
+Registered in 0.004353 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.53 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 1.20 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.204 seconds
+- Completed reload, in  1.092 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 0.87 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.90 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 138.7 MB.
-System memory in use after: 138.8 MB.
+System memory in use before: 124.7 MB.
+System memory in use after: 124.9 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2956.
-Total: 2.627100 ms (FindLiveObjects: 0.325900 ms CreateObjectMapping: 0.166900 ms MarkObjects: 2.057400 ms  DeleteObjects: 0.075700 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3010.
+Total: 3.103700 ms (FindLiveObjects: 0.472100 ms CreateObjectMapping: 0.249300 ms MarkObjects: 2.252400 ms  DeleteObjects: 0.124400 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003455 seconds.
+Registered in 0.005419 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.18 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.331 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.8 MB.
+System memory in use after: 124.9 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3013.
+Total: 3.422100 ms (FindLiveObjects: 0.419400 ms CreateObjectMapping: 0.226300 ms MarkObjects: 2.670700 ms  DeleteObjects: 0.103700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004325 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.89 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.065 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.92 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 124.8 MB.
+System memory in use after: 125.0 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3016.
+Total: 7.368100 ms (FindLiveObjects: 4.271400 ms CreateObjectMapping: 0.335900 ms MarkObjects: 2.677400 ms  DeleteObjects: 0.082000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003284 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.85 ms, found 0 plugins.
@@ -534,60 +2334,16 @@ Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.149 seconds
+- Completed reload, in  1.034 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.01 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.97 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 138.7 MB.
-System memory in use after: 138.8 MB.
+System memory in use before: 124.8 MB.
+System memory in use after: 125.0 MB.
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2959.
-Total: 6.014500 ms (FindLiveObjects: 0.473000 ms CreateObjectMapping: 3.307000 ms MarkObjects: 2.141800 ms  DeleteObjects: 0.091200 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.004712 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.99 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.157 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 0.89 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2375 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 138.7 MB.
-System memory in use after: 138.9 MB.
-
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2962.
-Total: 2.273500 ms (FindLiveObjects: 0.330300 ms CreateObjectMapping: 0.113400 ms MarkObjects: 1.755200 ms  DeleteObjects: 0.073100 ms)
-
-========================================================================
-Received Prepare
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 2.82 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 91.9 MB.
-System memory in use after: 92.1 MB.
-
-Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 2962.
-Total: 7.412100 ms (FindLiveObjects: 1.370600 ms CreateObjectMapping: 4.087000 ms MarkObjects: 1.880100 ms  DeleteObjects: 0.072700 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 1023.651532 seconds.
-  path: Assets/External Resource/Casino_Environment_Pack/Textures
-  artifactKey: Guid(95ceede7d7338094293d0bffdc967387) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/External Resource/Casino_Environment_Pack/Textures using Guid(95ceede7d7338094293d0bffdc967387) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f0cbde3ddbe1788cc34095e71f3b3272') in 0.008783 seconds
-  Import took 0.015105 seconds .
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3019.
+Total: 7.742500 ms (FindLiveObjects: 0.494300 ms CreateObjectMapping: 0.260400 ms MarkObjects: 6.871700 ms  DeleteObjects: 0.113800 ms)
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

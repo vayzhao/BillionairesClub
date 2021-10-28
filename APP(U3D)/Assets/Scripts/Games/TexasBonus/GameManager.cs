@@ -113,14 +113,14 @@ namespace TexasBonus
                 // deal 2 dealers card and 5 community card (in face-down)
                 yield return tableController.DealInitialCards();          
                 
-                // ask for the bonus wager
-                yield return BonusWagerBet();
-
                 // deal 2 cards for each player (in face-down)
                 yield return tableController.DealPlayerCards();
 
-                // ask for the ante wager and reveal player's start hand
+                // ask for the ante wager and bonus wager 
                 yield return AnteWagerBet();
+                yield return BonusWagerBet();
+
+                // reveal player's start hand
                 tableController.RevealPlayerCards();
 
                 // ask for decision on flop bet

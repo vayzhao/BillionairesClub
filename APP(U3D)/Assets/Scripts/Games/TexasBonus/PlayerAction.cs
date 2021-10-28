@@ -16,6 +16,14 @@ namespace TexasBonus
         [Tooltip("Panel that shows bet / check buttons")]
         public GameObject group_betOrCheck;
 
+        [Header("Decision Buttons")]
+        [Tooltip("Buttons for betting ante wager")]
+        public Button[] anteWagerBtns;
+        [Tooltip("Button for betting bonus wager")]
+        public Button[] bonusWagerBtns;
+        [Tooltip("Button for betting in bet or check panel")]
+        public Button betBtn;
+
         [HideInInspector]
         public bool isWaiting;                  // determine whether or not this script is waiting for a player to make decision
         [HideInInspector]
@@ -28,11 +36,15 @@ namespace TexasBonus
         public LabelController labelController; // the label controller script
 
         private BetType betType;                // used in bet method, to determine whether it is flop bet, turn bet or river bet
-        private int playerIndex;               // whose term is it
+        private int playerIndex;                // whose term is it
+        private int[] anteWagerOptions;         // optional betting values of ante wager 
+        private int[] bonusWagerOptions;        // optional betting values of bonus wager
 
         public void Setup() 
         {
             bets = new Bet[gameManager.players.Length];
+            anteWagerOptions = new int[4] { 15, 30, 45, 60 };
+            bonusWagerOptions = new int[5] { 5, 10, 20, 50, 100 };
         }
 
         /// <summary>
@@ -65,23 +77,89 @@ namespace TexasBonus
             switch (betType)
             {
                 case BetType.BonusWager:
-                    group_bonusWager.SetActive(true);
+                    DisplayBonusWagerPanel(playerIndex);
                     break;
                 case BetType.AnteWager:
-                    group_anteWager.SetActive(true);
+                    DisplayAnteWagerPanel(playerIndex);
                     break;
                 case BetType.Flop:
                     group_betOrFold.SetActive(true);
                     break;
                 case BetType.Turn:
-                    group_betOrCheck.SetActive(true);
-                    break;
                 case BetType.River:
-                    group_betOrCheck.SetActive(true);
+                    DisplayBetOrCheck(playerIndex);
                     break;
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// Method to display betting panel for ante wager, will disable options
+        /// that have value greater than 2/3 of player's remaining poker chip
+        /// </summary>
+        /// <param name="playerIndex"></param>
+        private void DisplayAnteWagerPanel(int playerIndex)
+        {
+            // run through each ante wager option
+            // the player cannot bet more than 1/3 of his total poker chip
+            // because the player will be required to bet 2 times of the ante wager in FLOP
+            for (int i = 0; i < anteWagerOptions.Length; i++)
+            {
+                // the player cannot bet more than 1/3 of his total poker chip
+                var validity = gameManager.players[playerIndex].chip >= anteWagerOptions[i];
+
+                // modify button state and cross sprite visibility
+                anteWagerBtns[i].enabled = validity;
+                anteWagerBtns[i].transform.GetChild(0).GetComponent<Image>().enabled = !validity;
+            }
+
+            // finally display the decision panel
+            group_anteWager.SetActive(true);
+        }
+
+        /// <summary>
+        /// Method to display betting panel for bonus wager, will disable options
+        /// that have value greater than (player's remaning poker chip - anteWager * 2)
+        /// </summary>
+        /// <param name="playerIndex"></param>
+        private void DisplayBonusWagerPanel(int playerIndex)
+        {
+            // run through each bonus wager option
+            // the player cannot bet more than (player's remaning poker chip - anteWager * 2)
+            // because the player will be required to bet 2 times of the ante wager in FLOP
+            for (int i = 0; i < bonusWagerOptions.Length; i++)
+            {
+                // the player cannot bet more than(player's remaning poker chip - anteWager * 2)
+                var validity = (gameManager.players[playerIndex].chip - bets[playerIndex].anteWager * 2) >= bonusWagerOptions[i];
+
+                // modify button state and cross sprite visibility
+                bonusWagerBtns[i].enabled = validity;
+                bonusWagerBtns[i].transform.GetChild(0).GetComponent<Image>().enabled = !validity;
+            }
+
+            // finally display the decision panel
+            group_bonusWager.SetActive(true);
+        }
+
+        /// <summary>
+        /// Method to display betting panel for TURN and RIVER, will disable bet button when
+        /// the player's remaning poker chip is less than ante wager
+        /// </summary>
+        /// <param name="playerIndex"></param>
+        private void DisplayBetOrCheck(int playerIndex)
+        {
+            // the player cannon bet if the remaning chip is less than ante wager
+            var validity = gameManager.players[playerIndex].chip >= bets[playerIndex].anteWager;
+
+            // modify button state 
+            betBtn.enabled = validity;
+            betBtn.GetComponent<Image>().sprite = validity ?
+                betBtn.spriteState.pressedSprite :
+                betBtn.spriteState.disabledSprite;
+
+            // finally display the decision panel
+            group_betOrCheck.SetActive(true);
         }
 
         /// <summary>
