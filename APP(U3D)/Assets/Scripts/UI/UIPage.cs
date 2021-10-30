@@ -87,8 +87,8 @@ public class UIPage
         if (uiManager == null || uiManager.sceneType != SceneType.InGame)
             return;
 
-        // otherwise, pause / resume the game
-        Time.timeScale = flag ? 1f : 0f;
+        // pause / resume the game
         uiManager.SetInteractableVisibility(flag);
+        Time.timeScale = flag ? 1f : 0f;
     }
 }

@@ -1,45 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TexasBonus
 {
     public class GameManager : MonoBehaviour
     {
-        [Header("Prefab objects")]
-        [Tooltip("A prefab object that holds the player action script")]
-        public GameObject pref_PlayerAction;
-        [Tooltip("A prefab object that holds the UI script")]
-        public GameObject pref_labelController;
-        [Tooltip("A prefab object that holds the ready button")]
-        public GameObject pref_readyBtn;
-        [Tooltip("A prefab object that holds the UI manager")]
-        public GameObject pref_uiManager;
-
         [HideInInspector]
         public Player[] players;                  // data for all players
 
-        private GameObject obj_readyBtn;          // a button that allows you to enter the game
+        private UIManager uiManager;              // a script that handles all the UI components
+        private PlayerAction playerAction;        // a script that handles betting decision in the game
         private TableInformation tableInfo;       // a script that handles information of the players 
         private TableController tableController;  // a script that handles all the 3D models used on the table 
-        private PlayerAction playerAction;        // a script that handles betting decision in the game
         private LabelController labelController;  // a script that handles all the UI-text objects in the scene
-        private UIManager uiManager;              // a script that handles all interactable UI components
+
         /// <summary>
         /// Method to setup the game manager for texas bonus
         /// </summary>
         /// <param name="canvas"></param>
         public void Setup(Transform canvas) 
         {
+            // find ui manager from the canvas
+            uiManager = canvas.GetComponentInChildren<UIManager>();
+
             // create game object for player action
-            playerAction = Instantiate(pref_PlayerAction, canvas).GetComponent<PlayerAction>();
+            playerAction = uiManager.playerAction.GetComponent<PlayerAction>();
 
             // find core components for table
             tableInfo = FindObjectOfType<TableInformation>();
             tableController = FindObjectOfType<TableController>();
 
             // create game object for player hand
-            labelController = Instantiate(pref_labelController, canvas).GetComponent<LabelController>();
+            labelController = uiManager.labelController.GetComponent<LabelController>();
             labelController.Setup();
             tableController.labelController = labelController;
 
@@ -50,13 +44,12 @@ namespace TexasBonus
             tableController.gameManager = this;
             tableController.playerAction = playerAction;
 
-            // create ready button in hidden form
-            obj_readyBtn = Instantiate(pref_readyBtn, canvas);
-            obj_readyBtn.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => GameStart());
-            obj_readyBtn.SetActive(false);
+            // register clicking event for ready button
+            uiManager.readyBtn.onClick.AddListener(() => GameStart());
 
-            // create the UI manager and register event for stand up button
-            uiManager = Instantiate(pref_uiManager, canvas).GetComponent<UIManager>();
+            // set player action & ready button as interactable object
+            uiManager.interactable.Add(playerAction.gameObject);
+            uiManager.interactable.Add(uiManager.readyBtn.gameObject);
         }
 
         /// <summary>
@@ -70,9 +63,6 @@ namespace TexasBonus
             // method to run start method for playerAction & tableController
             playerAction.Setup();
             tableController.Setup();
-
-            // display ready button
-            obj_readyBtn.SetActive(true);
         }
 
         /// <summary>
@@ -80,14 +70,14 @@ namespace TexasBonus
         /// </summary>
         void GameStart()
         {
+            // remove ready button from the interactable object list
+            uiManager.interactable.Remove(uiManager.readyBtn.gameObject);
+
             // destroy the ready button
-            Destroy(obj_readyBtn.gameObject);
+            Destroy(uiManager.readyBtn.gameObject);
 
             // display labels on the table
             tableController.DisplayTableLabel();
-
-            // enable the intractable UI components
-            uiManager.SetInitButtonVisbility(true);
 
             // start the game loop coroutine
             StartCoroutine(Round());

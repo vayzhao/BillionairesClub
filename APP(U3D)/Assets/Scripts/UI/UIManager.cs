@@ -9,14 +9,32 @@ public class UIManager : MonoBehaviour
     [Header("Option")]
     [Tooltip("The genre of this scene")]
     public SceneType sceneType;
+    [Tooltip("Gameobjects that are not displayed by default")]
+    public GameObject[] initialHide;
 
-    [Header("UI Widgets")]
+    [Header("UI Widgets - for common")]
     [Tooltip("The initial buttons in homepage")]
     public GameObject initButtons;
+    [Tooltip("A sprite that is used to fade in or out when switch scenes")]
+    public Image fadeSprite;
+    [Tooltip("A board that shows player's name and states")]
+    public PlayerBoard playerBoard;
+    [Tooltip("A game object that holds the sub-loading bar UI")]
+    public GameObject subLoaderBar;
+    
+    [Header("UI Widget - for some games")]
+    [Tooltip("a button for starting the game")]
+    public Button readyBtn;
+    [Tooltip("a script that handles betting decision in the game")]
+    public GameObject playerAction;
+    [Tooltip("a script that handles all the UI-text objects in the scene")]
+    public GameObject labelController;
 
-    private UIPage initPage;           // the background window
-    private UIPage currentPage;        // the current displayed window
-    private GameObject[] interactable; // an array to store all interactable UI objects from the scene
+    [HideInInspector]
+    public List<GameObject> interactable; // a list to store all interactable UI objects from the scene
+                                          // interactable objects will be hidden when the game is paused
+    private UIPage initPage;              // the background window
+    private UIPage currentPage;           // the current displayed window
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +46,7 @@ public class UIManager : MonoBehaviour
                 initPage = new UIPage(initButtons);
                 break;
             case SceneType.InCasino:
+                initPage = new UIPage(initButtons);
                 break;
             case SceneType.InGame:
                 initPage = new UIPage(initButtons);
@@ -39,8 +58,11 @@ public class UIManager : MonoBehaviour
         // set current page to be the init page
         currentPage = initPage;
 
-        // find the interactable object in the scene
-        FindInteractable();
+        // initialize interactable object list
+        interactable = new List<GameObject>();
+
+        // hide some objects that should not be displayed by default
+        SetDefaultObjectVisibility(false);
     }
 
     // Update is called once per frame
@@ -87,6 +109,15 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Method to modify visibility for default UI objects
+    /// </summary>
+    public void SetDefaultObjectVisibility(bool flag)
+    {
+        for (int i = 0; i < initialHide.Length; i++)
+            initialHide[i].SetActive(flag);
+    }
+
+    /// <summary>
     /// Method to modify the init buttons visibility
     /// </summary>
     public void SetInitButtonVisbility(bool flag)
@@ -95,21 +126,11 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Method to get all interactable UI objects in the scene
-    /// </summary>
-    private void FindInteractable()
-    {
-        interactable = GameObject.FindGameObjectsWithTag("Interactable");
-    }
-
-    /// <summary>
     /// Method to modify the interactable object's visibiilty
     /// </summary>
     public void SetInteractableVisibility(bool flag)
     {
-        for (int i = 0; i < interactable.Length; i++)
-        {
+        for (int i = 0; i < interactable.Count; i++)
             interactable[i].SetActive(flag);
-        }
     }
 }

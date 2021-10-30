@@ -20,11 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
+        m_Texture: {fileID: 2800000, guid: 50a0bb47f6c138747ba17a8a6bc44abe, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _ColorMask: 15
+    - _ColorMask: 34
     - _CullMode: 0
     - _Stencil: 0
     - _StencilComp: 8
@@ -33,8 +33,9 @@ Material:
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
     m_Colors:
-    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _ClipRect: {r: -32742.6, g: -33065, b: 32334, a: 32762}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,6 +53,7 @@ MonoBehaviour:
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
+    m_FaceIndex: 0
     m_FamilyName: 
     m_StyleName: 
     m_PointSize: 0
@@ -657,3 +659,4 @@ Material:
     m_TexEnvs: []
     m_Floats: []
     m_Colors: []
+  m_BuildTextureStacks: []

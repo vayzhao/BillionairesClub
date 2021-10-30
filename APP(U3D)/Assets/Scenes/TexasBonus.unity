@@ -295,46 +295,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1218994448, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 477235382}
     - target: {fileID: 8954841039940104149, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
       propertyPath: m_Name
       value: SceneInitializer
       objectReference: {fileID: 0}
-    - target: {fileID: 8954841039940104150, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 477235382}
-    - target: {fileID: 8954841039940104150, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
-      propertyPath: gameType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8954841039940104150, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
-      propertyPath: fadeImage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8954841039940104150, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
-      propertyPath: sceneType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8954841039940104150, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
-      propertyPath: pref_manager
-      value: 
-      objectReference: {fileID: 4571179310494198388, guid: ae3e96589e201f34c978e1a7651b32fa, type: 3}
-    - target: {fileID: 8954841039940104150, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
-      propertyPath: pref_character
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8954841039940104150, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
-      propertyPath: pref_fadeSprite
-      value: 
-      objectReference: {fileID: 9166924747962388787, guid: 5fdf441114d9f33499ad598142e97c54, type: 3}
-    - target: {fileID: 8954841039940104150, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
-      propertyPath: pref_environment
-      value: 
-      objectReference: {fileID: 5129508241262402484, guid: 7c7c1cf88ac246d45a8d1cb7f621c888, type: 3}
-    - target: {fileID: 8954841039940104150, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
-      propertyPath: pref_playerBoard
-      value: 
-      objectReference: {fileID: 4683724205653464973, guid: 972d27d06b7f210419db20eafd4da30d, type: 3}
     - target: {fileID: 8954841039940104151, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -381,29 +349,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
---- !u!1 &1218994447 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8954841039940104149, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
-  m_PrefabInstance: {fileID: 1218994446}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1218994448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218994447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1288e66e5baadaf44a9450e8a490cb02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneType: 2
-  gameType: 1
-  canvas: {fileID: 477235382}
-  pref_fadeSprite: {fileID: 9166924747962388787, guid: 5fdf441114d9f33499ad598142e97c54, type: 3}
-  pref_playerBoard: {fileID: 4683724205653464973, guid: 972d27d06b7f210419db20eafd4da30d, type: 3}
-  pref_subLoadingBar: {fileID: 8994583291677604014, guid: ed005a5d4768e7d4cbe7df1f63f54c2e, type: 3}
-  pref_environment: {fileID: 5129508241262402484, guid: 7c7c1cf88ac246d45a8d1cb7f621c888, type: 3}
-  pref_character: {fileID: 0}
-  pref_manager: {fileID: 4571179310494198388, guid: ae3e96589e201f34c978e1a7651b32fa, type: 3}

@@ -20,12 +20,8 @@ public class Loading : MonoBehaviour
     [Header("UI Elements")]
     [Tooltip("The canvas transform, which holds all the UI objects")]
     public Transform canvas;
-    [Tooltip("A white ssprite that is used when switching scene from one to another")]
-    public Image pref_fadeSprite;
-    [Tooltip("A game object that contains the player board UI")]
-    public GameObject pref_playerBoard;
-    [Tooltip("A game object that contains the sub-loading bar")]
-    public GameObject pref_subLoadingBar;
+    [Tooltip("A game object that contains all UI prefabs for a specific scene")]
+    public GameObject pref_uiManager;
 
     [Header("Prefab Objects")]
     [Tooltip("The prefab object for the environment in this scene")]
@@ -39,7 +35,7 @@ public class Loading : MonoBehaviour
     private GameObject obj_environment;   // a variable to record the environmental objects
     private GameObject obj_character;     // a variable to record the player's character
     private GameObject obj_manager;       // a variable to record the core manager for this scene
-    private GameObject obj_playerBoard;   // a variable to record the player board
+    private UIManager obj_uiManager;      // a variable to record the UI manager
     private List<GameObject> visibleObjs; // a list to store all the visible object, when intend to load a new scene,
                                           // hide all visble objects from the old scene
 
@@ -134,7 +130,7 @@ public class Loading : MonoBehaviour
         loader.RegisterLoadingMethod(0.2f, LoadSceneEnvironment);
         loader.RegisterLoadingMethod(0.4f, LoadCharacterController);
         loader.RegisterLoadingMethod(0.6f, LoadCasinoManager);
-        loader.RegisterLoadingMethod(0.8f, LoadPlayerBoard);
+        loader.RegisterLoadingMethod(0.8f, LoadUIManager);
 
         // set this scene to be active
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(Const.SCENE_INCASINO));
@@ -152,8 +148,8 @@ public class Loading : MonoBehaviour
         loader = new Loader();
         loader.RegisterLoadingMethod(0.2f, LoadSceneEnvironment);
         loader.RegisterLoadingMethod(0.4f, LoadTableCharacters);
-        loader.RegisterLoadingMethod(0.6f, LoadTexasBonusManager);
-        loader.RegisterLoadingMethod(0.8f, LoadPlayerBoard);
+        loader.RegisterLoadingMethod(0.6f, LoadUIManager);
+        loader.RegisterLoadingMethod(0.8f, LoadTexasBonusManager);
 
         // set this cene to be active 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(Const.SCENE_TEXAS));
@@ -202,8 +198,8 @@ public class Loading : MonoBehaviour
     /// <returns></returns>
     IEnumerator Fade()
     {
-        // create a fade sprite in canvas
-        var fade = Instantiate(pref_fadeSprite, canvas);
+        // display the fading sprite in canvas
+        var fade = obj_uiManager.fadeSprite;
 
         // get the color of the fadeImage
         var color = fade.color;
@@ -347,9 +343,10 @@ public class Loading : MonoBehaviour
     /// <returns></returns>
     IEnumerator SubLoading(string sceneName)
     {
-        // first, spawn the sub-loader object
-        var subLoader = Instantiate(pref_subLoadingBar, canvas);
+        // first, display the sub-loader object
+        var subLoader = obj_uiManager.subLoaderBar;
         var slider = subLoader.GetComponentInChildren<Slider>();
+        subLoader.SetActive(true);
 
         // force slider's value to be 0
         slider.value = 0f;
@@ -413,13 +410,13 @@ public class Loading : MonoBehaviour
     }
 
     /// <summary>
-    /// Method to spawn the player board, player board contains information
-    /// such as player's portrait image, remaning chips and gems
+    /// Method to spawn the UI prefab for this scene, this UI prefab contains 
+    /// player board, instruction, buttons...etc. 
     /// </summary>
-    void LoadPlayerBoard()
+    void LoadUIManager()
     {
-        obj_playerBoard = Instantiate(pref_playerBoard, canvas);
-        obj_playerBoard.SetActive(false);
+        // spawn the ui manager
+        obj_uiManager = Instantiate(pref_uiManager, canvas).GetComponent<UIManager>();
     }
 
     /// <summary>
@@ -427,11 +424,11 @@ public class Loading : MonoBehaviour
     /// </summary>
     void GameStart_Common(bool cursorLock)
     {
-        // display the playerboard
-        obj_playerBoard.SetActive(true);
+        // setup the player board
+        obj_uiManager.playerBoard.BindToPlayer(Blackboard.localPlayer);
 
-        // bind the player to the player board
-        obj_playerBoard.GetComponent<PlayerBoard>().BindToPlayer(Blackboard.localPlayer);
+        // display default hidden UI objects
+        obj_uiManager.SetDefaultObjectVisibility(true);
 
         // check to see whether or not to lock the cursor
         if (cursorLock)
