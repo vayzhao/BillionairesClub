@@ -12,6 +12,8 @@ public static class Blackboard
     public static float loadEstimate = 1f;
     public static bool isDebugMode = false;
     public static bool debugChecked = false;
+    public static bool lockMovement = false;
+    public static bool lockRotation = false;
 
     #region Player
     public static Player localPlayer;
@@ -236,6 +238,22 @@ public static class Blackboard
     };
     public static Sprite GetCardSprite(int index) { return Resources.Load<Sprite>(cardSprite[index]); }
     public static Mesh GetCardMesh(int index) { return Resources.Load<Mesh>(cardMesh[index]); }
+    #endregion
+
+    #region Cursor
+    public static void LockCursor(bool flag)
+    {
+        if (flag)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
     #endregion
 
 }

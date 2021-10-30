@@ -80,6 +80,10 @@ public class CController : Player
     /// </summary>
     void Turn()
     {
+        // return if the rotation is locked
+        if (Blackboard.lockRotation)
+            return;
+
         var mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * 400f;
         transform.Rotate(Vector3.up * mouseX);
     }
@@ -89,6 +93,10 @@ public class CController : Player
     /// </summary>
     void Walk()
     {
+        // return if the movement is locked
+        if (Blackboard.lockMovement)
+            return;
+
         // obtain player's input
         var vertical = Input.GetAxisRaw("Vertical");
         var horizontal = Input.GetAxisRaw("Horizontal");

@@ -291,6 +291,9 @@ public class Loading : MonoBehaviour
         // hide visble object from the old scene
         HideVisibleObjects();
 
+        // hide portal tags
+        FindObjectOfType<PortalTagManager>().Stop();
+
         // start loading coroutine
         StartCoroutine(SubLoading(sceneName));
     }
@@ -431,16 +434,7 @@ public class Loading : MonoBehaviour
         obj_uiManager.SetDefaultObjectVisibility(true);
 
         // check to see whether or not to lock the cursor
-        if (cursorLock)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
+        Blackboard.LockCursor(cursorLock);
     }
 
     #endregion
@@ -509,7 +503,10 @@ public class Loading : MonoBehaviour
         // set character to be active and bind it to the blackboard
         obj_character.SetActive(true);
         Blackboard.localPlayer = obj_character.GetComponent<Player>();
-        
+
+        // spawn portal effects
+        FindObjectOfType<PortalTagManager>().Setup(obj_character.transform);
+
         // check to see if this player has previously entered the casino
         if (Storage.LoadBool(Const.LOCAL_PLAYER,StorageType.HasRecord))
         {
