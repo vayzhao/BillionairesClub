@@ -254,6 +254,12 @@ public static class Blackboard
             Cursor.lockState = CursorLockMode.None;
         }
     }
+    public static void FocusOnWindow(bool flag)
+    {
+        LockCursor(!flag);
+        lockMovement = flag;
+        lockRotation = flag;
+    }
     #endregion
 
 }

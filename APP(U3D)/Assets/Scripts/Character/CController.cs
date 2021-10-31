@@ -93,10 +93,6 @@ public class CController : Player
     /// </summary>
     void Walk()
     {
-        // return if the movement is locked
-        if (Blackboard.lockMovement)
-            return;
-
         // obtain player's input
         var vertical = Input.GetAxisRaw("Vertical");
         var horizontal = Input.GetAxisRaw("Horizontal");
@@ -108,7 +104,7 @@ public class CController : Player
         // 2(walk backward)
         // 3(sprint)
         var moveState = 0;
-        if (horizontal != 0f || vertical != 0f)
+        if ((horizontal != 0f || vertical != 0f) && !Blackboard.lockMovement)
         {
             // if the character is moving, calculate move position based on the given input
             var verticalMove = transform.right * horizontal;

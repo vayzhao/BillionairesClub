@@ -9,6 +9,7 @@ TagManager:
   - CharacterSelection
   - Seat
   - Instruction
+  - Cashier
   layers:
   - Default
   - TransparentFX

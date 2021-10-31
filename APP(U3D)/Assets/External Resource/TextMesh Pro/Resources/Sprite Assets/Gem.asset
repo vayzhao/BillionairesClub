@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &-6858120638934530547
+--- !u!21 &-4051384449714113620
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 50a0bb47f6c138747ba17a8a6bc44abe, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9bacee10197aa8b448cff1845a7ca2af, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
-  m_Name: spaceKey
+  m_Name: Gem
   m_EditorClassIdentifier: 
-  hashCode: -1841263629
-  material: {fileID: -6858120638934530547}
+  hashCode: 78319
+  material: {fileID: -4051384449714113620}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -73,29 +73,29 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
-  spriteSheet: {fileID: 2800000, guid: 50a0bb47f6c138747ba17a8a6bc44abe, type: 3}
+  spriteSheet: {fileID: 2800000, guid: 9bacee10197aa8b448cff1845a7ca2af, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
     m_Scale: 1
-    m_Name: spaceKey
-    m_HashCode: -1841263629
+    m_Name: Gem
+    m_HashCode: 78319
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
-      m_Width: 2048
-      m_Height: 1024
-      m_HorizontalBearingX: -300
-      m_HorizontalBearingY: 750
-      m_HorizontalAdvance: 1750
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -64
+      m_HorizontalBearingY: 100
+      m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 0
       m_Y: 0
-      m_Width: 2048
-      m_Height: 1024
-    m_Scale: 1.2
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1
     m_AtlasIndex: 0
-    sprite: {fileID: 21300000, guid: 50a0bb47f6c138747ba17a8a6bc44abe, type: 3}
+    sprite: {fileID: 21300000, guid: 9bacee10197aa8b448cff1845a7ca2af, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

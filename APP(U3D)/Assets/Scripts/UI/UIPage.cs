@@ -27,8 +27,8 @@ public class UIPage
     public UIPage(GameObject holder, UIPage prevPage)
     {
         this.holder = holder;
-        this.prevPage = prevPage;
         this.tag = holder.tag;
+        this.prevPage = prevPage;
     }
 
     /// <summary>
@@ -44,14 +44,28 @@ public class UIPage
         }
         else if (tag == "CharacterSelection")
         {
-            MonoBehaviour.FindObjectOfType<CharacterSelection>().SetActive(flag);
+            holder.GetComponent<CharacterSelection>().SetActive(flag);
         }
         else if (tag == "Instruction")
         {
             if (flag)
-                MonoBehaviour.FindObjectOfType<Instruction>().Reset();
-
+                holder.GetComponentInParent<Instruction>().Reset();
             holder.SetActive(flag);    
+        }
+        else if (tag == "Cashier")
+        {
+            var script = holder.GetComponentInParent<ExchangeChip>();
+
+            if (script.isHolding && !flag)
+            {
+                script.isHolding = false;
+                return;
+            }
+            
+            if (!flag)
+                script.Close();
+
+            holder.SetActive(flag);
         }
         else
         {

@@ -35,4 +35,19 @@ public class Player : MonoBehaviour
             playerBoard.UpdateValue();
     }
 
+    /// <summary>
+    /// Method to exchange poker chip with gem
+    /// </summary>
+    /// <param name="gem">the exchange amount of gem</param>
+    /// <param name="chip">the exchange amount of gem</param>
+    public void ExchangePokerChip(int gem, int chip)
+    {
+        // modify chip
+        this.gem -= gem;
+        this.chip += chip;
+
+        // update playerboard information
+        playerBoard.UpdateValue();
+    }
+
 }

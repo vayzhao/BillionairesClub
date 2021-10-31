@@ -9,8 +9,14 @@ public class PortalTagManager : MonoBehaviour
     [Tooltip("A script that handles poker chip exchange methods")]
     public ExchangeChip exchangeChip;
 
+    private bool isRunning;   // determine whether or not this script is running
     private int triggerIndex; // an index to indicate which portal the player is near to
     private Transform player; // a variable to record the player
+
+    private void Update()
+    {
+        CheckSpaceBarInput();
+    }
 
     /// <summary>
     /// Method to setup the manager, by creating all the portal objects in the scene
@@ -42,6 +48,7 @@ public class PortalTagManager : MonoBehaviour
             portalTags[triggerIndex].tag.SetActive(false);
 
         // stop range-check coroutine
+        isRunning = false;
         StopCoroutine(CheckPlayerPosition());
     }
 
@@ -59,10 +66,13 @@ public class PortalTagManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator CheckPlayerPosition()
     {
+        // initialize runner bool
+        isRunning = true;
+
         // initialize trigger index
         triggerIndex = -1;
 
-        while (true)
+        while (isRunning)
         {
             // wait for a frame before execution
             yield return new WaitForSeconds(Time.deltaTime);
@@ -70,12 +80,9 @@ public class PortalTagManager : MonoBehaviour
             // get player's position in this frame
             var pos = player.position;
 
-            // if the player is near to a portal, check player's input
+            // if the player is near to a portal, do nothing
             if (triggerIndex >= 0 && portalTags[triggerIndex].IsPlayerInRange(pos))
-            {
-                CheckSpaceBarInput();
                 continue;
-            }
 
             // otherwise, hide the portal tooltip and reset trigger index
             if (triggerIndex != -1)
@@ -100,8 +107,12 @@ public class PortalTagManager : MonoBehaviour
     /// </summary>
     void CheckSpaceBarInput()
     {
-        // return if the player did not press space bar
-        if (!Input.GetKeyDown(KeyCode.Space))
+        // return if the script is not running
+        if (!isRunning)
+            return;
+
+        // return if the player is not near to any portal
+        if (triggerIndex == -1)
             return;
 
         // return if the trigger index is greater than 1
@@ -111,13 +122,18 @@ public class PortalTagManager : MonoBehaviour
         if (triggerIndex > 1)
             return;
 
+        // return if the player is not pressing Space Bar
+        if (!Input.GetKeyDown(KeyCode.Space))
+            return;
+
+        // check which portal the player is using
         switch (triggerIndex)
         {
             case 0:
                 BackToHomepage();
                 break;
             case 1:
-                ExchangePokerChip();
+                exchangeChip.PopUp();
                 break;
             default:
                 break;
@@ -130,18 +146,5 @@ public class PortalTagManager : MonoBehaviour
     void BackToHomepage()
     {
         Debug.Log("Take me home");
-    }
-
-    /// <summary>
-    /// A method to pop up poker chip exchange window
-    /// </summary>
-    void ExchangePokerChip()
-    {
-        // first of all, stop range-check coroutine
-        Stop();
-
-        // pop up the exchange window
-        exchangeChip.PopUp();
-
     }
 }
