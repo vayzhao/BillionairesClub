@@ -10,6 +10,8 @@ public class PlayerBoard : MonoBehaviour
     [Header("UI Components")]
     [Tooltip("A image component that shows the player's protrait")]
     public Image portrait;
+    [Tooltip("A text component that shows player's name")]
+    public TextMeshProUGUI nameText;
     [Tooltip("A text component that shows player's remaining chip")]
     public TextMeshProUGUI chipText;
     [Tooltip("A text component that shows player's remaining gem")]
@@ -31,6 +33,9 @@ public class PlayerBoard : MonoBehaviour
 
         // update portrait sprite 
         portrait.sprite = Blackboard.GetPortraitPrefab(player.modelIndex);
+
+        // update player's name
+        nameText.text = player.name;
 
         // update text's value
         UpdateValue();

@@ -31,10 +31,13 @@ public class UIManager : MonoBehaviour
     public GameObject labelController;
 
     [HideInInspector]
+    public bool lockPage;                 // determine whether or not the user can go back to previous page
+    [HideInInspector]
     public List<GameObject> interactable; // a list to store all interactable UI objects from the scene
                                           // interactable objects will be hidden when the game is paused
     private UIPage initPage;              // the background window
     private UIPage currentPage;           // the current displayed window
+   
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,7 @@ public class UIManager : MonoBehaviour
         {
             case SceneType.Homepage:
                 initPage = new UIPage(initButtons);
+                Blackboard.LockCursor(false);
                 break;
             case SceneType.InCasino:
                 initPage = new UIPage(initButtons);
@@ -99,13 +103,20 @@ public class UIManager : MonoBehaviour
     /// </summary>
     void OnESC()
     {
+        // return if the page is lock
+        if (lockPage)
+            return;
+
+        // return if there's no previous page of the current page
+        if (currentPage.prevPage == null)
+            return;
+
         // return if ESC key is not pressed
         if (!Input.GetKeyDown(KeyCode.Escape))
             return;
 
-        // close current page if it has a previous page
-        if (currentPage.prevPage != null)
-            ClosePage();
+        // close the current page
+        ClosePage();
     }
 
     /// <summary>

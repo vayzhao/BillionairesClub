@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public bool isNPC;
 
     [Header("Property")]
+    [Tooltip("Name of this player")]
+    public new string name;
     [Tooltip("The amount of money this player has")]
     public int chip;
     [Tooltip("The amount of chip this player has")]

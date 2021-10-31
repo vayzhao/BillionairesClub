@@ -67,6 +67,14 @@ public class UIPage
 
             holder.SetActive(flag);
         }
+        else if (tag == "ExitConfirmation")
+        {
+            if (!flag)
+                MonoBehaviour.FindObjectOfType<PortalTagManager>().Resume();
+
+            Blackboard.FocusOnWindow(flag);
+            holder.SetActive(flag);
+        }
         else
         {
             holder.SetActive(flag);

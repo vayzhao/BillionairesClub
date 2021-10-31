@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PortalTagManager : MonoBehaviour
 {
+    [Tooltip("A script that handles all UI operation")]
+    public UIManager uiManager;
     [Tooltip("All portal in this scene")]
     public PortalTag[] portalTags;
     [Tooltip("A script that handles poker chip exchange methods")]
-    public ExchangeChip exchangeChip;
+    public ExchangeChip exchangeChip;    
+    [Tooltip("A game object to display confirmation window when exiting the casino")]
+    public GameObject exitConfirmation;
 
     private bool isRunning;   // determine whether or not this script is running
     private int triggerIndex; // an index to indicate which portal the player is near to
@@ -145,6 +150,23 @@ public class PortalTagManager : MonoBehaviour
     /// </summary>
     void BackToHomepage()
     {
-        Debug.Log("Take me home");
+        // stop portals range-check coroutine
+        Stop();
+
+        // pop up confirmation window
+        uiManager.CreatePage(exitConfirmation);
+    }
+    
+    /// <summary>
+    /// A method to confirm leaving the casino, taking the 
+    /// user back to home page
+    /// </summary>
+    public void ConfirmExit()
+    {
+        // close current page
+        uiManager.ClosePage();
+
+        // load back to home page scene
+        SceneManager.LoadScene(Const.SCENE_HOMEPAGE);
     }
 }

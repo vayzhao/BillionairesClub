@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 4683724205653464970}
   - component: {fileID: 8967282461424607316}
   m_Layer: 5
-  m_Name: PlayerInfo
+  m_Name: Playerboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1117,5 +1117,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portrait: {fileID: 4683724205480117297}
+  nameText: {fileID: 4683724204636434902}
   chipText: {fileID: 4683724205271052523}
   gemText: {fileID: 4683724204209710415}

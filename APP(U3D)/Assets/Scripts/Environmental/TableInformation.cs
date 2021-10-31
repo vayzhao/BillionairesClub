@@ -55,6 +55,7 @@ public class TableInformation : MonoBehaviour
             if (player != null)
             {
                 // if this seat has player on it, save player's info
+                Storage.SaveString(i, StorageType.Name, player.name);
                 Storage.SaveInt(i, StorageType.Chip, player.chip);
                 Storage.SaveInt(i, StorageType.Gem, player.gem);
                 Storage.SaveInt(i, StorageType.ModelIndex, player.modelIndex);
@@ -97,6 +98,7 @@ public class TableInformation : MonoBehaviour
             {
                 players[i] = CreateCharacter(seats[i], Storage.LoadInt(i, StorageType.ModelIndex));
                 players[i].isNPC = playerState == 2 ? true : false;
+                players[i].name = Storage.LoadString(i, StorageType.Name);
                 players[i].gem = Storage.LoadInt(i, StorageType.Gem);
                 players[i].chip = Storage.LoadInt(i, StorageType.Chip);
 

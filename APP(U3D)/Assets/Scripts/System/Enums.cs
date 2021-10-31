@@ -82,5 +82,6 @@ public enum StorageType
     PlayerState,
     Position,
     Rotation,
-    HasRecord
+    HasRecord,
+    Name
 }

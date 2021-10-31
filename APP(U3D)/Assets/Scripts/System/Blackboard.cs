@@ -17,6 +17,7 @@ public static class Blackboard
 
     #region Player
     public static Player localPlayer;
+    public static string localPlayerName;
     #endregion
 
     #region Spawn Holder

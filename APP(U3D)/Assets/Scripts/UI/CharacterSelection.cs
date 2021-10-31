@@ -133,6 +133,9 @@ public class CharacterSelection : MonoBehaviour
         foreach (var obj in buttons)
             obj.SetActive(false);
 
+        // lock the player from closing UI page
+        FindObjectOfType<UIManager>().lockPage = true;
+
         // play push-up animation
         model.gameObject.GetComponent<Animator>().SetTrigger("Selected");
 
