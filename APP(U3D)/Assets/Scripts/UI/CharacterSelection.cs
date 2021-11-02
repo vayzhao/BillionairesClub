@@ -7,8 +7,6 @@ using System.Collections.Generic;
 public class CharacterSelection : MonoBehaviour
 {
     [Header("Widgets")]
-    [Tooltip("A gameobject that holds everything about character selection.(include 2D & 3D")]
-    public GameObject content;
     [Tooltip("A transform that holds the displayed model")]
     public Transform modelHolder;
     [Tooltip("A tag that shows the name of the model")]
@@ -25,6 +23,19 @@ public class CharacterSelection : MonoBehaviour
 
     // Update is called once per frame
     private void Update() { RotateModel(); }
+
+    /// <summary>
+    /// Method to enable or disable this script by button event
+    /// </summary>
+    /// <param name="flag"></param>
+    public void Enable(bool flag)
+    {
+        SetActive(flag);        
+        if (flag)
+            FindObjectOfType<UIManager>().CreatePage(this.gameObject);
+        else
+            FindObjectOfType<UIManager>().ClosePage();
+    }
 
     /// <summary>
     /// Method to display / hide character selection interface
@@ -53,7 +64,7 @@ public class CharacterSelection : MonoBehaviour
         }
 
         // display / hide the content object
-        content.SetActive(value);
+        gameObject.SetActive(value);
     }
 
     /// <summary>
@@ -77,8 +88,8 @@ public class CharacterSelection : MonoBehaviour
     /// </summary>
     void RotateModel()
     {
-        // return if the character selection window is hidden
-        if (!content.activeSelf || hasSelected)
+        // return if the character has been selected
+        if (hasSelected)
             return;
 
         // lock position and rotate

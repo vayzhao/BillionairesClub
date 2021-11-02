@@ -153,10 +153,7 @@ namespace TexasBonus
             var validity = gameManager.players[playerIndex].chip >= bets[playerIndex].anteWager;
 
             // modify button state 
-            betBtn.enabled = validity;
-            betBtn.GetComponent<Image>().sprite = validity ?
-                betBtn.spriteState.pressedSprite :
-                betBtn.spriteState.disabledSprite;
+            betBtn.Switch(validity);
 
             // finally display the decision panel
             group_betOrCheck.SetActive(true);

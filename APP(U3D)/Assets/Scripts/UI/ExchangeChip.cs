@@ -20,9 +20,6 @@ public class ExchangeChip: MonoBehaviour
     public GameObject congratPanel;
     public TextMeshProUGUI confirmText;
 
-    [HideInInspector]
-    public bool isHolding;
-
     private int purchaseItemIndex;
     private int[] chipAmount = new int[5] { 1000, 2500, 5000, 10000, 20000 };
     private int[] gemRequire = new int[5] { 50, 110, 200, 350, 600 };
@@ -47,6 +44,13 @@ public class ExchangeChip: MonoBehaviour
     /// </summary>
     public void Close()
     {
+        // return if the second panel is displayed 
+        if (secondPanel.activeSelf)
+            return;
+
+        // close the page
+        uiManager.ClosePage();
+
         // resume portals range-check coroutine
         portals.Resume();
 
@@ -62,12 +66,8 @@ public class ExchangeChip: MonoBehaviour
     /// <param name="itemIndex"></param>
     public void AttemptToPurchase(int itemIndex)
     {
-        // switch isHolding to be true to prevent UI manager from closing 
-        // the cashier panel when poping up a secondary panel
-        isHolding = true;
-
         // pop up the secondary panel
-        uiManager.CreatePage(secondPanel);
+        uiManager.CreatePageAdditive(secondPanel);
 
         // initially hide all second panels 
         warningPanel.SetActive(false);

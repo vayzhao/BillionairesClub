@@ -2474,7 +2474,7 @@ GameObject:
   - component: {fileID: 4318432767323533763}
   m_Layer: 5
   m_Name: Content
-  m_TagString: Instruction
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6733,7 +6733,7 @@ GameObject:
   - component: {fileID: 7258040201270051520}
   m_Layer: 5
   m_Name: Btn_close
-  m_TagString: Untagged
+  m_TagString: CancelButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6991,6 +6991,7 @@ MonoBehaviour:
   readyBtn: {fileID: 5788309069369203750}
   playerAction: {fileID: 2966840287927968709}
   labelController: {fileID: 9125431650797348320}
+  lockPage: 0
   interactable: []
 --- !u!1 &7003335157169361026
 GameObject:
@@ -8171,7 +8172,7 @@ GameObject:
   - component: {fileID: 8061360640139979035}
   m_Layer: 5
   m_Name: Btn_close
-  m_TagString: Untagged
+  m_TagString: CancelButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12001,7 +12002,7 @@ GameObject:
   - component: {fileID: 8061360641620460837}
   m_Layer: 5
   m_Name: Btn_close
-  m_TagString: Untagged
+  m_TagString: CancelButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12454,6 +12455,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 2661537610121491982}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7639915827607102023}
+        m_TargetAssemblyTypeName: Instruction, Assembly-CSharp
+        m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

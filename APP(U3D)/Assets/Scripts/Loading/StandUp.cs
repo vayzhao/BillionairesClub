@@ -61,5 +61,6 @@ public class StandUp : MonoBehaviour
     {
         Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.Chip, Blackboard.localPlayer.chip);
         Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.Gem, Blackboard.localPlayer.gem);
+        Storage.SaveString(Const.LOCAL_PLAYER, StorageType.Description, Blackboard.localPlayer.description);
     }
 }

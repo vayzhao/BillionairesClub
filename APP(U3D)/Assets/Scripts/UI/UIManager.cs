@@ -87,6 +87,16 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Method to pop up a new window without closing the old one
+    /// </summary>
+    /// <param name="holder">the popped up window</param>
+    public void CreatePageAdditive(GameObject holder)
+    {
+        currentPage = new UIPage(holder, currentPage);
+        currentPage.Display(true);
+    }
+
+    /// <summary>
     /// Method to close the current window by clicking 
     /// on the terminate button in the interface
     /// </summary>
@@ -115,8 +125,10 @@ public class UIManager : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Escape))
             return;
 
-        // close the current page
-        ClosePage();
+        // find all buttons that have "Cancel Button" tag with it and 
+        // invoke its on click method
+        foreach (var btn in GameObject.FindGameObjectsWithTag("CancelButton"))
+            btn.GetComponent<Button>().onClick.Invoke();        
     }
 
     /// <summary>

@@ -83,5 +83,6 @@ public enum StorageType
     Position,
     Rotation,
     HasRecord,
-    Name
+    Name,
+    Description
 }

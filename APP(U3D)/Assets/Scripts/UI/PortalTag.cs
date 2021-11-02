@@ -48,8 +48,5 @@ public class PortalTag
     /// </summary>
     /// <param name="playerPos">the player's position</param>
     /// <returns></returns>
-    public bool IsPlayerInRange(Vector3 playerPos)
-    {
-        return Vector3.Distance(playerPos, obj_portalEffect.transform.position) <= triggerDistance;
-    }
+    public bool IsPlayerInRange(Vector3 playerPos) => Vector3.Distance(playerPos, obj_portalEffect.transform.position) <= triggerDistance;
 }

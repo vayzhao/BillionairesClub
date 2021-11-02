@@ -207,10 +207,13 @@ public class CController : Player
             // check to see if this seat has binded to any table
             var table = seat.GetTable();
 
-            // return if the table does not exsit
+            // return if the table does not exsit, also unlock cursor so that the user can edit his playerboard
             if (table == null)
+            {
+                Blackboard.LockCursor(false);
                 return;
-
+            }
+            
             // return if the table has no game type
             if (table.gameType == GameType.None)
                 return;
@@ -228,6 +231,10 @@ public class CController : Player
     /// </summary>
     void StandUp()
     {
+        // return if the space bar is locked
+        if (Blackboard.lockSpaceBar)
+            return;
+
         // return if space key is not pressed
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
@@ -247,6 +254,9 @@ public class CController : Player
 
         // finally stand up
         seat.StandUp(animator);
+
+        // lock cursor
+        Blackboard.LockCursor(true);
     }
 
     /// <summary>

@@ -39,9 +39,6 @@ public class TableInformation : MonoBehaviour
     /// </summary>
     public void SaveSeatsInfo()
     {
-        // get the prefix string for data address
-        var prefix = GetAddressPrefix();
-
         // get the dealer information
         var dealerModelndex = dealerSeat.GetPlayer().modelIndex;
         Storage.SaveInt(Const.DEALER_PLAYER, StorageType.ModelIndex, dealerModelndex);
@@ -56,6 +53,7 @@ public class TableInformation : MonoBehaviour
             {
                 // if this seat has player on it, save player's info
                 Storage.SaveString(i, StorageType.Name, player.name);
+                Storage.SaveString(i, StorageType.Description, player.description);
                 Storage.SaveInt(i, StorageType.Chip, player.chip);
                 Storage.SaveInt(i, StorageType.Gem, player.gem);
                 Storage.SaveInt(i, StorageType.ModelIndex, player.modelIndex);
@@ -75,9 +73,6 @@ public class TableInformation : MonoBehaviour
     /// </summary>
     public void LoadSeatsInfo()
     {
-        // get the address prefix
-        var prefix = GetAddressPrefix();
-
         // get the dealer information
         var dealerModelIndex = Storage.LoadInt(Const.DEALER_PLAYER, StorageType.ModelIndex);
         CreateCharacter(dealerSeat, dealerModelIndex);
@@ -99,6 +94,7 @@ public class TableInformation : MonoBehaviour
                 players[i] = CreateCharacter(seats[i], Storage.LoadInt(i, StorageType.ModelIndex));
                 players[i].isNPC = playerState == 2 ? true : false;
                 players[i].name = Storage.LoadString(i, StorageType.Name);
+                players[i].description = Storage.LoadString(i, StorageType.Description);
                 players[i].gem = Storage.LoadInt(i, StorageType.Gem);
                 players[i].chip = Storage.LoadInt(i, StorageType.Chip);
 
@@ -129,10 +125,4 @@ public class TableInformation : MonoBehaviour
 
         return script;
     }
-
-    /// <summary>
-    /// Get prefix string for this game type
-    /// </summary>
-    /// <returns></returns>
-    public string GetAddressPrefix() { return gameType.ToString(); }
 }

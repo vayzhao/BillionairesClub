@@ -135,7 +135,7 @@ public class PortalTagManager : MonoBehaviour
         switch (triggerIndex)
         {
             case 0:
-                BackToHomepage();
+                PopUpExitPanel(true);
                 break;
             case 1:
                 exchangeChip.PopUp();
@@ -146,15 +146,27 @@ public class PortalTagManager : MonoBehaviour
     }
 
     /// <summary>
-    /// A method to pop up 'back to homepage' window
+    /// A method to display / hide the exit window
     /// </summary>
-    void BackToHomepage()
+    /// <param name="flag"></param>
+    public void PopUpExitPanel(bool flag)
     {
-        // stop portals range-check coroutine
-        Stop();
-
-        // pop up confirmation window
-        uiManager.CreatePage(exitConfirmation);
+        // force or release the user from window focus mode
+        Blackboard.FocusOnWindow(flag);
+        
+        // if the flag is true, stop the range-check coroutine
+        // and pop up a exit confirmation window for the user
+        if (flag)
+        {
+            Stop();
+            uiManager.CreatePage(exitConfirmation);
+        }
+        // otherwise, resume the range-check coroutine and close the page
+        else
+        {
+            Resume();
+            uiManager.ClosePage();
+        }
     }
     
     /// <summary>
@@ -166,7 +178,12 @@ public class PortalTagManager : MonoBehaviour
         // close current page
         uiManager.ClosePage();
 
+        // release the player from movement,rotation lock
+        Blackboard.lockMovement = false;
+        Blackboard.lockRotation = false;        
+
         // load back to home page scene
+        Blackboard.SCENE_PREVIOUS = Const.SCENE_HOMEPAGE;
         SceneManager.LoadScene(Const.SCENE_HOMEPAGE);
     }
 }

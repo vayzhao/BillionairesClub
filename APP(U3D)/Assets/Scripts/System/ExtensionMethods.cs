@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class ExtensionMethods
 {
@@ -95,6 +96,19 @@ public static class ExtensionMethods
             default:
                 return $"High-hand";
         }
+    }
+    #endregion
+
+    #region UnityEngine.UI
+    public static void Switch(this Button btn, bool flag)
+    {
+        // enable / disable the button
+        btn.enabled = flag;
+
+        // switch button's image sprite
+        btn.image.sprite = flag ?
+            btn.spriteState.pressedSprite :
+            btn.spriteState.disabledSprite;
     }
     #endregion
 

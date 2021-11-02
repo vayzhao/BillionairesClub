@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     [Header("Property")]
     [Tooltip("Name of this player")]
     public new string name;
+    [Tooltip("Description of this player")]
+    public string description;
     [Tooltip("The amount of money this player has")]
     public int chip;
     [Tooltip("The amount of chip this player has")]

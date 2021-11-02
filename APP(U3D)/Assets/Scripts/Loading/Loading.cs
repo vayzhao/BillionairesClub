@@ -102,7 +102,7 @@ public class Loading : MonoBehaviour
             // create a player for play testing
             Blackboard.localPlayer = new Player();
             Blackboard.localPlayer.modelIndex = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.ModelIndex);
-            Blackboard.localPlayer.name = Blackboard.localPlayerName;
+            Blackboard.localPlayer.name = "The Tester";
             Blackboard.localPlayer.chip = Const.DEFAULT_CHIP;
             Blackboard.localPlayer.gem = Const.DEFAULT_GEM;
         }
@@ -504,7 +504,8 @@ public class Loading : MonoBehaviour
         // set character to be active and bind it to the blackboard
         obj_character.SetActive(true);
         Blackboard.localPlayer = obj_character.GetComponent<Player>();
-        Blackboard.localPlayer.name = Blackboard.localPlayerName;
+        Blackboard.localPlayer.name = Storage.LoadString(Const.LOCAL_PLAYER, StorageType.Name);
+        Blackboard.localPlayer.description = Storage.LoadString(Const.LOCAL_PLAYER, StorageType.Description);
 
         // spawn portal effects
         FindObjectOfType<PortalTagManager>().Setup(obj_character.transform);

@@ -42,39 +42,6 @@ public class UIPage
             SetButtonsState(flag);
             SetGameState(flag);
         }
-        else if (tag == "CharacterSelection")
-        {
-            holder.GetComponent<CharacterSelection>().SetActive(flag);
-        }
-        else if (tag == "Instruction")
-        {
-            if (flag)
-                holder.GetComponentInParent<Instruction>().Reset();
-            holder.SetActive(flag);    
-        }
-        else if (tag == "Cashier")
-        {
-            var script = holder.GetComponentInParent<ExchangeChip>();
-
-            if (script.isHolding && !flag)
-            {
-                script.isHolding = false;
-                return;
-            }
-            
-            if (!flag)
-                script.Close();
-
-            holder.SetActive(flag);
-        }
-        else if (tag == "ExitConfirmation")
-        {
-            if (!flag)
-                MonoBehaviour.FindObjectOfType<PortalTagManager>().Resume();
-
-            Blackboard.FocusOnWindow(flag);
-            holder.SetActive(flag);
-        }
         else
         {
             holder.SetActive(flag);
@@ -88,12 +55,7 @@ public class UIPage
     void SetButtonsState(bool flag)
     {
         foreach (var btn in holder.GetComponentsInChildren<Button>())
-        {
-            btn.enabled = flag;
-            btn.image.sprite = flag ?
-                btn.spriteState.pressedSprite :
-                btn.spriteState.disabledSprite;
-        }
+            btn.Switch(flag);
     }
     
     /// <summary>

@@ -6,11 +6,8 @@ TagManager:
   tags:
   - Buttons
   - Option
-  - CharacterSelection
   - Seat
-  - Instruction
-  - Cashier
-  - ExitConfirmation
+  - CancelButton
   layers:
   - Default
   - TransparentFX

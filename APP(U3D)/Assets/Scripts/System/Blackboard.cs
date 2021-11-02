@@ -14,10 +14,10 @@ public static class Blackboard
     public static bool debugChecked = false;
     public static bool lockMovement = false;
     public static bool lockRotation = false;
+    public static bool lockSpaceBar = false;
 
     #region Player
     public static Player localPlayer;
-    public static string localPlayerName;
     #endregion
 
     #region Spawn Holder

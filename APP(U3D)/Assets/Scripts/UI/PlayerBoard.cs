@@ -12,10 +12,14 @@ public class PlayerBoard : MonoBehaviour
     public Image portrait;
     [Tooltip("A text component that shows player's name")]
     public TextMeshProUGUI nameText;
+    [Tooltip("A text component that shows player's current description")]
+    public TextMeshProUGUI descriptionText;
     [Tooltip("A text component that shows player's remaining chip")]
     public TextMeshProUGUI chipText;
     [Tooltip("A text component that shows player's remaining gem")]
     public TextMeshProUGUI gemText;
+    [Tooltip("A component that allows the user to edit playerboard description")]
+    public TMP_InputField inputField;
 
     private Player player; // the player that this player board refers to 
 
@@ -34,8 +38,9 @@ public class PlayerBoard : MonoBehaviour
         // update portrait sprite 
         portrait.sprite = Blackboard.GetPortraitPrefab(player.modelIndex);
 
-        // update player's name
+        // update player's name & description
         nameText.text = player.name;
+        inputField.text = player.description;
 
         // update text's value
         UpdateValue();
@@ -48,5 +53,31 @@ public class PlayerBoard : MonoBehaviour
     {
         chipText.text = player.chip.ToString("C0");
         gemText.text = player.gem.ToString();
+    }
+
+    /// <summary>
+    /// Method to lock the space bar when the user is trying to
+    /// modify the player board description. We do that to prevent the 
+    /// character from standing up when the user is trying to type white space
+    /// </summary>
+    public void StartEditing() => Blackboard.lockSpaceBar = true;
+
+    /// <summary>
+    /// Method to unlock the space bar when the user finished modifying
+    /// player board description
+    /// </summary>
+    public void EndEditing(string message)
+    {
+        // unlock space bar
+        Blackboard.lockSpaceBar = false;
+
+        // immediatly disable and re-enable the input field so the 
+        // player will not re-select the input field unintentionally 
+        // when pressing the space bar again
+        inputField.interactable = false;
+        inputField.interactable = true;
+
+        // update this description text to the player
+        player.description = message;
     }
 }

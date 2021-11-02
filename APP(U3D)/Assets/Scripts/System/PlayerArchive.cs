@@ -21,20 +21,14 @@ public class PlayerArchive : MonoBehaviour
 
         // if the character length is 0, disable the 'next' button
         if (newName.Length == 0 && nextBtn.enabled)
-        {
-            nextBtn.enabled = false;
-            nextBtn.GetComponent<Image>().sprite = nextBtn.spriteState.disabledSprite;
-        }
+            nextBtn.Switch(false);
         // enable the 'next' button as long as the user has entered anything
         else if (newName.Length > 0 && !nextBtn.enabled)
-        {
-            nextBtn.enabled = true;
-            nextBtn.GetComponent<Image>().sprite = nextBtn.spriteState.pressedSprite;
-        }
+            nextBtn.Switch(true);
     }
-    
+
     /// <summary>
     /// Method to set the last edited name as the local player name
     /// </summary>
-    public void UpdateLocalPlayerName() => Blackboard.localPlayerName = newName;
+    public void UpdateLocalPlayerName() => Storage.SaveString(Const.LOCAL_PLAYER, StorageType.Name, newName);
 }
