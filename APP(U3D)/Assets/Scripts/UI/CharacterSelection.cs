@@ -135,7 +135,7 @@ public class CharacterSelection : MonoBehaviour
     /// Method for the user to final select the character
     /// Disable all other irrelevant buttons and lock rotation
     /// </summary>
-    public void Ready()
+    public void Ready(bool usingDefaultData)
     {
         // switch hasSelected boolean to be true
         hasSelected = true;
@@ -150,14 +150,45 @@ public class CharacterSelection : MonoBehaviour
         // play push-up animation
         model.gameObject.GetComponent<Animator>().SetTrigger("Selected");
 
-        // save model prefab in player prefabs       
+        // declare that this is the first time the character enters the casino
+        Storage.SaveBool(Const.LOCAL_PLAYER, StorageType.HasRecord, false);
         Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.ModelIndex, prefabIndex);
 
-        // reset player's record
-        Storage.SaveBool(Const.LOCAL_PLAYER, StorageType.HasRecord, false);
+        // determine whether or not to use default data
+        // usually, use default data when this method is called by 
+        // the UI event system (click 'Ready' from the homepage')
+        if (usingDefaultData)
+        {
+            Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.Chip, Const.DEFAULT_CHIP);
+            Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.Gem, Const.DEFAULT_GEM);
+            Storage.SaveString(Const.LOCAL_PLAYER, StorageType.Description, "");
+        }
 
         // lock rotation angle 
         StartCoroutine(LockRotation());
+    }
+
+    /// <summary>
+    /// Method for the user to load a saved game
+    /// </summary>
+    public void ReadyFromLoad(Archive.Data data)
+    {
+        // enable this script
+        Enable(true);
+        
+        // modify model index & style index and swap the displayed model
+        modelIndex = data.modelIndex / 3;
+        styleIndex = data.modelIndex % 3;
+        SwapModel();
+
+        // call ready method
+        Ready(false);
+
+        // store all archive data into the prefabs
+        Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.Chip, data.chip);
+        Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.Gem, data.gem);
+        Storage.SaveString(Const.LOCAL_PLAYER, StorageType.Name, data.name);
+        Storage.SaveString(Const.LOCAL_PLAYER, StorageType.Description, data.description);
     }
 
     /// <summary>

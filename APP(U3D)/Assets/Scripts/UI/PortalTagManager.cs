@@ -176,7 +176,7 @@ public class PortalTagManager : MonoBehaviour
     public void ConfirmExit()
     {
         // close current page
-        uiManager.ClosePage();
+        // uiManager.ClosePage();
 
         // release the player from movement,rotation lock
         Blackboard.lockMovement = false;

@@ -432,14 +432,14 @@ MonoBehaviour:
       - m_Target: {fileID: 77460861}
         m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
         m_MethodName: Ready
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &63768169
 MonoBehaviour:
@@ -729,8 +729,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1916278325}
-        m_TargetAssemblyTypeName: PlayerArchive, Assembly-CSharp
+      - m_Target: {fileID: 855490447}
+        m_TargetAssemblyTypeName: Entering, Assembly-CSharp
         m_MethodName: InputChange
         m_Mode: 0
         m_Arguments:
@@ -810,8 +810,8 @@ GameObject:
   - component: {fileID: 121296057}
   - component: {fileID: 121296056}
   m_Layer: 5
-  m_Name: Button (1)
-  m_TagString: Untagged
+  m_Name: CloseBtn
+  m_TagString: CancelButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -883,6 +883,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1916278323}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: ClosePage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 855490447}
+        m_TargetAssemblyTypeName: Entering, Assembly-CSharp
+        m_MethodName: ResetInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1054,8 +1066,8 @@ GameObject:
   - component: {fileID: 152552495}
   - component: {fileID: 152552494}
   m_Layer: 5
-  m_Name: Button
-  m_TagString: Untagged
+  m_Name: CloseBtn
+  m_TagString: CancelButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3256,6 +3268,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &637592271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1683928271180490857, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+  m_PrefabInstance: {fileID: 1683928271480963662}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &640118190
 GameObject:
   m_ObjectHideFlags: 0
@@ -3416,10 +3433,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 77460861}
-        m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
-        m_MethodName: Enable
-        m_Mode: 6
+      - m_Target: {fileID: 855490447}
+        m_TargetAssemblyTypeName: Entering, Assembly-CSharp
+        m_MethodName: AttempToPlay
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4662,8 +4679,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 855490446}
+  - component: {fileID: 855490447}
   m_Layer: 5
-  m_Name: Group_PlayerArchive
+  m_Name: Group_BeforeStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4680,8 +4698,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1838764784}
   - {fileID: 1597587571}
+  - {fileID: 1838764784}
   - {fileID: 1885380218}
   m_Father: {fileID: 254474657}
   m_RootOrder: 5
@@ -4691,6 +4709,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &855490447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855490445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5d5953e746ea848bbc435371a89831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  register: {fileID: 1838764783}
+  nextBtn: {fileID: 2051731440}
+  inputField: {fileID: 119327279}
+  uiManager: {fileID: 1916278323}
+  startOrLoad: {fileID: 1597587570}
+  archiveManager: {fileID: 1683928271480963663}
 --- !u!1 &855597456
 GameObject:
   m_ObjectHideFlags: 0
@@ -7983,7 +8019,7 @@ RectTransform:
   - {fileID: 1822161726}
   - {fileID: 152552493}
   m_Father: {fileID: 855490446}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8913,7 +8949,7 @@ GameObject:
   - component: {fileID: 1822161728}
   - component: {fileID: 1822161727}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: LoadSavedBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8982,7 +9018,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1822161728}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1916278323}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CreatePage
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 637592271}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1822161728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9057,7 +9105,7 @@ RectTransform:
   - {fileID: 121296055}
   - {fileID: 2051731439}
   m_Father: {fileID: 855490446}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9625,7 +9673,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1916278324}
   - component: {fileID: 1916278323}
-  - component: {fileID: 1916278325}
   m_Layer: 0
   m_Name: General Manager
   m_TagString: Untagged
@@ -9670,19 +9717,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1916278325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1916278322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b0ee1f5270e1643a9ca59638a94947, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextBtn: {fileID: 2051731440}
 --- !u!1 &1923952503
 GameObject:
   m_ObjectHideFlags: 0
@@ -9830,7 +9864,7 @@ GameObject:
   - component: {fileID: 1925529942}
   - component: {fileID: 1925529941}
   m_Layer: 5
-  m_Name: Button
+  m_Name: StartNewBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9899,7 +9933,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1925529942}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1916278323}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CreatePage
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1838764783}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1925529942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10485,7 +10531,7 @@ GameObject:
   - component: {fileID: 2051731441}
   - component: {fileID: 2051731440}
   m_Layer: 5
-  m_Name: Button
+  m_Name: NextBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10555,20 +10601,32 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1916278323}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: CreatePage
-        m_Mode: 2
+      - m_Target: {fileID: 77460861}
+        m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
-          m_ObjectArgument: {fileID: 77460857}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1838764783}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1916278325}
-        m_TargetAssemblyTypeName: PlayerArchive, Assembly-CSharp
+      - m_Target: {fileID: 855490447}
+        m_TargetAssemblyTypeName: Entering, Assembly-CSharp
         m_MethodName: UpdateLocalPlayerName
         m_Mode: 1
         m_Arguments:
@@ -11021,6 +11079,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 855490446}
     m_Modifications:
+    - target: {fileID: 1683928270485048036, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1916278323}
+    - target: {fileID: 1683928270485048036, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClosePage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683928270485048036, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683928270485048036, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683928270673599539, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+      propertyPath: nextBtn
+      value: 
+      objectReference: {fileID: 2051731440}
+    - target: {fileID: 1683928270673599539, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+      propertyPath: register
+      value: 
+      objectReference: {fileID: 1838764783}
+    - target: {fileID: 1683928270673599539, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1916278323}
+    - target: {fileID: 1683928270673599539, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+      propertyPath: saveOrLoad
+      value: 
+      objectReference: {fileID: 1597587570}
+    - target: {fileID: 1683928270673599539, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+      propertyPath: characterSelection
+      value: 
+      objectReference: {fileID: 77460861}
     - target: {fileID: 1683928270673599540, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11111,10 +11205,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1683928270673599543, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683928271180490857, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+--- !u!114 &1683928271480963663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1683928270673599539, guid: 99e5d1519a0dc1b4d92ccc79ea83d4f0, type: 3}
+  m_PrefabInstance: {fileID: 1683928271480963662}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a0672b5bc96ba40be6d376f6a18ff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2992417910399972914
 MonoBehaviour:
   m_ObjectHideFlags: 0

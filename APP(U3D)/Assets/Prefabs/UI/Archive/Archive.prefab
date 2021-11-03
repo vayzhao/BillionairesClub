@@ -505,10 +505,10 @@ MonoBehaviour:
   empty: {fileID: 1369116935877888798}
   exist: {fileID: 1369116934599228940}
   protraitImg: {fileID: 1369116935713432853}
+  backGroundImg: {fileID: 1369116935753374818}
   nameText: {fileID: 1369116936015975151}
   dateText: {fileID: 1369116934958398416}
   resourceText: {fileID: 1369116936173008714}
-  img: {fileID: 0}
 --- !u!1 &1369116935877888798
 GameObject:
   m_ObjectHideFlags: 0

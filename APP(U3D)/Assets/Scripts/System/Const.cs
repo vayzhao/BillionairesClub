@@ -4,7 +4,6 @@ public static class Const
 {
     public const int LOCAL_PLAYER = -1;
     public const int DEALER_PLAYER = -2;
-
     public const int DEFAULT_CHIP = 1500;
     public const int DEFAULT_GEM = 50;
 

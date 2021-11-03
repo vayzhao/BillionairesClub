@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1683928270270236464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1683928270673599539}
+        m_TargetAssemblyTypeName: Archive.PanelManager, Assembly-CSharp
+        m_MethodName: LoadArchive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1683928270418956704
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,8 +280,8 @@ GameObject:
   - component: {fileID: 1683928270485048037}
   - component: {fileID: 1683928270485048036}
   m_Layer: 5
-  m_Name: Button
-  m_TagString: Untagged
+  m_Name: CloseBtn
+  m_TagString: CancelButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -374,7 +386,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1683928270485048037}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1683928270673599539}
+        m_TargetAssemblyTypeName: Archive.PanelManager, Assembly-CSharp
+        m_MethodName: OnESC
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1683928270633701022
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a0672b5bc96ba40be6d376f6a18ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneType: 0
   normalSprite: {fileID: 21300000, guid: 829160d044425e64a9e4068656029673, type: 3}
   selectedSprite: {fileID: 21300000, guid: 41ccf0521e8904144bae98f7dc618040, type: 3}
   archives:
@@ -482,8 +507,10 @@ MonoBehaviour:
   - {fileID: 3167219148604644731}
   - {fileID: 3007808811035186237}
   deleteButton: {fileID: 1683928270966050754}
-  saveButton: {fileID: 1683928270270236467}
-  loadButton: {fileID: 1683928271443521649}
+  saveButton: {fileID: 1683928271443521649}
+  loadButton: {fileID: 1683928270270236467}
+  uiManager: {fileID: 0}
+  notification: {fileID: 0}
 --- !u!1 &1683928270966050756
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -604,7 +631,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1683928270966050755}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1683928270673599539}
+        m_TargetAssemblyTypeName: Archive.PanelManager, Assembly-CSharp
+        m_MethodName: DeleteArchive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1683928271180490857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1145,7 +1184,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1683928271443521550}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1683928270673599539}
+        m_TargetAssemblyTypeName: Archive.PanelManager, Assembly-CSharp
+        m_MethodName: SaveArchive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1683928271974870685
 GameObject:
   m_ObjectHideFlags: 0

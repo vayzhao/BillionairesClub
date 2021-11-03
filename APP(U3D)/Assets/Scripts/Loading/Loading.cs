@@ -100,11 +100,12 @@ public class Loading : MonoBehaviour
             StartCoroutine(ProgressRunner());
 
             // create a player for play testing
-            Blackboard.localPlayer = new Player();
-            Blackboard.localPlayer.modelIndex = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.ModelIndex);
+            Blackboard.localPlayer = new Player();           
             Blackboard.localPlayer.name = "The Tester";
+            Blackboard.localPlayer.description = "";
             Blackboard.localPlayer.chip = Const.DEFAULT_CHIP;
             Blackboard.localPlayer.gem = Const.DEFAULT_GEM;
+            Blackboard.localPlayer.modelIndex = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.ModelIndex);
         }
     }
     IEnumerator ProgressRunner()
@@ -503,7 +504,9 @@ public class Loading : MonoBehaviour
 
         // set character to be active and bind it to the blackboard
         obj_character.SetActive(true);
-        Blackboard.localPlayer = obj_character.GetComponent<Player>();
+        Blackboard.localPlayer = obj_character.GetComponent<Player>();        
+        Blackboard.localPlayer.chip = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.Chip);
+        Blackboard.localPlayer.gem = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.Gem);
         Blackboard.localPlayer.name = Storage.LoadString(Const.LOCAL_PLAYER, StorageType.Name);
         Blackboard.localPlayer.description = Storage.LoadString(Const.LOCAL_PLAYER, StorageType.Description);
 
@@ -518,20 +521,12 @@ public class Loading : MonoBehaviour
                 Storage.LoadVector3(Const.LOCAL_PLAYER, StorageType.Position);
             obj_character.transform.eulerAngles = 
                 Storage.LoadVector3(Const.LOCAL_PLAYER, StorageType.Rotation);
-
-            // load player's data
-            Blackboard.localPlayer.gem = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.Gem);
-            Blackboard.localPlayer.chip = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.Chip);
         }
         else
         {
             // otherwise, initialize character's position & rotation
             obj_character.transform.position = new Vector3(0.7f, 0f, -13f);
             obj_character.transform.eulerAngles = Vector3.zero;
-
-            // initialize player's default chip and gem
-            Blackboard.localPlayer.gem = Const.DEFAULT_GEM;
-            Blackboard.localPlayer.chip = Const.DEFAULT_CHIP;
         }
     }
 
