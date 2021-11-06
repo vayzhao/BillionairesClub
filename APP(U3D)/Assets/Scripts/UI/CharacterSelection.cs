@@ -13,6 +13,12 @@ public class CharacterSelection : MonoBehaviour
     public TextMeshProUGUI nameTag;
     [Tooltip("A gameobject that holds all the buttons")]
     public GameObject[] buttons;
+    [Tooltip("A game object that holds every 2D element required for character selection")]
+    public GameObject content2D;
+    [Tooltip("A game object that holds every 3D element required for character selection")]
+    public GameObject content3D;
+    [Tooltip("A script that handles UI functionality")]
+    public UIManager uiManager;
 
     private int modelIndex;      // the index of current model
     private int styleIndex;      // the style of current model
@@ -25,25 +31,15 @@ public class CharacterSelection : MonoBehaviour
     private void Update() { RotateModel(); }
 
     /// <summary>
-    /// Method to enable or disable this script by button event
+    /// Method to display / hide character selection interface
     /// </summary>
     /// <param name="flag"></param>
     public void Enable(bool flag)
     {
-        SetActive(flag);        
-        if (flag)
-            FindObjectOfType<UIManager>().CreatePage(this.gameObject);
-        else
-            FindObjectOfType<UIManager>().ClosePage();
-    }
+        // display / hide the model preview
+        content3D.SetActive(flag);
 
-    /// <summary>
-    /// Method to display / hide character selection interface
-    /// </summary>
-    /// <param name="value">true to display, false to hide</param>
-    public void SetActive(bool value)
-    {
-        if (value)
+        if (flag)
         {
             // when showing, reset rotation angle and indexs
             rotationAngle = 180f;
@@ -55,16 +51,19 @@ public class CharacterSelection : MonoBehaviour
             model.transform.eulerAngles = new Vector3(0f, rotationAngle, 0f);
 
             // reset name tag
-            nameTag.text = Blackboard.modelName[0];            
+            nameTag.text = Blackboard.modelName[0];
+
+            // open a new page
+            uiManager.CreatePage(content2D);
         }
         else
         {
             // when hidding, destroy the model
-            Destroy(model.gameObject);            
-        }
+            Destroy(model.gameObject);
 
-        // display / hide the content object
-        gameObject.SetActive(value);
+            // close the page
+            uiManager.ClosePage();
+        }
     }
 
     /// <summary>

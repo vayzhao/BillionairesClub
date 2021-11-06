@@ -48,6 +48,11 @@ namespace TexasBonus
         }
 
         /// <summary>
+        /// Method to obtain the value from this hand strength
+        /// </summary>
+        public Value GetValue() => value;
+
+        /// <summary>
         /// Method to compute the hand-rank for the player
         /// </summary>
         public void Recompute()
@@ -127,41 +132,63 @@ namespace TexasBonus
             // if a flush is found, check to see if there is a straight within the flush
             if (flush.Any())
             {
-                // get the flush cards
+                // get the flush cards and sort them in ascending order
                 suit = flush.Single().Key;
-                var flushCards = cards.Select(x => x).Where(x => x.suit == suit).OrderByDescending(x => x.value).ToArray();
+                var flushCards = cards.Select(x => x).Where(x => x.suit == suit).OrderBy(x => x.value).ToArray();
 
                 // initialize straight count & value
                 var straightCount = 1;
                 var straightValue = flushCards[0].value;
 
-                // run through each element in the flush cards and see if they are straight
-                for (int i = 0; i < flushCards.Length; i++)
+                // run from the first element to the second last element in the flushCards and see if there is any straight
+                for (int i = 0; i < flushCards.Length - 1; i++)
                 {
-                    // check to see if the 'n' element is excatly 1 geater than the next element
-                    if (flushCards[i].value - flushCards[i + 1].value == 1)
+                    // check to see if the 'n' element is excatly 1 less than the next element
+                    if ((flushCards[i + 1].value - flushCards[i].value) == 1)
                     {
-                        // increment straight count
+                        // if it is, increase the straight count and update the straight value
                         straightCount++;
-
-                        // when straight count is equal to 5, the player gets a straight
-                        if (straightCount == 5)
+                        straightValue = flushCards[i + 1].value;
+                        
+                        // when reaches the end, return the straight flush
+                        if (i == flushCards.Length - 2)
                         {
                             value = straightValue;
                             rank = value == Value.ACE ? Rank.RoyalFlush : Rank.StraightFlush;
                             break;
                         }
                     }
-                    // otherwise the straight breaks, check to see if the array has at least 5 remaining cards that are unchecked,
-                    // if it does, reset straight count and straight value
-                    else if (flushCards.Length - (i + 1) >= 5)
+                    // otherwise, check to see if the straight count is equal or greater than 5
+                    else if (straightCount >= 5)
+                    {
+                        value = straightValue;
+                        rank = value == Value.ACE ? Rank.RoyalFlush : Rank.StraightFlush;
+                        break;
+                    }
+                    // otherwise, check to see if the straight count is 4 and the last value is 5
+                    else if (straightCount == 4 && straightValue == Value.FIVE)
+                    {
+                        // run through the remaining cards and check if there is any ACE
+                        for (int j = i + 1; j < flushCards.Length; j++)
+                        {
+                            if (flushCards[j].value == Value.ACE)
+                            {
+                                rank = Rank.StraightFlush;
+                                value = straightValue;
+                                break;
+                            }
+                        }
+                    }
+                    // otherwise, check if there are more than 5 unchecked cards remaining
+                    // if yes, reset the straight count and straight value
+                    else if (flushCards.Length - (i + 1) >= 5) 
                     {
                         straightCount = 1;
                         straightValue = flushCards[i + 1].value;
                     }
-                    // otherwise break the loop
+                    // otherwise break the for loop as it is impossible to get a straight
                     else
-                    {                        
+                    {
                         break;
                     }
                 }
@@ -169,12 +196,25 @@ namespace TexasBonus
         }
         private void BestHandStraightFlush()
         {
-            var straightFlush = cards.Select(x => x).Where(x => x.suit == suit && x.value <= value).OrderByDescending(x => x.value).Distinct().Take(5).ToArray();
+            // find all cards which has a lower value and same suit with the straight value, and sort then by descending order
+            // if the straight value is 5, take the first 4 of them
+            // otherwise, take the first 5 of them
+            var straightFlush = cards.Select(x => x).Where(x => x.suit == suit && x.value <= value).OrderByDescending(x => x.value).Distinct().Take(value == Value.FIVE ? 4 : 5).ToArray();
+
+            // setup the first best 4 cards
             bestHand[0] = straightFlush[0];
             bestHand[1] = straightFlush[1];
             bestHand[2] = straightFlush[2];
             bestHand[3] = straightFlush[3];
-            bestHand[4] = straightFlush[4];
+
+            // if the straight value is 5, resize the best hand array and set the last element to be an ACE
+            if (value == Value.FIVE)
+            {
+                Array.Resize(ref bestHand, 5);
+                bestHand[4] = cards.Select(x => x).Where(x => x.value == Value.ACE).First();
+            }
+            else
+                bestHand[4] = straightFlush[4];
         }
 
         /// <summary>
@@ -271,10 +311,10 @@ namespace TexasBonus
         /// <summary>
         /// Method to determine if the player has a straight
         /// </summary>
-        private void CheckStraight() 
+        private void CheckStraight()
         {
-            // first, sort the cards by descending order and convert it to an array
-            var sortCards = cards.OrderByDescending(x => x.value).ToArray();
+            // first, sort the cards by ascending order and distince
+            var sortCards = cards.OrderBy(x => x.value).Distinct().ToArray();
 
             // initialize straight count & straight value
             var straightCount = 1;
@@ -283,28 +323,50 @@ namespace TexasBonus
             // run from the first element to the second last element in the sortCard array
             for (int i = 0; i < sortCards.Length - 1; i++)
             {
-                // check to see if this element's value is exactly 1 greater than the next 
-                if (((int)(sortCards[i].value - sortCards[i + 1].value)) == 1) 
+                // check to see if this element's value is excatly 1 less than the next                 
+                if ((sortCards[i + 1].value - sortCards[i].value) == 1)
                 {
-                    // increment straight count
+                    // if it is, increase the straight count and update the straight value
                     straightCount++;
-                    
-                    // when straight count is equal to 5, the player gets a straight
-                    if (straightCount == 5)
+                    straightValue = sortCards[i + 1].value;
+
+                    // when reaches the end, return the straight
+                    if (i == sortCards.Length - 2)
                     {
                         rank = Rank.Straight;
                         value = straightValue;
-                        break;
+                        return;
                     }
                 }
-                // otherwise the straight breaks, check to see if the array has at least 5 remaining cards that are unchecked,
-                // if it does, reset straight count and straight value
-                else if (sortCards.Length - (i + 1) >= 5)
+                // otherwise, check to see if the straight count is equal or greater than 5
+                else if (straightCount >= 5)
+                {
+                    rank = Rank.Straight;
+                    value = straightValue;
+                    break;
+                }
+                // otherwise, check to see if the straight count is 4 and the last value is 5
+                else if (straightCount == 4 && straightValue == Value.FIVE)
+                {
+                    // if it is, run through the remaining cards and check if there is any ACE
+                    for (int j = i + 1; j < sortCards.Length; j++)
+                    {
+                        if (sortCards[j].value == Value.ACE)
+                        {
+                            rank = Rank.Straight;
+                            value = straightValue;
+                            break;
+                        }
+                    }
+                }
+                // otherwise, check if there are more than 5 unchecked cards remain
+                // if yes, reset the straight count and straight value
+                else if (sortCards.Length - (i + 1) >= 5) 
                 {
                     straightCount = 1;
                     straightValue = sortCards[i + 1].value;
                 }
-                // otherwise break the for loop
+                // otherwise break the for loop as it is impossible to get a straight
                 else
                 {
                     break;
@@ -313,12 +375,26 @@ namespace TexasBonus
         }
         private void BestHandStraight()
         {
-            var straight = cards.Select(x => x).Where(x => x.value <= value).OrderByDescending(x => x.value).Distinct().Take(5).ToArray();
+            // find all cards which has a lower value than the straight value and sort then by descending order
+            // if the straight value is 5, take the first 4 of them
+            // otherwise, take the first 5 of them
+            Card[] straight = cards.Select(x => x).Where(x => x.value <= value).OrderByDescending(x => x.value).Distinct().Take(value == Value.FIVE ? 4 : 5).ToArray();
+
+            // setup the first best 4 cards
             bestHand[0] = straight[0];
             bestHand[1] = straight[1];
             bestHand[2] = straight[2];
             bestHand[3] = straight[3];
-            bestHand[4] = straight[4];
+
+            // if the straight value is 5, resize the best hand array and set the last element to be an ACE
+            if (value == Value.FIVE)
+            {
+                Array.Resize(ref bestHand, 5);
+                bestHand[4] = cards.Select(x => x).Where(x => x.value == Value.ACE).First();
+            }
+            // otherwise the last best card will be the 5th element in 'straight'
+            else
+                bestHand[4] = straight[4];
         }
 
         /// <summary>

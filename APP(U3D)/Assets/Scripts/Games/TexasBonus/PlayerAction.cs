@@ -181,8 +181,8 @@ namespace TexasBonus
         }
         public void BetBonusWager_AI(int playerIndex)
         {
-            // assume the value to be 5
-            var value = 5;
+            // randomly select an value for bonus wager
+            var value = bonusWagerOptions[UnityEngine.Random.Range(0, bonusWagerOptions.Length)];
 
             // repeat excatly how it functions in player's version
             this.playerIndex = playerIndex;
@@ -214,8 +214,8 @@ namespace TexasBonus
         }
         public void BetAnteWager_AI(int playerIndex)
         {
-            // assume the value to be 15
-            var value = 15;
+            // randomly select an value for ante wager
+            var value = anteWagerOptions[UnityEngine.Random.Range(0, anteWagerOptions.Length)];
 
             // repeat excatly how it functions in player's version
             this.playerIndex = playerIndex;
@@ -265,7 +265,26 @@ namespace TexasBonus
             // repeat excatly how it functions in player's version
             this.betType = betType;
             this.playerIndex = playerIndex;
-            Bet();
+
+            // get bot's current hand strength
+            var handStrength = tableController.GetHandStrength(playerIndex);
+
+            // bet if the bot has at least one pair
+            if (handStrength.rank >= Rank.OnePair)
+            {
+                Bet();
+                return;
+            }
+
+            // if the bot has a value of at least eight in flop, also bet
+            if (betType == BetType.Flop && handStrength.GetValue() >= Value.EIGHT) 
+            {
+                Bet();
+                return;
+            }
+
+            // otherwise it can be only fold or check
+            if (betType == BetType.Flop) Fold(); else Check();
         }
         
         /// <summary>

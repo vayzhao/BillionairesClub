@@ -317,7 +317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &41296501
 RectTransform:
   m_ObjectHideFlags: 0
@@ -525,7 +525,6 @@ GameObject:
   m_Component:
   - component: {fileID: 77460858}
   - component: {fileID: 77460860}
-  - component: {fileID: 77460859}
   - component: {fileID: 77460861}
   m_Layer: 5
   m_Name: Group_CharacterSelection
@@ -533,7 +532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &77460858
 RectTransform:
   m_ObjectHideFlags: 0
@@ -546,7 +545,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 41296501}
-  - {fileID: 1113622471}
   m_Father: {fileID: 254474657}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -555,36 +553,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1800, y: 1600}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &77460859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77460857}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.09803922}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &77460860
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -610,6 +578,9 @@ MonoBehaviour:
   buttons:
   - {fileID: 1358561577}
   - {fileID: 41296500}
+  content2D: {fileID: 41296500}
+  content3D: {fileID: 1113622470}
+  uiManager: {fileID: 1916278323}
 --- !u!1 &119327277
 GameObject:
   m_ObjectHideFlags: 0
@@ -3916,6 +3887,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 855490447}
+        m_TargetAssemblyTypeName: Entering, Assembly-CSharp
+        m_MethodName: ResetInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &773148201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5890,12 +5873,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1113622471}
   m_Layer: 0
-  m_Name: 3D Content
+  m_Name: 3D Content[CharacterSelection]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1113622471
 Transform:
   m_ObjectHideFlags: 0
@@ -5904,13 +5887,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113622470}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -1920, y: -981, z: -12}
+  m_LocalPosition: {x: 0, y: 99, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1808418220}
   - {fileID: 1699679651}
-  m_Father: {fileID: 77460858}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1145360081
 GameObject:
@@ -9715,7 +9698,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1923952503
 GameObject:
@@ -10603,7 +10586,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 77460861}
         m_TargetAssemblyTypeName: CharacterSelection, Assembly-CSharp
-        m_MethodName: SetActive
+        m_MethodName: Enable
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

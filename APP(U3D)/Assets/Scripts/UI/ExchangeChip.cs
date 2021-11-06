@@ -13,16 +13,26 @@ public class ExchangeChip: MonoBehaviour
     [Tooltip("A script that holds portal operation")]
     public PortalTagManager portals;
 
+    [Header("First Panel")]
+    public Image playerPortrait;
+    [Tooltip("The text that says hello to the player")]
+    public TextMeshProUGUI greetingText;
+
     [Header("Second Panel")]
+    [Tooltip("The game object that holds the warning panel, confirm panel and congrat panel")]
     public GameObject secondPanel;
+    [Tooltip("The panel that warns the player when attempting to purchase something not affordable")]
     public GameObject warningPanel;
+    [Tooltip("The panel for the user to confirm when purchasing")]
     public GameObject confirmPanel;
+    [Tooltip("The panel for notificating the player that the purchase was successful")]
     public GameObject congratPanel;
+    [Tooltip("The text for the confirm panel")]
     public TextMeshProUGUI confirmText;
 
-    private int purchaseItemIndex;
-    private int[] chipAmount = new int[5] { 1000, 2500, 5000, 10000, 20000 };
-    private int[] gemRequire = new int[5] { 50, 110, 200, 350, 600 };
+    private int purchaseItemIndex;                                            // index of the exchange type    
+    private int[] chipAmount = new int[5] { 1000, 2500, 5000, 10000, 20000 }; // chip amount for each exchange type    
+    private int[] gemRequire = new int[5] { 50, 110, 200, 350, 600 };         // gem requirement for each exchange type
 
     /// <summary>
     /// A method to pop up the panel for chip exchange
@@ -31,6 +41,10 @@ public class ExchangeChip: MonoBehaviour
     {
         // stop portals range-check coroutine
         portals.Stop();
+
+        // update the greeting text and player's protrait
+        playerPortrait.sprite = Blackboard.GetPortraitPrefab(Blackboard.localPlayer.modelIndex);
+        greetingText.text = $"Hi, {Blackboard.localPlayer.name}. How can I help?";
 
         // pop up the panel
         uiManager.CreatePage(window);

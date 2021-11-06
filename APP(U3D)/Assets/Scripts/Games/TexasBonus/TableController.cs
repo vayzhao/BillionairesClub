@@ -110,6 +110,13 @@ namespace TexasBonus
         }
 
         /// <summary>
+        /// Method to get current hand strength of a single player
+        /// </summary>
+        /// <param name="index">index of the player</param>
+        /// <returns></returns>
+        public HandStrength GetHandStrength(int index) => handStrengths[index];
+
+        /// <summary>
         /// Methdo to reset the table, includes hiding card models, reseting labels,
         /// hand evluators and card deck shuffling
         /// </summary>
@@ -136,7 +143,8 @@ namespace TexasBonus
                 handStrengths[i].Reset();
 
             // shuffle the card deck
-            cardDeck.Shuffle();
+            cardDeck.DebugDeck();
+            //cardDeck.Shuffle();
         }
 
         /// <summary>

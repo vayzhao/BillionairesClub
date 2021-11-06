@@ -3219,12 +3219,13 @@ MonoBehaviour:
   window: {fileID: 4248754199167553960}
   uiManager: {fileID: 0}
   portals: {fileID: 0}
+  playerPortrait: {fileID: 4248754198524320524}
+  greetingText: {fileID: 4248754197562596870}
   secondPanel: {fileID: 631697803552994902}
   warningPanel: {fileID: 4204668948328443301}
   confirmPanel: {fileID: 8328423458249131342}
   congratPanel: {fileID: 5476483689494896694}
   confirmText: {fileID: 7171257565816885391}
-  isHolding: 0
 --- !u!1 &4248754198708587188
 GameObject:
   m_ObjectHideFlags: 0

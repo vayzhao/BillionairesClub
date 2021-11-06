@@ -7,24 +7,33 @@ namespace Archive
 {
     public class PanelManager : MonoBehaviour
     {
+        [Header("Settings")]
+        [Tooltip("Type of the current scene")]
         public SceneType sceneType;
-
+        [Tooltip("Sprite to display an archive panel when it is deselected")]
         public Sprite normalSprite;
+        [Tooltip("Sprite to display an archive panel when it is selected")]
         public Sprite selectedSprite;
 
+        [Header("Core elements")]
+        [Tooltip("Sub-panels to display all archive records")]
         public Panel[] archives;
-
+        [Tooltip("Button for deleting an archive record")]
         public Button deleteButton;
+        [Tooltip("Button for saving an archive record")]
         public Button saveButton;
+        [Tooltip("Button for loading an archive record")]
         public Button loadButton;
 
-        private int selectIndex;
-
+        [Header("Other panels")]
+        [Tooltip("A script to handle all ui functions")]
         public UIManager uiManager;
-
-        [Header("Notification Panel")]
+        [Tooltip("A game object that contains the notification panel")]
         public GameObject notification;
+        [Tooltip("A script that handles character selection functions")]
         public CharacterSelection characterSelection;
+
+        private int selectIndex; // index of current selected archive panel
 
         private void Start()
         {
@@ -155,10 +164,7 @@ namespace Archive
         public void LoadArchive()
         {
             Data data = Formatter.Load(selectIndex);
-
-
             characterSelection.ReadyFromLoad(data);
-
         }
     }
 }

@@ -27,15 +27,15 @@ public class CardDeck
         cards = new List<Card>();
         usedCards = new List<Card>();
 
-        cards.Add(new Card(Suit.Diamond,Value.TWO));
-        cards.Add(new Card(Suit.Diamond, Value.THREE));
-        cards.Add(new Card(Suit.Diamond, Value.FOUR));
-        cards.Add(new Card(Suit.Diamond, Value.FIVE));
-        cards.Add(new Card(Suit.Diamond, Value.SIX));
-        cards.Add(new Card(Suit.Diamond, Value.SEVEN));
-        cards.Add(new Card(Suit.Diamond, Value.EIGHT));
-        cards.Add(new Card(Suit.Diamond, Value.ACE));
+        cards.Add(new Card(Suit.Heart, Value.KING));
+        cards.Add(new Card(Suit.Heart, Value.QUEEN));
+        cards.Add(new Card(Suit.Heart, Value.EIGHT));
+        cards.Add(new Card(Suit.Heart, Value.JACK));
+        cards.Add(new Card(Suit.Heart, Value.QUEEN));
+        cards.Add(new Card(Suit.Heart, Value.KING));
         cards.Add(new Card(Suit.Heart, Value.ACE));
+        cards.Add(new Card(Suit.Heart, Value.TEN));
+        cards.Add(new Card(Suit.Heart, Value.NINE));
     }
 
     /// <summary>
