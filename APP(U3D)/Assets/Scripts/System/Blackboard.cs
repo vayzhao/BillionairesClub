@@ -16,6 +16,8 @@ public static class Blackboard
     public static bool lockRotation = false;
     public static bool lockSpaceBar = false;
 
+    public static AudioManager audioManager;
+
     #region Player
     public static Player localPlayer;
     #endregion

@@ -63,6 +63,11 @@ public class PlayerBoard : MonoBehaviour
     public void StartEditing() => Blackboard.lockSpaceBar = true;
 
     /// <summary>
+    /// Method to play input change sound effect when the player is editing the input field
+    /// </summary>
+    public void InputChange() => Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipInputFieldChange, AudioType.UI);
+
+    /// <summary>
     /// Method to unlock the space bar when the user finished modifying
     /// player board description
     /// </summary>

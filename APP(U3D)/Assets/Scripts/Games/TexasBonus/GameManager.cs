@@ -334,8 +334,9 @@ namespace TexasBonus
                     continue;
 
                 // compare player's hand strength
-                tableController.BonusReward(checkIndex);
                 tableController.Compare(checkIndex);                
+                tableController.BonusReward(checkIndex);
+                tableController.PlayChipAnimation(checkIndex);
                 yield return new WaitForSeconds(Const.WAIT_TIME_COMPARE);
             }
 

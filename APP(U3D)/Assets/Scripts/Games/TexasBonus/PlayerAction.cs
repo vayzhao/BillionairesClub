@@ -107,7 +107,7 @@ namespace TexasBonus
             for (int i = 0; i < anteWagerOptions.Length; i++)
             {
                 // the player cannot bet more than 1/3 of his total poker chip
-                var validity = gameManager.players[playerIndex].chip >= anteWagerOptions[i];
+                var validity = gameManager.players[playerIndex].chip >= anteWagerOptions[i] * 3;
 
                 // modify button state and cross sprite visibility
                 anteWagerBtns[i].enabled = validity;
@@ -172,12 +172,14 @@ namespace TexasBonus
 
             // store value into bet data
             bets[playerIndex].bonusWager = value;
+            bets[playerIndex].EditAmountChange(-value);
 
             // create some poker chip models to repersent the player's wager
             tableController.CreateWagerModel(playerIndex, 4, value);
 
             // consume player's chip 
             gameManager.players[playerIndex].EditPlayerChip(-value);
+            labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal(), bets[playerIndex].bonusWager);
         }
         public void BetBonusWager_AI(int playerIndex)
         {
@@ -202,6 +204,7 @@ namespace TexasBonus
 
             // store value into bet data
             bets[playerIndex].anteWager = value;
+            bets[playerIndex].EditAmountChange(-value);
 
             // create some poker chip models to repersent the player's wager
             // and also update the text label to show how much money the player
@@ -239,16 +242,19 @@ namespace TexasBonus
             {
                 case BetType.Flop:
                     bets[playerIndex].flopWager = bets[playerIndex].anteWager * 2;
+                    bets[playerIndex].EditAmountChange(-bets[playerIndex].flopWager);
                     tableController.CreateWagerModel(playerIndex, 1, bets[playerIndex].anteWager * 2);
                     gameManager.players[playerIndex].EditPlayerChip(bets[playerIndex].anteWager * -2);
                     break;
                 case BetType.Turn:
                     bets[playerIndex].turnWager = bets[playerIndex].anteWager * 1;
+                    bets[playerIndex].EditAmountChange(-bets[playerIndex].turnWager);
                     tableController.CreateWagerModel(playerIndex, 2, bets[playerIndex].anteWager * 1);
                     gameManager.players[playerIndex].EditPlayerChip(bets[playerIndex].anteWager * -1);
                     break;
                 case BetType.River:
                     bets[playerIndex].riverWager = bets[playerIndex].anteWager * 1;
+                    bets[playerIndex].EditAmountChange(-bets[playerIndex].riverWager);
                     tableController.CreateWagerModel(playerIndex, 3, bets[playerIndex].anteWager * 1);
                     gameManager.players[playerIndex].EditPlayerChip(bets[playerIndex].anteWager * -1);
                     break;
@@ -258,7 +264,7 @@ namespace TexasBonus
 
             // update the text label to show how much money the player
             // has currently bet on this round
-            labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal());
+            labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal(), bets[playerIndex].bonusWager);
         }
         public void Bet_AI(BetType betType, int playerIndex)
         {
@@ -303,6 +309,9 @@ namespace TexasBonus
             // display the player's card models face-down on the table 
             tableController.playerCardsObj[playerIndex].SetActive(true);
 
+            // play fold sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipFold, AudioType.Sfx);
+
             // hide the hand-rank panel if the player is a user player
             if (!gameManager.players[playerIndex].isNPC)
                 labelController.SetLocalHandRankPanelVisibility(false);
@@ -316,6 +325,9 @@ namespace TexasBonus
             // switch waiting state to be false and hide the decision panel
             isWaiting = false;
             group_betOrCheck.SetActive(false);
+
+            // play check sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipCheck, AudioType.Sfx);
         }
     }
 }

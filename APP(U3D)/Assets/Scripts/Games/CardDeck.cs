@@ -29,13 +29,13 @@ public class CardDeck
 
         cards.Add(new Card(Suit.Heart, Value.KING));
         cards.Add(new Card(Suit.Heart, Value.QUEEN));
-        cards.Add(new Card(Suit.Heart, Value.EIGHT));
-        cards.Add(new Card(Suit.Heart, Value.JACK));
-        cards.Add(new Card(Suit.Heart, Value.QUEEN));
-        cards.Add(new Card(Suit.Heart, Value.KING));
-        cards.Add(new Card(Suit.Heart, Value.ACE));
-        cards.Add(new Card(Suit.Heart, Value.TEN));
-        cards.Add(new Card(Suit.Heart, Value.NINE));
+        cards.Add(new Card(Suit.Heart, Value.FIVE));
+        cards.Add(new Card(Suit.Spade, Value.SIX));
+        cards.Add(new Card(Suit.Diamond, Value.SEVEN));
+        cards.Add(new Card(Suit.Spade, Value.SEVEN));
+        cards.Add(new Card(Suit.Diamond, Value.SEVEN));
+        cards.Add(new Card(Suit.Heart, Value.FOUR));
+        cards.Add(new Card(Suit.Heart, Value.THREE));
     }
 
     /// <summary>
@@ -43,6 +43,9 @@ public class CardDeck
     /// </summary>
     public void Shuffle()
     {
+        // play shuffle sound effect
+        Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipShuffling, AudioType.Sfx);
+
         // first of all, put every card into the usedCard list
         for (int i = 0; i < cards.Count; i++)
         {

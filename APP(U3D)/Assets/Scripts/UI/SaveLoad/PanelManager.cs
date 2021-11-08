@@ -122,6 +122,9 @@ namespace Archive
             // switch avilability of the save button
             saveButton.Switch(true);
 
+            // play click sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipMouseClickBtn, AudioType.UI);
+
             // if the user is currently in homepage scene, modify the 
             // availability of the load button, based on the archive panel state
             if (sceneType == SceneType.Homepage)
@@ -153,6 +156,9 @@ namespace Archive
 
             // update the archive panel
             archives[selectIndex].UpdatePanel(Formatter.Load(selectIndex));
+
+            // play save sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipReadyAndSave, AudioType.UI);
 
             // pop up the notification
             uiManager.CreatePageAdditive(notification);

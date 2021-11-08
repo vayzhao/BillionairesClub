@@ -378,7 +378,7 @@ namespace TexasBonus
             // find all cards which has a lower value than the straight value and sort then by descending order
             // if the straight value is 5, take the first 4 of them
             // otherwise, take the first 5 of them
-            Card[] straight = cards.Select(x => x).Where(x => x.value <= value).OrderByDescending(x => x.value).Distinct().Take(value == Value.FIVE ? 4 : 5).ToArray();
+            var straight = cards.Select(x => x).Where(x => x.value <= value).OrderByDescending(x => x.value).Distinct().Take(value == Value.FIVE ? 4 : 5).ToArray();
 
             // setup the first best 4 cards
             bestHand[0] = straight[0];

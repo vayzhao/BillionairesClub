@@ -8,6 +8,11 @@ TagManager:
   - Option
   - Seat
   - CancelButton
+  - ChipBlack
+  - ChipBlue
+  - ChipPink
+  - ChipRed
+  - ChipYellow
   layers:
   - Default
   - TransparentFX

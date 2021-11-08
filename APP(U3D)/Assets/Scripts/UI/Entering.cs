@@ -65,6 +65,9 @@ public class Entering : MonoBehaviour
         // enable the 'next' button as long as the user has entered anything
         else if (newName.Length > 0 && !nextBtn.enabled)
             nextBtn.Switch(true);
+
+        // play input change sound effect
+        Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipInputFieldChange, AudioType.UI);
     }
 
     /// <summary>

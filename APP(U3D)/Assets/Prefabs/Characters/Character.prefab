@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 14578891905751901}
   - component: {fileID: 14578891905751899}
-  - component: {fileID: 14578891905751898}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -75,14 +74,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &14578891905751898
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14578891905751900}
-  m_Enabled: 1
 --- !u!1 &851202821016077317
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,10 +168,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a797bf872b1ed43916e73fcaa55194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isNPC: 0
+  name: 
+  description: 
+  chip: 0
+  gem: 0
+  modelIndex: 0
+  playerBoard: {fileID: 0}
   moveSpeed: 3
   moveSpeedBackward: 1.5
   sprintSpeed: 5
-  seats: []
-  seatSortRate: 0.2
-  model: {fileID: 0}
-  animator: {fileID: 0}

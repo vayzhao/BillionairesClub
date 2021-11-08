@@ -40,6 +40,10 @@ namespace TexasBonus
         [Tooltip("Prefab model for black chip")]
         public GameObject pref_blackChip;
 
+        [Header("Other")]
+        [Tooltip("A component that register/play chip animation")]
+        public ChipAnimationPlayer chipAnimationPlayer;
+
         [HideInInspector]
         public CardDeck cardDeck;                // card deck used in the game
         [HideInInspector]
@@ -143,8 +147,8 @@ namespace TexasBonus
                 handStrengths[i].Reset();
 
             // shuffle the card deck
-            cardDeck.DebugDeck();
-            //cardDeck.Shuffle();
+            // cardDeck.DebugDeck();
+            cardDeck.Shuffle();
         }
 
         /// <summary>
@@ -188,6 +192,9 @@ namespace TexasBonus
             var remaining = amount;
             var height = 0f;
             var angle = 0f;
+
+            // play bet sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipPlaceWager, AudioType.Sfx);
 
             // keep spawning wager model as long as the remaining amount is greater than 0
             while (remaining > 0)
@@ -262,12 +269,53 @@ namespace TexasBonus
                     height += 0.01f;
                     angle += 20f;
 
-                    // spawn a wager model above 
+                    // spawn a wager model
                     var obj = Instantiate(parent.GetChild(j), parent);
-                    obj.transform.localPosition = new Vector3(0f, height, 0f);
-                    obj.transform.localEulerAngles = new Vector3(-90f, angle, 0f);
+
+                    // calculate spawning position and target position
+                    var spawnPos = chipAnimationPlayer.GetAssociateChipSlot(obj.tag);
+                    var targetPos = new Vector3(0f, height, 0f);
+
+                    // register the movement animation
+                    var chipAnimation = obj.gameObject.AddComponent<ChipAnimation>();
+                    chipAnimation.Take(spawnPos, targetPos, new Vector3(-90f, angle, 0f));
+
+                    // add the animation to animation player
+                    chipAnimationPlayer.Add(chipAnimation);
                 }
-            }            
+            }
+        }
+
+        /// <summary>
+        /// Method to setup the chip animation player to take away a player's wager in a specific slot
+        /// </summary>
+        /// <param name="playerId">index of the player</param>
+        /// <param name="wagerIndex">index of the wager slot</param>
+        public void TakingChipsAway(int playerId, int wagerIndex)
+        {
+            // return if the slot does not exist
+            if (wagerObj[playerId][wagerIndex] == null)
+                return;
+
+            // find the parent object that holds wager models in this specific part
+            var parent = wagerObj[playerId][wagerIndex].transform;
+
+            // run though each child in this parent
+            for (int i = parent.childCount - 1; i >= 0; i--)
+            {
+                // get the wager model
+                var obj = parent.GetChild(i);
+                
+                // get the slot position for this type of chip
+                var targetPos = chipAnimationPlayer.GetAssociateChipSlot(obj.tag);
+
+                // register the movement animation
+                var chipAnimation = obj.gameObject.AddComponent<ChipAnimation>();
+                chipAnimation.Lose(targetPos);
+
+                // add the animation to animation player
+                chipAnimationPlayer.Add(chipAnimation);
+            }
         }
 
         /// <summary>
@@ -297,7 +345,9 @@ namespace TexasBonus
             for (int i = 0; i < wagerObj[index].Length; i++)
             {
                 if (wagerObj[index][i] != null)
+                {
                     Destroy(wagerObj[index][i]);
+                }   
             }
 
             // hide card models and bet label
@@ -324,7 +374,11 @@ namespace TexasBonus
                 // if the 'n' player has folded, take away his wager and cards
                 if (playerAction.bets[i].hasFolded)
                 {
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);
+                    TakingChipsAway(i, 0);
+                    TakingChipsAway(i, 4);
+                    chipAnimationPlayer.Play();
+                    labelController.SetBetLabelResult(i, playerAction.bets[i].GetAmountChange());
+                    yield return new WaitForSeconds(Const.WAIT_TIME_CHIP_TOTAL + Const.WAIT_TIME_CHIP_TRAVEL);
                     HidePlayerBetAndCards(i);
                 }
                 // otherwise, as long as at least one player has not folded,
@@ -332,8 +386,8 @@ namespace TexasBonus
                 else
                 {
                     allPlayerFolded = false;
-                }
-            }
+                }                
+            }            
         }
 
         /// <summary>
@@ -347,6 +401,7 @@ namespace TexasBonus
             {
                 dealerHand[i] = cardDeck.DrawACard();
                 dealerCardsObj[i].SetCard(dealerHand[i]);
+                Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipDealCards, AudioType.Sfx);
                 yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);
             }
 
@@ -355,6 +410,7 @@ namespace TexasBonus
             {
                 communityCards[i] = cardDeck.DrawACard();
                 communityCardsObj[i].SetCard(communityCards[i]);
+                Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipDealCards, AudioType.Sfx);
                 yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);                
             }
         }
@@ -381,7 +437,7 @@ namespace TexasBonus
                     // deal a card for this player
                     playerCards[j][i] = cardDeck.DrawACard();
                     playerCardsObj[j].transform.GetChild(i).gameObject.SetCard(playerCards[j][i]);
-
+                    
                     // if this player is a user-player, update its cardTexture visibility in hand-rank panel
                     if (!gameManager.players[j].isNPC)
                         labelController.cardTexture[i].enabled = true;
@@ -421,8 +477,10 @@ namespace TexasBonus
                 if (!gameManager.players[i].isNPC)
                 {
                     labelController.title.text = handStrengths[i].GetInitialHandString();
+                    labelController.SetBonusLabel(handStrengths[i].GetBonusMultiplier());
                     labelController.cardTexture[0].sprite = Blackboard.GetCardSprite(playerCards[i][0].GetCardIndex());
                     labelController.cardTexture[1].sprite = Blackboard.GetCardSprite(playerCards[i][1].GetCardIndex());
+                    Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipDealCards, AudioType.Sfx);
                 }
             }
         }
@@ -442,6 +500,9 @@ namespace TexasBonus
             for (int i = 0; i < handStrengths.Length; i++)
                 handStrengths[i].AddCard(communityCards[index]);
             dealerHandStrengh.AddCard(communityCards[index]);
+
+            // play reveal card sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipDealCards, AudioType.Sfx);
 
             // determine whether or not to recompute hand-rank for all players
             if (computeHandStrengh)
@@ -484,6 +545,9 @@ namespace TexasBonus
             // recompute dealer's hand-rank
             dealerHandStrengh.Recompute();
 
+            // play reveal card sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipDealCards, AudioType.Sfx);
+
             // display dealer's hand-rank label
             labelController.SetHandRankLabelForDealer(true, dealerHandStrengh.ToString("<color=#00FF01><size=80%>"));
         }
@@ -500,12 +564,16 @@ namespace TexasBonus
 
             // only continue when the player has bet on bonus and trigger bonus reward
             if (!(bonusWager > 0 && multiplier > 0))
+            {
+                TakingChipsAway(index, 4);
                 return;
+            }
 
             // multiply bonus wager
             MultiplyWagerModel(index, 4, multiplier);
 
             // reward the player
+            playerAction.bets[index].EditAmountChange(bonusWager * (multiplier + 1));
             gameManager.players[index].EditPlayerChip(bonusWager * (multiplier + 1));
         }
 
@@ -529,47 +597,82 @@ namespace TexasBonus
             if (!gameManager.players[index].isNPC)
                 labelController.SetLocalHandRankPanelVisibility(false);
 
-            // if the player wins
-            if (result == Result.Win)
+            // play fold sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipFold, AudioType.Sfx);
+
+            // enum player's result
+            switch (result)
             {
-                // initialize the reward
-                var reward = playerAction.bets[index].anteWager;
-
-                // the player wins ante wager if he has hand-rank equal to flush or above
-                if (handStrengths[index].rank >= Rank.Flush)
-                {
-                    MultiplyWagerModel(index, 0, 1);
-                    reward += playerAction.bets[index].anteWager;
-                }
-                if (playerAction.bets[index].flopWager > 0)
-                {
-                    MultiplyWagerModel(index, 1, 1);
-                    reward += playerAction.bets[index].flopWager * 2;
-                }
-                if (playerAction.bets[index].turnWager > 0)
-                {
-                    MultiplyWagerModel(index, 2, 1);
-                    reward += playerAction.bets[index].turnWager * 2;
-                }
-                if (playerAction.bets[index].riverWager > 0)
-                {
-                    MultiplyWagerModel(index, 3, 1);
-                    reward += playerAction.bets[index].riverWager * 2;
-                }
-
-                // modify player's chip amount
-                gameManager.players[index].EditPlayerChip(reward);
+                case Result.Win:
+                    ResultWin(index);
+                    break;
+                case Result.Lose:
+                    ResultLose(index);
+                    break;
+                case Result.Standoff:
+                    ResultStandoff(index);
+                    break;
+                default:
+                    break;
             }
-            // if the player standoff
-            else if (result == Result.Standoff)
+        }
+
+        /// <summary>
+        /// Method to reward the player when win
+        /// </summary>
+        /// <param name="index">index of the player</param>
+        private void ResultWin(int index)
+        {
+            // initialize the reward
+            var reward = playerAction.bets[index].anteWager;
+
+            // the player wins ante wager if he has hand-rank equal to flush or above
+            if (handStrengths[index].rank >= Rank.Flush)
             {
-                // return wagers to the player
-                gameManager.players[index].EditPlayerChip(
-                    playerAction.bets[index].anteWager +
-                    playerAction.bets[index].flopWager +
-                    playerAction.bets[index].turnWager +
-                    playerAction.bets[index].riverWager);
-            }   
+                MultiplyWagerModel(index, 0, 1);
+                reward += playerAction.bets[index].anteWager;
+            }
+            if (playerAction.bets[index].flopWager > 0)
+            {
+                MultiplyWagerModel(index, 1, 1);
+                reward += playerAction.bets[index].flopWager * 2;
+            }
+            if (playerAction.bets[index].turnWager > 0)
+            {
+                MultiplyWagerModel(index, 2, 1);
+                reward += playerAction.bets[index].turnWager * 2;
+            }
+            if (playerAction.bets[index].riverWager > 0)
+            {
+                MultiplyWagerModel(index, 3, 1);
+                reward += playerAction.bets[index].riverWager * 2;
+            }
+
+            // modify player's chip amount
+            gameManager.players[index].EditPlayerChip(reward);
+            playerAction.bets[index].EditAmountChange(reward);
+        }
+
+        /// <summary>
+        /// Method to take away chips from the player when lose
+        /// </summary>
+        /// <param name="index">index of the player</param>
+        private void ResultLose(int index)
+        {
+            // run through each chip slot and take away chips
+            for (int i = 0; i < 4; i++)
+                TakingChipsAway(index, i);
+        }
+
+        /// <summary>
+        /// Method to return chips to the player when standoff
+        /// </summary>
+        /// <param name="index">index of the player</param>
+        private void ResultStandoff(int index)
+        {
+            // return wagers to the player
+            gameManager.players[index].EditPlayerChip(playerAction.bets[index].GetTotal());
+            playerAction.bets[index].EditAmountChange(playerAction.bets[index].GetTotal());
         }
 
         /// <summary>
@@ -585,6 +688,19 @@ namespace TexasBonus
             // hide wager, bet label and hand-rank label
             HidePlayerBetAndCards(index);
             labelController.SetHandRankLabel(index, false);
-        }        
+        }
+
+        /// <summary>
+        /// Method to player the chip animation player
+        /// </summary>
+        /// <param name="index"></param>
+        public void PlayChipAnimation(int index)
+        {
+            // play the animation player
+            chipAnimationPlayer.Play();
+
+            // display chip amount change for this player
+            labelController.SetBetLabelResult(index, playerAction.bets[index].GetAmountChange());
+        }
     }
 }

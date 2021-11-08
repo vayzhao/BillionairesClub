@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card
+public class Card : IEquatable<Card>
 {
     public Suit suit;   // suit of this card
     public Value value; // value of this card
@@ -40,4 +40,6 @@ public class Card
         return cards[index].value;
     }
 
+    public bool Equals(Card other) => value.Equals(other.value);
+    public override int GetHashCode() => value.GetHashCode();
 }

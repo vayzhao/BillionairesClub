@@ -49,6 +49,9 @@ public class ExchangeChip: MonoBehaviour
         // pop up the panel
         uiManager.CreatePage(window);
 
+        // play greetings sound effect
+        Blackboard.audioManager.PlayAudio(Blackboard.audioManager.cashierGreetings, AudioType.UI);
+
         // force the user to focus on the window
         Blackboard.FocusOnWindow(true);
     }
@@ -105,6 +108,9 @@ public class ExchangeChip: MonoBehaviour
         {
             // otherwise pop up a warning panel
             warningPanel.SetActive(true);
+
+            // play warning sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipWarning, AudioType.UI);
         }
     }
 
@@ -119,5 +125,8 @@ public class ExchangeChip: MonoBehaviour
 
         // exchange player's resource
         Blackboard.localPlayer.ExchangePokerChip(gemRequire[purchaseItemIndex], chipAmount[purchaseItemIndex]);
+
+        // play purchase successful sound effect
+        Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipPurchaseSuccessful, AudioType.UI);
     }
 }

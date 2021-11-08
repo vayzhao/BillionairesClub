@@ -153,6 +153,9 @@ public class CharacterSelection : MonoBehaviour
         Storage.SaveBool(Const.LOCAL_PLAYER, StorageType.HasRecord, false);
         Storage.SaveInt(Const.LOCAL_PLAYER, StorageType.ModelIndex, prefabIndex);
 
+        // play ready sound effect
+        Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipReadyAndSave, AudioType.UI);
+
         // determine whether or not to use default data
         // usually, use default data when this method is called by 
         // the UI event system (click 'Ready' from the homepage')

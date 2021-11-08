@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -67,6 +68,9 @@ public class UIManager : MonoBehaviour
 
         // hide some objects that should not be displayed by default
         SetDefaultObjectVisibility(false);
+
+        // initialize audio scene
+        InitializeAudioScene();
     }
 
     // Update is called once per frame
@@ -156,4 +160,23 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < interactable.Count; i++)
             interactable[i].SetActive(flag);
     }
+
+    /// <summary>
+    /// Method to initialize the audio scene
+    /// </summary>
+    public void InitializeAudioScene()
+    {
+        // return if the audio scene is already loaded 
+        if (SceneManager.GetSceneByName(Const.SCENE_AUDIO).isLoaded)
+            return;
+
+        // otherwise load the audio scene
+        SceneManager.LoadScene(Const.SCENE_AUDIO, LoadSceneMode.Additive);
+    }
+
+    /// <summary>
+    /// Methods to play mouse enter & click buton sound effect
+    /// </summary>
+    public void PlayMouseEnterSound() => Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipMouseEnterBtn, AudioType.UI);
+    public void PlayMouseClickSound() => Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipMouseClickBtn, AudioType.UI);
 }

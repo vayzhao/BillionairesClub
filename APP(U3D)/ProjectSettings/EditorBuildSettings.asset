@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TexasBonus.unity
     guid: d5553d0c3bf7768468af066b6ecede29
+  - enabled: 1
+    path: Assets/Scenes/AudioScene.unity
+    guid: 8cf946072f7f4bf48b7bb786c9c92856
   m_configObjects: {}

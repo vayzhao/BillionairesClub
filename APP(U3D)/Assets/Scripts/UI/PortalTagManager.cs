@@ -131,6 +131,9 @@ public class PortalTagManager : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Space))
             return;
 
+        // play space bar trigger sound effect
+        Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipSpaceBarTrigger, AudioType.UI);
+
         // check which portal the player is using
         switch (triggerIndex)
         {
@@ -180,10 +183,14 @@ public class PortalTagManager : MonoBehaviour
 
         // release the player from movement,rotation lock
         Blackboard.lockMovement = false;
-        Blackboard.lockRotation = false;        
+        Blackboard.lockRotation = false;
+
+        // stop crowd sound 
+        Blackboard.audioManager.EnableEnvironmentSound(false);
 
         // load back to home page scene
         Blackboard.SCENE_PREVIOUS = Const.SCENE_HOMEPAGE;
-        SceneManager.LoadScene(Const.SCENE_HOMEPAGE);
+        SceneManager.LoadScene(Const.SCENE_HOMEPAGE, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(Const.SCENE_INCASINO);
     }
 }

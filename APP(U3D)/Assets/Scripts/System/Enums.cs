@@ -86,3 +86,9 @@ public enum StorageType
     Name,
     Description
 }
+
+public enum AudioType
+{
+    Sfx,
+    UI
+}

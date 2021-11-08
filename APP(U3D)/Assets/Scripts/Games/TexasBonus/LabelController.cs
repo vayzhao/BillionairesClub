@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -12,11 +13,15 @@ namespace TexasBonus
         public Image panel;
         [Tooltip("A text to display what combination the player has")]
         public TextMeshProUGUI title;
+        [Tooltip("A game object that holds the bonus panel")]
+        public GameObject bonusPanel;
+        [Tooltip("A text to display bonus reward multiplier")]
+        public TextMeshProUGUI bonusText;
         [Tooltip("Default sprite for the card back")]
         public Sprite defaultTexture;
         [Tooltip("Player's hand image")]
         public Image[] cardTexture;
-        [Space(25f)]        
+        [Space(15)]        
         [Tooltip("Text objects that show the amount of money that the players bet")]
         public TextMeshProUGUI[] betLabels;
         [Tooltip("Text objects that show the hand-rank of the players")]
@@ -107,6 +112,11 @@ namespace TexasBonus
                 cardTexture[0].sprite = defaultTexture;
                 cardTexture[1].sprite = defaultTexture;
             }
+            // when disabling, reset the bonus panel
+            else
+            {
+                SetBonusLabel(0);
+            }
         }
 
         /// <summary>
@@ -114,9 +124,68 @@ namespace TexasBonus
         /// </summary>
         /// <param name="index">the player index</param>
         /// <param name="amount">the amount of money</param>
-        public void SetBetLabel(int index, int amount = 0)
+        public void SetBetLabel(int index, int amount = 0, int bonus = 0)
         {
-            betLabels[index].text = amount > 0 ? amount.ToString("C0") : "";
+            if (amount == 0)
+            {
+                betLabels[index].text = "";
+                return;
+            }   
+
+            if (bonus == 0)
+                betLabels[index].text = $"{amount:C0}";
+            else
+                betLabels[index].text = $"{amount:C0}<color=\"yellow\">({bonus:C0})</color>";
+        }
+
+        /// <summary>
+        /// Method to display the betting result in the bet label
+        /// </summary>
+        /// <param name="index">index of the player</param>
+        /// <param name="amountChange">chip amount change for this round</param>
+        public void SetBetLabelResult(int index, int amountChange)
+        {
+            // if the amount has not change, reset bet label and return
+            if (amountChange == 0)
+            {
+                betLabels[index].text = "";
+                return;
+            }
+
+            // otherwise, the player either win or lose
+            if (amountChange > 0)
+                betLabels[index].text = $"<color=\"green\">+{amountChange:C0}</color>";
+            else
+                betLabels[index].text = $"<color=\"red\">{amountChange:C0}</color>";
+
+            // start floating the text and fade it
+            StartCoroutine(BetLabelFloating(index));
+        }
+        IEnumerator BetLabelFloating(int index)
+        {
+            // initialize progress and record the origin position & color
+            var progress = 0f;
+            var originPos = betLabels[index].transform.position;
+            var originCor = betLabels[index].color;
+            
+            // playing the text animation
+            while (progress < 1f)
+            {
+                // update the progress
+                var progressChange = Time.deltaTime / Const.WAIT_TIME_LABEL_FLOAT;
+                progress += progressChange;
+
+                // update the position and alpha color
+                betLabels[index].transform.position += Vector3.up * 0.3f;
+                betLabels[index].color = new Color(1f, 1f, 1f, Mathf.Lerp(1f, 0f, progress));
+
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+
+            // reset the bet label text
+            betLabels[index].text = "";
+            betLabels[index].color = originCor;
+            betLabels[index].transform.position = originPos;
         }
 
         /// <summary>
@@ -169,6 +238,27 @@ namespace TexasBonus
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// Method to update bonus panel and its text
+        /// </summary>
+        /// <param name="multiplier"></param>
+        public void SetBonusLabel(int multiplier)
+        {
+            // hide the bonus panel and return if the multipier is 0
+            if (multiplier == 0)
+            {
+                bonusPanel.SetActive(false);
+                return;
+            }
+            
+            // otherwise, display the bonus and update its text
+            bonusPanel.SetActive(true);
+            bonusText.text = $"Bonus *{multiplier}";
+
+            // play bonus sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipBonusPopup, AudioType.Sfx);
         }
     }
 }

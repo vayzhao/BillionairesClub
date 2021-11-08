@@ -364,6 +364,9 @@ public class Loading : MonoBehaviour
         foreach (var light in FindObjectsOfType<Light>())
             light.enabled = false;
 
+        // stop the background music
+        Blackboard.audioManager.EnableBGM(false);
+
         // load the specific scene 
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
 
@@ -513,6 +516,16 @@ public class Loading : MonoBehaviour
         // spawn portal effects
         FindObjectOfType<PortalTagManager>().Setup(obj_character.transform);
 
+        // play crowd sound 
+        Blackboard.audioManager.EnableEnvironmentSound(true);
+
+        // play background music if it is not playing
+        if (!Blackboard.audioManager.srcBgm.isPlaying)
+        {
+            Blackboard.audioManager.srcBgm.clip = Blackboard.audioManager.bgm0;
+            Blackboard.audioManager.EnableBGM(true);
+        }
+
         // check to see if this player has previously entered the casino
         if (Storage.LoadBool(Const.LOCAL_PLAYER,StorageType.HasRecord))
         {
@@ -552,6 +565,10 @@ public class Loading : MonoBehaviour
 
         // setup previous scene name
         Blackboard.SCENE_PREVIOUS = Const.SCENE_TEXAS;
+
+        // start the background music again
+        Blackboard.audioManager.srcBgm.clip = Blackboard.audioManager.bgm1;
+        Blackboard.audioManager.EnableBGM(true);
     }
     #endregion
 
