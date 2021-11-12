@@ -5,18 +5,17 @@ using UnityEngine;
 public class CardDeck
 { 
     private List<Card> cards;     // list of card that repersent the card-deck
-    private List<Card> usedCards; // list of card that has been dealt
+    private int pointerIndex;     // the index of current drawing card
+    private System.Random rd;     // the random generator for card shuffling
 
     public CardDeck()
     {
         cards = new List<Card>();
-        usedCards = new List<Card>();
+        rd = new System.Random();
 
         foreach (Suit suit in Enum.GetValues(typeof(Suit)))
             foreach (Value value in Enum.GetValues(typeof(Value)))
                 cards.Add(new Card(suit, value));
-
-        Shuffle();
     }
 
     /// <summary>
@@ -25,8 +24,6 @@ public class CardDeck
     public void DebugDeck()
     {
         cards = new List<Card>();
-        usedCards = new List<Card>();
-
         cards.Add(new Card(Suit.Heart, Value.KING));
         cards.Add(new Card(Suit.Heart, Value.QUEEN));
         cards.Add(new Card(Suit.Heart, Value.FIVE));
@@ -43,40 +40,36 @@ public class CardDeck
     /// </summary>
     public void Shuffle()
     {
+        // reset pointer index
+        pointerIndex = 0;
+
         // play shuffle sound effect
         Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipShuffling, AudioType.Sfx);
 
-        // first of all, put every card into the usedCard list
-        for (int i = 0; i < cards.Count; i++)
+        // shuffle the card deck
+        for (int i = cards.Count - 1; i > 0; i--)
         {
-            usedCards.Add(cards[0]);
-            cards.RemoveAt(0);
-        }
+            // randomly pick a card
+            var j = rd.Next(0, i);
+            Card c = cards[j];
 
-        // then, randomly pick a card from usedCard list and put it back to card list
-        while (usedCards.Count > 0)
-        {
-            // randomly select a card
-            var card = usedCards[UnityEngine.Random.Range(0, usedCards.Count)];
-
-            // add it to card list & remove it from usedCard list
-            cards.Add(card);
-            usedCards.Remove(card);
+            // and swap the selected card with i card
+            cards[j] = cards[i];
+            cards[i] = c;
         }
     }
 
     /// <summary>
-    /// Method to draw the first card from the card-deck
+    /// Method to draw the 'n' card from the card-deck
     /// </summary>
     /// <returns></returns>
     public Card DrawACard()
     {
-        // find the first card 
-        var card = cards[0];
+        // find the 'n' card 
+        var card = cards[pointerIndex];
 
-        // revmoe it from the card list & add it to usedCard list
-        cards.Remove(card);
-        usedCards.Add(card);
+        // increment the pointer index
+        pointerIndex++;
 
         return card;
     }
