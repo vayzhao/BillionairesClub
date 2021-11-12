@@ -97,7 +97,7 @@ public class OptionPanel : MonoBehaviour
         SetResolution(bestIndex);
 
         // update resolution dropdown
-        Invoke("UpdateResolutionDropdown", Time.deltaTime * 2);
+        Invoke("UpdateResolutionDropdown", Const.WAIT_TIME_FULLSCREEN);
     }
     /// <summary>
     /// Method to change resolution
@@ -130,7 +130,7 @@ public class OptionPanel : MonoBehaviour
         Screen.fullScreen = isFullscreen;
 
         // update resolution dropdown
-        Invoke("UpdateResolutionDropdown", Time.deltaTime * 2);
+        Invoke("UpdateResolutionDropdown", Const.WAIT_TIME_FULLSCREEN);
     }
 
     /// <summary>

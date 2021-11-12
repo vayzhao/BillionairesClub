@@ -99,7 +99,6 @@ namespace TexasBonus
 
                 // reset the game
                 ResetGame();
-                yield return new WaitForSeconds(Const.WAIT_TIME_CHIP_TOTAL);
 
                 // deal 2 dealers card and 5 community card (in face-down)
                 yield return tableController.DealInitialCards();          

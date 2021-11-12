@@ -84,7 +84,7 @@ public class CController : Player
         if (Blackboard.lockRotation)
             return;
 
-        var mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * 400f;
+        var mouseX = Input.GetAxis("Mouse X") * Const.MOUSE_SENSITIVITY;
         transform.Rotate(Vector3.up * mouseX);
     }
 

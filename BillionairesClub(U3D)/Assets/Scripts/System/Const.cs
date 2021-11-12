@@ -14,6 +14,8 @@ public static class Const
     public const float WAIT_TIME_CHIP_TOTAL = 1f;
     public const float WAIT_TIME_CHIP_TRAVEL = 0.2f;
     public const float WAIT_TIME_LABEL_FLOAT = 1.5f;
+    public const float WAIT_TIME_FULLSCREEN = 0.25f;
+    public const float MOUSE_SENSITIVITY = 6f;
 
     public const string SCENE_HOMEPAGE = "Homepage";
     public const string SCENE_INCASINO = "Casino";

@@ -24,15 +24,16 @@ public class CardDeck
     public void DebugDeck()
     {
         cards = new List<Card>();
-        cards.Add(new Card(Suit.Heart, Value.KING));
-        cards.Add(new Card(Suit.Heart, Value.QUEEN));
-        cards.Add(new Card(Suit.Heart, Value.FIVE));
-        cards.Add(new Card(Suit.Spade, Value.SIX));
-        cards.Add(new Card(Suit.Diamond, Value.SEVEN));
-        cards.Add(new Card(Suit.Spade, Value.SEVEN));
-        cards.Add(new Card(Suit.Diamond, Value.SEVEN));
-        cards.Add(new Card(Suit.Heart, Value.FOUR));
-        cards.Add(new Card(Suit.Heart, Value.THREE));
+        pointerIndex = 0;
+        cards.Add(new Card(Suit.Heart, Value.KING)); // dealer hand 1
+        cards.Add(new Card(Suit.Heart, Value.QUEEN)); // dealer hand 2
+        cards.Add(new Card(Suit.Heart, Value.TWO)); // flop1
+        cards.Add(new Card(Suit.Spade, Value.THREE)); // flop2
+        cards.Add(new Card(Suit.Diamond, Value.FOUR)); // flop3
+        cards.Add(new Card(Suit.Spade, Value.FIVE)); // turn
+        cards.Add(new Card(Suit.Diamond, Value.SIX)); // river
+        cards.Add(new Card(Suit.Heart, Value.SEVEN)); // player's hand 1
+        cards.Add(new Card(Suit.Heart, Value.ACE)); // player's hand 2
     }
 
     /// <summary>

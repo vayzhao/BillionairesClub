@@ -178,6 +178,8 @@ namespace TexasBonus
                                 break;
                             }
                         }
+                        // if the player has 2-3-4-5 but does not have ACE, it is impossible to get another straight
+                        return;
                     }
                     // otherwise, check if there are more than 5 unchecked cards remaining
                     // if yes, reset the straight count and straight value
@@ -199,7 +201,7 @@ namespace TexasBonus
             // find all cards which has a lower value and same suit with the straight value, and sort then by descending order
             // if the straight value is 5, take the first 4 of them
             // otherwise, take the first 5 of them
-            var straightFlush = cards.Select(x => x).Where(x => x.suit == suit && x.value <= value).OrderByDescending(x => x.value).Distinct().Take(value == Value.FIVE ? 4 : 5).ToArray();
+            var straightFlush = cards.Select(x => x).Where(x => x.suit == suit && x.value <= value).OrderByDescending(x => x.value).Distinct().ToArray();
 
             // setup the first best 4 cards
             bestHand[0] = straightFlush[0];
@@ -207,12 +209,9 @@ namespace TexasBonus
             bestHand[2] = straightFlush[2];
             bestHand[3] = straightFlush[3];
 
-            // if the straight value is 5, resize the best hand array and set the last element to be an ACE
+            // if the straight value is 5, set the last element to be an ACE
             if (value == Value.FIVE)
-            {
-                Array.Resize(ref bestHand, 5);
                 bestHand[4] = cards.Select(x => x).Where(x => x.value == Value.ACE).First();
-            }
             else
                 bestHand[4] = straightFlush[4];
         }
@@ -358,6 +357,8 @@ namespace TexasBonus
                             break;
                         }
                     }
+                    // if the player has 2-3-4-5 but does not have ACE, it is impossible to get another straight
+                    return;
                 }
                 // otherwise, check if there are more than 5 unchecked cards remain
                 // if yes, reset the straight count and straight value
@@ -378,7 +379,7 @@ namespace TexasBonus
             // find all cards which has a lower value than the straight value and sort then by descending order
             // if the straight value is 5, take the first 4 of them
             // otherwise, take the first 5 of them
-            var straight = cards.Select(x => x).Where(x => x.value <= value).OrderByDescending(x => x.value).Distinct().Take(value == Value.FIVE ? 4 : 5).ToArray();
+            var straight = cards.Select(x => x).Where(x => x.value <= value).OrderByDescending(x => x.value).Distinct().ToArray();
 
             // setup the first best 4 cards
             bestHand[0] = straight[0];
@@ -386,12 +387,9 @@ namespace TexasBonus
             bestHand[2] = straight[2];
             bestHand[3] = straight[3];
 
-            // if the straight value is 5, resize the best hand array and set the last element to be an ACE
+            // if the straight value is 5, set the last element to be an ACE
             if (value == Value.FIVE)
-            {
-                Array.Resize(ref bestHand, 5);
                 bestHand[4] = cards.Select(x => x).Where(x => x.value == Value.ACE).First();
-            }
             // otherwise the last best card will be the 5th element in 'straight'
             else
                 bestHand[4] = straight[4];
