@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     public PlayerBoard playerBoard;
     [Tooltip("A game object that holds the sub-loading bar UI")]
     public GameObject subLoaderBar;
-    
+
     [Header("UI Widget - for some games")]
     [Tooltip("a button for starting the game")]
     public Button readyBtn;
@@ -38,17 +38,17 @@ public class UIManager : MonoBehaviour
                                           // interactable objects will be hidden when the game is paused
     private UIPage initPage;              // the background window
     private UIPage currentPage;           // the current displayed window
-   
+
 
     // Start is called before the first frame update
     void Start()
-    {        
+    {
         // initialize the background page
         switch (sceneType)
         {
             case SceneType.Homepage:
                 initPage = new UIPage(initButtons);
-                Blackboard.LockCursor(false);
+                CursorController.LockCursor(false);
                 break;
             case SceneType.InCasino:
                 initPage = new UIPage(initButtons);
@@ -132,7 +132,7 @@ public class UIManager : MonoBehaviour
         // find all buttons that have "Cancel Button" tag with it and 
         // invoke its on click method
         foreach (var btn in GameObject.FindGameObjectsWithTag("CancelButton"))
-            btn.GetComponent<Button>().onClick.Invoke();        
+            btn.GetComponent<Button>().onClick.Invoke();
     }
 
     /// <summary>

@@ -53,7 +53,7 @@ public class ExchangeChip: MonoBehaviour
         Blackboard.audioManager.PlayAudio(Blackboard.audioManager.cashierGreetings, AudioType.UI);
 
         // force the user to focus on the window
-        Blackboard.FocusOnWindow(true);
+        CursorController.WindowFocusMode(true);
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public class ExchangeChip: MonoBehaviour
         portals.Resume();
 
         // release user from the chip exchange panel
-        Blackboard.FocusOnWindow(false);
+        CursorController.WindowFocusMode(false);
     }
 
     /// <summary>

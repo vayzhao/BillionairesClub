@@ -56,11 +56,11 @@ public class PlayerBoard : MonoBehaviour
     }
 
     /// <summary>
-    /// Method to lock the space bar when the user is trying to
+    /// Method to lock the keyboard when the user is trying to
     /// modify the player board description. We do that to prevent the 
-    /// character from standing up when the user is trying to type white space
+    /// character from moving when the user is trying to type white space
     /// </summary>
-    public void StartEditing() => Blackboard.lockSpaceBar = true;
+    public void StartEditing() => CursorController.isTypingText = true;
 
     /// <summary>
     /// Method to play input change sound effect when the player is editing the input field
@@ -68,13 +68,13 @@ public class PlayerBoard : MonoBehaviour
     public void InputChange() => Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipInputFieldChange, AudioType.UI);
 
     /// <summary>
-    /// Method to unlock the space bar when the user finished modifying
+    /// Method to unlock the keyboard when the user finished modifying
     /// player board description
     /// </summary>
     public void EndEditing(string message)
     {
-        // unlock space bar
-        Blackboard.lockSpaceBar = false;
+        // unlock keyboard
+        CursorController.isTypingText = false;
 
         // immediatly disable and re-enable the input field so the 
         // player will not re-select the input field unintentionally 

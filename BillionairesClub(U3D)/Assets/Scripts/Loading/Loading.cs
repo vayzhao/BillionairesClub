@@ -439,7 +439,7 @@ public class Loading : MonoBehaviour
         obj_uiManager.SetDefaultObjectVisibility(true);
 
         // check to see whether or not to lock the cursor
-        Blackboard.LockCursor(cursorLock);
+        CursorController.LockCursor(cursorLock);
     }
 
     #endregion

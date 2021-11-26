@@ -15,6 +15,8 @@ public class CController : Player
     /// <summary>
     /// Core components
     /// </summary>
+    [HideInInspector]
+    public CursorController cursor;         // a controller that handles all the cursor events
     private Seat seat;                      // a seat which the character will sit / is sitting on
     private Transform model;                // the model to visualize the player character
     private Animator animator;              // a component that handles all the animation staff
@@ -47,6 +49,9 @@ public class CController : Player
 
         // find character controller component from this object
         controller = GetComponent<CharacterController>();
+
+        // find cursor controller from this object
+        cursor = GetComponent<CursorController>();
 
         // find seat manager script in the scene
         seatManager = FindObjectOfType<SeatManager>();
@@ -81,7 +86,7 @@ public class CController : Player
     void Turn()
     {
         // return if the rotation is locked
-        if (Blackboard.lockRotation)
+        if (CursorController.IsCharacterLocked())
             return;
 
         var mouseX = Input.GetAxis("Mouse X") * Const.MOUSE_SENSITIVITY;
@@ -104,7 +109,7 @@ public class CController : Player
         // 2(walk backward)
         // 3(sprint)
         var moveState = 0;
-        if ((horizontal != 0f || vertical != 0f) && !Blackboard.lockMovement)
+        if ((horizontal != 0f || vertical != 0f) && !CursorController.IsCharacterLocked())
         {
             // if the character is moving, calculate move position based on the given input
             var verticalMove = transform.right * horizontal;
@@ -207,12 +212,9 @@ public class CController : Player
             // check to see if this seat has binded to any table
             var table = seat.GetTable();
 
-            // return if the table does not exsit, also unlock cursor so that the user can edit his playerboard
+            // return if the table does not exist
             if (table == null)
-            {
-                Blackboard.LockCursor(false);
                 return;
-            }
             
             // return if the table has no game type
             if (table.gameType == GameType.None)
@@ -231,8 +233,8 @@ public class CController : Player
     /// </summary>
     void StandUp()
     {
-        // return if the space bar is locked
-        if (Blackboard.lockSpaceBar)
+        // return if the user is typing
+        if (CursorController.isTypingText)
             return;
 
         // return if space key is not pressed
@@ -254,9 +256,6 @@ public class CController : Player
 
         // finally stand up
         seat.StandUp(animator);
-
-        // lock cursor
-        Blackboard.LockCursor(true);
     }
 
     /// <summary>

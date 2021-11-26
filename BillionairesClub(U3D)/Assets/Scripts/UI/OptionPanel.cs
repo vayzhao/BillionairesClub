@@ -15,7 +15,7 @@ public class OptionPanel : MonoBehaviour
     public static float volSfx = 0f;         // default value for sfx volume
     public static float volUI = 0f;          // default value for UI
     public static int qualityLevel = 2;      // default value for quality level
-    public static int resolutionIndex;       // default value for resolution index
+    public static int resolutionIndex = -1;  // default value for resolution index
 
     private const float VOL_MIN = -10f;  // minimum value for the volume slider
     private const float VOL_MUTE = -80f; // volume that completely muted
@@ -92,12 +92,12 @@ public class OptionPanel : MonoBehaviour
         dropdown.AddOptions(resolutions.Select(x => $"{x.width}x{x.height}").ToList());
 
         // automatically select the best resolution
-        var bestIndex = dropdown.options.Count - 1;
+        var bestIndex = resolutionIndex == -1 ? dropdown.options.Count - 1 : resolutionIndex;
         dropdown.value = bestIndex;
         SetResolution(bestIndex);
 
         // update resolution dropdown
-        Invoke("UpdateResolutionDropdown", Const.WAIT_TIME_FULLSCREEN);
+        StartCoroutine(UpdateResolutionDropdown(Screen.fullScreen));
     }
     /// <summary>
     /// Method to change resolution
@@ -130,7 +130,7 @@ public class OptionPanel : MonoBehaviour
         Screen.fullScreen = isFullscreen;
 
         // update resolution dropdown
-        Invoke("UpdateResolutionDropdown", Const.WAIT_TIME_FULLSCREEN);
+        StartCoroutine(UpdateResolutionDropdown(isFullscreen));
     }
 
     /// <summary>
@@ -153,9 +153,17 @@ public class OptionPanel : MonoBehaviour
     /// <summary>
     /// Method to update resolution dropdown panel when changing full screen option
     /// </summary>
-    private void UpdateResolutionDropdown()
+    IEnumerator UpdateResolutionDropdown(bool flag)
     {
-        // disable dropdown panel if in full screen
+        // break the corotine when the game is running in editor
+        if (Application.isEditor)
+            yield break;
+
+        // otherwise wait till the change to take effect
+        while (Screen.fullScreen != flag)
+            yield return new WaitForSeconds(Time.deltaTime);
+
+        // disable dropdown panel if full-screen is on
         dropdown.enabled = !Screen.fullScreen;
 
         // refresh dropdown panel color
@@ -164,6 +172,7 @@ public class OptionPanel : MonoBehaviour
         // refresh value in resolution dropdown
         dropdown.RefreshShownValue();
     }
+
     #endregion
 
     #region Volume
