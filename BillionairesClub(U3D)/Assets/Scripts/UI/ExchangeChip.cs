@@ -51,9 +51,6 @@ public class ExchangeChip: MonoBehaviour
 
         // play greetings sound effect
         Blackboard.audioManager.PlayAudio(Blackboard.audioManager.cashierGreetings, AudioType.UI);
-
-        // force the user to focus on the window
-        CursorController.WindowFocusMode(true);
     }
 
     /// <summary>
@@ -70,9 +67,6 @@ public class ExchangeChip: MonoBehaviour
 
         // resume portals range-check coroutine
         portals.Resume();
-
-        // release user from the chip exchange panel
-        CursorController.WindowFocusMode(false);
     }
 
     /// <summary>

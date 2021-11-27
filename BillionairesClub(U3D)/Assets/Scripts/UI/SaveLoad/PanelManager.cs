@@ -141,6 +141,7 @@ namespace Archive
 
             // switch off the delete button
             deleteButton.Switch(false);
+            loadButton.Switch(false);
 
             // refresh the selected archive panel
             archives[selectIndex].ClearPanel();

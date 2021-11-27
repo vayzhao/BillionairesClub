@@ -154,9 +154,6 @@ public class PortalTagManager : MonoBehaviour
     /// <param name="flag"></param>
     public void PopUpExitPanel(bool flag)
     {
-        // force or release the user from window focus mode
-        CursorController.WindowFocusMode(flag);
-        
         // if the flag is true, stop the range-check coroutine
         // and pop up a exit confirmation window for the user
         if (flag)
@@ -180,9 +177,6 @@ public class PortalTagManager : MonoBehaviour
     {
         // close current page
         // uiManager.ClosePage();
-
-        // release the player from movement,rotation lock
-        CursorController.WindowFocusMode(false);
 
         // stop crowd sound 
         Blackboard.audioManager.EnableEnvironmentSound(false);

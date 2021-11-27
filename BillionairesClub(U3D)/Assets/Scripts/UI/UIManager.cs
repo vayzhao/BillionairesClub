@@ -78,6 +78,12 @@ public class UIManager : MonoBehaviour
 
     // Terminate the program
     public void Terminate() { Application.Quit(); }
+    
+    /// <summary>
+    /// Method to determine whether or not we have a pop up window overlay the screen
+    /// </summary>
+    /// <returns></returns>
+    public bool HasPage() => currentPage.prevPage != null;
 
     /// <summary>
     /// Method to pop up a new window and hide the old window
