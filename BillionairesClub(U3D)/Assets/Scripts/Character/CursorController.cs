@@ -30,7 +30,7 @@ public class CursorController : MonoBehaviour
         // switch cursor display state to true when alt key is pressed
         // switch to false when alt key is released
         // otherwise remain its current value
-        cursorDisplay = Input.GetKeyDown(KeyCode.LeftAlt) ? true : Input.GetKeyUp(KeyCode.LeftAlt) ? false : cursorDisplay;
+        cursorDisplay = UserInput.GetKeyDown(KeyCode.LeftAlt) ? true : UserInput.GetKeyUp(KeyCode.LeftAlt) ? false : cursorDisplay;
 
         // return when there is a window overlay the screen or the cursor visible state matches cursor display state
         if (windowDisplay || Cursor.visible == cursorDisplay)

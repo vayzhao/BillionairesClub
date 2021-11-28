@@ -89,7 +89,7 @@ public class CController : Player
         if (CursorController.IsCharacterLocked())
             return;
 
-        var mouseX = Input.GetAxis("Mouse X") * Const.MOUSE_SENSITIVITY;
+        var mouseX = UserInput.GetAxis("Mouse X") * Const.MOUSE_SENSITIVITY;
         transform.Rotate(Vector3.up * mouseX);
     }
 
@@ -99,8 +99,8 @@ public class CController : Player
     void Walk()
     {
         // obtain player's input
-        var vertical = Input.GetAxisRaw("Vertical");
-        var horizontal = Input.GetAxisRaw("Horizontal");
+        var vertical = UserInput.GetAxisRaw("Vertical");
+        var horizontal = UserInput.GetAxisRaw("Horizontal");
 
         // detect whether or not the character is moving by checking the input
         // set up a moveState index for animation purpose 
@@ -123,7 +123,7 @@ public class CController : Player
                 movePosition *= moveSpeedBackward;
             }
             // case1: moving sprinting forward
-            else if (Input.GetKey(KeyCode.LeftShift))
+            else if (UserInput.GetKey(KeyCode.LeftShift))
             {
                 moveState = 3;
                 movePosition *= sprintSpeed;
@@ -180,7 +180,7 @@ public class CController : Player
     void SitDown()
     {
         // check through all conditions for siting action
-        if (Input.GetKeyDown(KeyCode.Space)
+        if (UserInput.GetKeyDown(KeyCode.Space)
             && hasAvailableSeat
             && (seatManager.availableSeats.Contains(seat)
                 || seatManager.userSeats.Contains(seat))
@@ -238,7 +238,7 @@ public class CController : Player
             return;
 
         // return if space key is not pressed
-        if (!Input.GetKeyDown(KeyCode.Space))
+        if (!UserInput.GetKeyDown(KeyCode.Space))
             return;
 
         // otherwise, switch sitting state to be false

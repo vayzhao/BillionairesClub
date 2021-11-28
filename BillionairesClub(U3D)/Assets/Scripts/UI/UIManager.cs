@@ -132,7 +132,7 @@ public class UIManager : MonoBehaviour
             return;
 
         // return if ESC key is not pressed
-        if (!Input.GetKeyDown(KeyCode.Escape))
+        if (!UserInput.GetKeyDown(KeyCode.Escape))
             return;
 
         // find all buttons that have "Cancel Button" tag with it and 

@@ -92,3 +92,10 @@ public enum AudioType
     Sfx,
     UI
 }
+
+public enum PlatformType
+{
+    Window,
+    iOS,
+    Android
+}

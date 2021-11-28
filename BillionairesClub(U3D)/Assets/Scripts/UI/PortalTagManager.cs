@@ -128,7 +128,7 @@ public class PortalTagManager : MonoBehaviour
             return;
 
         // return if the player is not pressing Space Bar
-        if (!Input.GetKeyDown(KeyCode.Space))
+        if (!UserInput.GetKeyDown(KeyCode.Space))
             return;
 
         // play space bar trigger sound effect
