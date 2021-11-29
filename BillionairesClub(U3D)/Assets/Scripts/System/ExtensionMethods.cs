@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public static class ExtensionMethods
 {
@@ -109,6 +110,16 @@ public static class ExtensionMethods
         btn.image.sprite = flag ?
             btn.spriteState.pressedSprite :
             btn.spriteState.disabledSprite;
+    }
+    public static void RegisterEventMethod(this EventTrigger trg, EventTriggerType type, Action<PointerEventData> method)
+    {
+        // create an entry that invokes the event method
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = type;
+        entry.callback.AddListener(data => method.Invoke((PointerEventData)data));
+
+        // add the entry into the trigger
+        trg.triggers.Add(entry);
     }
     #endregion
 
