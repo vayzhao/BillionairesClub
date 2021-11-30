@@ -57,3 +57,12 @@ The following packages were updated:
   com.unity.render-pipelines.universal from version 10.3.2 to 10.6.0
   com.unity.test-framework from version 1.1.22 to 1.1.29
   com.unity.timeline from version 1.4.6 to 1.4.8
+
+=== Tue Nov 30 20:56:08 2021
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.collab-proxy from version 1.13.5 to 1.15.1
+  com.unity.render-pipelines.universal from version 10.6.0 to 10.7.0
