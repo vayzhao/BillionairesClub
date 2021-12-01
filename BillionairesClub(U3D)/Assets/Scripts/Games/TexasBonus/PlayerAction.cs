@@ -34,17 +34,31 @@ namespace TexasBonus
         public TableController tableController; // the table controller script
         [HideInInspector]
         public LabelController labelController; // the label controller script
+        [HideInInspector]
+        public BeforeBet beforeBet;             // the drag and drop betting component
 
         private BetType betType;                // used in bet method, to determine whether it is flop bet, turn bet or river bet
         private int playerIndex;                // whose term is it
         private int[] anteWagerOptions;         // optional betting values of ante wager 
         private int[] bonusWagerOptions;        // optional betting values of bonus wager
+        private int[] wagerOptions;             // values for all chips
+
+        private void Start()
+        {
+            beforeBet = GetComponent<BeforeBet>();
+            beforeBet.methodFold = TestFold;
+            beforeBet.methodCheck = TestCheck;
+            beforeBet.methodBet = TestBet;
+        }
 
         public void Setup() 
         {
             bets = new Bet[gameManager.players.Length];
             anteWagerOptions = new int[4] { 15, 30, 45, 60 };
-            bonusWagerOptions = new int[5] { 5, 10, 20, 50, 100 };
+            bonusWagerOptions = new int[5] { 5, 10, 25, 50, 100 };
+            wagerOptions = new int[5] { 5, 10, 25, 50, 100 };
+
+            
         }
 
         /// <summary>
@@ -315,6 +329,18 @@ namespace TexasBonus
             // hide the hand-rank panel if the player is a user player
             if (!gameManager.players[playerIndex].isNPC)
                 labelController.SetLocalHandRankPanelVisibility(false);
+        }
+        void TestBet()
+        {
+            Debug.Log("TestBet");
+        }
+        void TestFold()
+        {
+            Debug.Log("TestFold");
+        }
+        void TestCheck()
+        {
+            Debug.Log("TestCheck");
         }
 
         /// <summary>

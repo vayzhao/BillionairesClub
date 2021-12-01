@@ -41,6 +41,7 @@ namespace TexasBonus
             playerAction.gameManager = this;
             playerAction.labelController = labelController;
             playerAction.tableController = tableController;
+            playerAction.beforeBet = uiManager.beforeBet;
             tableController.gameManager = this;
             tableController.playerAction = playerAction;
 

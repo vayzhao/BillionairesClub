@@ -30,6 +30,8 @@ public class UIManager : MonoBehaviour
     public GameObject playerAction;
     [Tooltip("a script that handles all the UI-text objects in the scene")]
     public GameObject labelController;
+    [Tooltip("a script that handles drag and drop betting system")]
+    public BeforeBet beforeBet;
 
     [HideInInspector]
     public bool lockPage;                 // determine whether or not the user can go back to previous page

@@ -5,20 +5,50 @@ using TMPro;
 
 public class BeforeBet : MonoBehaviour
 {
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI wagerText;
 
     public int total;
+    public bool isWaiting;
 
     public Button btn_reset;
     public Button btn_bet;
     public Button btn_fold;
-    public TextMeshProUGUI betText;
 
+    [Header("Options")]
     public Toggle isSkipDrag;
     public Toggle isRightClickBet;
 
-    private void Start()
+    public delegate void Method();
+    public Method methodFold;
+    public Method methodCheck;
+    public Method methodBet;
+
+    void Start()
     {
         Reset();
+    }
+
+    void Update()
+    {
+        RightClickDetect();
+    }
+
+    void RightClickDetect()
+    {
+        // return if right click bet is off
+        if (!isRightClickBet.isOn)
+            return;
+
+        // return if the user is not pressing right-click
+        if (!Input.GetMouseButtonDown(1))
+            return;
+
+        // determine which action to take
+        if (total == 0)
+            Fold();
+        else
+            Bet();
     }
 
     public void AddChip(int value)
@@ -31,7 +61,7 @@ public class BeforeBet : MonoBehaviour
         }
         
         total += value;
-        betText.text = $"{total:C0}";
+        wagerText.text = $"{total:C0}";
     }
 
     public void Reset()
@@ -40,16 +70,14 @@ public class BeforeBet : MonoBehaviour
         btn_reset.Switch(false);
         btn_bet.gameObject.SetActive(false);
         btn_fold.gameObject.SetActive(true);
-        betText.text = "";
+        wagerText.text = "";
     }
 
-    public void Bet()
-    {
 
-    }
-
-    public void Fold()
-    {
-
-    }
+    /// <summary>
+    /// Delegate methods for fold/check/bet
+    /// </summary>
+    public void Bet() => methodBet.Invoke();
+    public void Fold() => methodFold.Invoke();
+    public void Check() => methodCheck.Invoke();
 }
