@@ -41,7 +41,6 @@ namespace TexasBonus
             playerAction.gameManager = this;
             playerAction.labelController = labelController;
             playerAction.tableController = tableController;
-            playerAction.beforeBet = uiManager.beforeBet;
             tableController.gameManager = this;
             tableController.playerAction = playerAction;
 
@@ -178,7 +177,7 @@ namespace TexasBonus
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    playerAction.BetBonusWager_AI(checkIndex);
+                    //playerAction.BetBonusWager_AI(checkIndex);
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
@@ -209,7 +208,7 @@ namespace TexasBonus
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    playerAction.BetAnteWager_AI(checkIndex);
+                    //playerAction.BetAnteWager_AI(checkIndex);
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
@@ -240,7 +239,7 @@ namespace TexasBonus
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    playerAction.Bet_AI(BetType.Flop, checkIndex);
+                    //playerAction.Bet_AI(BetType.Flop, checkIndex);
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
@@ -271,7 +270,7 @@ namespace TexasBonus
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    playerAction.Bet_AI(BetType.Turn, checkIndex);
+                    //playerAction.Bet_AI(BetType.Turn, checkIndex);
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
@@ -302,7 +301,7 @@ namespace TexasBonus
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    playerAction.Bet_AI(BetType.River, checkIndex);
+                    //playerAction.Bet_AI(BetType.River, checkIndex);
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }

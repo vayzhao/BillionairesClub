@@ -3640,7 +3640,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6040173574471368200}
-  - {fileID: 2966840287927968706}
+  - {fileID: 1147869601814462036}
   m_Father: {fileID: 3460310380295488922}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7082,7 +7082,7 @@ MonoBehaviour:
   playerBoard: {fileID: 8862211177487442631}
   subLoaderBar: {fileID: 2925266196262693153}
   readyBtn: {fileID: 5788309069369203750}
-  playerAction: {fileID: 2966840287927968709}
+  playerAction: {fileID: 1147869601814462035}
   labelController: {fileID: 9125431650797348320}
   lockPage: 0
   interactable: []
@@ -13907,16 +13907,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd448801548cd444b04a0cf2dc2fa9d, type: 3}
---- !u!1 &2177700071199022869 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 211063583560793149, guid: bfd448801548cd444b04a0cf2dc2fa9d, type: 3}
-  m_PrefabInstance: {fileID: 2077680719592710952}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &898840499208412022 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1201393683980433502, guid: bfd448801548cd444b04a0cf2dc2fa9d, type: 3}
-  m_PrefabInstance: {fileID: 2077680719592710952}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5788309069369203750 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5512779730776768270, guid: bfd448801548cd444b04a0cf2dc2fa9d, type: 3}
@@ -13928,6 +13918,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2177700071199022869 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 211063583560793149, guid: bfd448801548cd444b04a0cf2dc2fa9d, type: 3}
+  m_PrefabInstance: {fileID: 2077680719592710952}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &898840499208412022 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1201393683980433502, guid: bfd448801548cd444b04a0cf2dc2fa9d, type: 3}
+  m_PrefabInstance: {fileID: 2077680719592710952}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4668245182263152296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14402,14 +14402,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
---- !u!224 &6040173574471368200 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 9134818167235980593, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
-  m_PrefabInstance: {fileID: 3248895664216838969}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9125431650797348320 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6031004726975428313, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
+  m_PrefabInstance: {fileID: 3248895664216838969}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6040173574471368200 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9134818167235980593, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
   m_PrefabInstance: {fileID: 3248895664216838969}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5188123452015046353
@@ -14713,11 +14713,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41bb8039ba8221047beb47eb54ce4563, type: 3}
---- !u!224 &3174114409195748283 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7778652199469798762, guid: 41bb8039ba8221047beb47eb54ce4563, type: 3}
-  m_PrefabInstance: {fileID: 5188123452015046353}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6399206562327614169 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2247690648685132808, guid: 41bb8039ba8221047beb47eb54ce4563, type: 3}
@@ -14726,6 +14721,11 @@ GameObject:
 --- !u!1 &2437777640079045254 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7362069359998000215, guid: 41bb8039ba8221047beb47eb54ce4563, type: 3}
+  m_PrefabInstance: {fileID: 5188123452015046353}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &3174114409195748283 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7778652199469798762, guid: 41bb8039ba8221047beb47eb54ce4563, type: 3}
   m_PrefabInstance: {fileID: 5188123452015046353}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6120873702612404000
@@ -14892,817 +14892,113 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8994583291677604014, guid: ed005a5d4768e7d4cbe7df1f63f54c2e, type: 3}
   m_PrefabInstance: {fileID: 6074106587548045711}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &7113731792006380797
+--- !u!1001 &6336215326281656327
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 9127324110911669952}
     m_Modifications:
-    - target: {fileID: 5446357018551181112, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-      propertyPath: m_Name
-      value: Player's Action[TexasBonus]
-      objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181112, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+    - target: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6341295971015186004, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+      propertyPath: m_Name
+      value: Player's Action[TexasBonus]
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
---- !u!1 &2966840287762962507 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357018650387638, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7185739345746738284 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 72570529470038161, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840288197735644 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357017745066017, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840288426132738 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357017986103807, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840287302536297 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357019244966036, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840286413218936 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357019462932613, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840288386348523 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357018227280150, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840286784300814 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357019829853171, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840286510230372 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357019566266265, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840287794371016 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357018686022965, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840287782145184 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357018697003101, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5832312159791192235 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3623572913627259990, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840287785164010 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357018693722135, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840286767100006 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357019846200475, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &2966840287927968706 stripped
+--- !u!224 &1147869601814462036 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5446357018551181119, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
+  m_CorrespondingSourceObject: {fileID: 6341295971015186003, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+  m_PrefabInstance: {fileID: 6336215326281656327}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2966840287927968709 stripped
+--- !u!1 &1147869601814462035 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 5446357018551181112, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
-  m_PrefabInstance: {fileID: 7113731792006380797}
+  m_CorrespondingSourceObject: {fileID: 6341295971015186004, guid: 681e72ee0b0d22f4aa29c9d67875c9b7, type: 3}
+  m_PrefabInstance: {fileID: 6336215326281656327}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2138986820706549799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840286413218936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &5023022408733598503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840286510230372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &911513132996118581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840286767100006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &8449149341227487316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840286784300814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &948491482869440317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840287302536297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &825580546571037573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840287762962507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &8724009370526914500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840287782145184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &8876274460166565046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840287785164010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &7292692401322697205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840287794371016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &7724426605708852651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840288197735644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &2991219940882787368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840288386348523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &5012456727116836739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966840288426132738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &4285286764469825594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5832312159791192235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &5582291745940179487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7185739345746738284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseEnterSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6932235123458729214}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: PlayMouseClickSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1001 &8001733969959935679
 PrefabInstance:
   m_ObjectHideFlags: 0

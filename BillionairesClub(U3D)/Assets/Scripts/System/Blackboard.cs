@@ -15,6 +15,8 @@ public static class Blackboard
 
     public static AudioManager audioManager;
 
+    public delegate void VoidDel();
+
     #region Player
     public static Player localPlayer;
     #endregion

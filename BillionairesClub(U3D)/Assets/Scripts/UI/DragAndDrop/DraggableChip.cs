@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ChipSprite: MonoBehaviour
+public class DraggableChip: MonoBehaviour
 {
     [Tooltip("Value of this chip")]
     public int value = 5;
@@ -21,7 +21,7 @@ public class ChipSprite: MonoBehaviour
     private EventTrigger triggers;      // a component that triggers functions based on user's input
     private BeforeBet manager; // a component that handles all the drag and drop functions
 
-    void Start()
+    void Awake()
     {
         InitializeSprite();
         RegisterEvents();        
