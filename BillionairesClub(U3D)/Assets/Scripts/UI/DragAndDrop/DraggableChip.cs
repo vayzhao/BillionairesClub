@@ -10,16 +10,16 @@ public class DraggableChip: MonoBehaviour
 
     [Tooltip("Sprite to display when the button is disabled")]
     public Sprite disableSprite;
-    private Sprite defaultSprite;       // sprite used for the image
+    private Sprite defaultSprite;  // sprite used for the image
 
     [Tooltip("Gameobject to display when the user is dragging a chip")]
     public GameObject pref_drag;
-    private GameObject obj_drag;        // the actual gameobject 
+    private GameObject obj_drag;   // the actual gameobject 
 
-    private bool isOn;                  // determine whether or not this button is functioning
-    private Image image;                // image used for this chip 
-    private EventTrigger triggers;      // a component that triggers functions based on user's input
-    private BeforeBet manager; // a component that handles all the drag and drop functions
+    private bool isOn;             // determine whether or not this button is functioning
+    private Image image;           // image used for this chip 
+    private EventTrigger triggers; // a component that triggers functions based on user's input
+    private BeforeBet betManager;  // a component that handles all the drag and drop functions
 
     void Awake()
     {
@@ -37,7 +37,7 @@ public class DraggableChip: MonoBehaviour
         defaultSprite = image.sprite;
 
         // find the drag and drop manager
-        manager = GetComponentInParent<BeforeBet>();
+        betManager = GetComponentInParent<BeforeBet>();
 
         // turn on the button
         Enable(true);
@@ -87,7 +87,7 @@ public class DraggableChip: MonoBehaviour
     void BeginDrag(PointerEventData data)
     {
         // return if the chip is not activated or skip dragging is on
-        if (!isOn || manager.isSkipDrag.isOn)
+        if (!isOn || betManager.isSkipDrag.isOn)
             return;
 
         // spawn the clone chip sprite and update its image
@@ -97,7 +97,7 @@ public class DraggableChip: MonoBehaviour
     void Drag(PointerEventData data)
     {
         // return if the chip is not activated or skip dragging is on
-        if (!isOn || manager.isSkipDrag.isOn)
+        if (!isOn || betManager.isSkipDrag.isOn)
             return;
 
         // adjust clone chip sprite's position
@@ -106,7 +106,7 @@ public class DraggableChip: MonoBehaviour
     void EndDrag(PointerEventData data)
     {
         // return if the chip is not activated or skip dragging is on
-        if (!isOn || manager.isSkipDrag.isOn)
+        if (!isOn || betManager.isSkipDrag.isOn)
             return;
 
         // destroy the clone chip
@@ -120,7 +120,7 @@ public class DraggableChip: MonoBehaviour
         }
 
         // add chip
-        manager.AddChip(value);
+        betManager.Add(value);
     }
 
     /// <summary>
@@ -130,7 +130,7 @@ public class DraggableChip: MonoBehaviour
     void PointerDown(PointerEventData data)
     {
         // retrn if the chip is not activated or dragging is off
-        if (!isOn || !manager.isSkipDrag.isOn)
+        if (!isOn || !betManager.isSkipDrag.isOn)
             return;
 
         // return if the pointer button is not left click
@@ -138,7 +138,7 @@ public class DraggableChip: MonoBehaviour
             return;
 
         // add chip
-        manager.AddChip(value);
+        betManager.Add(value);
 
         // play normal sprite
         Normal(data);

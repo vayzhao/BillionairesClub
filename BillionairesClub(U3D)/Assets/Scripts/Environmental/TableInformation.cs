@@ -89,7 +89,7 @@ public class TableInformation : MonoBehaviour
 
             // check to see if this seat has player on it
             // if it does, spawn a model to repersent the player
-            if (playerState == 1 && playerState != 0)
+            if (playerState != 0)
             {
                 players[i] = CreateCharacter(seats[i], Storage.LoadInt(i, StorageType.ModelIndex));
                 players[i].isNPC = playerState == 2 ? true : false;

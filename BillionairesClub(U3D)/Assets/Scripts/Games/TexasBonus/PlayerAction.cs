@@ -7,9 +7,13 @@ namespace TexasBonus
     public class PlayerAction : BeforeBet
     {
         [Header("Decision Panel")]
+        [Tooltip("A game object that holds fold button")]
         public GameObject obj_fold;
+        [Tooltip("A game object that holds check button")]
         public GameObject obj_check;
+        [Tooltip("A game object that holds bet button")]
         public GameObject obj_bet;
+        [Tooltip("A game object that holds fold/check/bet buttons")]
         public GameObject decisionPanel;
 
         [HideInInspector]
@@ -23,8 +27,7 @@ namespace TexasBonus
         [HideInInspector]
         public LabelController labelController; // the label controller script
 
-        private BetType betType;                // used in bet method, to determine whether it is flop bet, turn bet or river bet
-        private int playerIndex;                // whose term is it
+        private BetType betType;                // type of the turn (ANTE/BONUS/FLOP/TURN/RIVER)
 
         public void Setup() 
         {
@@ -35,6 +38,8 @@ namespace TexasBonus
             methodFold = Fold;
             methodCheck = Check;
             methodBet = Bet;
+            methodAdd = Add;
+            methodClear = Clear;
         }
 
         /// <summary>
@@ -66,19 +71,21 @@ namespace TexasBonus
             // display associated decision panel to the player, depends on the bet type
             switch (betType)
             {
+                // display bonus wager panel, the player has to have enough money to bet
+                // on flop, that's why the remaining chip is assume to be (total-anteWager*2)
                 case BetType.BonusWager:
                     DisplayWagerPanel("Bonus Wager", 
                         gameManager.players[playerIndex].chip - bets[playerIndex].anteWager * 2);
                     break;
+                
+                // display ante wager panel, the player cannot bet more 1/3 of his total chip
+                // because he needs to have at least 2 times of ante wager to start the flop turn
                 case BetType.AnteWager:
                     DisplayWagerPanel("Ante Wager", gameManager.players[playerIndex].chip / 3);
                     break;
-                case BetType.Flop:
-                case BetType.Turn:
-                case BetType.River:
-                    DisplayDecisionPanel();
-                    break;
+
                 default:
+                    DisplayDecisionPanel();
                     break;
             }
         }
@@ -88,60 +95,100 @@ namespace TexasBonus
         /// </summary>
         void DisplayDecisionPanel()
         {
+            // display decision panel
             decisionPanel.SetActive(true);
 
-            switch (betType)
+            // in flop, the player will be asked to decide whether fold or bet
+            if (betType == BetType.Flop)
             {
-                case BetType.Flop:
-                    obj_fold.SetActive(true);
-                    obj_check.SetActive(false);
-                    break;
-                case BetType.Turn:
-                case BetType.River:
-                    obj_check.SetActive(true);
-                    obj_fold.SetActive(false);
-                    obj_bet.GetComponent<Button>().Switch(gameManager.players[playerIndex].chip >= bets[playerIndex].anteWager);
-                    break;
-                default:
-                    break;
+                obj_fold.SetActive(true);
+                obj_check.SetActive(false);
+            }
+            // otherwise (turn OR river), the player will be asked to decided 
+            // whether to check or bet
+            else
+            {
+                obj_check.SetActive(true);
+                obj_fold.SetActive(false);
+                obj_bet.GetComponent<Button>().Switch(gameManager.players[playerIndex].chip >= bets[playerIndex].anteWager);
             }
         }
 
+        /// <summary>
+        /// Method for players to bet
+        /// </summary>
         new void Bet()
         {
             // finish this turn
             FinishTurn();
 
+            // determine which bet turn it is
             switch (betType)
             {
                 case BetType.BonusWager:
+                    BetBonusWager(totalWager);
                     break;
                 case BetType.AnteWager:
-                    BetAnteWager(totalBet);
-                    break;
-                case BetType.Flop:
-                    break;
-                case BetType.Turn:
-                    break;
-                case BetType.River:
+                    BetAnteWager(totalWager);
                     break;
                 default:
+                    BetFlopTurnRiver();
                     break;
             }
         }
 
+        /// <summary>
+        /// Method for players to check
+        /// </summary>
         new void Check()
         {
             // finish this turn
             FinishTurn();
+
+            // play check sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipCheck, AudioType.Sfx);
         }
 
+        /// <summary>
+        /// Method for players to fold cards
+        /// </summary>
         new void Fold()
         {
             // finish this turn
             FinishTurn();
+
+            // update bet data, set hand to be folded
+            bets[playerIndex].hasFolded = true;
+
+            // display player's card models face-down on the table
+            tableController.playerCardsObj[playerIndex].SetActive(true);
+
+            // play fold sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipFold, AudioType.Sfx);
+
+            // hide the hand-rank panel if the player is a user player
+            if (!gameManager.players[playerIndex].isNPC)
+                labelController.SetLocalHandRankPanelVisibility(false);
         }
 
+        /// <summary>
+        /// Method to finish a turn for a player, switch isWaiting to false
+        /// so that the coroutine can continue to move to the next player
+        /// also, hide the wager panel & decision panel
+        /// </summary>
+        void FinishTurn()
+        {
+            isWaiting = false;
+            wagerPanel.SetActive(false);
+            decisionPanel.SetActive(false);
+            StopCoroutine(RightClickDetect());
+        }
+
+        /// <summary>
+        /// Methods for players to bet on ante wager, it is called from 
+        /// the button click event in the Game UI
+        /// </summary>
+        /// <param name="value"></param>
         void BetAnteWager(int value)
         {
             // store value into bet data
@@ -157,187 +204,162 @@ namespace TexasBonus
             // consume player's chip
             gameManager.players[playerIndex].EditPlayerChip(-value);
         }
-
-        /// <summary>
-        /// Method to finish a turn for a player, switch isWaiting to false
-        /// so that the coroutine can continue to move to the next player
-        /// also, hide the wager panel & decision panel
-        /// </summary>
-        void FinishTurn()
+        public void BetAnteWagerAI(int playerIndex)
         {
-            isWaiting = false;
-            wagerPanel.SetActive(false);
-            decisionPanel.SetActive(false);
+            // randomly select an value for ante wager ($10~$300)
+            var value = chipValues[0] * UnityEngine.Random.Range(2, 60);
+
+            // repeat excatly how it functions in player's version
+            this.playerIndex = playerIndex;
+            BetAnteWager(value);
         }
 
-        ///// <summary>
-        ///// Method for the player to bet on bonus wager, it is called
-        ///// from the button click event in the game UI
-        ///// </summary>
-        ///// <param name="value">bonus wager amount</param>
-        //public void BetBonusWager(int value)
-        //{
-        //    // switch waiting state to be false and hide the decision panel
-        //    isWaiting = false;
-        //    wagerPanel.SetActive(false);
+        /// <summary>
+        /// Methods for players to bet on bonus wager, it is called from
+        /// the button click event in the Game UI
+        /// </summary>
+        /// <param name="value"></param>
+        void BetBonusWager(int value)
+        {
+            // store value into the bet data
+            bets[playerIndex].bonusWager = value;
+            bets[playerIndex].EditAmountChange(-value);
 
-        //    // store value into bet data
-        //    bets[playerIndex].bonusWager = value;
-        //    bets[playerIndex].EditAmountChange(-value);
+            // create some poker chip models to represent the player's wager
+            tableController.CreateWagerModel(playerIndex, 4, value);
 
-        //    // create some poker chip models to repersent the player's wager
-        //    tableController.CreateWagerModel(playerIndex, 4, value);
+            // consume player's chip
+            gameManager.players[playerIndex].EditPlayerChip(-value);
+            labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal(), bets[playerIndex].bonusWager);
+        }
+        public void BetBonusWagerAI(int playerIndex)
+        {
+            // randomly select an value for ante wager ($5~$150)
+            var value = chipValues[0] * UnityEngine.Random.Range(1, 30);
 
-        //    // consume player's chip 
-        //    gameManager.players[playerIndex].EditPlayerChip(-value);
-        //    labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal(), bets[playerIndex].bonusWager);
-        //}
-        //public void BetBonusWager_AI(int playerIndex)
-        //{
-        //    // randomly select an value for bonus wager
-        //    var value = chipValues[UnityEngine.Random.Range(0, chipValues.Length)];
-
-        //    // repeat excatly how it functions in player's version
-        //    this.playerIndex = playerIndex;
-        //    BetBonusWager(value);
-        //}
+            // repeat excatly how it functions in player's version
+            this.playerIndex = playerIndex;
+            BetAnteWager(value);
+        }
 
         /// <summary>
-        /// Method for the player to bet on ante wager, it is called
-        /// from the button click event in the game UI
+        /// Method for the players to bet on flop/turn/river wager, it
+        /// is called from the button click event in the game UI
         /// </summary>
-        /// <param name="value">ante wager amount</param>
-        //public void BetAnteWager(int value)
-        //{
-        //     switch waiting state to be false and hide the decision panel
-        //    isWaiting = false;
-        //    wagerPanel.SetActive(false);
+        void BetFlopTurnRiver()
+        {
+            // check which bet turn it is 
+            switch (betType)
+            {
+                case BetType.Flop:
+                    bets[playerIndex].flopWager = bets[playerIndex].anteWager * 2;
+                    bets[playerIndex].EditAmountChange(-bets[playerIndex].flopWager);
+                    tableController.CreateWagerModel(playerIndex, 1, bets[playerIndex].flopWager);
+                    gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].flopWager);
+                    break;
+                case BetType.Turn:
+                    bets[playerIndex].turnWager = bets[playerIndex].anteWager * 1;
+                    bets[playerIndex].EditAmountChange(-bets[playerIndex].turnWager);
+                    tableController.CreateWagerModel(playerIndex, 2, bets[playerIndex].turnWager);
+                    gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].turnWager);
+                    break;
+                case BetType.River:
+                    bets[playerIndex].riverWager = bets[playerIndex].anteWager * 1;
+                    bets[playerIndex].EditAmountChange(-bets[playerIndex].riverWager);
+                    tableController.CreateWagerModel(playerIndex, 3, bets[playerIndex].riverWager);
+                    gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].riverWager);
+                    break;
+                default:
+                    break;
+            }
 
-        //     store value into bet data
-        //    bets[playerIndex].anteWager = value;
-        //    bets[playerIndex].EditAmountChange(-value);
+            // update the text label to show how much money the player
+            // has currently bet on this round
+            labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal(), bets[playerIndex].bonusWager);
+        }
+        public void BetFlopTurnRiverAI(BetType betType, int playerIndex)
+        {
+            // repeat excatly how it functions in player's version
+            this.betType = betType;
+            this.playerIndex = playerIndex;
 
-        //     create some poker chip models to repersent the player's wager
-        //     and also update the text label to show how much money the player
-        //     has currently bet on this round
-        //    tableController.CreateWagerModel(playerIndex, 0, value);
-        //    labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal());
+            // get bot's current hand strength
+            var handStrength = tableController.GetHandStrength(playerIndex);
 
-        //     consume player's chip 
-        //    gameManager.players[playerIndex].EditPlayerChip(-value);
-        //}
-        //public void BetAnteWager_AI(int playerIndex)
-        //{
-        //     randomly select an value for ante wager
-        //    var value = chipValues[UnityEngine.Random.Range(0, chipValues.Length)];
+            // bet if the bot has at least one pair
+            if (handStrength.rank >= Rank.OnePair)
+            {
+                Bet();
+                return;
+            }
 
-        //     repeat excatly how it functions in player's version
-        //    this.playerIndex = playerIndex;
-        //    BetAnteWager(value);
-        //}
+            // otherwise it can be only fold or check
+            if (betType == BetType.Flop)
+                Fold();
+            else
+                Check();
+        }
 
-        ///// <summary>
-        ///// Method for the player to bet on flop/turn/river wager, it
-        ///// is called from the button click event in the game UI
-        ///// </summary>
-        ///// <param name="value">wager amount</param>
-        //public void Bet2()
-        //{
-        //    // switch waiting state to be false and hide the decision panel
-        //    isWaiting = false;
-        //    decisionPanel.SetActive(false);
+        /// <summary>
+        /// Method for players to add a single chip into the wager pool
+        /// </summary>
+        /// <param name="value">value of the added chip</param>
+        new void Add(int value)
+        {
+            // if this is the first chip being added, swithc on reset button
+            if (totalWager == 0)
+            {
+                btn_reset.Switch(true);
 
-        //    // check which type of bet it is 
-        //    switch (betType)
-        //    {
-        //        case BetType.Flop:
-        //            bets[playerIndex].flopWager = bets[playerIndex].anteWager * 2;
-        //            bets[playerIndex].EditAmountChange(-bets[playerIndex].flopWager);
-        //            tableController.CreateWagerModel(playerIndex, 1, bets[playerIndex].anteWager * 2);
-        //            gameManager.players[playerIndex].EditPlayerChip(bets[playerIndex].anteWager * -2);
-        //            break;
-        //        case BetType.Turn:
-        //            bets[playerIndex].turnWager = bets[playerIndex].anteWager * 1;
-        //            bets[playerIndex].EditAmountChange(-bets[playerIndex].turnWager);
-        //            tableController.CreateWagerModel(playerIndex, 2, bets[playerIndex].anteWager * 1);
-        //            gameManager.players[playerIndex].EditPlayerChip(bets[playerIndex].anteWager * -1);
-        //            break;
-        //        case BetType.River:
-        //            bets[playerIndex].riverWager = bets[playerIndex].anteWager * 1;
-        //            bets[playerIndex].EditAmountChange(-bets[playerIndex].riverWager);
-        //            tableController.CreateWagerModel(playerIndex, 3, bets[playerIndex].anteWager * 1);
-        //            gameManager.players[playerIndex].EditPlayerChip(bets[playerIndex].anteWager * -1);
-        //            break;
-        //        default:
-        //            break;
-        //    }
+                // if this is a ante wager bet, switch on bet button
+                if (betType == BetType.AnteWager)
+                    btn_bet.Switch(true);
 
-        //    // update the text label to show how much money the player
-        //    // has currently bet on this round
-        //    labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal(), bets[playerIndex].bonusWager);
-        //}
-        //public void Bet_AI(BetType betType, int playerIndex)
-        //{
-        //    // repeat excatly how it functions in player's version
-        //    this.betType = betType;
-        //    this.playerIndex = playerIndex;
+                // if this is a bonud wager bet, display bet button 
+                // and hide skip button
+                else if (betType == BetType.BonusWager)
+                {
+                    btn_bet.gameObject.SetActive(true);
+                    btn_skip.gameObject.SetActive(false);
+                }
+            }
 
-        //    // get bot's current hand strength
-        //    var handStrength = tableController.GetHandStrength(playerIndex);
+            // update the wager and remaining info
+            totalWager += value;
+            remainingTemp -= value;
+            wagerText.text = $"{totalWager:C0}";
 
-        //    // bet if the bot has at least one pair
-        //    if (handStrength.rank >= Rank.OnePair)
-        //    {
-        //        Bet();
-        //        return;
-        //    }
+            // refresh chip's validity
+            RefreshChipValidity(remainingTemp);
+        }
 
-        //    // if the bot has a value of at least eight in flop, also bet
-        //    if (betType == BetType.Flop && handStrength.GetValue() >= Value.EIGHT) 
-        //    {
-        //        Bet();
-        //        return;
-        //    }
+        /// <summary>
+        /// Method for the player to reset wager in 'before bet' section
+        /// </summary>
+        new void Clear()
+        {
+            // reset total wager & remaining
+            totalWager = 0;
+            remainingTemp = remaining;
 
-        //    // otherwise it can be only fold or check
-        //    if (betType == BetType.Flop) Fold(); else Check();
-        //}
+            // switch off reset button and hide other button
+            btn_reset.Switch(false);
+            btn_bet.gameObject.SetActive(false);
+            btn_skip.gameObject.SetActive(false);
 
-        ///// <summary>
-        ///// Method for a player to fold the cards
-        ///// </summary>
-        //public new void Fold()
-        //{
-        //    // switch waiting state to be false and hide the decision panel
-        //    isWaiting = false;
-        //    wagerPanel.SetActive(false);
-        //    decisionPanel.SetActive(false);
+            // if it is ante wager bet, display bet button again with switch off
+            if (betType == BetType.AnteWager)
+            {
+                btn_bet.gameObject.SetActive(true);
+                btn_bet.Switch(false);
+                wagerText.text = "";
+            }
+            // if it is a bonud wager bet, display skip button
+            else if (betType == BetType.BonusWager)
+                btn_skip.gameObject.SetActive(true);
 
-        //    // update bet data, set hand to be folded
-        //    bets[playerIndex].hasFolded = true;
-
-        //    // display the player's card models face-down on the table 
-        //    tableController.playerCardsObj[playerIndex].SetActive(true);
-
-        //    // play fold sound effect
-        //    Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipFold, AudioType.Sfx);
-
-        //    // hide the hand-rank panel if the player is a user player
-        //    if (!gameManager.players[playerIndex].isNPC)
-        //        labelController.SetLocalHandRankPanelVisibility(false);
-        //}
-
-        ///// <summary>
-        ///// Method for a player to check
-        ///// </summary>
-        //public new void Check()
-        //{
-        //    // switch waiting state to be false and hide the decision panel
-        //    isWaiting = false;
-        //    decisionPanel.SetActive(false);
-
-        //    // play check sound effect
-        //    Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipCheck, AudioType.Sfx);
-        //}
+            // refresh chip's validity
+            RefreshChipValidity(remainingTemp);
+        }
     }
 }

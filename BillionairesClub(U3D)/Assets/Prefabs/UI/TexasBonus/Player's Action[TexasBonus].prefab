@@ -641,7 +641,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 686a7f3262ab83c4da02a8ce609dccf6, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: b70a033fbcdb01c44adb41f87dc0dab2, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 686a7f3262ab83c4da02a8ce609dccf6, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: f43bb4b45c999074798a5425b0309843, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fold
+  m_text: Skip
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2607,12 +2607,12 @@ GameObject:
   - component: {fileID: 1411200964492453533}
   - component: {fileID: 1411200964492453532}
   m_Layer: 5
-  m_Name: BtnFold
+  m_Name: BtnSkip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1411200964492453535
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2703,7 +2703,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 280950b8cc4fc6741ab4c8e64de06361, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 751f5aea5ab71094588b4ba1dae8dd05, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 280950b8cc4fc6741ab4c8e64de06361, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: f43bb4b45c999074798a5425b0309843, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -2717,7 +2717,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6341295971015186010}
         m_TargetAssemblyTypeName: BeforeBet, Assembly-CSharp
-        m_MethodName: Fold
+        m_MethodName: Check
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3253,7 +3253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1411200964907320622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3477,7 +3477,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 686a7f3262ab83c4da02a8ce609dccf6, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: b70a033fbcdb01c44adb41f87dc0dab2, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 686a7f3262ab83c4da02a8ce609dccf6, type: 3}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: f43bb4b45c999074798a5425b0309843, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -3969,7 +3969,7 @@ MonoBehaviour:
   wagerText: {fileID: 1411200964772966837}
   btn_reset: {fileID: 1411200963381977283}
   btn_bet: {fileID: 1411200963266523266}
-  btn_fold: {fileID: 1411200964492453532}
+  btn_skip: {fileID: 1411200964492453532}
   wagerPanel: {fileID: 13514003169208988}
   isSkipDrag: {fileID: 1411200963830163541}
   isRightClickBet: {fileID: 1411200963473513678}
@@ -3980,7 +3980,10 @@ MonoBehaviour:
   - {fileID: 2130198133970294237}
   - {fileID: 3426272406790157518}
   chipValues: 
-  totalBet: 0
+  playerIndex: 0
+  totalWager: 0
+  remaining: 0
+  remainingTemp: 0
   obj_fold: {fileID: 1411200963672109953}
   obj_check: {fileID: 1411200964907320617}
   obj_bet: {fileID: 1411200964912774700}

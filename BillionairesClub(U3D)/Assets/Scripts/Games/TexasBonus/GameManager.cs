@@ -177,7 +177,7 @@ namespace TexasBonus
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    //playerAction.BetBonusWager_AI(checkIndex);
+                    playerAction.BetBonusWagerAI(checkIndex);
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
@@ -208,7 +208,7 @@ namespace TexasBonus
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    //playerAction.BetAnteWager_AI(checkIndex);
+                    playerAction.BetAnteWagerAI(checkIndex);
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
@@ -239,7 +239,7 @@ namespace TexasBonus
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    //playerAction.Bet_AI(BetType.Flop, checkIndex);
+                    playerAction.BetFlopTurnRiverAI(BetType.Flop, checkIndex);
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
@@ -270,7 +270,7 @@ namespace TexasBonus
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    //playerAction.Bet_AI(BetType.Turn, checkIndex);
+                    playerAction.BetFlopTurnRiverAI(BetType.Turn, checkIndex);
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
@@ -301,7 +301,7 @@ namespace TexasBonus
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    //playerAction.Bet_AI(BetType.River, checkIndex);
+                    playerAction.BetFlopTurnRiverAI(BetType.River, checkIndex);
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
                     continue;
                 }
