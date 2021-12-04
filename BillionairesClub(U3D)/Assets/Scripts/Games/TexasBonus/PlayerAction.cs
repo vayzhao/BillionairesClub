@@ -103,6 +103,7 @@ namespace TexasBonus
             {
                 obj_fold.SetActive(true);
                 obj_check.SetActive(false);
+                obj_bet.GetComponent<Button>().Switch(true);
             }
             // otherwise (turn OR river), the player will be asked to decided 
             // whether to check or bet
@@ -195,19 +196,17 @@ namespace TexasBonus
             bets[playerIndex].anteWager = value;
             bets[playerIndex].EditAmountChange(-value);
 
-            // create some poker chip models to represent the player's wager
-            // and also update the text label to show how much money the player
-            // has bet on this round
-            tableController.CreateWagerModel(playerIndex, 0, value);
-            labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal());
-
             // consume player's chip
             gameManager.players[playerIndex].EditPlayerChip(-value);
+            labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal());
         }
         public void BetAnteWagerAI(int playerIndex)
         {
             // randomly select an value for ante wager ($10~$300)
             var value = chipValues[0] * UnityEngine.Random.Range(2, 60);
+
+            // create some poker chip models to represent the bot's wager
+            tableController.CreateWagerModel(playerIndex, 0, value);
 
             // repeat excatly how it functions in player's version
             this.playerIndex = playerIndex;
@@ -225,9 +224,6 @@ namespace TexasBonus
             bets[playerIndex].bonusWager = value;
             bets[playerIndex].EditAmountChange(-value);
 
-            // create some poker chip models to represent the player's wager
-            tableController.CreateWagerModel(playerIndex, 4, value);
-
             // consume player's chip
             gameManager.players[playerIndex].EditPlayerChip(-value);
             labelController.SetBetLabel(playerIndex, bets[playerIndex].GetTotal(), bets[playerIndex].bonusWager);
@@ -237,9 +233,12 @@ namespace TexasBonus
             // randomly select an value for ante wager ($5~$150)
             var value = chipValues[0] * UnityEngine.Random.Range(1, 30);
 
+            // create some poker chip models to represent the bot's wager
+            tableController.CreateWagerModel(playerIndex, 4, value);
+
             // repeat excatly how it functions in player's version
             this.playerIndex = playerIndex;
-            BetAnteWager(value);
+            BetBonusWager(value);
         }
 
         /// <summary>
@@ -254,19 +253,19 @@ namespace TexasBonus
                 case BetType.Flop:
                     bets[playerIndex].flopWager = bets[playerIndex].anteWager * 2;
                     bets[playerIndex].EditAmountChange(-bets[playerIndex].flopWager);
-                    tableController.CreateWagerModel(playerIndex, 1, bets[playerIndex].flopWager);
+                    tableController.CloneAnteWagerModel(playerIndex, 1, true);
                     gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].flopWager);
                     break;
                 case BetType.Turn:
                     bets[playerIndex].turnWager = bets[playerIndex].anteWager * 1;
                     bets[playerIndex].EditAmountChange(-bets[playerIndex].turnWager);
-                    tableController.CreateWagerModel(playerIndex, 2, bets[playerIndex].turnWager);
+                    tableController.CloneAnteWagerModel(playerIndex, 2, false);
                     gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].turnWager);
                     break;
                 case BetType.River:
                     bets[playerIndex].riverWager = bets[playerIndex].anteWager * 1;
                     bets[playerIndex].EditAmountChange(-bets[playerIndex].riverWager);
-                    tableController.CreateWagerModel(playerIndex, 3, bets[playerIndex].riverWager);
+                    tableController.CloneAnteWagerModel(playerIndex, 3, false);
                     gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].riverWager);
                     break;
                 default:
@@ -288,6 +287,13 @@ namespace TexasBonus
 
             // bet if the bot has at least one pair
             if (handStrength.rank >= Rank.OnePair)
+            {
+                Bet();
+                return;
+            }
+
+            // if the bot's hand has at least eight-high in flop, bet
+            if (betType == BetType.Flop && handStrength.GetValue()>=Value.EIGHT)
             {
                 Bet();
                 return;
@@ -329,6 +335,12 @@ namespace TexasBonus
             remainingTemp -= value;
             wagerText.text = $"{totalWager:C0}";
 
+            // add single wager model to the associate slot
+            if (betType == BetType.AnteWager)
+                tableController.AddWagerModel(playerIndex, 0, value);
+            else if (betType == BetType.BonusWager)
+                tableController.AddWagerModel(playerIndex, 4, value);
+
             // refresh chip's validity
             RefreshChipValidity(remainingTemp);
         }
@@ -347,17 +359,27 @@ namespace TexasBonus
             btn_bet.gameObject.SetActive(false);
             btn_skip.gameObject.SetActive(false);
 
-            // if it is ante wager bet, display bet button again with switch off
+            // if it is ante wager bet
             if (betType == BetType.AnteWager)
             {
+                // reset bet button
                 btn_bet.gameObject.SetActive(true);
                 btn_bet.Switch(false);
                 wagerText.text = "";
+
+                // clear all wagers in ante wager slot
+                tableController.ClearWagerModel(playerIndex, 0);
             }
-            // if it is a bonud wager bet, display skip button
+            // if it is a bonud wager bet
             else if (betType == BetType.BonusWager)
+            {
+                // display skip button
                 btn_skip.gameObject.SetActive(true);
 
+                // clear all wagers in bonus wager slot
+                tableController.ClearWagerModel(playerIndex, 4);
+            }
+            
             // refresh chip's validity
             RefreshChipValidity(remainingTemp);
         }

@@ -17,6 +17,9 @@ public static class Const
     public const float WAIT_TIME_FULLSCREEN = 0.25f;
     public const float MOUSE_SENSITIVITY = 6f;
 
+    public const float TABLE_WAGER_ANGLE_INCREMENT  = 20f;
+    public const float TABLE_WAGER_HEIGHT_INCREMENT = 0.0075f;
+
     public const string SCENE_HOMEPAGE = "Homepage";
     public const string SCENE_INCASINO = "Casino";
     public const string SCENE_TEXAS = "TexasBonus";

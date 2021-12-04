@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Blackboard;
 
 namespace TexasBonus
 {
@@ -62,6 +63,8 @@ namespace TexasBonus
         private Card[][] playerCards;            // card data for players
         private HandStrength dealerHandStrengh;  // hand evaluator for dealer
         private HandStrength[] handStrengths;    // hand evaluator for players
+        private float wagerHeight;               // used to determine current wager height when spawning heaps of wagers
+        private float wagerAngle;                // used to determine current wager rotation angle when spawning heaps of wagers
 
         public void Setup()
         {
@@ -184,17 +187,17 @@ namespace TexasBonus
         {
             // first of all, create an empty game object that holds the wager models
             wagerObj[playerId][wagerIndex] = new GameObject("Chip");
-            wagerObj[playerId][wagerIndex].transform.parent = Blackboard.spawnHolder;
+            wagerObj[playerId][wagerIndex].transform.parent = spawnHolder;
             wagerObj[playerId][wagerIndex].transform.localScale = Vector3.one * 1.75f;
             wagerObj[playerId][wagerIndex].transform.position = wagerPos[playerId][wagerIndex];
 
             // initialize the spawning data
             var remaining = amount;
-            var height = 0f;
-            var angle = 0f;
+            wagerHeight = 0f;
+            wagerAngle = 0f;
 
             // play bet sound effect
-            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipPlaceWager, AudioType.Sfx);
+            audioManager.PlayAudio(audioManager.clipPlaceWager, AudioType.Sfx);
 
             // keep spawning wager model as long as the remaining amount is greater than 0
             while (remaining > 0)
@@ -215,9 +218,9 @@ namespace TexasBonus
                     obj = Instantiate(pref_pinkChip, wagerObj[playerId][wagerIndex].transform);
                 }
                 // case3: yellow chip
-                else if (remaining >= 20)
+                else if (remaining >= 25)
                 {
-                    remaining -= 20;
+                    remaining -= 25;
                     obj = Instantiate(pref_yellowChip, wagerObj[playerId][wagerIndex].transform);
                 }
                 // case4: blue chip
@@ -234,13 +237,105 @@ namespace TexasBonus
                 }
 
                 // adjust spawned object's position and rotation
-                obj.transform.localPosition = new Vector3(0f, height, 0f);
-                obj.transform.localEulerAngles = new Vector3(-90f, angle, 0f);
+                obj.transform.localPosition = new Vector3(0f, wagerHeight, 0f);
+                obj.transform.localEulerAngles = new Vector3(-90f, wagerAngle, 0f);
 
                 // increment height & angle
-                height += 0.01f;
-                angle += 20f;
+                wagerAngle += Const.TABLE_WAGER_ANGLE_INCREMENT;
+                wagerHeight += Const.TABLE_WAGER_HEIGHT_INCREMENT;
             }
+        }
+
+        /// <summary>
+        /// Method to clone a ante wager stack, it is used when players bet on 
+        /// FLOP/TURN/RIVER
+        /// </summary>
+        /// <param name="playerId">index of the player</param>
+        /// <param name="wagerIndex">index of the wager slot</param>
+        /// <param name="isDouble">true in flop, false in turn and river</param>
+        public void CloneAnteWagerModel(int playerId, int wagerIndex, bool isDouble)
+        {
+            // first of all, spawn a parent object to hold all the clone chips
+            wagerObj[playerId][wagerIndex] = new GameObject("Chip");
+            wagerObj[playerId][wagerIndex].transform.parent = spawnHolder;
+            wagerObj[playerId][wagerIndex].transform.localScale = Vector3.one * 1.75f;
+            wagerObj[playerId][wagerIndex].transform.position = wagerPos[playerId][wagerIndex];
+
+            // initial default height & angle for the wager stack
+            wagerHeight = 0f;
+            wagerAngle = 0f;
+
+            // keep spawning wager models 
+            for (int i = 0; i < (isDouble ? 2 : 1); i++) 
+            {
+                for (int j = 0; j < wagerObj[playerId][0].transform.childCount; j++)
+                {
+                    // spawn a wager model
+                    var obj = Instantiate(wagerObj[playerId][0].transform.GetChild(j),wagerObj[playerId][wagerIndex].transform);
+                    obj.transform.localPosition = Vector3.up * wagerHeight;
+                    obj.transform.localEulerAngles = new Vector3(-90f, wagerAngle, 0f);
+
+                    // increment height & angle
+                    wagerAngle += Const.TABLE_WAGER_ANGLE_INCREMENT;
+                    wagerHeight += Const.TABLE_WAGER_HEIGHT_INCREMENT;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Methdo to create a single wager model for a player, wager model repersent the 
+        /// amount of money the player bet on a specific part (BONUS/ANTE/FLOP/TURN/RIVER)
+        /// </summary>
+        /// <param name="playerId">the player id</param>
+        /// <param name="wagerIndex">the index of the specific slot</param>
+        /// <param name="amount">amount of money</param>
+        public void AddWagerModel(int playerId, int wagerIndex, int amount)
+        {
+            // create an empty game object that holds the wager models
+            if (wagerObj[playerId][wagerIndex] == null)
+            {
+                wagerHeight = 0f;
+                wagerAngle = 0f;
+                wagerObj[playerId][wagerIndex] = new GameObject("Chip");
+                wagerObj[playerId][wagerIndex].transform.parent = spawnHolder;
+                wagerObj[playerId][wagerIndex].transform.localScale = Vector3.one * 1.75f;
+                wagerObj[playerId][wagerIndex].transform.position = wagerPos[playerId][wagerIndex];                
+            }
+
+            // play bet sound effect
+            audioManager.PlayAudio(audioManager.clipPlaceWager, AudioType.Sfx);
+
+            // spawn a single chip into the holder
+            GameObject obj;
+            if (amount == 5)
+                obj = Instantiate(pref_redChip, wagerObj[playerId][wagerIndex].transform);
+            else if (amount == 10)
+                obj = Instantiate(pref_blueChip, wagerObj[playerId][wagerIndex].transform);
+            else if (amount == 25)
+                obj = Instantiate(pref_yellowChip, wagerObj[playerId][wagerIndex].transform);
+            else if (amount == 50)
+                obj = Instantiate(pref_pinkChip, wagerObj[playerId][wagerIndex].transform);
+            else
+                obj = Instantiate(pref_blackChip, wagerObj[playerId][wagerIndex].transform);
+
+            // adjust spawned object's position and rotation
+            obj.transform.localPosition = new Vector3(0f, wagerHeight, 0f);
+            obj.transform.localEulerAngles = new Vector3(-90f, wagerAngle, 0f);
+
+            // increment height & angle
+            wagerAngle += Const.TABLE_WAGER_ANGLE_INCREMENT;
+            wagerHeight += Const.TABLE_WAGER_HEIGHT_INCREMENT;
+        }
+
+        /// <summary>
+        /// Method to clear all wager model for a player in a specific slot
+        /// </summary>
+        /// <param name="playerId">the player id</param>
+        /// <param name="wagerIndex">the index of the specific slot</param>
+        public void ClearWagerModel(int playerId, int wagerIndex)
+        {
+            if (wagerObj[playerId][wagerIndex] != null)
+                Destroy(wagerObj[playerId][wagerIndex]);
         }
 
         /// <summary>
@@ -257,8 +352,8 @@ namespace TexasBonus
             
             // find the childcount so that we know the height of the parent object
             var childCount = parent.transform.childCount;
-            var height = parent.GetChild(childCount - 1).localPosition.y;
-            var angle = parent.GetChild(childCount - 1).localEulerAngles.y;
+            wagerHeight = parent.GetChild(childCount - 1).localPosition.y;
+            wagerAngle = parent.GetChild(childCount - 1).localEulerAngles.y;
 
             // spawn 'n' times
             for (int i = 0; i < multiplier; i++)
@@ -266,19 +361,19 @@ namespace TexasBonus
                 for (int j = 0; j < childCount; j++)
                 {
                     // increment height & angle
-                    height += 0.01f;
-                    angle += 20f;
+                    wagerAngle += Const.TABLE_WAGER_ANGLE_INCREMENT;
+                    wagerHeight += Const.TABLE_WAGER_HEIGHT_INCREMENT;
 
                     // spawn a wager model
                     var obj = Instantiate(parent.GetChild(j), parent);
 
                     // calculate spawning position and target position
                     var spawnPos = chipAnimationPlayer.GetAssociateChipSlot(obj.tag);
-                    var targetPos = new Vector3(0f, height, 0f);
+                    var targetPos = new Vector3(0f, wagerHeight, 0f);
 
                     // register the movement animation
                     var chipAnimation = obj.gameObject.AddComponent<ChipAnimation>();
-                    chipAnimation.Take(spawnPos, targetPos, new Vector3(-90f, angle, 0f));
+                    chipAnimation.Take(spawnPos, targetPos, new Vector3(-90f, wagerAngle, 0f));
 
                     // add the animation to animation player
                     chipAnimationPlayer.Add(chipAnimation);
@@ -325,13 +420,8 @@ namespace TexasBonus
         public void RemoveWagerModel()
         {
             for (int i = 0; i < wagerObj.Length; i++)
-            {
                 for (int j = 0; j < wagerObj[i].Length; j++)
-                {
-                    if (wagerObj[i][j] != null)
-                        Destroy(wagerObj[i][j]);
-                }
-            }
+                    ClearWagerModel(i, j);
         }
 
         /// <summary>
@@ -343,12 +433,7 @@ namespace TexasBonus
         {
             // remove all chips from this player
             for (int i = 0; i < wagerObj[index].Length; i++)
-            {
-                if (wagerObj[index][i] != null)
-                {
-                    Destroy(wagerObj[index][i]);
-                }   
-            }
+                ClearWagerModel(index, i);
 
             // hide card models and bet label
             playerCardsObj[index].HideCard();
@@ -401,7 +486,7 @@ namespace TexasBonus
             {
                 dealerHand[i] = cardDeck.DrawACard();
                 dealerCardsObj[i].SetCard(dealerHand[i]);
-                Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipDealCards, AudioType.Sfx);
+                audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
                 yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);
             }
 
@@ -410,7 +495,7 @@ namespace TexasBonus
             {
                 communityCards[i] = cardDeck.DrawACard();
                 communityCardsObj[i].SetCard(communityCards[i]);
-                Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipDealCards, AudioType.Sfx);
+                audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
                 yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);                
             }
         }
@@ -467,7 +552,7 @@ namespace TexasBonus
 
                     // update card texture in hand-rank panel if this player is a user-player
                     if (!gameManager.players[i].isNPC)
-                        labelController.cardTexture[j].sprite = Blackboard.GetCardSprite(playerCards[i][j].GetCardIndex());
+                        labelController.cardTexture[j].sprite = GetCardSprite(playerCards[i][j].GetCardIndex());
                 }
 
                 // recompute the hand-rank
@@ -478,9 +563,9 @@ namespace TexasBonus
                 {
                     labelController.title.text = handStrengths[i].GetInitialHandString();
                     labelController.SetBonusLabel(handStrengths[i].GetBonusMultiplier());
-                    labelController.cardTexture[0].sprite = Blackboard.GetCardSprite(playerCards[i][0].GetCardIndex());
-                    labelController.cardTexture[1].sprite = Blackboard.GetCardSprite(playerCards[i][1].GetCardIndex());
-                    Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipDealCards, AudioType.Sfx);
+                    labelController.cardTexture[0].sprite = GetCardSprite(playerCards[i][0].GetCardIndex());
+                    labelController.cardTexture[1].sprite = GetCardSprite(playerCards[i][1].GetCardIndex());
+                    audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
                 }
             }
         }
@@ -502,7 +587,7 @@ namespace TexasBonus
             dealerHandStrengh.AddCard(communityCards[index]);
 
             // play reveal card sound effect
-            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipDealCards, AudioType.Sfx);
+            audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
 
             // determine whether or not to recompute hand-rank for all players
             if (computeHandStrengh)
@@ -546,7 +631,7 @@ namespace TexasBonus
             dealerHandStrengh.Recompute();
 
             // play reveal card sound effect
-            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipDealCards, AudioType.Sfx);
+            audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
 
             // display dealer's hand-rank label
             labelController.SetHandRankLabelForDealer(true, dealerHandStrengh.ToString("<color=#00FF01><size=80%>"));
@@ -598,7 +683,7 @@ namespace TexasBonus
                 labelController.SetLocalHandRankPanelVisibility(false);
 
             // play fold sound effect
-            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipFold, AudioType.Sfx);
+            audioManager.PlayAudio(audioManager.clipFold, AudioType.Sfx);
 
             // enum player's result
             switch (result)
