@@ -12,6 +12,7 @@ public static class Blackboard
     public static float loadEstimate = 1f;
     public static bool isDebugMode = false;
     public static bool debugChecked = false;
+    public static bool hasPreloaded = false;
 
     public static AudioManager audioManager;
 
