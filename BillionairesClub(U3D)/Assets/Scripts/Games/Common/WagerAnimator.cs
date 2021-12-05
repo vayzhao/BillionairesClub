@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChipAnimationPlayer : MonoBehaviour
+public class WagerAnimator : MonoBehaviour
 {
     [Header("Chip's slot")]
     [Tooltip("Slot for red poker chips")]

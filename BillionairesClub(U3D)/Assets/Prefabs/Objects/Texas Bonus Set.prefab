@@ -3265,8 +3265,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6539917950483246784}
   - component: {fileID: 4669433658088638040}
-  - component: {fileID: 2552239726206973089}
   - component: {fileID: 1515965305755025500}
+  - component: {fileID: 2552239726206973089}
   m_Layer: 0
   m_Name: Texas Bonus Set
   m_TagString: Untagged
@@ -3323,6 +3323,23 @@ MonoBehaviour:
   - {fileID: 3624183181133427485}
   seatManager: {fileID: 0}
   players: []
+--- !u!114 &1515965305755025500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129508241262402484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3edc822f89b5a42b0267980103d686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotRed: {fileID: 3587793388917644603}
+  slotBlue: {fileID: 6314863867586985725}
+  slotYellow: {fileID: 1298664215337657518}
+  slotPink: {fileID: 4899463675826955041}
+  slotBlack: {fileID: 7525106812370566946}
 --- !u!114 &2552239726206973089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3335,6 +3352,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20765e603d6147b47b8653e0512bd683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redChip: {fileID: 114676, guid: a1234177e138bd64c98da885394657d4, type: 3}
+  blueChip: {fileID: 177790, guid: 4cb5d4a22372f8b4aada2a088d58c9b7, type: 3}
+  yellowChip: {fileID: 114062, guid: 488be7892cbc45c4d955a33fcbdc1da5, type: 3}
+  pinkChip: {fileID: 173702, guid: 7ae667bbb94090a44b6cc18079fa4caf, type: 3}
+  blackChip: {fileID: 180760, guid: 23677d359fd830048932e19a46ad2f04, type: 3}
+  wager:
+  - {fileID: 4528660811531851083}
+  - {fileID: 2813531733416368946}
+  - {fileID: 2284756492693155765}
+  - {fileID: 4377737669431829076}
+  - {fileID: 5783272757027358180}
+  wagerAnimator: {fileID: 1515965305755025500}
   group_slots: {fileID: 475168792463281857}
   chips:
   - {fileID: 5476890045065479753}
@@ -3342,12 +3371,6 @@ MonoBehaviour:
   - {fileID: 5235369990447501962}
   - {fileID: 6226353451143795604}
   - {fileID: 4469207077340352819}
-  wager:
-  - {fileID: 4528660811531851083}
-  - {fileID: 2813531733416368946}
-  - {fileID: 2284756492693155765}
-  - {fileID: 4377737669431829076}
-  - {fileID: 5783272757027358180}
   marks:
   - {fileID: 947599778626022249}
   - {fileID: 8033076153466075089}
@@ -3369,33 +3392,10 @@ MonoBehaviour:
   - {fileID: 2477941366546690327}
   - {fileID: 8901804941365999264}
   - {fileID: 4301608430568722069}
-  pref_redChip: {fileID: 114676, guid: a1234177e138bd64c98da885394657d4, type: 3}
-  pref_blueChip: {fileID: 177790, guid: 4cb5d4a22372f8b4aada2a088d58c9b7, type: 3}
-  pref_yellowChip: {fileID: 114062, guid: 488be7892cbc45c4d955a33fcbdc1da5, type: 3}
-  pref_pinkChip: {fileID: 173702, guid: 7ae667bbb94090a44b6cc18079fa4caf, type: 3}
-  pref_blackChip: {fileID: 180760, guid: 23677d359fd830048932e19a46ad2f04, type: 3}
-  chipAnimationPlayer: {fileID: 1515965305755025500}
   gameManager: {fileID: 0}
   playerAction: {fileID: 0}
   labelController: {fileID: 0}
   allPlayerFolded: 0
---- !u!114 &1515965305755025500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5129508241262402484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27b216107338fd146b765e07d6cdcbb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotRed: {fileID: 3587793388917644603}
-  slotBlue: {fileID: 6314863867586985725}
-  slotYellow: {fileID: 1298664215337657518}
-  slotPink: {fileID: 4899463675826955041}
-  slotBlack: {fileID: 7525106812370566946}
 --- !u!1 &5144537438867082041
 GameObject:
   m_ObjectHideFlags: 0

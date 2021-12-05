@@ -53,7 +53,7 @@ namespace TexasBonus
                 bets[i].Reset();
 
             // remove all poker chip models from the table
-            tableController.RemoveWagerModel();
+            tableController.ClearWagerStackForAll();
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace TexasBonus
             var value = chipValues[0] * UnityEngine.Random.Range(2, 60);
 
             // create some poker chip models to represent the bot's wager
-            tableController.CreateWagerModel(playerIndex, 0, value);
+            tableController.InstantiateWagerStack(playerIndex, 0, value);
 
             // repeat excatly how it functions in player's version
             this.playerIndex = playerIndex;
@@ -234,7 +234,7 @@ namespace TexasBonus
             var value = chipValues[0] * UnityEngine.Random.Range(1, 30);
 
             // create some poker chip models to represent the bot's wager
-            tableController.CreateWagerModel(playerIndex, 4, value);
+            tableController.InstantiateWagerStack(playerIndex, 4, value);
 
             // repeat excatly how it functions in player's version
             this.playerIndex = playerIndex;
@@ -253,19 +253,19 @@ namespace TexasBonus
                 case BetType.Flop:
                     bets[playerIndex].flopWager = bets[playerIndex].anteWager * 2;
                     bets[playerIndex].EditAmountChange(-bets[playerIndex].flopWager);
-                    tableController.CloneAnteWagerModel(playerIndex, 1, true);
+                    tableController.CloneAnteWagerStack(playerIndex, 1, true);
                     gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].flopWager);
                     break;
                 case BetType.Turn:
                     bets[playerIndex].turnWager = bets[playerIndex].anteWager * 1;
                     bets[playerIndex].EditAmountChange(-bets[playerIndex].turnWager);
-                    tableController.CloneAnteWagerModel(playerIndex, 2, false);
+                    tableController.CloneAnteWagerStack(playerIndex, 2, false);
                     gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].turnWager);
                     break;
                 case BetType.River:
                     bets[playerIndex].riverWager = bets[playerIndex].anteWager * 1;
                     bets[playerIndex].EditAmountChange(-bets[playerIndex].riverWager);
-                    tableController.CloneAnteWagerModel(playerIndex, 3, false);
+                    tableController.CloneAnteWagerStack(playerIndex, 3, false);
                     gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].riverWager);
                     break;
                 default:
@@ -368,7 +368,7 @@ namespace TexasBonus
                 wagerText.text = "";
 
                 // clear all wagers in ante wager slot
-                tableController.ClearWagerModel(playerIndex, 0);
+                tableController.ClearWagerStackForSingleSlot(playerIndex, 0);
             }
             // if it is a bonud wager bet
             else if (betType == BetType.BonusWager)
@@ -377,7 +377,7 @@ namespace TexasBonus
                 btn_skip.gameObject.SetActive(true);
 
                 // clear all wagers in bonus wager slot
-                tableController.ClearWagerModel(playerIndex, 4);
+                tableController.ClearWagerStackForSingleSlot(playerIndex, 4);
             }
             
             // refresh chip's validity

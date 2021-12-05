@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5341590287962345951}
   - component: {fileID: -7872254278910683443}
   m_Layer: 0
-  m_Name: GameManager_TexasBonus
+  m_Name: GameManager[TexasBonus]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

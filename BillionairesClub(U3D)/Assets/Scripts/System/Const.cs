@@ -23,6 +23,7 @@ public static class Const
     public const string SCENE_HOMEPAGE = "Homepage";
     public const string SCENE_INCASINO = "Casino";
     public const string SCENE_TEXAS = "TexasBonus";
+    public const string SCENE_BLACKJACK = "Blackjack";
     public const string SCENE_AUDIO = "AudioScene";
 
     public const string CHIP_TAG_RED = "ChipRed";

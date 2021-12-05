@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using static Blackboard;
+using static Const;
 
 /// <summary>
 /// A class to handle the process of loading & spawning when switching from
@@ -63,6 +65,9 @@ public class Loading : MonoBehaviour
                     case GameType.TexasBonus:
                         LoadTexasBonus();
                         break;
+                    case GameType.Blackjack:
+                        LoadBlackjack();
+                        break;
                     default:
                         break;
                 }
@@ -79,43 +84,43 @@ public class Loading : MonoBehaviour
     void DebugMode()
     {
         // return if this program has been checked
-        if (Blackboard.debugChecked)
+        if (debugChecked)
             return;
 
         // otherwise set debugChecked to true
-        Blackboard.debugChecked = true;
+        debugChecked = true;
 
         // check to see if the user is entering this scene in an appropriate way
         // (e.g. 
         //       Homepage -> Casino
         //       Casino -> InGame
-        if ((sceneType == SceneType.InCasino && !SceneManager.GetSceneByName(Const.SCENE_HOMEPAGE).isLoaded)
-            || (sceneType == SceneType.InGame && !SceneManager.GetSceneByName(Const.SCENE_INCASINO).isLoaded))
+        if ((sceneType == SceneType.InCasino && !SceneManager.GetSceneByName(SCENE_HOMEPAGE).isLoaded)
+            || (sceneType == SceneType.InGame && !SceneManager.GetSceneByName(SCENE_INCASINO).isLoaded))
         {
             // switch debug mode on
-            Blackboard.isDebugMode = true;
+            isDebugMode = true;
             Debug.Log("Debug Mode is on!");
 
             // run the progress bar in debug mode
             StartCoroutine(ProgressRunner());
 
             // create a player for play testing
-            Blackboard.localPlayer = new Player();           
-            Blackboard.localPlayer.name = "The Tester";
-            Blackboard.localPlayer.description = "";
-            Blackboard.localPlayer.chip = Const.DEFAULT_CHIP;
-            Blackboard.localPlayer.gem = Const.DEFAULT_GEM;
-            Blackboard.localPlayer.modelIndex = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.ModelIndex);
+            localPlayer = new Player();           
+            localPlayer.name = "The Tester";
+            localPlayer.description = "";
+            localPlayer.chip = DEFAULT_CHIP;
+            localPlayer.gem = DEFAULT_GEM;
+            localPlayer.modelIndex = Storage.LoadInt(LOCAL_PLAYER, StorageType.ModelIndex);
         }
     }
     IEnumerator ProgressRunner()
     {   
         var progress = 0f;
-        Storage.SaveFloat(Const.LOCAL_PLAYER, StorageType.Progress, progress);
+        Storage.SaveFloat(LOCAL_PLAYER, StorageType.Progress, progress);
         while (progress < 1f)
         {
-            progress += (Time.deltaTime / Blackboard.loadEstimate);
-            Storage.SaveFloat(Const.LOCAL_PLAYER, StorageType.Progress, progress);
+            progress += (Time.deltaTime / loadEstimate);
+            Storage.SaveFloat(LOCAL_PLAYER, StorageType.Progress, progress);
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
@@ -135,7 +140,7 @@ public class Loading : MonoBehaviour
         loader.RegisterLoadingMethod(0.8f, LoadUIManager);
 
         // set this scene to be active
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(Const.SCENE_INCASINO));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(SCENE_INCASINO));
 
         // start the loading coroutine
         StartCoroutine(Load());
@@ -153,8 +158,27 @@ public class Loading : MonoBehaviour
         loader.RegisterLoadingMethod(0.6f, LoadUIManager);
         loader.RegisterLoadingMethod(0.8f, LoadTexasBonusManager);
 
-        // set this cene to be active 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(Const.SCENE_TEXAS));
+        // set this scene to be active 
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(SCENE_TEXAS));
+
+        // start the loading coroutine
+        StartCoroutine(Load());
+    }
+
+    /// <summary>
+    /// A method to load all contents needed in blackjack scene
+    /// </summary>
+    void LoadBlackjack()
+    {
+        // setup a loader
+        loader = new Loader();
+        loader.RegisterLoadingMethod(0.2f, LoadSceneEnvironment);
+        loader.RegisterLoadingMethod(0.4f, LoadTableCharacters);
+        loader.RegisterLoadingMethod(0.6f, LoadUIManager);
+        loader.RegisterLoadingMethod(0.8f, LoadBlackjackManager);
+
+        // set this scene to be active
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(SCENE_BLACKJACK));
 
         // start the loading coroutine
         StartCoroutine(Load());
@@ -179,13 +203,13 @@ public class Loading : MonoBehaviour
                 loader.Run();
 
             // get the updated loading bar progress
-            progress = Storage.LoadFloat(Const.LOCAL_PLAYER, StorageType.Progress);
+            progress = Storage.LoadFloat(LOCAL_PLAYER, StorageType.Progress);
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
         // set fade delay time, if takes 2 seconds wait time to fade when transiting
         // from homepage scene to casino scene
-        var fadeDelay = SceneManager.GetSceneByName(Const.SCENE_HOMEPAGE).isLoaded ? 2f : 0f;
+        var fadeDelay = SceneManager.GetSceneByName(SCENE_HOMEPAGE).isLoaded ? 2f : 0f;
 
         // start to fade in and out after n seconds
         yield return new WaitForSeconds(fadeDelay);
@@ -222,10 +246,10 @@ public class Loading : MonoBehaviour
         }
 
         // unload the previous scene if it is loaded
-        if (Blackboard.SCENE_PREVIOUS != ""
-            && SceneManager.GetSceneByName(Blackboard.SCENE_PREVIOUS).isLoaded)
+        if (SCENE_PREVIOUS != ""
+            && SceneManager.GetSceneByName(SCENE_PREVIOUS).isLoaded)
         {
-            SceneManager.UnloadSceneAsync(Blackboard.SCENE_PREVIOUS);
+            SceneManager.UnloadSceneAsync(SCENE_PREVIOUS);
         }
 
         // officially start the scene
@@ -245,6 +269,9 @@ public class Loading : MonoBehaviour
                         break;
                     case GameType.TexasBonus:
                         GameStart_Texas();
+                        break;
+                    case GameType.Blackjack:
+                        GameStart_Blackjack();
                         break;
                     default:
                         break;
@@ -281,7 +308,10 @@ public class Loading : MonoBehaviour
             case GameType.None:
                 break;
             case GameType.TexasBonus:
-                sceneName = Const.SCENE_TEXAS;                
+                sceneName = SCENE_TEXAS;                
+                break;
+            case GameType.Blackjack:
+                sceneName = SCENE_BLACKJACK;
                 break;
             default:
                 break;
@@ -315,7 +345,7 @@ public class Loading : MonoBehaviour
         HideVisibleObjects();
 
         // start loading coroutine
-        StartCoroutine(SubLoading(Const.SCENE_INCASINO));
+        StartCoroutine(SubLoading(SCENE_INCASINO));
     }
 
     /// <summary>
@@ -358,14 +388,14 @@ public class Loading : MonoBehaviour
 
         // reset progress value in player prefs
         var progress = 0f;
-        Storage.SaveFloat(Const.LOCAL_PLAYER, StorageType.Progress, progress);
+        Storage.SaveFloat(LOCAL_PLAYER, StorageType.Progress, progress);
 
         // disable light component from this scene
         foreach (var light in FindObjectsOfType<Light>())
             light.enabled = false;
 
         // stop the background music
-        Blackboard.audioManager.EnableBGM(false);
+        audioManager.EnableBGM(false);
 
         // load the specific scene 
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
@@ -374,8 +404,8 @@ public class Loading : MonoBehaviour
         while (slider.value < 1f)
         {
             // update loading bar progress to player prefs
-            progress += (Time.deltaTime / Blackboard.loadEstimate);
-            Storage.SaveFloat(Const.LOCAL_PLAYER, StorageType.Progress, progress);
+            progress += (Time.deltaTime / loadEstimate);
+            Storage.SaveFloat(LOCAL_PLAYER, StorageType.Progress, progress);
 
             // update slider value & text
             slider.value = progress;
@@ -400,11 +430,11 @@ public class Loading : MonoBehaviour
         environment.name = "Environmental Objects";
 
         // setup spawn holder
-        Blackboard.SetupSpawnHolder();
+        SetupSpawnHolder();
 
         // add the spawned object into the visible object list
         visibleObjs.Add(environment);
-        visibleObjs.Add(Blackboard.spawnHolder.gameObject);
+        visibleObjs.Add(spawnHolder.gameObject);
     }
 
     /// <summary>
@@ -433,7 +463,7 @@ public class Loading : MonoBehaviour
     void GameStart_Common(bool cursorLock)
     {
         // setup the player board
-        obj_uiManager.playerBoard.BindToPlayer(Blackboard.localPlayer);
+        obj_uiManager.playerBoard.BindToPlayer(localPlayer);
 
         // display default hidden UI objects
         obj_uiManager.SetDefaultObjectVisibility(true);
@@ -455,8 +485,8 @@ public class Loading : MonoBehaviour
         obj_character.name = "Player";
 
         // and then load the character model asset
-        var index = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.ModelIndex);
-        var asset = Blackboard.GetModelPrefab(index);
+        var index = Storage.LoadInt(LOCAL_PLAYER, StorageType.ModelIndex);
+        var asset = GetModelPrefab(index);
         Instantiate(asset, obj_character.transform.GetChild(0));
 
         // save model index
@@ -496,44 +526,44 @@ public class Loading : MonoBehaviour
     void GameStart_Casino()
     {
         // unload the previous scene if it is loaded
-        if (Blackboard.SCENE_PREVIOUS != ""
-            && SceneManager.GetSceneByName(Blackboard.SCENE_PREVIOUS).isLoaded)
+        if (SCENE_PREVIOUS != ""
+            && SceneManager.GetSceneByName(SCENE_PREVIOUS).isLoaded)
         {
-            SceneManager.UnloadSceneAsync(Blackboard.SCENE_PREVIOUS);
+            SceneManager.UnloadSceneAsync(SCENE_PREVIOUS);
         }
 
         // setup previous scene name
-        Blackboard.SCENE_PREVIOUS = Const.SCENE_INCASINO;
+        SCENE_PREVIOUS = SCENE_INCASINO;
 
         // set character to be active and bind it to the blackboard
         obj_character.SetActive(true);
-        Blackboard.localPlayer = obj_character.GetComponent<Player>();        
-        Blackboard.localPlayer.chip = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.Chip);
-        Blackboard.localPlayer.gem = Storage.LoadInt(Const.LOCAL_PLAYER, StorageType.Gem);
-        Blackboard.localPlayer.name = Storage.LoadString(Const.LOCAL_PLAYER, StorageType.Name);
-        Blackboard.localPlayer.description = Storage.LoadString(Const.LOCAL_PLAYER, StorageType.Description);
+        localPlayer = obj_character.GetComponent<Player>();        
+        localPlayer.chip = Storage.LoadInt(LOCAL_PLAYER, StorageType.Chip);
+        localPlayer.gem = Storage.LoadInt(LOCAL_PLAYER, StorageType.Gem);
+        localPlayer.name = Storage.LoadString(LOCAL_PLAYER, StorageType.Name);
+        localPlayer.description = Storage.LoadString(LOCAL_PLAYER, StorageType.Description);
 
         // spawn portal effects
         FindObjectOfType<PortalTagManager>().Setup(obj_character.transform);
 
         // play crowd sound 
-        Blackboard.audioManager.EnableEnvironmentSound(true);
+        audioManager.EnableEnvironmentSound(true);
 
         // play background music if it is not playing
-        if (!Blackboard.audioManager.srcBgm.isPlaying)
+        if (!audioManager.srcBgm.isPlaying)
         {
-            Blackboard.audioManager.srcBgm.clip = Blackboard.audioManager.bgm0;
-            Blackboard.audioManager.EnableBGM(true);
+            audioManager.srcBgm.clip = audioManager.bgm0;
+            audioManager.EnableBGM(true);
         }
 
         // check to see if this player has previously entered the casino
-        if (Storage.LoadBool(Const.LOCAL_PLAYER,StorageType.HasRecord))
+        if (Storage.LoadBool(LOCAL_PLAYER,StorageType.HasRecord))
         {
             // if yes, move the character to previous position & rotation
             obj_character.transform.position = 
-                Storage.LoadVector3(Const.LOCAL_PLAYER, StorageType.Position);
+                Storage.LoadVector3(LOCAL_PLAYER, StorageType.Position);
             obj_character.transform.eulerAngles = 
-                Storage.LoadVector3(Const.LOCAL_PLAYER, StorageType.Rotation);
+                Storage.LoadVector3(LOCAL_PLAYER, StorageType.Rotation);
         }
         else
         {
@@ -554,7 +584,7 @@ public class Loading : MonoBehaviour
         // setup the game manager
         obj_manager.GetComponent<TexasBonus.GameManager>().Setup(canvas);
     }
-
+    
     /// <summary>
     /// A method to actually start the texas bonus scene
     /// </summary>
@@ -564,11 +594,38 @@ public class Loading : MonoBehaviour
         obj_manager.GetComponent<TexasBonus.GameManager>().FinishedLoading();
 
         // setup previous scene name
-        Blackboard.SCENE_PREVIOUS = Const.SCENE_TEXAS;
+        SCENE_PREVIOUS = SCENE_TEXAS;
 
         // start the background music again
-        Blackboard.audioManager.srcBgm.clip = Blackboard.audioManager.bgm1;
-        Blackboard.audioManager.EnableBGM(true);
+        audioManager.srcBgm.clip = audioManager.bgm1;
+        audioManager.EnableBGM(true);
+    }
+
+    /// <summary>
+    /// Method to create game manager for blackjack
+    /// </summary>
+    void LoadBlackjackManager()
+    {
+        // create the game manager
+        obj_manager = Instantiate(pref_manager);
+
+        // setup the game manager
+
+    }
+
+    /// <summary>
+    /// A method to actually start the blackjack scene
+    /// </summary>
+    void GameStart_Blackjack()
+    {
+        // call the finished loading method and ready to start the game
+
+        // setup previous scene name
+        SCENE_PREVIOUS = SCENE_TEXAS;
+
+        // start the background music again
+        audioManager.srcBgm.clip = audioManager.bgm1;
+        audioManager.EnableBGM(true);
     }
     #endregion
 

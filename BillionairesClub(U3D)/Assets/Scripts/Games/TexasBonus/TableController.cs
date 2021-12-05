@@ -7,7 +7,7 @@ using static Blackboard;
 
 namespace TexasBonus
 {
-    public class TableController : MonoBehaviour
+    public class TableController : WagerBehaviour
     {
         [Header("UI Components")]
         [Tooltip("A game object that holds the table labels")]
@@ -16,8 +16,6 @@ namespace TexasBonus
         [Header("Player's asset")]
         [Tooltip("Poker chips")]
         public GameObject[] chips;
-        [Tooltip("Objects that contain placing position for wager")]
-        public GameObject[] wager;
         [Tooltip("Objects that hold label marks for the wager")]
         public GameObject[] marks;
 
@@ -28,22 +26,6 @@ namespace TexasBonus
         public GameObject[] communityCardsObj;
         [Tooltip("Models to repersent player's cards")]
         public GameObject[] playerCardsObj;
-
-        [Header("Prefabs")]
-        [Tooltip("Prefab model for red chip")]
-        public GameObject pref_redChip;
-        [Tooltip("Prefab model for blue chip")]
-        public GameObject pref_blueChip;
-        [Tooltip("Prefab model for yellow chip")]
-        public GameObject pref_yellowChip;
-        [Tooltip("Prefab model for pink chip")]
-        public GameObject pref_pinkChip;
-        [Tooltip("Prefab model for black chip")]
-        public GameObject pref_blackChip;
-
-        [Header("Other")]
-        [Tooltip("A component that register/play chip animation")]
-        public ChipAnimationPlayer chipAnimationPlayer;
 
         [HideInInspector]
         public CardDeck cardDeck;                // card deck used in the game
@@ -56,16 +38,12 @@ namespace TexasBonus
         [HideInInspector]
         public bool allPlayerFolded;             // a state to determine whether or not all the players have folded thier cards
 
-        private Vector3[][] wagerPos;            // contains placing positions for all wager
-        private GameObject[][] wagerObj;         // parent object that holds all poker chips model for a specific player
         private Card[] dealerHand;               // card data for dealer
         private Card[] communityCards;           // card data for community cards
         private Card[][] playerCards;            // card data for players
         private HandStrength dealerHandStrengh;  // hand evaluator for dealer
         private HandStrength[] handStrengths;    // hand evaluator for players
-        private float wagerHeight;               // used to determine current wager height when spawning heaps of wagers
-        private float wagerAngle;                // used to determine current wager rotation angle when spawning heaps of wagers
-
+        
         public void Setup()
         {
             InitializeCards();
@@ -104,13 +82,13 @@ namespace TexasBonus
         {
             // initialize associated variables
             wagerPos = new Vector3[gameManager.players.Length][];
-            wagerObj = new GameObject[gameManager.players.Length][];
+            wagerStacks = new GameObject[gameManager.players.Length][];
 
             // initialize wager positions
             for (int i = 0; i < wagerPos.Length; i++)
             {
                 wagerPos[i] = new Vector3[5];
-                wagerObj[i] = new GameObject[5];
+                wagerStacks[i] = new GameObject[5];
                 for (int j = 0; j < wagerPos.Length; j++)
                     wagerPos[i][j] = wager[i].transform.GetChild(j).transform.position;
             }
@@ -177,267 +155,18 @@ namespace TexasBonus
         }
 
         /// <summary>
-        /// Methdo to create wager model for a player, wager model repersent the 
-        /// amount of money the player bet on a specific part (BONUS/ANTE/FLOP/TURN/RIVER)
-        /// </summary>
-        /// <param name="playerId">the player id</param>
-        /// <param name="wagerIndex">the index of the specific part</param>
-        /// <param name="amount">amount of money</param>
-        public void CreateWagerModel(int playerId, int wagerIndex, int amount)
-        {
-            // first of all, create an empty game object that holds the wager models
-            wagerObj[playerId][wagerIndex] = new GameObject("Chip");
-            wagerObj[playerId][wagerIndex].transform.parent = spawnHolder;
-            wagerObj[playerId][wagerIndex].transform.localScale = Vector3.one * 1.75f;
-            wagerObj[playerId][wagerIndex].transform.position = wagerPos[playerId][wagerIndex];
-
-            // initialize the spawning data
-            var remaining = amount;
-            wagerHeight = 0f;
-            wagerAngle = 0f;
-
-            // play bet sound effect
-            audioManager.PlayAudio(audioManager.clipPlaceWager, AudioType.Sfx);
-
-            // keep spawning wager model as long as the remaining amount is greater than 0
-            while (remaining > 0)
-            {
-                // the spawning object
-                GameObject obj;
-
-                // case1: black chip
-                if (remaining >= 100)
-                {
-                    remaining -= 100;
-                    obj = Instantiate(pref_blackChip, wagerObj[playerId][wagerIndex].transform);
-                }
-                // case2: pink chip
-                else if (remaining >= 50)
-                {
-                    remaining -= 50;
-                    obj = Instantiate(pref_pinkChip, wagerObj[playerId][wagerIndex].transform);
-                }
-                // case3: yellow chip
-                else if (remaining >= 25)
-                {
-                    remaining -= 25;
-                    obj = Instantiate(pref_yellowChip, wagerObj[playerId][wagerIndex].transform);
-                }
-                // case4: blue chip
-                else if (remaining >= 10)
-                {
-                    remaining -= 10;
-                    obj = Instantiate(pref_blueChip, wagerObj[playerId][wagerIndex].transform);
-                }
-                // default case: red chip
-                else
-                {
-                    remaining = 0;
-                    obj = Instantiate(pref_redChip, wagerObj[playerId][wagerIndex].transform);
-                }
-
-                // adjust spawned object's position and rotation
-                obj.transform.localPosition = new Vector3(0f, wagerHeight, 0f);
-                obj.transform.localEulerAngles = new Vector3(-90f, wagerAngle, 0f);
-
-                // increment height & angle
-                wagerAngle += Const.TABLE_WAGER_ANGLE_INCREMENT;
-                wagerHeight += Const.TABLE_WAGER_HEIGHT_INCREMENT;
-            }
-        }
-
-        /// <summary>
-        /// Method to clone a ante wager stack, it is used when players bet on 
-        /// FLOP/TURN/RIVER
-        /// </summary>
-        /// <param name="playerId">index of the player</param>
-        /// <param name="wagerIndex">index of the wager slot</param>
-        /// <param name="isDouble">true in flop, false in turn and river</param>
-        public void CloneAnteWagerModel(int playerId, int wagerIndex, bool isDouble)
-        {
-            // first of all, spawn a parent object to hold all the clone chips
-            wagerObj[playerId][wagerIndex] = new GameObject("Chip");
-            wagerObj[playerId][wagerIndex].transform.parent = spawnHolder;
-            wagerObj[playerId][wagerIndex].transform.localScale = Vector3.one * 1.75f;
-            wagerObj[playerId][wagerIndex].transform.position = wagerPos[playerId][wagerIndex];
-
-            // initial default height & angle for the wager stack
-            wagerHeight = 0f;
-            wagerAngle = 0f;
-
-            // keep spawning wager models 
-            for (int i = 0; i < (isDouble ? 2 : 1); i++) 
-            {
-                for (int j = 0; j < wagerObj[playerId][0].transform.childCount; j++)
-                {
-                    // spawn a wager model
-                    var obj = Instantiate(wagerObj[playerId][0].transform.GetChild(j),wagerObj[playerId][wagerIndex].transform);
-                    obj.transform.localPosition = Vector3.up * wagerHeight;
-                    obj.transform.localEulerAngles = new Vector3(-90f, wagerAngle, 0f);
-
-                    // increment height & angle
-                    wagerAngle += Const.TABLE_WAGER_ANGLE_INCREMENT;
-                    wagerHeight += Const.TABLE_WAGER_HEIGHT_INCREMENT;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Methdo to create a single wager model for a player, wager model repersent the 
-        /// amount of money the player bet on a specific part (BONUS/ANTE/FLOP/TURN/RIVER)
-        /// </summary>
-        /// <param name="playerId">the player id</param>
-        /// <param name="wagerIndex">the index of the specific slot</param>
-        /// <param name="amount">amount of money</param>
-        public void AddWagerModel(int playerId, int wagerIndex, int amount)
-        {
-            // create an empty game object that holds the wager models
-            if (wagerObj[playerId][wagerIndex] == null)
-            {
-                wagerHeight = 0f;
-                wagerAngle = 0f;
-                wagerObj[playerId][wagerIndex] = new GameObject("Chip");
-                wagerObj[playerId][wagerIndex].transform.parent = spawnHolder;
-                wagerObj[playerId][wagerIndex].transform.localScale = Vector3.one * 1.75f;
-                wagerObj[playerId][wagerIndex].transform.position = wagerPos[playerId][wagerIndex];                
-            }
-
-            // play bet sound effect
-            audioManager.PlayAudio(audioManager.clipPlaceWager, AudioType.Sfx);
-
-            // spawn a single chip into the holder
-            GameObject obj;
-            if (amount == 5)
-                obj = Instantiate(pref_redChip, wagerObj[playerId][wagerIndex].transform);
-            else if (amount == 10)
-                obj = Instantiate(pref_blueChip, wagerObj[playerId][wagerIndex].transform);
-            else if (amount == 25)
-                obj = Instantiate(pref_yellowChip, wagerObj[playerId][wagerIndex].transform);
-            else if (amount == 50)
-                obj = Instantiate(pref_pinkChip, wagerObj[playerId][wagerIndex].transform);
-            else
-                obj = Instantiate(pref_blackChip, wagerObj[playerId][wagerIndex].transform);
-
-            // adjust spawned object's position and rotation
-            obj.transform.localPosition = new Vector3(0f, wagerHeight, 0f);
-            obj.transform.localEulerAngles = new Vector3(-90f, wagerAngle, 0f);
-
-            // increment height & angle
-            wagerAngle += Const.TABLE_WAGER_ANGLE_INCREMENT;
-            wagerHeight += Const.TABLE_WAGER_HEIGHT_INCREMENT;
-        }
-
-        /// <summary>
-        /// Method to clear all wager model for a player in a specific slot
-        /// </summary>
-        /// <param name="playerId">the player id</param>
-        /// <param name="wagerIndex">the index of the specific slot</param>
-        public void ClearWagerModel(int playerId, int wagerIndex)
-        {
-            if (wagerObj[playerId][wagerIndex] != null)
-                Destroy(wagerObj[playerId][wagerIndex]);
-        }
-
-        /// <summary>
-        /// Method to multiply wager on a specific part (BONUS/ANTE/FLOP/TURN/RIVER), it is called
-        /// when a player wins
-        /// </summary>
-        /// <param name="playerId">the player id</param>
-        /// <param name="wagerIndex">index of the specific part</param>
-        /// <param name="multiplier">multiplier</param>
-        public void MultiplyWagerModel(int playerId, int wagerIndex, int multiplier)
-        {
-            // find the parent object that holds wager models in this specific part
-            var parent = wagerObj[playerId][wagerIndex].transform;
-            
-            // find the childcount so that we know the height of the parent object
-            var childCount = parent.transform.childCount;
-            wagerHeight = parent.GetChild(childCount - 1).localPosition.y;
-            wagerAngle = parent.GetChild(childCount - 1).localEulerAngles.y;
-
-            // spawn 'n' times
-            for (int i = 0; i < multiplier; i++)
-            {
-                for (int j = 0; j < childCount; j++)
-                {
-                    // increment height & angle
-                    wagerAngle += Const.TABLE_WAGER_ANGLE_INCREMENT;
-                    wagerHeight += Const.TABLE_WAGER_HEIGHT_INCREMENT;
-
-                    // spawn a wager model
-                    var obj = Instantiate(parent.GetChild(j), parent);
-
-                    // calculate spawning position and target position
-                    var spawnPos = chipAnimationPlayer.GetAssociateChipSlot(obj.tag);
-                    var targetPos = new Vector3(0f, wagerHeight, 0f);
-
-                    // register the movement animation
-                    var chipAnimation = obj.gameObject.AddComponent<ChipAnimation>();
-                    chipAnimation.Take(spawnPos, targetPos, new Vector3(-90f, wagerAngle, 0f));
-
-                    // add the animation to animation player
-                    chipAnimationPlayer.Add(chipAnimation);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Method to setup the chip animation player to take away a player's wager in a specific slot
-        /// </summary>
-        /// <param name="playerId">index of the player</param>
-        /// <param name="wagerIndex">index of the wager slot</param>
-        public void TakingChipsAway(int playerId, int wagerIndex)
-        {
-            // return if the slot does not exist
-            if (wagerObj[playerId][wagerIndex] == null)
-                return;
-
-            // find the parent object that holds wager models in this specific part
-            var parent = wagerObj[playerId][wagerIndex].transform;
-
-            // run though each child in this parent
-            for (int i = parent.childCount - 1; i >= 0; i--)
-            {
-                // get the wager model
-                var obj = parent.GetChild(i);
-                
-                // get the slot position for this type of chip
-                var targetPos = chipAnimationPlayer.GetAssociateChipSlot(obj.tag);
-
-                // register the movement animation
-                var chipAnimation = obj.gameObject.AddComponent<ChipAnimation>();
-                chipAnimation.Lose(targetPos);
-
-                // add the animation to animation player
-                chipAnimationPlayer.Add(chipAnimation);
-            }
-        }
-
-        /// <summary>
-        /// Method to remove all wager models, it is called when a round 
-        /// is about to reset
-        /// </summary>
-        public void RemoveWagerModel()
-        {
-            for (int i = 0; i < wagerObj.Length; i++)
-                for (int j = 0; j < wagerObj[i].Length; j++)
-                    ClearWagerModel(i, j);
-        }
-
-        /// <summary>
         /// Method to hide a player's wager models, cards and label, it is 
         /// called when the player has lost
         /// </summary>
         /// <param name="index"></param>
         private void HidePlayerBetAndCards(int index)
         {
-            // remove all chips from this player
-            for (int i = 0; i < wagerObj[index].Length; i++)
-                ClearWagerModel(index, i);
-
             // hide card models and bet label
             playerCardsObj[index].HideCard();
             labelController.SetBetLabel(index);
+
+            // remove all chips from this player
+            ClearWagerStackForSinglePlayer(index);
         }
 
         /// <summary>
@@ -461,7 +190,7 @@ namespace TexasBonus
                 {
                     TakingChipsAway(i, 0);
                     TakingChipsAway(i, 4);
-                    chipAnimationPlayer.Play();
+                    wagerAnimator.Play();
                     labelController.SetBetLabelResult(i, playerAction.bets[i].GetAmountChange());
                     yield return new WaitForSeconds(Const.WAIT_TIME_CHIP_TOTAL + Const.WAIT_TIME_CHIP_TRAVEL);
                     HidePlayerBetAndCards(i);
@@ -782,7 +511,7 @@ namespace TexasBonus
         public void PlayChipAnimation(int index)
         {
             // play the animation player
-            chipAnimationPlayer.Play();
+            wagerAnimator.Play();
 
             // display chip amount change for this player
             labelController.SetBetLabelResult(index, playerAction.bets[index].GetAmountChange());

@@ -1,7 +1,8 @@
 ﻿public enum GameType
 {
     None,
-    TexasBonus
+    TexasBonus,
+    Blackjack
 }
 
 public enum SeatAvailability
