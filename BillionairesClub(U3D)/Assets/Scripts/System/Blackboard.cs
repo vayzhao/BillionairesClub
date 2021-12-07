@@ -32,6 +32,11 @@ public static class Blackboard
     }
     #endregion
 
+    #region Canvas
+    public static Transform canvas;
+    public static void SetupCanvas() => canvas = GameObject.FindGameObjectWithTag("Canvas").transform;
+    #endregion
+
     #region Character Prefabs
     public static string[] modelName = new string[12]
     {
@@ -243,4 +248,5 @@ public static class Blackboard
     public static Sprite GetCardSprite(int index) { return Resources.Load<Sprite>(cardSprite[index]); }
     public static Mesh GetCardMesh(int index) { return Resources.Load<Mesh>(cardMesh[index]); }
     #endregion
+
 }

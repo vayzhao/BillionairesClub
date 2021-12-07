@@ -832,7 +832,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 674458230360755014}
-  - component: {fileID: 674458230360755023}
+  - component: {fileID: 203634330204331937}
   m_Layer: 5
   m_Name: Player's Action[Blackjack]
   m_TagString: Untagged
@@ -861,7 +861,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &674458230360755023
+--- !u!114 &203634330204331937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 674458230360755009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c7079147d4b2374686bb257a88be70d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8870443f96749944ca115e2749317e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   titleText: {fileID: 7674767084218313463}
@@ -892,14 +892,9 @@ MonoBehaviour:
   totalWager: 0
   remaining: 0
   remainingTemp: 0
-  obj_fold: {fileID: 0}
-  obj_check: {fileID: 4812501876949473340}
-  obj_bet: {fileID: 4812501877072880441}
-  decisionPanel: {fileID: 4812501877759978558}
-  isWaiting: 0
   gameManager: {fileID: 0}
-  tableController: {fileID: 0}
   labelController: {fileID: 0}
+  tableController: {fileID: 0}
 --- !u!1 &696386379891790262
 GameObject:
   m_ObjectHideFlags: 0
@@ -14374,7 +14369,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 674458230360755023}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BeforeBet, Assembly-CSharp
         m_MethodName: Check
         m_Mode: 1
@@ -14881,7 +14876,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 674458230360755023}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BeforeBet, Assembly-CSharp
         m_MethodName: Check
         m_Mode: 1
@@ -15416,7 +15411,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 674458230360755023}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BeforeBet, Assembly-CSharp
         m_MethodName: Bet
         m_Mode: 1
@@ -15918,7 +15913,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 674458230360755023}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BeforeBet, Assembly-CSharp
         m_MethodName: ResetChip
         m_Mode: 1
@@ -17398,7 +17393,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 674458230360755023}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BeforeBet, Assembly-CSharp
         m_MethodName: Bet
         m_Mode: 1
@@ -21565,7 +21560,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 674458230360755023}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BeforeBet, Assembly-CSharp
         m_MethodName: Check
         m_Mode: 1
@@ -21998,7 +21993,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 674458230360755023}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BeforeBet, Assembly-CSharp
         m_MethodName: Check
         m_Mode: 1
@@ -28917,7 +28912,7 @@ MonoBehaviour:
   playerBoard: {fileID: 8338020832739636285}
   subLoaderBar: {fileID: 2437254176780074971}
   readyBtn: {fileID: 6421653370813958876}
-  playerAction: {fileID: 0}
+  playerAction: {fileID: 674458230360755009}
   labelController: {fileID: 8641972712916644634}
   lockPage: 0
   interactable: []
@@ -30341,8 +30336,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6528387693984033010}
+  - component: {fileID: 1181813657899790374}
   m_Layer: 5
-  m_Name: LabelControler[TexasBonus]
+  m_Name: LabelControler[Blackjack]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30370,6 +30366,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1181813657899790374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8641972712916644634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d57608d8a0cde42a3afc97bdddc989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labelSpriteRed: {fileID: 21300000, guid: 41e7317d41fd3ea4099ea9393f008a40, type: 3}
+  labelSpriteGreen: {fileID: 21300000, guid: 76fe17b0af720b147961466fc92ab9a4, type: 3}
+  labelSpritePurple: {fileID: 21300000, guid: d502ff25af7689b43873c97d01c78e17, type: 3}
 --- !u!1 &8770909941846362532
 GameObject:
   m_ObjectHideFlags: 0

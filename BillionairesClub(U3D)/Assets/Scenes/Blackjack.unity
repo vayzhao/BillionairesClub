@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 477235379}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,7 +310,7 @@ PrefabInstance:
     - target: {fileID: 1218994448, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
       propertyPath: pref_manager
       value: 
-      objectReference: {fileID: 4656738798385959529, guid: 03bdceda60a01ef47ab52d4e91d59eb8, type: 3}
+      objectReference: {fileID: 3208367079079570031, guid: b70e769b71cc2a941bfc1dbf74d35b36, type: 3}
     - target: {fileID: 1218994448, guid: b6fbfcc41811e984c830c02756bf7e26, type: 3}
       propertyPath: pref_uiManager
       value: 

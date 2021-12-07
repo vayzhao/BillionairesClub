@@ -36,7 +36,7 @@ public class Loading : MonoBehaviour
     private Loader loader;                // a class that contains all sort of methods to spawn objects 
     private GameObject obj_environment;   // a variable to record the environmental objects
     private GameObject obj_character;     // a variable to record the player's character
-    private GameObject obj_manager;       // a variable to record the core manager for this scene
+    private GameObject obj_gameManager;       // a variable to record the core manager for this scene
     private UIManager obj_uiManager;      // a variable to record the UI manager
     private List<GameObject> visibleObjs; // a list to store all the visible object, when intend to load a new scene,
                                           // hide all visble objects from the old scene
@@ -429,7 +429,8 @@ public class Loading : MonoBehaviour
         var environment = Instantiate(pref_environment);
         environment.name = "Environmental Objects";
 
-        // setup spawn holder
+        // setup canvas & spawn holder
+        SetupCanvas();
         SetupSpawnHolder();
 
         // add the spawned object into the visible object list
@@ -502,10 +503,10 @@ public class Loading : MonoBehaviour
     void LoadCasinoManager()
     {
         // create the game manager
-        obj_manager = Instantiate(pref_manager);
+        obj_gameManager = Instantiate(pref_manager);
 
         // initialie seat manager
-        var seatManager = obj_manager.GetComponent<SeatManager>();
+        var seatManager = obj_gameManager.GetComponent<SeatManager>();
         seatManager.Setup();
 
         // attach seat manager to all tables
@@ -516,7 +517,7 @@ public class Loading : MonoBehaviour
         }
 
         // initialize crowd
-        obj_manager.GetComponent<CrowdManager>().Setup();
+        obj_gameManager.GetComponent<CrowdManager>().Setup();
     }
 
     /// <summary>
@@ -579,10 +580,10 @@ public class Loading : MonoBehaviour
     void LoadTexasBonusManager()
     {
         // create the game manager
-        obj_manager = Instantiate(pref_manager);
+        obj_gameManager = Instantiate(pref_manager);
 
         // setup the game manager
-        obj_manager.GetComponent<TexasBonus.GameManager>().Setup(canvas);
+        obj_gameManager.GetComponent<TexasBonus.GameManager>().Setup(canvas);
     }
     
     /// <summary>
@@ -591,7 +592,7 @@ public class Loading : MonoBehaviour
     void GameStart_Texas()
     {
         // call the finished loading method and ready to start the game
-        obj_manager.GetComponent<TexasBonus.GameManager>().FinishedLoading();
+        obj_gameManager.GetComponent<TexasBonus.GameManager>().FinishedLoading();
 
         // setup previous scene name
         SCENE_PREVIOUS = SCENE_TEXAS;
@@ -607,10 +608,10 @@ public class Loading : MonoBehaviour
     void LoadBlackjackManager()
     {
         // create the game manager
-        obj_manager = Instantiate(pref_manager);
+        obj_gameManager = Instantiate(pref_manager);
 
         // setup the game manager
-
+        obj_gameManager.GetComponent<Blackjack.GameManager>().Setup(canvas);
     }
 
     /// <summary>
@@ -619,6 +620,7 @@ public class Loading : MonoBehaviour
     void GameStart_Blackjack()
     {
         // call the finished loading method and ready to start the game
+        obj_gameManager.GetComponent<Blackjack.GameManager>().FinishedLoading();
 
         // setup previous scene name
         SCENE_PREVIOUS = SCENE_TEXAS;

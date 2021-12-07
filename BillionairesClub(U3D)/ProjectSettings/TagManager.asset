@@ -13,6 +13,7 @@ TagManager:
   - ChipPink
   - ChipRed
   - ChipYellow
+  - Canvas
   layers:
   - Default
   - TransparentFX

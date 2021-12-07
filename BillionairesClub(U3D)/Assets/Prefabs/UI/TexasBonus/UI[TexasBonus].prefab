@@ -14208,6 +14208,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -60
       objectReference: {fileID: 0}
+    - target: {fileID: 5325179436078187808, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
+      propertyPath: labelSpriteRed
+      value: 
+      objectReference: {fileID: 21300000, guid: 41e7317d41fd3ea4099ea9393f008a40, type: 3}
+    - target: {fileID: 5325179436078187808, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
+      propertyPath: pref_floatText
+      value: 
+      objectReference: {fileID: 4003156190351455927, guid: 26f98010ff54203408c7b3023f2f1bbd, type: 3}
+    - target: {fileID: 5325179436078187808, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
+      propertyPath: labelSpriteGreen
+      value: 
+      objectReference: {fileID: 21300000, guid: 76fe17b0af720b147961466fc92ab9a4, type: 3}
+    - target: {fileID: 5325179436078187808, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
+      propertyPath: labelSpritePurple
+      value: 
+      objectReference: {fileID: 21300000, guid: d502ff25af7689b43873c97d01c78e17, type: 3}
     - target: {fileID: 6031004726975428313, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
       propertyPath: m_Name
       value: LabelControler[TexasBonus]
@@ -14298,6 +14314,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7302179054055638499, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7750387136236269457, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8724207645168577943, guid: 424635f7763bf064e9a43299aeb80f08, type: 3}

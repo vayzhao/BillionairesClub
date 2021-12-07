@@ -6,7 +6,7 @@ using TMPro;
 
 namespace TexasBonus
 {
-    public class LabelController : MonoBehaviour
+    public class LabelController : LabelBehaviour
     {
         [Header("Local Player Hand")]
         [Tooltip("A image to display the background of player hand")]
@@ -17,24 +17,18 @@ namespace TexasBonus
         public GameObject bonusPanel;
         [Tooltip("A text to display bonus reward multiplier")]
         public TextMeshProUGUI bonusText;
+
+        [Header("Other")]
         [Tooltip("Default sprite for the card back")]
         public Sprite defaultTexture;
+        [Tooltip("Text object that shows the hand-rank of the dealer")]
+        public GameObject dealerHandRankLabel;
         [Tooltip("Player's hand image")]
-        public Image[] cardTexture;
-        [Space(15)]        
+        public Image[] cardTexture;        
         [Tooltip("Text objects that show the amount of money that the players bet")]
         public TextMeshProUGUI[] betLabels;
         [Tooltip("Text objects that show the hand-rank of the players")]
         public GameObject[] handRankLabel;
-        [Tooltip("Text object that shows the hand-rank of the dealer")]
-        public GameObject dealerHandRankLabel;
-        [Header("Sprite Asset")]
-        [Tooltip("Background sprite for hand-rank label when win")]
-        public Sprite labelSpriteForWin;
-        [Tooltip("Background sprite for hand-rank label when lose")]
-        public Sprite labelSpriteForLose;
-        [Tooltip("Background sprite for hand-rank label when standoff")]
-        public Sprite labelSpriteForStandoff;
 
         private Image dealerLabelBg;               // image to display hand-rank label's background 
         private Image[] playerLabelBg;             // image to display hand-rank label's background 
@@ -42,7 +36,7 @@ namespace TexasBonus
         private TextMeshProUGUI[] playerLabelText; // text to display hand-rank label's text
 
         /// <summary>
-        /// Method to setup the label controllers
+        /// Method to setup the label controller
         /// </summary>
         public void Setup()
         {
@@ -67,7 +61,7 @@ namespace TexasBonus
         }
 
         /// <summary>
-        /// Method to reset labels, it is called then a round finished
+        /// Method to reset labels, it is called when a round finished
         /// </summary>
         public void Reset()
         {
@@ -130,7 +124,7 @@ namespace TexasBonus
             {
                 betLabels[index].text = "";
                 return;
-            }   
+            }
 
             if (bonus == 0)
                 betLabels[index].text = $"{amount:C0}";
@@ -139,53 +133,27 @@ namespace TexasBonus
         }
 
         /// <summary>
-        /// Method to display the betting result in the bet label
+        /// Method to display betting result to players, it is called when 
+        /// calculating player's profit and loss
         /// </summary>
         /// <param name="index">index of the player</param>
-        /// <param name="amountChange">chip amount change for this round</param>
-        public void SetBetLabelResult(int index, int amountChange)
+        /// <param name="amountChange">amount of profit/loss</param>
+        public void DisplayBetResult(int index, int amountChange)
         {
-            // if the amount has not change, reset bet label and return
+            // first of all, hide the initial bet text
+            SetBetLabel(index);
+
+            // return if the bet amount hasn't change
             if (amountChange == 0)
-            {
-                betLabels[index].text = "";
                 return;
-            }
 
-            // otherwise, the player either win or lose
-            if (amountChange > 0)
-                betLabels[index].text = $"<color=\"green\">+{amountChange:C0}</color>";
-            else
-                betLabels[index].text = $"<color=\"red\">{amountChange:C0}</color>";
+            // otherwise, setup a text for bet result
+            var message = amountChange > 0 ?
+                $"<color=\"green\">+{amountChange:C0}</color>" :
+                $"<color=\"red\">{amountChange:C0}</color>";
 
-            // start floating the text and fade it
-            StartCoroutine(BetLabelFloating(index));
-        }
-        IEnumerator BetLabelFloating(int index)
-        {
-            // initialize progress and record the origin position & color
-            var progress = 0f;
-            var originPos = betLabels[index].transform.position;
-            var originCor = betLabels[index].color;
-            
-            // playing the text animation
-            while (progress < 1f)
-            {
-                // update the progress
-                var progressChange = Time.deltaTime / Const.WAIT_TIME_LABEL_FLOAT;
-                progress += progressChange;
-
-                // update the position and alpha color
-                betLabels[index].transform.position += Vector3.up * 0.3f;
-                betLabels[index].color = new Color(1f, 1f, 1f, Mathf.Lerp(1f, 0f, progress));
-
-                yield return new WaitForSeconds(Time.deltaTime);
-            }
-
-            // reset the bet label text
-            betLabels[index].text = "";
-            betLabels[index].color = originCor;
-            betLabels[index].transform.position = originPos;
+            // display the text
+            FloatText(message, betLabels[index].transform.position, 60f, 3f, 0.3f);
         }
 
         /// <summary>
@@ -224,16 +192,16 @@ namespace TexasBonus
             switch (result)
             {
                 case Result.Win:
-                    dealerLabelBg.sprite = labelSpriteForLose;
-                    playerLabelBg[playerIndex].sprite = labelSpriteForWin;
+                    dealerLabelBg.sprite = labelSpriteRed;
+                    playerLabelBg[playerIndex].sprite = labelSpriteGreen;
                     break;
                 case Result.Lose:
-                    dealerLabelBg.sprite = labelSpriteForWin;
-                    playerLabelBg[playerIndex].sprite = labelSpriteForLose;
+                    dealerLabelBg.sprite = labelSpriteGreen;
+                    playerLabelBg[playerIndex].sprite = labelSpriteRed;
                     break;
                 case Result.Standoff:
-                    dealerLabelBg.sprite = labelSpriteForStandoff;
-                    playerLabelBg[playerIndex].sprite = labelSpriteForStandoff;
+                    dealerLabelBg.sprite = labelSpritePurple;
+                    playerLabelBg[playerIndex].sprite = labelSpritePurple;
                     break;
                 default:
                     break;
@@ -252,7 +220,7 @@ namespace TexasBonus
                 bonusPanel.SetActive(false);
                 return;
             }
-            
+
             // otherwise, display the bonus and update its text
             bonusPanel.SetActive(true);
             bonusText.text = $"Bonus *{multiplier}";

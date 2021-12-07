@@ -191,7 +191,7 @@ namespace TexasBonus
                     TakingChipsAway(i, 0);
                     TakingChipsAway(i, 4);
                     wagerAnimator.Play();
-                    labelController.SetBetLabelResult(i, playerAction.bets[i].GetAmountChange());
+                    labelController.DisplayBetResult(i, playerAction.bets[i].GetAmountChange());
                     yield return new WaitForSeconds(Const.WAIT_TIME_CHIP_TOTAL + Const.WAIT_TIME_CHIP_TRAVEL);
                     HidePlayerBetAndCards(i);
                 }
@@ -514,7 +514,7 @@ namespace TexasBonus
             wagerAnimator.Play();
 
             // display chip amount change for this player
-            labelController.SetBetLabelResult(index, playerAction.bets[index].GetAmountChange());
+            labelController.DisplayBetResult(index, playerAction.bets[index].GetAmountChange());
         }
     }
 }
