@@ -7,7 +7,7 @@ public class CardDeck
     private List<Card> cards;     // list of card that repersent the card-deck
     private int pointerIndex;     // the index of current drawing card
     private System.Random rd;     // the random generator for card shuffling
-
+    
     public CardDeck()
     {
         cards = new List<Card>();
@@ -18,6 +18,17 @@ public class CardDeck
                 cards.Add(new Card(suit, value));
     }
 
+    public CardDeck(int multiplier)
+    {
+        cards = new List<Card>();
+        rd = new System.Random();
+
+        for (int i = 0; i < multiplier; i++)
+            foreach (Suit suit in Enum.GetValues(typeof(Suit)))
+                foreach (Value value in Enum.GetValues(typeof(Value)))
+                    cards.Add(new Card(suit, value));
+    }
+
     /// <summary>
     /// Method for setting up a card deck for debug purpose
     /// </summary>
@@ -26,7 +37,7 @@ public class CardDeck
         cards = new List<Card>();
         pointerIndex = 0;
         cards.Add(new Card(Suit.Heart, Value.KING)); // dealer hand 1
-        cards.Add(new Card(Suit.Heart, Value.QUEEN)); // dealer hand 2
+        cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer hand 2
         cards.Add(new Card(Suit.Heart, Value.TWO)); // flop1
         cards.Add(new Card(Suit.Spade, Value.THREE)); // flop2
         cards.Add(new Card(Suit.Diamond, Value.FOUR)); // flop3
@@ -74,4 +85,10 @@ public class CardDeck
 
         return card;
     }
+
+    /// <summary>
+    /// Method to get number of remaining cards in the card deck
+    /// </summary>
+    /// <returns></returns>
+    public int GetRemaining() => cards.Count - pointerIndex;
 }

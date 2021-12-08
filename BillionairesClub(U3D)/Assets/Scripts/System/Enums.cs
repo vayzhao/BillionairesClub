@@ -25,7 +25,9 @@ public enum BetType
     AnteWager,
     Flop,
     Turn,
-    River
+    River,
+    PerfectPair,
+    Insurance
 }
 
 public enum Suit

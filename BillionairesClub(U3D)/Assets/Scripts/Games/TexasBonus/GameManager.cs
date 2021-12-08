@@ -34,7 +34,7 @@ namespace TexasBonus
 
             // create game object for player hand
             labelController = uiManager.labelController.GetComponent<LabelController>();
-            labelController.Setup();
+            labelController.Reset();
             tableController.labelController = labelController;
 
             // bind relative script to each other

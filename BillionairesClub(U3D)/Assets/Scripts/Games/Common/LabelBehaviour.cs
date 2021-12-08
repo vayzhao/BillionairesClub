@@ -13,6 +13,8 @@ public class LabelBehaviour : MonoBehaviour
     public Sprite labelSpriteGreen;
     [Tooltip("A panel background sprite with purple color")]
     public Sprite labelSpritePurple;
+    [Tooltip("Default sprite for the card back")]
+    public Sprite defaultTexture;
 
     /// <summary>
     /// A method to spawn a text mesh pro object displaying a message 
@@ -63,5 +65,4 @@ public class LabelBehaviour : MonoBehaviour
         // destroy the text
         Destroy(tmp.gameObject);
     }
-
 }

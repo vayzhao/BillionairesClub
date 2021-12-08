@@ -41,12 +41,18 @@ public class BeforeBet : MonoBehaviour
     public int remaining;       // amounf of wager the player had when this round started
     [HideInInspector]
     public int remainingTemp;   // amount of wager the player has now
+    [HideInInspector]
+    public BetType betType;     // which type of bet it is
+    [HideInInspector]
+    public bool isWaiting;      // determine whether or not this script is waiting for a player to make decision
 
     public VoidDel methodFold;  // method for folding
     public VoidDel methodCheck; // method for checking
     public VoidDel methodBet;   // method for betting
     public VoidDel methodClear; // method for clearing chip
     public VoidDelI methodAdd;  // method for adding chip
+
+    
 
     void Start() => InitializeValues();
 

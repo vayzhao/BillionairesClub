@@ -17,8 +17,6 @@ namespace TexasBonus
         public GameObject decisionPanel;
 
         [HideInInspector]
-        public bool isWaiting;                  // determine whether or not this script is waiting for a player to make decision
-        [HideInInspector]
         public Bet[] bets;                      // bet data for players
         [HideInInspector]
         public GameManager gameManager;         // the game manager script
@@ -26,8 +24,6 @@ namespace TexasBonus
         public TableController tableController; // the table controller script
         [HideInInspector]
         public LabelController labelController; // the label controller script
-
-        private BetType betType;                // type of the turn (ANTE/BONUS/FLOP/TURN/RIVER)
 
         public void Setup() 
         {
@@ -64,7 +60,7 @@ namespace TexasBonus
         public void DisplayBetPanel(BetType betType, int playerIndex)
         {
             // switch waiting state to be true and record the playerIndex and bet type
-            isWaiting = true;
+            this.isWaiting = true;
             this.betType = betType;
             this.playerIndex = playerIndex;
 

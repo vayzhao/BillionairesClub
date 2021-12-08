@@ -28,8 +28,6 @@ namespace TexasBonus
         public GameObject[] playerCardsObj;
 
         [HideInInspector]
-        public CardDeck cardDeck;                // card deck used in the game
-        [HideInInspector]
         public GameManager gameManager;          // the game manager script
         [HideInInspector]
         public PlayerAction playerAction;        // the player action script
@@ -37,7 +35,8 @@ namespace TexasBonus
         public LabelController labelController;  // the label controller script
         [HideInInspector]
         public bool allPlayerFolded;             // a state to determine whether or not all the players have folded thier cards
-
+        
+        private CardDeck cardDeck;               // card deck used in the game
         private Card[] dealerHand;               // card data for dealer
         private Card[] communityCards;           // card data for community cards
         private Card[][] playerCards;            // card data for players
@@ -89,7 +88,7 @@ namespace TexasBonus
             {
                 wagerPos[i] = new Vector3[5];
                 wagerStacks[i] = new GameObject[5];
-                for (int j = 0; j < wagerPos.Length; j++)
+                for (int j = 0; j < wagerPos[i].Length; j++)
                     wagerPos[i][j] = wager[i].transform.GetChild(j).transform.position;
             }
         }
@@ -163,7 +162,7 @@ namespace TexasBonus
         {
             // hide card models and bet label
             playerCardsObj[index].HideCard();
-            labelController.SetBetLabel(index);
+            labelController.betLabels[index].Switch(false);
 
             // remove all chips from this player
             ClearWagerStackForSinglePlayer(index);
@@ -290,7 +289,7 @@ namespace TexasBonus
                 // if this player is a user-player, update its hand-rank panel 
                 if (!gameManager.players[i].isNPC)
                 {
-                    labelController.title.text = handStrengths[i].GetInitialHandString();
+                    labelController.localHandLabel.tmp.text = handStrengths[i].GetInitialHandString();
                     labelController.SetBonusLabel(handStrengths[i].GetBonusMultiplier());
                     labelController.cardTexture[0].sprite = GetCardSprite(playerCards[i][0].GetCardIndex());
                     labelController.cardTexture[1].sprite = GetCardSprite(playerCards[i][1].GetCardIndex());
@@ -333,7 +332,7 @@ namespace TexasBonus
 
                     // update hand-rank panel's text if this player is a user-player
                     if (!gameManager.players[i].isNPC)
-                        labelController.title.text = handStrengths[i].ToString();
+                        labelController.localHandLabel.tmp.text = handStrengths[i].ToString();
                 }
             }           
             yield return new WaitForSeconds(Const.WAIT_TIME_DEAL);
@@ -363,7 +362,7 @@ namespace TexasBonus
             audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
 
             // display dealer's hand-rank label
-            labelController.SetHandRankLabelForDealer(true, dealerHandStrengh.ToString("<color=#00FF01><size=80%>"));
+            labelController.dealerHandRankLabel.Display(dealerHandStrengh.ToString("<color=#00FF01><size=80%>"));
         }
 
         /// <summary>
@@ -405,7 +404,7 @@ namespace TexasBonus
 
             // display the hand rank panel
             labelController.SetHandRankLabelColor(index, result);            
-            labelController.SetHandRankLabel(index, true, handStrengths[index].ToString("<color=#00FF01><size=80%>"));
+            labelController.handRankLabel[index].Display(handStrengths[index].ToString("<color=#00FF01><size=80%>"));
 
             // if the player is an actual player, hide its hand rank panel UI
             if (!gameManager.players[index].isNPC)
@@ -501,7 +500,7 @@ namespace TexasBonus
 
             // hide wager, bet label and hand-rank label
             HidePlayerBetAndCards(index);
-            labelController.SetHandRankLabel(index, false);
+            labelController.handRankLabel[index].Switch(false);
         }
 
         /// <summary>

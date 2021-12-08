@@ -7,6 +7,14 @@ namespace Blackjack
 {
     public class GameManager : MonoBehaviour
     {
+        public const int CARD_DECK_COUNT = 8;
+        public const int WAGER_INDEX_ANTE = 0;
+        public const int WAGER_INDEX_PERFECTPAIR = 1;
+        public const int WAGER_INDEX_DOUBLE = 2;
+        public const int WAGER_INDEX_SPLIT_ANTE = 3;
+        public const int WAGER_INDEX_SPLIT_DOUBLE = 4;
+        public const int WAGER_INDEX_INSURANCE = 5;
+
         [HideInInspector]
         public Player[] players;                 // data for all players
                 
@@ -34,7 +42,8 @@ namespace Blackjack
 
             // create UI object to display local player's hand
             labelController = uiManager.labelController.GetComponent<LabelController>();
-            labelController.Setup();
+            labelController.cardDeckLabel.Switch(false);
+            labelController.Reset();
 
             // bind relative script to each other
             tableController.gameManager = this;
@@ -75,7 +84,183 @@ namespace Blackjack
             Destroy(uiManager.readyBtn.gameObject);
 
             // display labels on the table
-            labelController.DisplayTableLabel();
+            tableController.DisplayTableLabel();
+
+            // start the game loop coroutine
+            StartCoroutine(Round());
+        }
+        
+        /// <summary>
+        /// Core Game Loop Function
+        /// An infinite whileloop to keep the game going
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator Round()
+        {
+            // initialize round number
+            var round = 0;
+            while (true)
+            {
+                // increment round
+                round++;
+
+                // reset the game
+                ResetGame();
+
+                // ask for the ante wager and perfect pair wager
+                yield return AnteWagerBet();
+                yield return PerfectPairBet();
+
+                // deal first two cards to players and dealer
+                yield return tableController.DealInitialCards();
+
+                // ask for the insurance wager if the insurance trigger is on
+                if (tableController.insuranceTriggered)
+                    yield return InsuranceBet();
+
+                // go through players and ask for decisions
+                yield return MakeDecision();
+
+                break;
+            }
+        }
+
+        /// <summary>
+        /// Method to reset the game, it is called everytime when a new 
+        /// round starts
+        /// </summary>
+        void ResetGame()
+        {
+            // reset player action's data
+            playerAction.ResetBet();
+
+            // reset table controller's data
+            tableController.ResetTable();
+        }
+
+        /// <summary>
+        /// Method to scan through player array and ask for ante wager
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator AnteWagerBet()
+        {
+            var checkIndex = -1;
+            while (checkIndex < players.Length - 1)
+            {
+                // increment checkIndex
+                checkIndex++;
+
+                // skip this iteration if the 'n' player is empty
+                if (players[checkIndex] == null)
+                    continue;
+
+                // bet automatically if the 'n' player is a NPC
+                if (players[checkIndex].isNPC)
+                {
+                    // TODO: call AI betting method
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    continue;
+                }
+
+                // otherwise, pop up a decision window to the player
+                playerAction.DisplayBetPanel(BetType.AnteWager, checkIndex);
+                while (playerAction.isWaiting)
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+            }
+        }
+
+        /// <summary>
+        /// Method to scan through player array and ask for perfect pair wager
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator PerfectPairBet()
+        {
+            var checkIndex = -1;
+            while (checkIndex < players.Length - 1)
+            {
+                // increment checkIndex
+                checkIndex++;
+
+                // skip this iteration if the 'n' player is empty
+                if (players[checkIndex] == null)
+                    continue;
+
+                // bet automatically if the 'n' player is a NPC
+                if (players[checkIndex].isNPC)
+                {
+                    // TODO: call AI betting method
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    continue;
+                }
+
+                // otherwise, pop up a decision window to the player
+                playerAction.DisplayBetPanel(BetType.PerfectPair, checkIndex);
+                while (playerAction.isWaiting)
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+            }
+        }
+
+        /// <summary>
+        /// Method to scan through player array and ask for insurance wager
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator InsuranceBet()
+        {
+            var checkIndex = -1;
+            while (checkIndex < players.Length - 1)
+            {
+                // increment checkIndex
+                checkIndex++;
+
+                // skip this iteration if the 'n' player is empty
+                if (players[checkIndex] == null)
+                    continue;
+
+                // bet automatically if the 'n' player is a NPC
+                if (players[checkIndex].isNPC)
+                {
+                    // TODO: call AI betting method
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    continue;
+                }
+
+                // otherwise, pop up a decision window to the player
+                playerAction.DisplayBetPanel(BetType.Insurance, checkIndex);
+                while (playerAction.isWaiting)
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+            }
+        }
+
+        /// <summary>
+        /// Method to scan through player array and ask for decision, decisions
+        /// include double down, hit, stand and split
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator MakeDecision()
+        {
+            var checkIndex = -1;
+            while (checkIndex < players.Length - 1)
+            {
+                // increment checkIndex
+                checkIndex++;
+
+                // skip this iteration if the 'n' player is empty
+                if (players[checkIndex] == null)
+                    continue;
+
+                // making decision for AI players
+                if (players[checkIndex].isNPC)
+                {
+                    // TODO: call AI betting method
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    continue;
+                }
+
+                // otherwise, pop up a decision window to the player
+                playerAction.DisplayDecisionPanel(checkIndex);
+                while (playerAction.isWaiting)
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+            }
         }
     }
 }
