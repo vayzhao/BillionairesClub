@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using static Blackboard;
 
 namespace Blackjack
 {
@@ -97,8 +98,9 @@ namespace Blackjack
             decisionPanel.SetActive(true);
 
             // check double down and split button validity
-            btn_double.Switch(false);
-            btn_split.Switch(false);
+            var hand = tableController.GetPlayerHand(playerIndex);
+            btn_double.Switch(hand.GetRank() <= 11);
+            btn_split.Switch(hand.IsPairSameValue());
         }
 
         public void DoubleDown()
@@ -108,12 +110,15 @@ namespace Blackjack
 
         public void Hit()
         {
-
+            tableController.OnPlayerHit(playerIndex, 0);
         }
 
         public void Stand()
         {
 
+            bets[playerIndex].stand = true;
+            FinishTurn();
+            audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
         }
 
         public void Split()
@@ -143,7 +148,6 @@ namespace Blackjack
         {
             // store value into bet data
             bets[playerIndex].anteWager = value;
-            bets[playerIndex].EditAmountChange(-value);
 
             // consume player's chip
             gameManager.players[playerIndex].EditPlayerChip(-value);
@@ -159,7 +163,6 @@ namespace Blackjack
         {
             // store value into the bet data
             bets[playerIndex].perfectPairWager = value;
-            bets[playerIndex].EditAmountChange(-value);
 
             // consume player's chip
             gameManager.players[playerIndex].EditPlayerChip(-value);
@@ -175,7 +178,6 @@ namespace Blackjack
         {
             // store value into the bet data
             bets[playerIndex].insuranceWager = value;
-            bets[playerIndex].EditAmountChange(-value);
 
             // consume player's chip
             gameManager.players[playerIndex].EditPlayerChip(-value);
@@ -240,7 +242,7 @@ namespace Blackjack
             if (betType == BetType.AnteWager)
                 tableController.AddWagerModel(playerIndex, GameManager.WAGER_INDEX_ANTE, value);
             else if (betType == BetType.PerfectPair)
-                tableController.AddWagerModel(playerIndex, GameManager.WAGER_INDEX_PERFECTPAIR, value);
+                tableController.AddWagerModel(playerIndex, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER, value);
             else if (betType == BetType.Insurance)
                 tableController.AddWagerModel(playerIndex, GameManager.WAGER_INDEX_INSURANCE, value);
 
@@ -280,7 +282,7 @@ namespace Blackjack
                 btn_skip.gameObject.SetActive(true);
 
                 // clear all wagers in bonus wager slot
-                tableController.ClearWagerStackForSingleSlot(playerIndex, GameManager.WAGER_INDEX_PERFECTPAIR);
+                tableController.ClearWagerStackForSingleSlot(playerIndex, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER);
             }
             // if it is an insurance wager bet
             else if (betType == BetType.Insurance)

@@ -47,6 +47,7 @@ namespace TexasBonus
         {
             InitializeCards();
             InitializeWagerPos();
+            HideInitialObjects();
         }
         
         /// <summary>
@@ -91,6 +92,32 @@ namespace TexasBonus
                 for (int j = 0; j < wagerPos[i].Length; j++)
                     wagerPos[i][j] = wager[i].transform.GetChild(j).transform.position;
             }
+        }
+
+        /// <summary>
+        /// Method to hide all players assets on the table, also dealer's cards
+        /// </summary>
+        void HideInitialObjects()
+        {
+            // hide card slots
+            group_slots.SetActive(false);
+
+            // hide all players asset
+            for (int i = 0; i < gameManager.players.Length; i++)
+            {
+                chips[i].SetActive(false);
+                marks[i].SetActive(false);
+                wager[i].SetActive(false);
+                playerCardsObj[i].SetActive(false);
+            }
+
+            // hide all dealer card objects
+            for (int i = 0; i < dealerCardsObj.Length; i++)
+                dealerCardsObj[i].SetActive(false);
+
+            // hide all community card objects
+            for (int i = 0; i < communityCardsObj.Length; i++)
+                communityCardsObj[i].SetActive(false);
         }
 
         /// <summary>

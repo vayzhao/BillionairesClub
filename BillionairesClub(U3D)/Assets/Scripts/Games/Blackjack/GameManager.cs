@@ -9,11 +9,10 @@ namespace Blackjack
     {
         public const int CARD_DECK_COUNT = 8;
         public const int WAGER_INDEX_ANTE = 0;
-        public const int WAGER_INDEX_PERFECTPAIR = 1;
+        public const int WAGER_INDEX_BONUS_SPLITE_WAGER = 1;
         public const int WAGER_INDEX_DOUBLE = 2;
-        public const int WAGER_INDEX_SPLIT_ANTE = 3;
-        public const int WAGER_INDEX_SPLIT_DOUBLE = 4;
-        public const int WAGER_INDEX_INSURANCE = 5;
+        public const int WAGER_INDEX_SPLIT_DOUBLE = 3;
+        public const int WAGER_INDEX_INSURANCE = 4;
 
         [HideInInspector]
         public Player[] players;                 // data for all players
@@ -118,8 +117,17 @@ namespace Blackjack
                 if (tableController.insuranceTriggered)
                     yield return InsuranceBet();
 
+                // apply perfect pair reward / loss
+                yield return tableController.CheckPerfectPair();
+
                 // go through players and ask for decisions
                 yield return MakeDecision();
+
+                // TODO: Reveal dealer's second card and give insurance reward
+
+                // TODO: dealer's hit
+
+                // TODO: compare results
 
                 break;
             }

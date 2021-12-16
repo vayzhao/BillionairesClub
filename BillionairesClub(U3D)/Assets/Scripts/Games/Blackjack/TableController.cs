@@ -37,10 +37,18 @@ namespace Blackjack
         private Hand dealerHand;                 // hand evaluator for dealer
         private Hand[] playerHands;              // hand evaluator for players
 
+        /// <summary>
+        /// Method to access a single player's hand
+        /// </summary>
+        /// <param name="playerId">index of the player</param>
+        /// <returns></returns>
+        public Hand GetPlayerHand(int playerId) => playerHands[playerId];
+
         public void Setup()
         {
             InitializeCards();
             InitializeWagerPos();
+            HideInitialObjects();
         }
 
         /// <summary>
@@ -87,9 +95,9 @@ namespace Blackjack
             // initialize wager positions
             for (int i = 0; i < wagerPos.Length; i++)
             {
-                wagerPos[i] = new Vector3[6];
-                wagerStacks[i] = new GameObject[6];
-                labelMarks[i] = new Image[6];
+                wagerPos[i] = new Vector3[5];
+                wagerStacks[i] = new GameObject[5];
+                labelMarks[i] = new Image[5];
                 for (int j = 0; j < wagerPos[i].Length; j++)
                 {
                     wagerPos[i][j] = wager[i].transform.GetChild(j).transform.position;
@@ -99,13 +107,32 @@ namespace Blackjack
         }
 
         /// <summary>
+        /// Method to hide all players assets on the table, also dealer's cards
+        /// </summary>
+        void HideInitialObjects()
+        {
+            // hide all players asset
+            for (int i = 0; i < gameManager.players.Length; i++)
+            {
+                chips[i].SetActive(false);
+                marks[i].SetActive(false);
+                wager[i].SetActive(false);
+                playerCardGroups[i].SetActive(false);
+            }
+
+            // hide all dealer card objects
+            for (int i = 0; i < dealerCardsObj.Length; i++)
+                dealerCardsObj[i].SetActive(false);
+        }
+
+        /// <summary>
         /// Method to reset a player's wager label mark
         /// </summary>
         /// <param name="playerId">index of the player</param>
         void ResetLabelMark(int playerId)
         {
+            labelMarks[playerId][GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER].enabled = true;
             labelMarks[playerId][GameManager.WAGER_INDEX_DOUBLE].enabled = false;
-            labelMarks[playerId][GameManager.WAGER_INDEX_SPLIT_ANTE].enabled = false;
             labelMarks[playerId][GameManager.WAGER_INDEX_SPLIT_DOUBLE].enabled = false;
             labelMarks[playerId][GameManager.WAGER_INDEX_INSURANCE].enabled = false;
         }
@@ -129,6 +156,7 @@ namespace Blackjack
                 // otherwise, display the 'n' player's poker chip and label marks
                 chips[i].SetActive(true);
                 marks[i].SetActive(true);
+                playerCardGroups[i].SetActive(true);
                 ResetLabelMark(i);
             }
         }
@@ -213,7 +241,7 @@ namespace Blackjack
                         if (!gameManager.players[j].isNPC)
                         {
                             labelController.RevealACard(GetCardSprite(card.GetCardIndex()), i);
-                            labelController.localHandLabels[0].tmp.text = $"{playerHands[j].GetRank()}";
+                            labelController.localHandLabels[0].tmp.text = $"{point}";
                         }
 
                         yield return new WaitForSeconds(WAIT_TIME_DEAL);
@@ -240,7 +268,10 @@ namespace Blackjack
                 }
 
                 yield return new WaitForSeconds(WAIT_TIME_DEAL);
-            }            
+            }
+
+            // check if anyone has a pair to start with
+            DetectPairHand();
         }
 
         /// <summary>
@@ -261,6 +292,141 @@ namespace Blackjack
             for (int i = 0; i < labelMarks.Length; i++)
                 if (gameManager.players[i] != null)
                     labelMarks[i][GameManager.WAGER_INDEX_INSURANCE].enabled = true;
+        }
+
+        public void OnPlayerHit(int playerIndex, int handIndex)
+        {
+            // draw a card
+            var card = DrawACard();
+            var cardIndex = playerHands[playerIndex].GetCardCount(handIndex);
+            playerHands[playerIndex].AddCard(card, handIndex);
+            playerCardsObj[playerIndex][handIndex][cardIndex].SetCard(card);
+            audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
+
+            // get point
+            var point = playerHands[playerIndex].GetRank();
+
+            // display global player hand label
+            labelController.playerHandLabel[playerIndex].tmp.text = $"{point}";
+
+            // update card sprite from local hand panel
+            if (!gameManager.players[playerIndex].isNPC)
+            {
+                labelController.RevealACard(GetCardSprite(card.GetCardIndex()), cardIndex, handIndex);
+                labelController.localHandLabels[handIndex].tmp.text = $"{point}";
+            }
+        }
+
+        /// <summary>
+        /// Method to pre-calculate player's perfect pair reward multipiler, players who have a pair
+        /// to start with, will change his hand panel background color to be green
+        /// </summary>
+        void DetectPairHand()
+        {
+            // quickly check through all players hand, change hand panel to green color
+            // if the 'n' player has a pair, also pre-calculate its reward multipier
+            for (int i = 0; i < gameManager.players.Length; i++)
+            {
+                // skip this iteration if 'n' player does not exist
+                if (gameManager.players[i] == null)
+                    continue;
+
+                // skip this iteration if 'n' player did not bet on perfect pair
+                if (playerAction.bets[i].perfectPairWager == 0)
+                    continue;
+
+                // if the 'n' player has a pair 
+                if (playerHands[i].IsPairSameValue())
+                {
+                    // set hand panel color to be green
+                    labelController.playerHandLabel[i].bg.sprite = labelController.labelSpriteGreen;
+
+                    // calculate its perfect pair reward multipier
+                    playerHands[i].CalculatePerfectPairReward();
+
+                    // display perfect pair reward panel
+                    if (!gameManager.players[i].isNPC)
+                        labelController.SetPerfectPairLabel(playerHands[i].GetPerfectPairMultiplier());
+                }
+                else
+                {
+                    // otherwise set hand panel color to be red
+                    labelController.playerHandLabel[i].bg.sprite = labelController.labelSpriteRed;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Methdo to calculate perfect pair win & loss for a single playerr
+        /// </summary>
+        /// <param name="index">index of the player</param>
+        void PerfectPairResult(int index)
+        {
+            // get perfect pair wager & multiplier
+            var message = "";
+            var perfectPairBet = playerAction.bets[index].perfectPairWager;
+            var multiplier = playerHands[index].GetPerfectPairMultiplier();
+
+            // if the player doesn't win from the perfect pair, take his 
+            // perfect pair wagers alway
+            if (multiplier == 0)
+            {
+                message = $"<color=\"red\">-{perfectPairBet}</color>";
+                TakingChipsAway(index, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER);
+            }
+            else
+            {
+                message = $"<color=\"green\">+{perfectPairBet * multiplier}</color>";
+                gameManager.players[index].EditPlayerChip(perfectPairBet * (multiplier + 1));
+                MultiplyWagerModel(index, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER, multiplier) ;
+            }
+
+            // display the result with floating text
+            labelController.FloatText(message, labelController.betLabels[index].transform.position, 60f, 3f, 0.3f);
+        }
+
+        /// <summary>
+        /// An IEnumerator that runs through all players and apply perfect pair
+        /// reward / loss for each player
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator CheckPerfectPair()
+        {
+            // applying perfect pair reward / loss
+            for (int i = 0; i < gameManager.players.Length; i++)
+            {
+                // skip this iteration if 'n' player does not exist
+                if (gameManager.players[i] == null)
+                    continue;
+
+                // skip this iteration if 'n' player did not bet on perfect pair
+                if (playerAction.bets[i].perfectPairWager == 0)
+                    continue;
+
+                // calculate 'n' player's win & loss and play wager animation
+                PerfectPairResult(i);
+                wagerAnimator.Play();
+
+                yield return new WaitForSeconds(WAIT_TIME_COMPARE);
+            }
+
+            // clear perfect pair relevent objects and UI
+            for (int i = 0; i < gameManager.players.Length; i++)
+            {
+                // skip this iteration if 'n' player does not exist
+                if (gameManager.players[i] == null)
+                    continue;
+
+                // remove perfect pair wager number from bet label text
+                labelController.SetBetLabel(i, playerAction.bets[i].anteWager);
+
+                // reset player hand label color and hide perfect pair wager label
+                labelMarks[i][GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER].enabled = false;
+                labelController.playerHandLabel[i].bg.sprite = labelController.labelSpriteTransparent;
+
+                // remove wager stack in perfect pair slot
+                ClearWagerStackForSingleSlot(i, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER);
+            }
         }
     }
 }

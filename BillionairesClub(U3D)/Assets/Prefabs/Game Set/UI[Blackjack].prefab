@@ -1926,7 +1926,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76fe17b0af720b147961466fc92ab9a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93478d93951889d4a927c42575da37c7, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15406,7 +15406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76fe17b0af720b147961466fc92ab9a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93478d93951889d4a927c42575da37c7, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -24721,7 +24721,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76fe17b0af720b147961466fc92ab9a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93478d93951889d4a927c42575da37c7, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -26319,7 +26319,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76fe17b0af720b147961466fc92ab9a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93478d93951889d4a927c42575da37c7, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -31113,7 +31113,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76fe17b0af720b147961466fc92ab9a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 93478d93951889d4a927c42575da37c7, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -33519,6 +33519,7 @@ MonoBehaviour:
   labelSpriteRed: {fileID: 21300000, guid: 41e7317d41fd3ea4099ea9393f008a40, type: 3}
   labelSpriteGreen: {fileID: 21300000, guid: 76fe17b0af720b147961466fc92ab9a4, type: 3}
   labelSpritePurple: {fileID: 21300000, guid: d502ff25af7689b43873c97d01c78e17, type: 3}
+  labelSpriteTransparent: {fileID: 21300000, guid: 93478d93951889d4a927c42575da37c7, type: 3}
   defaultTexture: {fileID: 21300000, guid: b227f984d736717438d3dfc4a0808c1a, type: 3}
   localHandLabels:
   - {fileID: 6535671873694527356}

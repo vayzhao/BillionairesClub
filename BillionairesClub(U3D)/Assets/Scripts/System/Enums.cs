@@ -55,6 +55,12 @@ public enum Value
     ACE
 }
 
+public enum SuitColor
+{
+    Red,
+    Black
+}
+
 public enum Rank
 {
     HighHand,

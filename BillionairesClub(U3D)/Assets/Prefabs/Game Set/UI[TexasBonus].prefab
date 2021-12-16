@@ -1303,11 +1303,12 @@ MonoBehaviour:
   totalWager: 0
   remaining: 0
   remainingTemp: 0
+  betType: 0
+  isWaiting: 0
   obj_fold: {fileID: 4934631859540335494}
   obj_check: {fileID: 4934631860469378350}
   obj_bet: {fileID: 4934631860446107179}
   decisionPanel: {fileID: 4934631859656841516}
-  isWaiting: 0
   gameManager: {fileID: 0}
   tableController: {fileID: 0}
   labelController: {fileID: 0}
@@ -2224,6 +2225,7 @@ MonoBehaviour:
   labelSpriteRed: {fileID: 0}
   labelSpriteGreen: {fileID: 0}
   labelSpritePurple: {fileID: 0}
+  labelSpriteTransparent: {fileID: 0}
   defaultTexture: {fileID: 21300000, guid: b227f984d736717438d3dfc4a0808c1a, type: 3}
   localHandLabel: {fileID: 0}
   bonusLabel: {fileID: 0}
@@ -7282,7 +7284,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &4934631859458754007
 GameObject:
   m_ObjectHideFlags: 0
@@ -8087,7 +8089,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &4934631859829410042
 GameObject:
   m_ObjectHideFlags: 0
@@ -21280,6 +21282,7 @@ MonoBehaviour:
   labelSpriteRed: {fileID: 21300000, guid: 41e7317d41fd3ea4099ea9393f008a40, type: 3}
   labelSpriteGreen: {fileID: 21300000, guid: 76fe17b0af720b147961466fc92ab9a4, type: 3}
   labelSpritePurple: {fileID: 21300000, guid: d502ff25af7689b43873c97d01c78e17, type: 3}
+  labelSpriteTransparent: {fileID: 0}
   defaultTexture: {fileID: 21300000, guid: b227f984d736717438d3dfc4a0808c1a, type: 3}
   localHandLabel: {fileID: 4330702975744323730}
   bonusLabel: {fileID: 5143921876188150522}

@@ -38,7 +38,7 @@ public class CardDeck
         pointerIndex = 0;
         cards.Add(new Card(Suit.Heart, Value.KING)); // dealer hand 1
         cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer hand 2
-        cards.Add(new Card(Suit.Heart, Value.TWO)); // flop1
+        cards.Add(new Card(Suit.Heart, Value.KING)); // flop1
         cards.Add(new Card(Suit.Spade, Value.THREE)); // flop2
         cards.Add(new Card(Suit.Diamond, Value.FOUR)); // flop3
         cards.Add(new Card(Suit.Spade, Value.FIVE)); // turn

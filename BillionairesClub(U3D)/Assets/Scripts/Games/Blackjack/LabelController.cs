@@ -112,5 +112,26 @@ namespace Blackjack
                 cardTextureSplit[cardIndex].sprite = cardSprite;
             }
         }
+
+        /// <summary>
+        /// Method to update perfect pair panel and its text
+        /// </summary>
+        /// <param name="multiplier"></param>
+        public void SetPerfectPairLabel(int multiplier)
+        {
+            // return if the multiplier is 0
+            if (multiplier == 0)
+            {
+                perfectPairLabel.Switch(false);
+                return;
+            }
+
+            // otherwise, display the bonus and update its text
+            perfectPairLabel.Switch(true);
+            perfectPairLabel.tmp.text = $"Bonus *{multiplier}";
+
+            // play bonus sound effect
+            Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipBonusPopup, AudioType.Sfx);
+        }
     }
 }

@@ -98,6 +98,17 @@ public static class ExtensionMethods
                 return $"High-hand";
         }
     }
+    public static SuitColor GetColor(this Suit suit)
+    {
+        switch (suit)
+        {
+            case Suit.Club:
+            case Suit.Spade:
+                return SuitColor.Black;
+            default:
+                return SuitColor.Red;
+        }        
+    }
     #endregion
 
     #region UnityEngine.UI

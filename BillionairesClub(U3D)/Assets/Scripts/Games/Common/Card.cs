@@ -19,6 +19,8 @@ public class Card : IEquatable<Card>
 
     public bool SameSuit(Card other) { return this.suit == other.suit; }
 
+    public bool SameColor(Card other) { return this.suit.GetColor() == other.suit.GetColor(); }
+
     /// <summary>
     /// Method to find the card that has the maximum value within a list of cards
     /// </summary>
@@ -42,4 +44,6 @@ public class Card : IEquatable<Card>
 
     public bool Equals(Card other) => value.Equals(other.value);
     public override int GetHashCode() => value.GetHashCode();
+
+    public override string ToString() => $"{suit.ToString()}-{value.ToString()}";
 }

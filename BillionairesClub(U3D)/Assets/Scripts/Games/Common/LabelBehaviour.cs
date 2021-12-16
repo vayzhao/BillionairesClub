@@ -13,6 +13,8 @@ public class LabelBehaviour : MonoBehaviour
     public Sprite labelSpriteGreen;
     [Tooltip("A panel background sprite with purple color")]
     public Sprite labelSpritePurple;
+    [Tooltip("A panel background sprite with no color")]
+    public Sprite labelSpriteTransparent;
     [Tooltip("Default sprite for the card back")]
     public Sprite defaultTexture;
 
