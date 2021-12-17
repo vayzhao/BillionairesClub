@@ -32,19 +32,33 @@ public class CardDeck
     /// <summary>
     /// Method for setting up a card deck for debug purpose
     /// </summary>
-    public void DebugDeck()
+    public void DebugDeck_TexasBonus()
     {
         cards = new List<Card>();
         pointerIndex = 0;
-        cards.Add(new Card(Suit.Heart, Value.KING)); // dealer hand 1
+        cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer hand 1
         cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer hand 2
-        cards.Add(new Card(Suit.Heart, Value.KING)); // flop1
+        cards.Add(new Card(Suit.Heart, Value.ACE)); // flop1
         cards.Add(new Card(Suit.Spade, Value.THREE)); // flop2
         cards.Add(new Card(Suit.Diamond, Value.FOUR)); // flop3
         cards.Add(new Card(Suit.Spade, Value.FIVE)); // turn
         cards.Add(new Card(Suit.Diamond, Value.SIX)); // river
         cards.Add(new Card(Suit.Heart, Value.SEVEN)); // player's hand 1
         cards.Add(new Card(Suit.Heart, Value.ACE)); // player's hand 2
+    }
+    public void DebugDeck_Blackjack()
+    {
+        cards = new List<Card>();
+        pointerIndex = 0;
+        cards.Add(new Card(Suit.Heart, Value.ACE)); // player
+        cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer
+        cards.Add(new Card(Suit.Heart, Value.KING)); // player 
+        cards.Add(new Card(Suit.Spade, Value.THREE)); // dealer
+        cards.Add(new Card(Suit.Diamond, Value.FOUR)); // player or dealer
+        cards.Add(new Card(Suit.Spade, Value.FIVE)); // player or dealer
+        cards.Add(new Card(Suit.Diamond, Value.SIX)); // player or dealer
+        cards.Add(new Card(Suit.Heart, Value.SEVEN)); // player or dealer
+        cards.Add(new Card(Suit.Heart, Value.ACE)); // player or dealer
     }
 
     /// <summary>

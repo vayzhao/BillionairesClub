@@ -265,7 +265,7 @@ namespace Blackjack
                 }
 
                 // otherwise, pop up a decision window to the player
-                playerAction.DisplayDecisionPanel(checkIndex);
+                yield return playerAction.Deciding(checkIndex);
                 while (playerAction.isWaiting)
                     yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
             }

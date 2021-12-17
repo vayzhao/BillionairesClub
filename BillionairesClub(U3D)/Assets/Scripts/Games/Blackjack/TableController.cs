@@ -59,7 +59,7 @@ namespace Blackjack
             // setup card deck (notice that blackjack uses 6~8 decks of cards)
             cardDeck = new CardDeck(GameManager.CARD_DECK_COUNT);
             cardDeck.Shuffle();
-            //cardDeck.DebugDeck();
+            //cardDeck.DebugDeck_Blackjack();
 
             // setup hand evaluator for dealer and players
             dealerHand = new Hand();
@@ -227,11 +227,24 @@ namespace Blackjack
                         playerCardsObj[j][0][i].SetCard(card);
                         audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
 
-                        // get point
-                        var point = playerHands[j].GetRank();
+                        // initialize label text
+                        var labelText = "";
+
+                        // check to see if the player has blackjack
+                        if (playerHands[j].HasBlackjack())
+                        {
+                            labelText = "Blackjack";
+                        }
+                        else
+                        {
+                            // otherwise, calculate player's hand rank
+                            var rank = playerHands[j].GetRank();
+                            var rankSoft = playerHands[j].GetRankSoft();
+                            labelText = $"{rank}" + (rankSoft > 0 ? $"/{rankSoft}" : "");
+                        }
 
                         // display global player hand label
-                        labelController.playerHandLabel[j].Display($"{point}");
+                        labelController.playerHandLabel[j].Display(labelText);
 
                         // display local player hand label if this player is a non-npc player
                         if (i == 0 && !gameManager.players[j].isNPC)
@@ -241,7 +254,7 @@ namespace Blackjack
                         if (!gameManager.players[j].isNPC)
                         {
                             labelController.RevealACard(GetCardSprite(card.GetCardIndex()), i);
-                            labelController.localHandLabels[0].tmp.text = $"{point}";
+                            labelController.localHandLabels[0].tmp.text = labelText;
                         }
 
                         yield return new WaitForSeconds(WAIT_TIME_DEAL);
@@ -259,7 +272,8 @@ namespace Blackjack
                 if (i == 0)
                 {
                     CheckInsuranceTrigger(card.value == Value.ACE);
-                    labelController.dealerHandLabel.Display($"{dealerHand.GetRank()}");
+                    labelController.dealerHandLabel.Display($"{dealerHand.GetRank()}" + 
+                        (dealerHand.GetRankSoft() > 0 ? $"/{dealerHand.GetRankSoft()}" : ""));
                 }
                 // in the second iteration, make dealer's second card face-down
                 else if (i == 1)
@@ -304,16 +318,18 @@ namespace Blackjack
             audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
 
             // get point
-            var point = playerHands[playerIndex].GetRank();
+            var rank = playerHands[playerIndex].GetRank();
+            var rankSoft = playerHands[playerIndex].GetRankSoft();
+            var labelText = $"{rank}" + (rankSoft > 0 ? $"/{rankSoft}" : "");
 
             // display global player hand label
-            labelController.playerHandLabel[playerIndex].tmp.text = $"{point}";
+            labelController.playerHandLabel[playerIndex].tmp.text = labelText;
 
             // update card sprite from local hand panel
             if (!gameManager.players[playerIndex].isNPC)
             {
                 labelController.RevealACard(GetCardSprite(card.GetCardIndex()), cardIndex, handIndex);
-                labelController.localHandLabels[handIndex].tmp.text = $"{point}";
+                labelController.localHandLabels[handIndex].tmp.text = labelText;
             }
         }
 
@@ -423,6 +439,9 @@ namespace Blackjack
                 // reset player hand label color and hide perfect pair wager label
                 labelMarks[i][GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER].enabled = false;
                 labelController.playerHandLabel[i].bg.sprite = labelController.labelSpriteTransparent;
+
+                // remove perfect pair bonus label
+                labelController.perfectPairLabel.Switch(false);
 
                 // remove wager stack in perfect pair slot
                 ClearWagerStackForSingleSlot(i, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using static Blackboard;
@@ -27,7 +28,12 @@ namespace Blackjack
         public LabelController labelController; // the table controller script
         [HideInInspector]
         public TableController tableController; // the label controller script
-        
+
+        private bool triggerHit;
+        private bool triggerStand;
+        private bool triggerDouble;
+        private bool triggerSplit;
+
         public void SetUp()
         {
             // initialize bet data for all players
@@ -88,7 +94,7 @@ namespace Blackjack
         /// Method to display decision panel, includes hit, stand,
         /// double down and split buttons
         /// </summary>
-        public void DisplayDecisionPanel(int playerIndex)
+        void DisplayDecisionPanel(int playerIndex)
         {
             // switch waiting state to be true and record the playerIndex and bet type
             this.isWaiting = true;
@@ -99,32 +105,123 @@ namespace Blackjack
 
             // check double down and split button validity
             var hand = tableController.GetPlayerHand(playerIndex);
-            btn_double.Switch(hand.GetRank() <= 11);
+            var rank = hand.GetRank();
+            btn_double.Switch(rank >= 9 && rank <= 11);
             btn_split.Switch(hand.IsPairSameValue());
         }
 
         public void DoubleDown()
         {
+            if (!triggerDouble)
+            {
+                triggerDouble = true;
+                decisionPanel.SetActive(false);
+                return;
+            }
+            else
+            {
+                triggerDouble = false;
+            }
 
+            tableController.OnPlayerHit(playerIndex, 0);
+            bets[playerIndex].stand = true;
+            audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
+            FinishTurn();
+
+            Debug.Log("Double");
         }
 
         public void Hit()
         {
+            if (!triggerHit)
+            {
+                triggerHit = true;
+                decisionPanel.SetActive(false);
+                return;
+            }
+            else
+            {
+                triggerHit = false;
+                decisionPanel.SetActive(true);
+            }
+
             tableController.OnPlayerHit(playerIndex, 0);
+
+            Debug.Log("Hit");
         }
 
         public void Stand()
         {
+            if (!triggerStand)
+            {
+                triggerStand = true;
+                decisionPanel.SetActive(false);
+                return;
+            }
+            else
+            {
+                triggerHit = false;
+            }
 
             bets[playerIndex].stand = true;
-            FinishTurn();
             audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
+            FinishTurn();
+
+            Debug.Log("Stand");
         }
 
         public void Split()
         {
+            if (!triggerSplit)
+            {
+                triggerSplit = true;
+                decisionPanel.SetActive(false);
+                return;
+            }
+            else
+            {
+                triggerSplit = false;
+                decisionPanel.SetActive(true);
+            }
 
+            Debug.Log("Split");
         }
+
+        public IEnumerator Deciding(int playerIndex)
+        {
+            DisplayDecisionPanel(playerIndex);
+
+            while (isWaiting)
+            {
+                if (triggerHit)
+                {
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    Hit();
+                }
+
+                if (triggerStand)
+                {
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    Stand();
+                }
+
+                if (triggerDouble)
+                {
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    DoubleDown();
+                }
+
+                if (triggerSplit)
+                {
+                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    Split();
+                }
+
+                yield return new WaitForSeconds(Time.deltaTime);
+            }            
+        }
+
+
 
         /// <summary>
         /// Method to finish a turn for a player, switch isWaiting to false

@@ -8,15 +8,19 @@ namespace Blackjack
     public class Hand 
     {
         private int[] rank;
-        private int[] pointer;
+        private int[] rankSoft;
+        private int[] cardCount;
         private Card[][] cards;
         private int perfectPairMultiplier;
+        private bool[] hasBlackjack;
         
         public Hand()
         {
             rank = new int[2];
-            pointer = new int[2];
+            rankSoft = new int[2];
+            cardCount = new int[2];
             cards = new Card[2][];
+            hasBlackjack = new bool[2];
 
             for (int i = 0; i < cards.Length; i++)
                 cards[i] = new Card[5];
@@ -28,11 +32,15 @@ namespace Blackjack
         /// </summary>
         public void Reset()
         {
-            rank[0] = 0;
-            rank[1] = 0;
-            pointer[0] = 0;
-            pointer[1] = 0;
             perfectPairMultiplier = 0;
+
+            for (int i = 0; i < 2; i++)
+            {
+                rank[i] = 0;
+                cardCount[i] = 0;
+                rankSoft[i] = 0;
+                hasBlackjack[i] = false;
+            }
 
             for (int i = 0; i < cards.Length; i++)
                 for (int j = 0; j < cards[i].Length; j++)
@@ -46,8 +54,8 @@ namespace Blackjack
         /// <param name="handIndex">index of the hand</param>
         public void AddCard(Card newCard, int handIndex = 0)
         {
-            cards[handIndex][pointer[handIndex]] = newCard;
-            pointer[handIndex] += 1;
+            cards[handIndex][cardCount[handIndex]] = newCard;
+            cardCount[handIndex] += 1;
 
             Recompute(handIndex);
         }
@@ -58,13 +66,15 @@ namespace Blackjack
         /// <param name="handIndex">index of the hand</param>
         /// <returns></returns>
         public int GetRank(int handIndex = 0) => rank[handIndex];
+        public int GetRankSoft(int handIndex = 0) => rankSoft[handIndex];
+        public bool HasBlackjack(int handIndex = 0) => hasBlackjack[handIndex];
 
         /// <summary>
         /// Method to obtain the card count in a specific hand
         /// </summary>
         /// <param name="handIndex">index of the hand</param>
         /// <returns></returns>
-        public int GetCardCount(int handIndex = 0) => pointer[handIndex];
+        public int GetCardCount(int handIndex = 0) => cardCount[handIndex];
 
         /// <summary>
         /// Method to compute the hand-rank for a hand
@@ -72,12 +82,88 @@ namespace Blackjack
         /// <param name="handIndex">index of the hand</param>
         public void Recompute(int handIndex = 0)
         {
+            // detect blackjack if the hand currently has 2 cards only
+            if (cardCount[handIndex] == 2)
+                DetectBlackjack();
+
+            // skip the recomputation if the player already has blackjack
+            if (hasBlackjack[handIndex])
+                return;
+
+            // otherwise, sum the player hand's cards
             rank[handIndex] = 0;
-            for (int i = 0; i < cards[handIndex].Length; i++)
+            for (int i = 0; i < cardCount[handIndex]; i++)
+                rank[handIndex] += GetPoint(cards[handIndex][i].value);
+
+            // check to see if this is a soft hand, if it is, add an
+            // alternate option to the player
+            if (IsSoftHand(handIndex))
+                rankSoft[handIndex] = rank[handIndex] + 10;
+            else
+                rankSoft[handIndex] = 0;
+        }
+
+        /// <summary>
+        /// Method to detect whether or not the player has blackjack by
+        /// finding an ace and a Jack/Queen/King from the first two cards
+        /// </summary>
+        /// <param name="handIndex"></param>
+        void DetectBlackjack(int handIndex = 0)
+        {
+            // run through the first two cards and see if there
+            // is an ace and a jack/queen/king
+            var hasAce = false;
+            var hasJQK = false;
+            for (int i = 0; i < cardCount[handIndex]; i++)
             {
-                if (cards[handIndex][i] != null)
-                    rank[handIndex] += GetPoint(cards[handIndex][i].value);
+                switch (cards[handIndex][i].value)
+                {
+                    case Value.ACE:
+                        hasAce = true;
+                        break;
+                    case Value.JACK:
+                    case Value.QUEEN:
+                    case Value.KING:
+                        hasJQK = true;
+                        break;
+                    default:
+                        break;
+                }
             }
+
+            // if the player has blackjack, set rank to be 21
+            if (hasAce && hasJQK)
+            {
+                rank[handIndex] = 21;
+                hasBlackjack[handIndex] = true;
+            }
+        }
+
+        /// <summary>
+        /// Method to detect if the player's hand is a soft hand
+        /// e.g: a soft hand contains an ace without the other card(s)
+        /// totaling 10 or more
+        /// </summary>
+        /// <param name="handIndex"></param>
+        /// <returns></returns>
+        bool IsSoftHand(int handIndex)
+        {
+            int total = 0;
+            bool hasAce = false;
+
+            for (int i = 0; i < cardCount[handIndex]; i++)
+            {
+                if (cards[handIndex][i].value == Value.ACE)
+                {
+                    hasAce = true;
+                }
+                else
+                {
+                    total += GetPoint(cards[handIndex][i].value);
+                }
+            }
+
+            return hasAce && total <= 10;
         }
 
         /// <summary>
@@ -120,10 +206,10 @@ namespace Blackjack
 
             for (int i = 0; i < 2; i++)
             {
-                if (pointer[i] != 0) 
+                if (cardCount[i] != 0) 
                 {
                     result += $"the {i + 1} hand is :";
-                    for (int j = 0; j < pointer[i]; j++)
+                    for (int j = 0; j < cardCount[i]; j++)
                     {
                         result += $"{cards[i][j].ToString()} ";
                     }
