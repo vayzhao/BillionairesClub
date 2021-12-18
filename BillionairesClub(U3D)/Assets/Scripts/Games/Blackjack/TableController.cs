@@ -8,6 +8,7 @@ using static Const;
 
 namespace Blackjack
 {
+    using static Para;
     public class TableController : WagerBehaviour
     {
         [Header("Player's asset")]
@@ -36,6 +37,8 @@ namespace Blackjack
         private GameObject[][][] playerCardsObj; // objects to represent player's cards
         private Hand dealerHand;                 // hand evaluator for dealer
         private Hand[] playerHands;              // hand evaluator for players
+        private bool hasInsuranceBet;            // determine if there are insurance bet on the table
+        private bool hasUnclearPlayer;           // determine if there are players waiting to compare
 
         /// <summary>
         /// Method to access a single player's hand
@@ -57,9 +60,9 @@ namespace Blackjack
         void InitializeCards()
         {
             // setup card deck (notice that blackjack uses 6~8 decks of cards)
-            cardDeck = new CardDeck(GameManager.CARD_DECK_COUNT);
-            cardDeck.Shuffle();
-            //cardDeck.DebugDeck_Blackjack();
+            cardDeck = new CardDeck(CARD_DECK_COUNT);
+            //cardDeck.Shuffle();
+            cardDeck.DebugDeck_Blackjack();
 
             // setup hand evaluator for dealer and players
             dealerHand = new Hand();
@@ -131,10 +134,10 @@ namespace Blackjack
         /// <param name="playerId">index of the player</param>
         void ResetLabelMark(int playerId)
         {
-            labelMarks[playerId][GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER].enabled = true;
-            labelMarks[playerId][GameManager.WAGER_INDEX_DOUBLE].enabled = false;
-            labelMarks[playerId][GameManager.WAGER_INDEX_SPLIT_DOUBLE].enabled = false;
-            labelMarks[playerId][GameManager.WAGER_INDEX_INSURANCE].enabled = false;
+            labelMarks[playerId][WAGER_INDEX_BONUS_SPLITE_WAGER].enabled = true;
+            labelMarks[playerId][WAGER_INDEX_DOUBLE].enabled = false;
+            labelMarks[playerId][WAGER_INDEX_SPLIT_DOUBLE].enabled = false;
+            labelMarks[playerId][WAGER_INDEX_INSURANCE].enabled = false;
         }
 
         /// <summary>
@@ -167,7 +170,9 @@ namespace Blackjack
         /// </summary>
         public void ResetTable()
         {
-            // reset insurance trigger
+            // reset triggers
+            hasInsuranceBet = false;
+            hasUnclearPlayer = false;
             insuranceTriggered = false;
 
             // hide dealer card objects 
@@ -179,6 +184,14 @@ namespace Blackjack
                 for (int j = 0; j < playerCardsObj[i].Length; j++)
                     for (int k = 0; k < playerCardsObj[i][j].Length; k++)
                         playerCardsObj[i][j][k].SetActive(false);
+
+            // reset all player's hand
+            dealerHand.Reset();
+            for (int i = 0; i < playerHands.Length; i++)
+            {
+                ResetLabelMark(i);
+                playerHands[i].Reset();
+            }
 
             // reset table labels
             labelController.Reset();
@@ -227,23 +240,8 @@ namespace Blackjack
                         playerCardsObj[j][0][i].SetCard(card);
                         audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
 
-                        // initialize label text
-                        var labelText = "";
-
-                        // check to see if the player has blackjack
-                        if (playerHands[j].HasBlackjack())
-                        {
-                            labelText = "Blackjack";
-                        }
-                        else
-                        {
-                            // otherwise, calculate player's hand rank
-                            var rank = playerHands[j].GetRank();
-                            var rankSoft = playerHands[j].GetRankSoft();
-                            labelText = $"{rank}" + (rankSoft > 0 ? $"/{rankSoft}" : "");
-                        }
-
                         // display global player hand label
+                        var labelText = playerHands[j].ToString();
                         labelController.playerHandLabel[j].Display(labelText);
 
                         // display local player hand label if this player is a non-npc player
@@ -299,15 +297,122 @@ namespace Blackjack
             if (!flag)
                 return;
 
-            // otherwise set insurance trigger to be true
+            // otherwise set insuranceTriggered to be true
             insuranceTriggered = true;
 
             // display insurance label marks on the table
             for (int i = 0; i < labelMarks.Length; i++)
                 if (gameManager.players[i] != null)
-                    labelMarks[i][GameManager.WAGER_INDEX_INSURANCE].enabled = true;
+                    labelMarks[i][WAGER_INDEX_INSURANCE].enabled = true;
         }
 
+        /// <summary>
+        /// Method to reward or tak away players chip in insurance bet section
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator InsuranceResult()
+        {
+            // run through each player and see determine win & lose
+            for (int i = 0; i < gameManager.players.Length; i++)
+            {
+                // skip this iteration if 'n' player does not exist
+                if (gameManager.players[i] == null)
+                    continue;
+
+                // skip this iteration if 'n' player does not have insurance bet
+                var insuranceBet = playerAction.bets[i].insuranceWager;
+                if (insuranceBet == 0)
+                    continue;
+
+                // otherwise, the player either win or lose insurance wager
+                var message = "";
+                if (dealerHand.HasBlackjack())
+                {
+                    message = $"<color=\"green\">+{insuranceBet * REWARD_INSURANCE}</color>";
+                    gameManager.players[i].EditPlayerChip(insuranceBet * (REWARD_INSURANCE + 1));
+                    MultiplyWagerModel(i, WAGER_INDEX_INSURANCE, REWARD_INSURANCE);
+                }
+                else
+                {
+                    message = $"<color=\"red\">-{insuranceBet}</color>";
+                    TakingChipsAway(i, WAGER_INDEX_INSURANCE);
+                }
+
+                // play wager animation and display the result with a floating text
+                wagerAnimator.Play();
+                labelController.insuranceBets[i].Switch(false);
+                labelController.FloatText(message, labelController.insuranceBets[i].transform.position, 60f, 3f, 0.3f);
+
+                yield return new WaitForSeconds(WAIT_TIME_COMPARE);
+            }
+
+            // clear insurance relevent objects and UI
+            for (int i = 0; i < gameManager.players.Length; i++)
+            {
+                // skip this iteration if 'n' player does not exist
+                if (gameManager.players[i] == null)
+                    continue;
+
+                // otherwise, hide insurance wager stack 
+                ClearWagerStackForSingleSlot(i, WAGER_INDEX_INSURANCE);
+            }
+        }
+
+        public IEnumerator DealerHit()
+        {
+            // check whether or not the game needs to continue
+            CheckGameState();
+
+            // if there is no insurance bet and all players are cleared
+            // we can safely break this coroutine
+            if (!hasInsuranceBet && !hasUnclearPlayer)
+                yield break;
+
+            // otherwise, reveal dealer's second card
+            dealerCardsObj[1].transform.localEulerAngles = Vector3.zero;
+            labelController.dealerHandLabel.tmp.text = dealerHand.ToString();
+
+            // compare player's win & lose in insurance section
+            if (hasInsuranceBet)
+                yield return InsuranceResult();
+
+
+            yield break;
+        }
+
+        public IEnumerator Comparing()
+        {
+            yield break;
+        }
+
+        /// <summary>
+        /// Method to detect whether or nor the game needs to continue
+        /// by running through all players and check their insurance bet
+        /// and state. 
+        /// </summary>
+        void CheckGameState()
+        {
+            // run through each player and see if they have insurance bet or 
+            // they are waiting to compare
+            for (int i = 0; i < gameManager.players.Length; i++)
+            {
+                // skip this iteration if 'n' player does not exist
+                if (gameManager.players[i] == null)
+                    continue;
+
+                if (playerAction.bets[i].insuranceWager > 0)
+                    hasInsuranceBet = true;
+
+                if (!playerAction.bets[i].isClear)
+                    hasUnclearPlayer = true;
+            }
+        }
+
+        /// <summary>
+        /// Method for the player to draw additional cards
+        /// </summary>
+        /// <param name="playerIndex">index of the player</param>
+        /// <param name="handIndex">index of the player's current hand</param>
         public void OnPlayerHit(int playerIndex, int handIndex)
         {
             // draw a card
@@ -317,10 +422,8 @@ namespace Blackjack
             playerCardsObj[playerIndex][handIndex][cardIndex].SetCard(card);
             audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
 
-            // get point
-            var rank = playerHands[playerIndex].GetRank();
-            var rankSoft = playerHands[playerIndex].GetRankSoft();
-            var labelText = $"{rank}" + (rankSoft > 0 ? $"/{rankSoft}" : "");
+            // get hand string
+            var labelText = playerHands[playerIndex].ToString();
 
             // display global player hand label
             labelController.playerHandLabel[playerIndex].tmp.text = labelText;
@@ -388,16 +491,17 @@ namespace Blackjack
             if (multiplier == 0)
             {
                 message = $"<color=\"red\">-{perfectPairBet}</color>";
-                TakingChipsAway(index, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER);
+                TakingChipsAway(index, WAGER_INDEX_BONUS_SPLITE_WAGER);
             }
             else
             {
                 message = $"<color=\"green\">+{perfectPairBet * multiplier}</color>";
                 gameManager.players[index].EditPlayerChip(perfectPairBet * (multiplier + 1));
-                MultiplyWagerModel(index, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER, multiplier) ;
+                MultiplyWagerModel(index, WAGER_INDEX_BONUS_SPLITE_WAGER, multiplier) ;
             }
 
-            // display the result with floating text
+            // play wager animation and display the result with a floating text
+            wagerAnimator.Play();
             labelController.FloatText(message, labelController.betLabels[index].transform.position, 60f, 3f, 0.3f);
         }
 
@@ -419,10 +523,9 @@ namespace Blackjack
                 if (playerAction.bets[i].perfectPairWager == 0)
                     continue;
 
-                // calculate 'n' player's win & loss and play wager animation
+                // calculate 'n' player's win & loss
                 PerfectPairResult(i);
-                wagerAnimator.Play();
-
+                
                 yield return new WaitForSeconds(WAIT_TIME_COMPARE);
             }
 
@@ -436,16 +539,106 @@ namespace Blackjack
                 // remove perfect pair wager number from bet label text
                 labelController.SetBetLabel(i, playerAction.bets[i].anteWager);
 
-                // reset player hand label color and hide perfect pair wager label
-                labelMarks[i][GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER].enabled = false;
+                // reset player hand label color
                 labelController.playerHandLabel[i].bg.sprite = labelController.labelSpriteTransparent;
 
                 // remove perfect pair bonus label
                 labelController.perfectPairLabel.Switch(false);
 
                 // remove wager stack in perfect pair slot
-                ClearWagerStackForSingleSlot(i, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER);
+                ClearWagerStackForSingleSlot(i, WAGER_INDEX_BONUS_SPLITE_WAGER);
             }
+        }
+
+        /// <summary>
+        /// Method for a single player's bust, dealer collects all chips from the 
+        /// specific wager stacks
+        /// </summary>
+        /// <param name="playerIndex">index of the player</param>
+        /// <param name="handIndex">index of the hand</param>
+        public void Bust(int playerIndex, int handIndex = 0)
+        {
+            var message = "";
+            var bet = playerAction.bets[playerIndex];
+
+            if (handIndex == 0)
+            {
+                message = $"<color=\"red\">-{bet.anteWager}</color>";
+                TakingChipsAway(playerIndex, WAGER_INDEX_ANTE);
+            }
+            else if (handIndex == 1)
+            {
+                message = $"<color=\"red\">-{bet.anteWagerSplit}</color>";
+                TakingChipsAway(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER);
+            }
+
+            // display the result with floating text
+            labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
+
+            // hide the bet label
+            labelController.betLabels[playerIndex].Switch(false);
+
+            // play the wager animator
+            wagerAnimator.Play();
+        }
+
+        /// <summary>
+        /// Method for a single player's five card charlie, instant win
+        /// </summary>
+        /// <param name="playerIndex">index of the player</param>
+        /// <param name="handIndex">index of the hnad</param>
+        public void FiveCardCharlie(int playerIndex, int handIndex = 0)
+        {
+            var message = "";
+            var bet = playerAction.bets[playerIndex];
+
+            if (handIndex == 0) 
+            {
+                message = $"<color=\"green\">+{bet.anteWager * REWARD_FIVECARDS}</color>";
+                MultiplyWagerModel(playerIndex, WAGER_INDEX_ANTE, REWARD_FIVECARDS);
+                gameManager.players[playerIndex].EditPlayerChip(bet.anteWager * (REWARD_FIVECARDS + 1));
+            }
+            else if (handIndex == 1)
+            {
+                message = $"<color=\"green\">+{bet.anteWagerSplit * REWARD_FIVECARDS}</color>";
+                MultiplyWagerModel(playerIndex, WAGER_INDEX_DOUBLE, REWARD_FIVECARDS);
+                gameManager.players[playerIndex].EditPlayerChip(bet.anteWagerSplit * (REWARD_FIVECARDS + 1));
+            }
+
+            // display the result with floating text
+            labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
+            
+            // hide the bet label
+            labelController.betLabels[playerIndex].Switch(false);
+
+            // play the wager animator
+            wagerAnimator.Play();
+        }
+
+        /// <summary>
+        /// Method to clear one single player out of the table
+        /// </summary>
+        /// <param name="playerIndex">index of the player</param>
+        public void ClearSinglePlayer(int playerIndex)
+        {
+            // set isClear to be true
+            playerAction.bets[playerIndex].isClear = true;
+
+            // hide player's bet label and local hand panel
+            labelController.betLabels[playerIndex].Switch(false);
+            labelController.playerHandLabel[playerIndex].Switch(false);
+            labelController.ResetLocalHandVisbility();
+
+            // hide player's card objects
+            for (int i = 0; i < playerCardsObj[playerIndex].Length; i++)
+                for (int j = 0; j < playerCardsObj[playerIndex][i].Length; j++)
+                    playerCardsObj[playerIndex][i][j].SetActive(false);
+
+            // hide player's wager stacks (exclude insurance slot)
+            ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_ANTE);
+            ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER);
+            ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_DOUBLE);
+            ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_SPLIT_DOUBLE);
         }
     }
 }

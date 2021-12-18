@@ -3,9 +3,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using static Blackboard;
+using static Const;
 
 namespace Blackjack
 {
+    using static Para;
     public class PlayerAction : BeforeBet
     {
         [Header("Decision Panel")]
@@ -33,6 +35,8 @@ namespace Blackjack
         private bool triggerStand;
         private bool triggerDouble;
         private bool triggerSplit;
+        private bool triggerBust;
+        private bool triggerFiveCards;
 
         public void SetUp()
         {
@@ -61,7 +65,7 @@ namespace Blackjack
         }
 
         /// <summary>
-        /// Method to display a decision panel for a non-npc player
+        /// Method to display the wager betting panel for a non-npc player
         /// </summary>
         /// <param name="betType">the bet type</param>
         /// <param name="playerIndex">whose term is it</param>
@@ -91,8 +95,8 @@ namespace Blackjack
         }
 
         /// <summary>
-        /// Method to display decision panel, includes hit, stand,
-        /// double down and split buttons
+        /// Method to display decision panel in the first place, includes hit, 
+        /// stand and detect validity for double down and split buttons
         /// </summary>
         void DisplayDecisionPanel(int playerIndex)
         {
@@ -110,64 +114,118 @@ namespace Blackjack
             btn_split.Switch(hand.IsPairSameValue());
         }
 
+        /// <summary>
+        /// Method to display/hide decision panel. When a button in the decision panel
+        /// is clicked, switch trigger to true and hide the decision panel for a short 
+        /// amount of time. When the decision panel shows up again, switch trigger
+        /// to false in order to detect player's next input.
+        /// </summary>
+        /// <param name="trigger">always opposite to panel visibility</param>
+        /// <param name="flag">true to display, false to hide</param>
+        void SetDecisionPanelVisibility(ref bool trigger, bool flag)
+        {
+            // switch trigger and panel's visibility
+            trigger = !flag;
+            decisionPanel.SetActive(flag);
+
+            // when displaying the panel
+            if (flag)
+            {
+                // switch off the double down & split button
+                btn_double.Switch(false);
+                btn_split.Switch(false);
+
+                // if the player has two cards only, detect whether or not
+                // we need to enable double down button again
+                var hand = tableController.GetPlayerHand(playerIndex);
+                if (hand.GetCardCount() == 2) 
+                {
+                    var rank = hand.GetRank();
+                    if (rank >= 9 && rank <= 11)
+                        btn_double.Switch(true);
+                }
+            }
+        }
+
         public void DoubleDown()
         {
             if (!triggerDouble)
             {
-                triggerDouble = true;
-                decisionPanel.SetActive(false);
-                return;
+                SetDecisionPanelVisibility(ref triggerDouble, false);
             }
             else
             {
                 triggerDouble = false;
+                bets[playerIndex].isClear = true;
+                tableController.OnPlayerHit(playerIndex, 0);
+                audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
+                FinishTurn();
             }
-
-            tableController.OnPlayerHit(playerIndex, 0);
-            bets[playerIndex].stand = true;
-            audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
-            FinishTurn();
-
-            Debug.Log("Double");
         }
 
+        /// <summary>
+        /// Decision function for hit button
+        /// </summary>
         public void Hit()
         {
+            // this part is functioning when the player clicks the button
             if (!triggerHit)
             {
-                triggerHit = true;
-                decisionPanel.SetActive(false);
+                // hide decision panel and switch on trigger
+                SetDecisionPanelVisibility(ref triggerHit, false);
                 return;
             }
-            else
-            {
-                triggerHit = false;
-                decisionPanel.SetActive(true);
-            }
 
+            // after that trigger will be switched off 
+            // and execute the following codes
+            SetDecisionPanelVisibility(ref triggerHit, true);
+
+            // add one more card to the player
             tableController.OnPlayerHit(playerIndex, 0);
-
-            Debug.Log("Hit");
+            DetectBustAndFiveCard();
         }
 
+        /// <summary>
+        /// Method to detect if the player has bust or five card
+        /// charlie
+        /// </summary>
+        void DetectBustAndFiveCard()
+        {
+            if (tableController.GetPlayerHand(playerIndex).HasBust()) 
+            {
+                SetDecisionPanelVisibility(ref triggerBust, false);
+                labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteRed;
+            }
+            else if (tableController.GetPlayerHand(playerIndex).HasFiveCardCharlie())
+            {
+                SetDecisionPanelVisibility(ref triggerFiveCards, false);
+                labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteGreen;
+            }
+        }
+
+        /// <summary>
+        /// Decision function for stand button
+        /// </summary>
         public void Stand()
         {
+            // this part is functioning when the player clicks the button
             if (!triggerStand)
             {
-                triggerStand = true;
-                decisionPanel.SetActive(false);
+                // hide decision panel and switch on trigger
+                SetDecisionPanelVisibility(ref triggerStand, false);
                 return;
             }
-            else
-            {
-                triggerHit = false;
-            }
 
-            bets[playerIndex].stand = true;
+            // after that trigger will be switched off 
+            // and execute the following codes
+            triggerStand = false;
+
+            // set player statu to be stand and play check sound effect
+            bets[playerIndex].isClear = true;
             audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
-            FinishTurn();
 
-            Debug.Log("Stand");
+            // finish the turn
+            FinishTurn();
         }
 
         public void Split()
@@ -183,8 +241,6 @@ namespace Blackjack
                 triggerSplit = false;
                 decisionPanel.SetActive(true);
             }
-
-            Debug.Log("Split");
         }
 
         public IEnumerator Deciding(int playerIndex)
@@ -195,33 +251,51 @@ namespace Blackjack
             {
                 if (triggerHit)
                 {
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     Hit();
                 }
 
                 if (triggerStand)
                 {
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     Stand();
                 }
 
                 if (triggerDouble)
                 {
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     DoubleDown();
                 }
 
                 if (triggerSplit)
                 {
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     Split();
+                }
+
+                if (triggerBust)
+                {
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
+                    tableController.Bust(playerIndex);
+                    triggerBust = false;
+                    FinishTurn();                    
+                    yield return new WaitForSeconds(WAIT_TIME_COMPARE);
+                    tableController.ClearSinglePlayer(playerIndex);
+                }
+
+                if (triggerFiveCards)
+                {
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
+                    tableController.FiveCardCharlie(playerIndex);
+                    triggerFiveCards = false;
+                    FinishTurn();
+                    yield return new WaitForSeconds(WAIT_TIME_COMPARE);
+                    tableController.ClearSinglePlayer(playerIndex);
                 }
 
                 yield return new WaitForSeconds(Time.deltaTime);
             }            
         }
-
-
 
         /// <summary>
         /// Method to finish a turn for a player, switch isWaiting to false
@@ -230,7 +304,7 @@ namespace Blackjack
         /// </summary>
         void FinishTurn()
         {
-            isWaiting = false;
+            isWaiting = false;            
             wagerPanel.SetActive(false);
             decisionPanel.SetActive(false);
             StopCoroutine(RightClickDetect());
@@ -337,11 +411,11 @@ namespace Blackjack
 
             // add single wager model to the associate slot
             if (betType == BetType.AnteWager)
-                tableController.AddWagerModel(playerIndex, GameManager.WAGER_INDEX_ANTE, value);
+                tableController.AddWagerModel(playerIndex, WAGER_INDEX_ANTE, value);
             else if (betType == BetType.PerfectPair)
-                tableController.AddWagerModel(playerIndex, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER, value);
+                tableController.AddWagerModel(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER, value);
             else if (betType == BetType.Insurance)
-                tableController.AddWagerModel(playerIndex, GameManager.WAGER_INDEX_INSURANCE, value);
+                tableController.AddWagerModel(playerIndex, WAGER_INDEX_INSURANCE, value);
 
             // refresh chip's validity
             RefreshChipValidity(remainingTemp);
@@ -370,7 +444,7 @@ namespace Blackjack
                 wagerText.text = "";
 
                 // clear all wagers in ante wager slot
-                tableController.ClearWagerStackForSingleSlot(playerIndex, GameManager.WAGER_INDEX_ANTE);
+                tableController.ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_ANTE);
             }
             // if it is a bonud wager bet
             else if (betType == BetType.PerfectPair)
@@ -379,7 +453,7 @@ namespace Blackjack
                 btn_skip.gameObject.SetActive(true);
 
                 // clear all wagers in bonus wager slot
-                tableController.ClearWagerStackForSingleSlot(playerIndex, GameManager.WAGER_INDEX_BONUS_SPLITE_WAGER);
+                tableController.ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER);
             }
             // if it is an insurance wager bet
             else if (betType == BetType.Insurance)
@@ -388,7 +462,7 @@ namespace Blackjack
                 btn_skip.gameObject.SetActive(true);
 
                 // clear all wagers in insurance wager slot
-                tableController.ClearWagerStackForSingleSlot(playerIndex, GameManager.WAGER_INDEX_INSURANCE);
+                tableController.ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_INSURANCE);
             }
 
             // refresh chip's validity

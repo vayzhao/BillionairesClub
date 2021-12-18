@@ -5,6 +5,7 @@ using TMPro;
 
 namespace Blackjack
 {
+    using static Para;
     public class LabelController : LabelBehaviour
     {
         [Header("Local Player Hand")]
@@ -75,6 +76,12 @@ namespace Blackjack
             {
                 cardTextureOrigin[i].enabled = false;
                 cardTextureSplit[i].enabled = false;
+            }
+
+            // hide all local hand panels
+            for (int i = 0; i < MAX_HAND; i++)
+            {
+                localHandLabels[i].Switch(false);
             }
 
             // also hide perfect pair label

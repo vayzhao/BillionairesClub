@@ -2,18 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Const;
 
 namespace Blackjack
 {
     public class GameManager : MonoBehaviour
     {
-        public const int CARD_DECK_COUNT = 8;
-        public const int WAGER_INDEX_ANTE = 0;
-        public const int WAGER_INDEX_BONUS_SPLITE_WAGER = 1;
-        public const int WAGER_INDEX_DOUBLE = 2;
-        public const int WAGER_INDEX_SPLIT_DOUBLE = 3;
-        public const int WAGER_INDEX_INSURANCE = 4;
-
         [HideInInspector]
         public Player[] players;                 // data for all players
                 
@@ -113,7 +107,7 @@ namespace Blackjack
                 // deal first two cards to players and dealer
                 yield return tableController.DealInitialCards();
 
-                // ask for the insurance wager if the insurance trigger is on
+                // ask for the insurance wager if the dealer starts with an ace
                 if (tableController.insuranceTriggered)
                     yield return InsuranceBet();
 
@@ -123,13 +117,11 @@ namespace Blackjack
                 // go through players and ask for decisions
                 yield return MakeDecision();
 
-                // TODO: Reveal dealer's second card and give insurance reward
+                // finally dealer starts to draw cards
+                yield return tableController.DealerHit();
 
-                // TODO: dealer's hit
-
-                // TODO: compare results
-
-                break;
+                // compare dealers hand and player's hand
+                yield return tableController.Comparing();
             }
         }
 
@@ -166,14 +158,14 @@ namespace Blackjack
                 if (players[checkIndex].isNPC)
                 {
                     // TODO: call AI betting method
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     continue;
                 }
 
                 // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.AnteWager, checkIndex);
                 while (playerAction.isWaiting)
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
             }
         }
 
@@ -197,14 +189,14 @@ namespace Blackjack
                 if (players[checkIndex].isNPC)
                 {
                     // TODO: call AI betting method
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     continue;
                 }
 
                 // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.PerfectPair, checkIndex);
                 while (playerAction.isWaiting)
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
             }
         }
 
@@ -228,14 +220,14 @@ namespace Blackjack
                 if (players[checkIndex].isNPC)
                 {
                     // TODO: call AI betting method
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     continue;
                 }
 
                 // otherwise, pop up a decision window to the player
                 playerAction.DisplayBetPanel(BetType.Insurance, checkIndex);
                 while (playerAction.isWaiting)
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
             }
         }
 
@@ -260,14 +252,12 @@ namespace Blackjack
                 if (players[checkIndex].isNPC)
                 {
                     // TODO: call AI betting method
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
+                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     continue;
                 }
 
                 // otherwise, pop up a decision window to the player
                 yield return playerAction.Deciding(checkIndex);
-                while (playerAction.isWaiting)
-                    yield return new WaitForSeconds(Const.WAIT_TIME_DECISION);
             }
         }
     }

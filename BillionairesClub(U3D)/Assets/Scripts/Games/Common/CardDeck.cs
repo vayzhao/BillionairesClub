@@ -50,15 +50,20 @@ public class CardDeck
     {
         cards = new List<Card>();
         pointerIndex = 0;
-        cards.Add(new Card(Suit.Heart, Value.ACE)); // player
-        cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer
-        cards.Add(new Card(Suit.Heart, Value.KING)); // player 
-        cards.Add(new Card(Suit.Spade, Value.THREE)); // dealer
-        cards.Add(new Card(Suit.Diamond, Value.FOUR)); // player or dealer
-        cards.Add(new Card(Suit.Spade, Value.FIVE)); // player or dealer
-        cards.Add(new Card(Suit.Diamond, Value.SIX)); // player or dealer
-        cards.Add(new Card(Suit.Heart, Value.SEVEN)); // player or dealer
-        cards.Add(new Card(Suit.Heart, Value.ACE)); // player or dealer
+        for (int i = 0; i < 20; i++)
+        {
+            cards.Add(new Card(Suit.Heart, Value.TWO)); // player
+            cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer
+            cards.Add(new Card(Suit.Heart, Value.THREE)); // player 
+            cards.Add(new Card(Suit.Spade, Value.KING)); // dealer
+            cards.Add(new Card(Suit.Diamond, Value.ACE)); // player or dealer
+            cards.Add(new Card(Suit.Spade, Value.TWO)); // player or dealer
+            cards.Add(new Card(Suit.Diamond, Value.TWO)); // player or dealer
+            cards.Add(new Card(Suit.Heart, Value.TWO)); // player or dealer
+            cards.Add(new Card(Suit.Heart, Value.ACE)); // player or dealer
+            cards.Add(new Card(Suit.Heart, Value.ACE)); // player or dealer
+        }
+        
     }
 
     /// <summary>

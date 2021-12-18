@@ -5,25 +5,32 @@ using UnityEngine;
 
 namespace Blackjack
 {
+    using static Para;
     public class Hand 
     {
         private int[] rank;
         private int[] rankSoft;
         private int[] cardCount;
+        private bool[] stood;
+        private bool[] hasBust;
+        private bool[] hasBlackjack;
+        private bool[] hasFiveCardCharlie;
         private Card[][] cards;
         private int perfectPairMultiplier;
-        private bool[] hasBlackjack;
         
         public Hand()
         {
-            rank = new int[2];
-            rankSoft = new int[2];
-            cardCount = new int[2];
-            cards = new Card[2][];
-            hasBlackjack = new bool[2];
+            rank = new int[MAX_HAND];
+            rankSoft = new int[MAX_HAND];
+            cardCount = new int[MAX_HAND];
+            cards = new Card[MAX_HAND][];
+            stood = new bool[MAX_HAND];
+            hasBust = new bool[MAX_HAND];
+            hasBlackjack = new bool[MAX_HAND];
+            hasFiveCardCharlie = new bool[MAX_HAND];
 
             for (int i = 0; i < cards.Length; i++)
-                cards[i] = new Card[5];
+                cards[i] = new Card[MAX_CARD_PER_HAND];
         }
 
         /// <summary>
@@ -34,15 +41,18 @@ namespace Blackjack
         {
             perfectPairMultiplier = 0;
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < MAX_HAND; i++)
             {
                 rank[i] = 0;
                 cardCount[i] = 0;
                 rankSoft[i] = 0;
+                stood[i] = false;
+                hasBust[i] = false;
                 hasBlackjack[i] = false;
+                hasFiveCardCharlie[i] = false;
             }
 
-            for (int i = 0; i < cards.Length; i++)
+            for (int i = 0; i < MAX_HAND; i++)
                 for (int j = 0; j < cards[i].Length; j++)
                     cards[i][j] = null;
         }
@@ -68,6 +78,9 @@ namespace Blackjack
         public int GetRank(int handIndex = 0) => rank[handIndex];
         public int GetRankSoft(int handIndex = 0) => rankSoft[handIndex];
         public bool HasBlackjack(int handIndex = 0) => hasBlackjack[handIndex];
+        public bool HasBust(int handIndex = 0) => hasBust[handIndex];
+        public bool HasFiveCardCharlie(int handIndex = 0) => hasFiveCardCharlie[handIndex];
+        public bool IsStood(int handIndex = 0) => stood[handIndex];
 
         /// <summary>
         /// Method to obtain the card count in a specific hand
@@ -101,19 +114,28 @@ namespace Blackjack
                 rankSoft[handIndex] = rank[handIndex] + 10;
             else
                 rankSoft[handIndex] = 0;
+
+            // if the rank is over 21, the hand is bust
+            if (rank[handIndex] > 21)
+                hasBust[handIndex] = true;
+
+            // otherwise, if the player has 5 cards without exceeding 21
+            // the player gets a five card charlie
+            else if (cardCount[handIndex] == 5)
+                hasFiveCardCharlie[handIndex] = true;
         }
 
         /// <summary>
         /// Method to detect whether or not the player has blackjack by
-        /// finding an ace and a Jack/Queen/King from the first two cards
+        /// finding an ace and a picture from the first two cards
         /// </summary>
         /// <param name="handIndex"></param>
         void DetectBlackjack(int handIndex = 0)
         {
             // run through the first two cards and see if there
-            // is an ace and a jack/queen/king
+            // is an ace and a picture
             var hasAce = false;
-            var hasJQK = false;
+            var hasPicture = false;
             for (int i = 0; i < cardCount[handIndex]; i++)
             {
                 switch (cards[handIndex][i].value)
@@ -124,7 +146,7 @@ namespace Blackjack
                     case Value.JACK:
                     case Value.QUEEN:
                     case Value.KING:
-                        hasJQK = true;
+                        hasPicture = true;
                         break;
                     default:
                         break;
@@ -132,7 +154,7 @@ namespace Blackjack
             }
 
             // if the player has blackjack, set rank to be 21
-            if (hasAce && hasJQK)
+            if (hasAce && hasPicture)
             {
                 rank[handIndex] = 21;
                 hasBlackjack[handIndex] = true;
@@ -200,20 +222,38 @@ namespace Blackjack
             }
         }
 
+        /// <summary>
+        /// Conver player's hand to string
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             string result = "";
 
-            for (int i = 0; i < 2; i++)
+            // run through player's hands
+            for (int i = 0; i < MAX_HAND; i++)
             {
-                if (cardCount[i] != 0) 
+                // in the second iteration, check to see if the 
+                // player has a second hand, it he does, add a prefix
+                // to the result, otherwise break the loop
+                if (i == 1)
+                    if (cardCount[i] > 0)
+                        result += "-";
+                    else
+                        break;
+
+                // check what combination the player has
+                if (hasBlackjack[i])
+                    result += "Blackjack";
+                else if (hasBust[i])
+                    result += "Bust";
+                else if (hasFiveCardCharlie[i])
+                    result += "5 Cards";
+                else
                 {
-                    result += $"the {i + 1} hand is :";
-                    for (int j = 0; j < cardCount[i]; j++)
-                    {
-                        result += $"{cards[i][j].ToString()} ";
-                    }
-                    result += "\n";
+                    result += $"{rank[i]}";
+                    if (rankSoft[i] > 0)
+                        result += $"/{rankSoft[i]}";
                 }
             }
             return result;
