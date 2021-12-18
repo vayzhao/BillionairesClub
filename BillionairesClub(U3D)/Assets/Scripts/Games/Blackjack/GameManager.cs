@@ -117,11 +117,8 @@ namespace Blackjack
                 // go through players and ask for decisions
                 yield return MakeDecision();
 
-                // finally dealer starts to draw cards
-                yield return tableController.DealerHit();
-
-                // compare dealers hand and player's hand
-                yield return tableController.Comparing();
+                // finally dealer decides whether or not to continue the game
+                yield return tableController.DealerDecision();
             }
         }
 

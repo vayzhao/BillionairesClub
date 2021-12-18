@@ -61,8 +61,8 @@ namespace Blackjack
         {
             // setup card deck (notice that blackjack uses 6~8 decks of cards)
             cardDeck = new CardDeck(CARD_DECK_COUNT);
-            //cardDeck.Shuffle();
-            cardDeck.DebugDeck_Blackjack();
+            cardDeck.Shuffle();
+            //cardDeck.DebugDeck_Blackjack();
 
             // setup hand evaluator for dealer and players
             dealerHand = new Hand();
@@ -195,6 +195,9 @@ namespace Blackjack
 
             // reset table labels
             labelController.Reset();
+
+            // reset dealer's hand label
+            labelController.dealerHandLabel.bg.sprite = labelController.labelSpritePurple;
         }
 
         /// <summary>
@@ -358,7 +361,38 @@ namespace Blackjack
             }
         }
 
-        public IEnumerator DealerHit()
+        /// <summary>
+        /// Method for the dealer to continue draw cards until its hand reaches 17
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator DealTill17()
+        {
+            while (dealerHand.GetHighestRank() < 17 && !dealerHand.HasFiveCardCharlie())
+            {
+                yield return new WaitForSeconds(WAIT_TIME_DEAL * 4);
+
+                // deal a card for dealer
+                var card = DrawACard();
+                dealerHand.AddCard(card);
+                dealerCardsObj[dealerHand.GetCardCount() - 1].SetCard(card);
+                audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
+                labelController.dealerHandLabel.tmp.text = dealerHand.ToString();
+
+                // if the dealer busts, change dealer label background color to red
+                if (dealerHand.HasBust())
+                    labelController.dealerHandLabel.bg.sprite = labelController.labelSpriteRed;
+                else if (dealerHand.HasFiveCardCharlie())
+                    labelController.dealerHandLabel.bg.sprite = labelController.labelSpriteGreen;
+            }
+        }
+
+        /// <summary>
+        /// Method for the dealer to decide whether or not to continue the game.
+        /// (e.g if all the players bust and no one bet on the insurance, the 
+        /// dealer just end the game)
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator DealerDecision()
         {
             // check whether or not the game needs to continue
             CheckGameState();
@@ -376,13 +410,31 @@ namespace Blackjack
             if (hasInsuranceBet)
                 yield return InsuranceResult();
 
+            // keep drawing card until reach 17
+            yield return DealTill17();
 
-            yield break;
+            // compare dealer's hand and existing players hand
+            yield return Comparing();
         }
 
-        public IEnumerator Comparing()
+        /// <summary>
+        /// Method for the dealer to compare his hand with every individual player
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator Comparing()
         {
-            yield break;
+            for (int i = 0; i < gameManager.players.Length; i++)
+            {
+                // skip this iteration if 'n' player does not exist
+                if (gameManager.players[i] == null)
+                    continue;
+
+
+
+
+                yield return new WaitForSeconds(WAIT_TIME_COMPARE);
+            }
+            
         }
 
         /// <summary>

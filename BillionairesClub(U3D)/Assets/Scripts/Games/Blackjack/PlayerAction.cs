@@ -135,7 +135,7 @@ namespace Blackjack
                 btn_double.Switch(false);
                 btn_split.Switch(false);
 
-                // if the player has two cards only, detect whether or not
+                // if the  tplayer haswo cards only, detect whether or not
                 // we need to enable double down button again
                 var hand = tableController.GetPlayerHand(playerIndex);
                 if (hand.GetCardCount() == 2) 
@@ -176,12 +176,13 @@ namespace Blackjack
                 return;
             }
 
-            // after that trigger will be switched off 
-            // and execute the following codes
+            // after that add one card to the player
+            tableController.OnPlayerHit(playerIndex, 0);
+
+            // switch off the trigger and display the panel again
             SetDecisionPanelVisibility(ref triggerHit, true);
 
-            // add one more card to the player
-            tableController.OnPlayerHit(playerIndex, 0);
+            // detect whether or not the player bust after the last card added
             DetectBustAndFiveCard();
         }
 
@@ -221,7 +222,7 @@ namespace Blackjack
             triggerStand = false;
 
             // set player statu to be stand and play check sound effect
-            bets[playerIndex].isClear = true;
+            tableController.GetPlayerHand(playerIndex).stand[0] = true;
             audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
 
             // finish the turn

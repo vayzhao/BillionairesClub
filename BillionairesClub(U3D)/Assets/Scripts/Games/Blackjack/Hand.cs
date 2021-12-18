@@ -8,10 +8,10 @@ namespace Blackjack
     using static Para;
     public class Hand 
     {
+        public bool[] stand;
         private int[] rank;
         private int[] rankSoft;
         private int[] cardCount;
-        private bool[] stood;
         private bool[] hasBust;
         private bool[] hasBlackjack;
         private bool[] hasFiveCardCharlie;
@@ -24,7 +24,7 @@ namespace Blackjack
             rankSoft = new int[MAX_HAND];
             cardCount = new int[MAX_HAND];
             cards = new Card[MAX_HAND][];
-            stood = new bool[MAX_HAND];
+            stand = new bool[MAX_HAND];
             hasBust = new bool[MAX_HAND];
             hasBlackjack = new bool[MAX_HAND];
             hasFiveCardCharlie = new bool[MAX_HAND];
@@ -46,7 +46,7 @@ namespace Blackjack
                 rank[i] = 0;
                 cardCount[i] = 0;
                 rankSoft[i] = 0;
-                stood[i] = false;
+                stand[i] = false;
                 hasBust[i] = false;
                 hasBlackjack[i] = false;
                 hasFiveCardCharlie[i] = false;
@@ -77,10 +77,10 @@ namespace Blackjack
         /// <returns></returns>
         public int GetRank(int handIndex = 0) => rank[handIndex];
         public int GetRankSoft(int handIndex = 0) => rankSoft[handIndex];
+        public int GetHighestRank(int handIndex = 0) => Mathf.Max(rank[handIndex], rankSoft[handIndex]);
         public bool HasBlackjack(int handIndex = 0) => hasBlackjack[handIndex];
         public bool HasBust(int handIndex = 0) => hasBust[handIndex];
         public bool HasFiveCardCharlie(int handIndex = 0) => hasFiveCardCharlie[handIndex];
-        public bool IsStood(int handIndex = 0) => stood[handIndex];
 
         /// <summary>
         /// Method to obtain the card count in a specific hand
