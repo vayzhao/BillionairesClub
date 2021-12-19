@@ -117,6 +117,10 @@ namespace Blackjack
                 // go through players and ask for decisions
                 yield return MakeDecision();
 
+                // after all palyers have made their decisions, wait for
+                // a short amount of time then start dealer's turn
+                yield return new WaitForSeconds(WAIT_TIME_SHORTPAUSE);
+
                 // finally dealer decides whether or not to continue the game
                 yield return tableController.DealerDecision();
             }

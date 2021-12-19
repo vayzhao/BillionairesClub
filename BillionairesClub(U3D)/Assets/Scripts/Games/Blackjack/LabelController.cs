@@ -99,6 +99,35 @@ namespace Blackjack
             betLabels[index].Switch(true);
             betLabels[index].tmp.text = $"{amount:C0}" + (perfectPair > 0 ? $"<color=\"yellow\">({perfectPair:C0})</color>" : "");
         }
+        
+        /// <summary>
+        /// Method to update player's bet label during the game,
+        /// this function might be called when player decides to 
+        /// double down or split
+        /// </summary>
+        /// <param name="index">index of the player</param>
+        /// <param name="bet">bet data from the player</param>
+        public void UpdateBetLabel(int index, Bet bet)
+        {
+            // initialize text 
+            var text = "";
+
+            // setup bet label for first hand
+            if (bet.doubleWager == 0)
+                text = $"{bet.anteWager:C0}";
+            else
+                text = $"{bet.anteWager + bet.doubleWager:C0}";
+
+            // setup bet label for second hand
+            if (bet.anteWagerSplit > 0)
+                if (bet.doubleWagerSplit > 0)
+                    text += $"/<color=\"yellow\">({bet.anteWagerSplit + bet.doubleWagerSplit:C0})</color>";
+                else
+                    text += $"/<color=\"yellow\">({bet.anteWagerSplit:C0})</color>";
+
+            // apply changes to the text component 
+            betLabels[index].tmp.text = text;
+        }
 
         /// <summary>
         /// Method to reveal a card in local player hand panel

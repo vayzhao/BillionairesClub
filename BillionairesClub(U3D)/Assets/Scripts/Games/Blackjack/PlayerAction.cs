@@ -114,11 +114,15 @@ namespace Blackjack
             // otherwise, display decision panel
             decisionPanel.SetActive(true);
 
-            // check double down and split button validity
-            var hand = tableController.GetPlayerHand(playerIndex);
-            var rank = hand.GetRank();
-            btn_double.Switch(rank >= 9 && rank <= 11);
-            btn_split.Switch(hand.IsPairSameValue());
+            // check if the player has enough amount of chip to do double down or split
+            if (gameManager.players[playerIndex].chip >= bets[playerIndex].anteWager)
+            {
+                // check double down and split button validity
+                var hand = tableController.GetPlayerHand(playerIndex);
+                var rank = hand.GetRank();
+                btn_double.Switch(rank >= 9 && rank <= 11);
+                btn_split.Switch(hand.IsPairSameValue());
+            }
         }
 
         /// <summary>
@@ -154,20 +158,41 @@ namespace Blackjack
             }
         }
 
+        /// <summary>
+        /// Decision function for double down button
+        /// </summary>
         public void DoubleDown()
         {
+            // this part is function when the player clicks the button
             if (!triggerDouble)
             {
                 SetDecisionPanelVisibility(ref triggerDouble, false);
+                return;
             }
-            else
-            {
-                triggerDouble = false;
-                bets[playerIndex].isClear = true;
-                tableController.OnPlayerHit(playerIndex, 0);
-                audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
-                FinishTurn();
-            }
+
+            // after that trigger will be switched off 
+            // and execute the following codes
+            triggerDouble = false;
+
+            // add one card to the player
+            tableController.OnPlayerHit(playerIndex, 0);
+            audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
+
+            // cost player's wager
+            bets[playerIndex].doubleWager = bets[playerIndex].anteWager;
+            tableController.CloneAnteWagerStack(playerIndex, WAGER_INDEX_DOUBLE, false);
+            gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].doubleWager);
+
+            // set player to stand
+            tableController.GetPlayerHand(playerIndex).stand[0] = true;
+
+            // update player's bet label and hand label
+            labelController.UpdateBetLabel(playerIndex, bets[playerIndex]);
+            labelController.playerHandLabel[playerIndex].tmp.text = 
+                tableController.GetPlayerHand(playerIndex).ToString();
+
+            // finish the turn
+            FinishTurn();
         }
 
         /// <summary>
@@ -241,7 +266,8 @@ namespace Blackjack
             audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
 
             // update hand rank panel text
-            labelController.playerHandLabel[playerIndex].tmp.text = tableController.GetPlayerHand(playerIndex).ToString();
+            labelController.playerHandLabel[playerIndex].tmp.text = 
+                tableController.GetPlayerHand(playerIndex).ToString();
 
             // finish the turn
             FinishTurn();

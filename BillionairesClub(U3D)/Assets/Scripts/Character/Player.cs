@@ -57,5 +57,4 @@ public class Player : MonoBehaviour
         // update playerboard information
         playerBoard.UpdateValue();
     }
-
 }

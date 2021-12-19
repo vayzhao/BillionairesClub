@@ -191,6 +191,7 @@ namespace Blackjack
             {
                 ResetLabelMark(i);
                 playerHands[i].Reset();
+                labelController.playerHandLabel[i].bg.sprite = labelController.labelSpriteTransparent;
             }
 
             // reset table labels
@@ -424,10 +425,13 @@ namespace Blackjack
                     switch (result)
                     {
                         case Result.Win:
-                            PlayerWins(i, j);
+                            PlayerWins(i, j, playerAction.bets[i]);
                             break;
                         case Result.Lose:
-                            PlayerLoses(i, j);
+                            PlayerLoses(i, j, playerAction.bets[i]);
+                            break;
+                        case Result.Standoff:
+                            Standoff(i, j, playerAction.bets[i]);
                             break;
                         default:
                             break;
@@ -448,7 +452,8 @@ namespace Blackjack
         /// </summary>
         /// <param name="playerIndex">index of the player</param>
         /// <param name="handIndex">index of the hand</param>
-        void PlayerWins(int playerIndex, int handIndex)
+        /// /// <param name="bet">bet data from the player</param>
+        void PlayerWins(int playerIndex, int handIndex, Bet bet)
         {
             // calculate the reward multipiler 
             var multipiler = 0f;
@@ -472,31 +477,31 @@ namespace Blackjack
             var rewardDisplay = 0f;
             if (handIndex == 0)
             {
-                if (playerAction.bets[playerIndex].anteWager > 0)
+                if (bet.anteWager > 0)
                 {
-                    reward += playerAction.bets[playerIndex].anteWager * (1 + multipiler);
-                    rewardDisplay += playerAction.bets[playerIndex].anteWager * multipiler;
+                    reward += bet.anteWager * (1 + multipiler);
+                    rewardDisplay += bet.anteWager * multipiler;
                     MultiplyWagerModel(playerIndex, WAGER_INDEX_ANTE, multipiler);
                 }
-                if (playerAction.bets[playerIndex].doubleWager > 0)
+                if (bet.doubleWager > 0)
                 {
-                    reward += playerAction.bets[playerIndex].doubleWager * (1 + multipiler);
-                    rewardDisplay += playerAction.bets[playerIndex].doubleWager * multipiler;
+                    reward += bet.doubleWager * (1 + multipiler);
+                    rewardDisplay += bet.doubleWager * multipiler;
                     MultiplyWagerModel(playerIndex, WAGER_INDEX_DOUBLE, multipiler);
                 }
             }
             else if (handIndex == 1)
             {
-                if (playerAction.bets[playerIndex].anteWagerSplit > 0)
+                if (bet.anteWagerSplit > 0)
                 {
-                    reward += playerAction.bets[playerIndex].anteWagerSplit * (1 + multipiler);
-                    rewardDisplay += playerAction.bets[playerIndex].anteWagerSplit * multipiler;
+                    reward += bet.anteWagerSplit * (1 + multipiler);
+                    rewardDisplay += bet.anteWagerSplit * multipiler;
                     MultiplyWagerModel(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER, multipiler);
                 }
-                if (playerAction.bets[playerIndex].doubleWagerSplit > 0)
+                if (bet.doubleWagerSplit > 0)
                 {
-                    reward += playerAction.bets[playerIndex].doubleWagerSplit * (1 + multipiler);
-                    rewardDisplay += playerAction.bets[playerIndex].doubleWagerSplit * multipiler;
+                    reward += bet.doubleWagerSplit * (1 + multipiler);
+                    rewardDisplay += bet.doubleWagerSplit * multipiler;
                     MultiplyWagerModel(playerIndex, WAGER_INDEX_SPLIT_DOUBLE, multipiler);
                 }
             }
@@ -509,39 +514,40 @@ namespace Blackjack
             labelController.FloatText($"<color=\"green\">+{rewardDisplay:C0}</color>",
                 labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
         }
-        
+
         /// <summary>
         /// Method to take away players chip when he loses 
         /// </summary>
         /// <param name="playerIndex">index of the player</param>
         /// <param name="handIndex">index of the hand</param>
-        void PlayerLoses(int playerIndex, int handIndex)
+        /// /// <param name="bet">bet data from the player</param>
+        void PlayerLoses(int playerIndex, int handIndex, Bet bet)
         {
             // calculate the loss
             var loss = 0f;
             if (handIndex == 0)
             {
-                if (playerAction.bets[playerIndex].anteWager > 0)
+                if (bet.anteWager > 0)
                 {
-                    loss += playerAction.bets[playerIndex].anteWager;
+                    loss += bet.anteWager;
                     TakingChipsAway(playerIndex, WAGER_INDEX_ANTE);
                 }
-                if (playerAction.bets[playerIndex].doubleWager > 0)
+                if (bet.doubleWager > 0)
                 {
-                    loss += playerAction.bets[playerIndex].doubleWager;
+                    loss += bet.doubleWager;
                     TakingChipsAway(playerIndex, WAGER_INDEX_DOUBLE);
                 }
             }
             else if (handIndex == 1)
             {
-                if (playerAction.bets[playerIndex].anteWagerSplit > 0)
+                if (bet.anteWagerSplit > 0)
                 {
-                    loss += playerAction.bets[playerIndex].anteWagerSplit;
+                    loss += bet.anteWagerSplit;
                     TakingChipsAway(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER);
                 }
-                if (playerAction.bets[playerIndex].doubleWagerSplit > 0)
+                if (bet.doubleWagerSplit > 0)
                 {
-                    loss += playerAction.bets[playerIndex].doubleWagerSplit;
+                    loss += bet.doubleWagerSplit;
                     TakingChipsAway(playerIndex, WAGER_INDEX_SPLIT_DOUBLE);
                 }
             }
@@ -550,6 +556,25 @@ namespace Blackjack
             wagerAnimator.Play();
             labelController.FloatText($"<color=\"red\">+{loss:C0}</color>",
                 labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
+        }
+
+        /// <summary>
+        /// Method to return player poker chip when it is standoff
+        /// </summary>
+        /// <param name="playerIndex">index of the player</param>
+        /// <param name="handIndex">index of the hand</param>
+        /// <param name="bet">bet data from the player</param>
+        void Standoff(int playerIndex, int handIndex, Bet bet)
+        {
+            // calculate refund
+            var refund = 0f;
+            if (handIndex == 0)
+                refund = bet.anteWager + bet.doubleWager;
+            else if (handIndex == 1)
+                refund = bet.anteWagerSplit + bet.doubleWagerSplit;
+
+            // give money back to the player
+            gameManager.players[playerIndex].EditPlayerChip(refund);
         }
 
         /// <summary>
