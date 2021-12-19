@@ -52,11 +52,11 @@ public class CardDeck
         pointerIndex = 0;
         for (int i = 0; i < 20; i++)
         {
-            cards.Add(new Card(Suit.Heart, Value.TWO)); // player
+            cards.Add(new Card(Suit.Heart, Value.ACE)); // player
             cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer
-            cards.Add(new Card(Suit.Heart, Value.THREE)); // player 
+            cards.Add(new Card(Suit.Heart, Value.ACE)); // player 
             cards.Add(new Card(Suit.Spade, Value.KING)); // dealer
-            cards.Add(new Card(Suit.Diamond, Value.ACE)); // player or dealer
+            cards.Add(new Card(Suit.Diamond, Value.KING)); // player or dealer
             cards.Add(new Card(Suit.Spade, Value.TWO)); // player or dealer
             cards.Add(new Card(Suit.Diamond, Value.TWO)); // player or dealer
             cards.Add(new Card(Suit.Heart, Value.TWO)); // player or dealer

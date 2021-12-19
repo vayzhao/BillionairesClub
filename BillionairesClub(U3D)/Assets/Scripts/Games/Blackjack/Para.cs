@@ -13,11 +13,20 @@
         public const int WAGER_INDEX_SPLIT_DOUBLE = 3;
         public const int WAGER_INDEX_INSURANCE = 4;
 
-        public const int REWARD_PP_SAMESUIT = 30;
-        public const int REWARD_PP_SAMECOLOR = 10;
-        public const int REWARD_PP_NORMAL = 5;
-        public const int REWARD_BLACKJACK = 3;
-        public const int REWARD_FIVECARDS = 5;
-        public const int REWARD_INSURANCE = 2;
+        public const float REWARD_PP_SAMESUIT = 30f;
+        public const float REWARD_PP_SAMECOLOR = 10f;
+        public const float REWARD_PP_NORMAL = 5f;
+        public const float REWARD_NORMAL = 1f;
+        public const float REWARD_BLACKJACK = 1.5f;
+        public const float REWARD_FIVECARDS = 5f;
+        public const float REWARD_INSURANCE = 2f;
+    }
+
+    public enum HandRank
+    {
+        Bust,
+        Value,
+        Blackjack,
+        FiveCardCharlie
     }
 }

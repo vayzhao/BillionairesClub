@@ -31,12 +31,12 @@ namespace Blackjack
         [HideInInspector]
         public TableController tableController; // the label controller script
 
-        private bool triggerHit;
-        private bool triggerStand;
-        private bool triggerDouble;
-        private bool triggerSplit;
-        private bool triggerBust;
-        private bool triggerFiveCards;
+        private bool triggerHit;                // a switchable trigger for hit function
+        private bool triggerStand;              // a switchable trigger for stand function
+        private bool triggerDouble;             // a switchable trigger for double function
+        private bool triggerSplit;              // a switchable trigger for split function
+        private bool triggerBust;               // a switchable trigger for bust function
+        private bool triggerFiveCards;          // a switchable trigger for fiveCard function
 
         public void SetUp()
         {
@@ -104,7 +104,14 @@ namespace Blackjack
             this.isWaiting = true;
             this.playerIndex = playerIndex;
 
-            // display decision panel
+            // if the player has blackjack, then automatically stand
+            if (tableController.GetPlayerHand(playerIndex).HasBlackjack())
+            {
+                triggerStand = true;
+                return;
+            }
+
+            // otherwise, display decision panel
             decisionPanel.SetActive(true);
 
             // check double down and split button validity
@@ -182,25 +189,33 @@ namespace Blackjack
             // switch off the trigger and display the panel again
             SetDecisionPanelVisibility(ref triggerHit, true);
 
-            // detect whether or not the player bust after the last card added
-            DetectBustAndFiveCard();
+            // detect whether or not the player need to stop hitting
+            DetectBreaker();
         }
 
         /// <summary>
-        /// Method to detect if the player has bust or five card
+        /// detect whether or not the player need to stop hitting, the player
+        /// stops hitting when the hand is bust, blackjack or five card charlie
         /// charlie
         /// </summary>
-        void DetectBustAndFiveCard()
+        void DetectBreaker()
         {
-            if (tableController.GetPlayerHand(playerIndex).HasBust()) 
+            // get the player current hand
+            var hand = tableController.GetPlayerHand(playerIndex);
+
+            if (hand.HasBust()) 
             {
                 SetDecisionPanelVisibility(ref triggerBust, false);
                 labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteRed;
             }
-            else if (tableController.GetPlayerHand(playerIndex).HasFiveCardCharlie())
+            else if (hand.HasFiveCardCharlie())
             {
                 SetDecisionPanelVisibility(ref triggerFiveCards, false);
                 labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteGreen;
+            }
+            else if (hand.HasBlackjack())
+            {
+                SetDecisionPanelVisibility(ref triggerStand, false);
             }
         }
 
@@ -224,6 +239,9 @@ namespace Blackjack
             // set player statu to be stand and play check sound effect
             tableController.GetPlayerHand(playerIndex).stand[0] = true;
             audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
+
+            // update hand rank panel text
+            labelController.playerHandLabel[playerIndex].tmp.text = tableController.GetPlayerHand(playerIndex).ToString();
 
             // finish the turn
             FinishTurn();

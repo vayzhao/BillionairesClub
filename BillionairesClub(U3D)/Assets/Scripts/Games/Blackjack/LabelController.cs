@@ -140,5 +140,33 @@ namespace Blackjack
             // play bonus sound effect
             Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipBonusPopup, AudioType.Sfx);
         }
+
+        /// <summary>
+        /// Method to switch player and dealer's hand-rank panel, the sprite used
+        /// to display the panel based on the given result
+        /// Green for win, Red for lose, Purple for standoff
+        /// </summary>
+        /// <param name="playerIndex">index of the compared player</param>
+        /// <param name="result">result of the comparison</param>
+        public void SetHandRankLabelColor(int playerIndex, Result result)
+        {
+            switch (result)
+            {
+                case Result.Win:
+                    dealerHandLabel.bg.sprite = labelSpriteRed;
+                    playerHandLabel[playerIndex].bg.sprite = labelSpriteGreen;
+                    break;
+                case Result.Lose:
+                    dealerHandLabel.bg.sprite = labelSpriteGreen;
+                    playerHandLabel[playerIndex].bg.sprite = labelSpriteRed;
+                    break;
+                case Result.Standoff:
+                    dealerHandLabel.bg.sprite = labelSpritePurple;
+                    playerHandLabel[playerIndex].bg.sprite = labelSpritePurple;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

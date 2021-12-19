@@ -38,6 +38,10 @@ public class Player : MonoBehaviour
         if (!isNPC)
             playerBoard.UpdateValue();
     }
+    public void EditPlayerChip(float amount)
+    {
+        EditPlayerChip((int)amount);
+    }
 
     /// <summary>
     /// Method to exchange poker chip with gem

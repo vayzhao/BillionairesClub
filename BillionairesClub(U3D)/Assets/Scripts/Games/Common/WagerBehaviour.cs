@@ -178,6 +178,10 @@ public class WagerBehaviour : MonoBehaviour
             }
         }
     }
+    public void MultiplyWagerModel(int playerId, int slotId, float multiplier)
+    {
+        MultiplyWagerModel(playerId, slotId, (int)multiplier);
+    }
 
     /// <summary>
     /// Method to add a single wager model to a player's specific wager stack

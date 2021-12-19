@@ -197,7 +197,7 @@ namespace Blackjack
             labelController.Reset();
 
             // reset dealer's hand label
-            labelController.dealerHandLabel.bg.sprite = labelController.labelSpritePurple;
+            labelController.dealerHandLabel.bg.sprite = labelController.labelSpriteTransparent;
         }
 
         /// <summary>
@@ -331,13 +331,13 @@ namespace Blackjack
                 var message = "";
                 if (dealerHand.HasBlackjack())
                 {
-                    message = $"<color=\"green\">+{insuranceBet * REWARD_INSURANCE}</color>";
+                    message = $"<color=\"green\">+{insuranceBet * REWARD_INSURANCE:C0}</color>";
                     gameManager.players[i].EditPlayerChip(insuranceBet * (REWARD_INSURANCE + 1));
                     MultiplyWagerModel(i, WAGER_INDEX_INSURANCE, REWARD_INSURANCE);
                 }
                 else
                 {
-                    message = $"<color=\"red\">-{insuranceBet}</color>";
+                    message = $"<color=\"red\">-{insuranceBet:C0}</color>";
                     TakingChipsAway(i, WAGER_INDEX_INSURANCE);
                 }
 
@@ -367,6 +367,7 @@ namespace Blackjack
         /// <returns></returns>
         IEnumerator DealTill17()
         {
+            // dealer keep drawing cards
             while (dealerHand.GetHighestRank() < 17 && !dealerHand.HasFiveCardCharlie())
             {
                 yield return new WaitForSeconds(WAIT_TIME_DEAL * 4);
@@ -384,6 +385,171 @@ namespace Blackjack
                 else if (dealerHand.HasFiveCardCharlie())
                     labelController.dealerHandLabel.bg.sprite = labelController.labelSpriteGreen;
             }
+
+            // at the end if the dealer's hand is value ranked, display the highest value
+            if (dealerHand.handRank[0] == HandRank.Value) 
+            {
+                dealerHand.stand[0] = true;
+                labelController.dealerHandLabel.tmp.text = dealerHand.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Method for the dealer to compare his hand with every individual player
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator Comparing()
+        {
+            // run through each player and compare result
+            for (int i = 0; i < gameManager.players.Length; i++)
+            {
+                // skip this iteration if 'n' player does not exist
+                if (gameManager.players[i] == null)
+                    continue;
+
+                // skip this iteration if 'n' player is already clear
+                if (playerAction.bets[i].isClear)
+                    continue;
+
+                // otherwise run through player hands,
+                // each player has up to 2 hands
+                for (int j = 0; j < MAX_HAND; j++)
+                {
+                    // skip this iteration if 'n' hand is not stood
+                    if (!playerHands[i].stand[j])
+                        continue;
+
+                    // compre the 'n' hand to dealer's hand
+                    var result = playerHands[i].CompareToDealer(j, dealerHand);
+                    switch (result)
+                    {
+                        case Result.Win:
+                            PlayerWins(i, j);
+                            break;
+                        case Result.Lose:
+                            PlayerLoses(i, j);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    // change the hand label background image to indicate who win and who lose
+                    labelController.SetHandRankLabelColor(i, result);
+                    yield return new WaitForSeconds(WAIT_TIME_COMPARE);
+                }
+
+                // clean the player after comparison
+                ClearSinglePlayer(i);
+            }
+        }
+
+        /// <summary>
+        /// Method to reward a player when he wins
+        /// </summary>
+        /// <param name="playerIndex">index of the player</param>
+        /// <param name="handIndex">index of the hand</param>
+        void PlayerWins(int playerIndex, int handIndex)
+        {
+            // calculate the reward multipiler 
+            var multipiler = 0f;
+            switch (playerHands[playerIndex].handRank[handIndex])
+            {
+                case HandRank.Value:
+                    multipiler = REWARD_NORMAL;
+                    break;
+                case HandRank.Blackjack:
+                    multipiler = REWARD_BLACKJACK;
+                    break;
+                case HandRank.FiveCardCharlie:
+                    multipiler = REWARD_FIVECARDS;
+                    break;
+                default:
+                    break;
+            }
+
+            // calculate the actual reward
+            var reward = 0f;
+            var rewardDisplay = 0f;
+            if (handIndex == 0)
+            {
+                if (playerAction.bets[playerIndex].anteWager > 0)
+                {
+                    reward += playerAction.bets[playerIndex].anteWager * (1 + multipiler);
+                    rewardDisplay += playerAction.bets[playerIndex].anteWager * multipiler;
+                    MultiplyWagerModel(playerIndex, WAGER_INDEX_ANTE, multipiler);
+                }
+                if (playerAction.bets[playerIndex].doubleWager > 0)
+                {
+                    reward += playerAction.bets[playerIndex].doubleWager * (1 + multipiler);
+                    rewardDisplay += playerAction.bets[playerIndex].doubleWager * multipiler;
+                    MultiplyWagerModel(playerIndex, WAGER_INDEX_DOUBLE, multipiler);
+                }
+            }
+            else if (handIndex == 1)
+            {
+                if (playerAction.bets[playerIndex].anteWagerSplit > 0)
+                {
+                    reward += playerAction.bets[playerIndex].anteWagerSplit * (1 + multipiler);
+                    rewardDisplay += playerAction.bets[playerIndex].anteWagerSplit * multipiler;
+                    MultiplyWagerModel(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER, multipiler);
+                }
+                if (playerAction.bets[playerIndex].doubleWagerSplit > 0)
+                {
+                    reward += playerAction.bets[playerIndex].doubleWagerSplit * (1 + multipiler);
+                    rewardDisplay += playerAction.bets[playerIndex].doubleWagerSplit * multipiler;
+                    MultiplyWagerModel(playerIndex, WAGER_INDEX_SPLIT_DOUBLE, multipiler);
+                }
+            }
+
+            // modify player's chip amount
+            gameManager.players[playerIndex].EditPlayerChip(reward);
+
+            // play the wager animation and display float text
+            wagerAnimator.Play();
+            labelController.FloatText($"<color=\"green\">+{rewardDisplay:C0}</color>",
+                labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
+        }
+        
+        /// <summary>
+        /// Method to take away players chip when he loses 
+        /// </summary>
+        /// <param name="playerIndex">index of the player</param>
+        /// <param name="handIndex">index of the hand</param>
+        void PlayerLoses(int playerIndex, int handIndex)
+        {
+            // calculate the loss
+            var loss = 0f;
+            if (handIndex == 0)
+            {
+                if (playerAction.bets[playerIndex].anteWager > 0)
+                {
+                    loss += playerAction.bets[playerIndex].anteWager;
+                    TakingChipsAway(playerIndex, WAGER_INDEX_ANTE);
+                }
+                if (playerAction.bets[playerIndex].doubleWager > 0)
+                {
+                    loss += playerAction.bets[playerIndex].doubleWager;
+                    TakingChipsAway(playerIndex, WAGER_INDEX_DOUBLE);
+                }
+            }
+            else if (handIndex == 1)
+            {
+                if (playerAction.bets[playerIndex].anteWagerSplit > 0)
+                {
+                    loss += playerAction.bets[playerIndex].anteWagerSplit;
+                    TakingChipsAway(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER);
+                }
+                if (playerAction.bets[playerIndex].doubleWagerSplit > 0)
+                {
+                    loss += playerAction.bets[playerIndex].doubleWagerSplit;
+                    TakingChipsAway(playerIndex, WAGER_INDEX_SPLIT_DOUBLE);
+                }
+            }
+
+            // play the wager animation and display float text
+            wagerAnimator.Play();
+            labelController.FloatText($"<color=\"red\">+{loss:C0}</color>",
+                labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
         }
 
         /// <summary>
@@ -410,31 +576,15 @@ namespace Blackjack
             if (hasInsuranceBet)
                 yield return InsuranceResult();
 
+            // if there is no unclear player, end the round
+            if (!hasUnclearPlayer)
+                yield break;
+
             // keep drawing card until reach 17
             yield return DealTill17();
 
             // compare dealer's hand and existing players hand
             yield return Comparing();
-        }
-
-        /// <summary>
-        /// Method for the dealer to compare his hand with every individual player
-        /// </summary>
-        /// <returns></returns>
-        IEnumerator Comparing()
-        {
-            for (int i = 0; i < gameManager.players.Length; i++)
-            {
-                // skip this iteration if 'n' player does not exist
-                if (gameManager.players[i] == null)
-                    continue;
-
-
-
-
-                yield return new WaitForSeconds(WAIT_TIME_COMPARE);
-            }
-            
         }
 
         /// <summary>
@@ -542,12 +692,12 @@ namespace Blackjack
             // perfect pair wagers alway
             if (multiplier == 0)
             {
-                message = $"<color=\"red\">-{perfectPairBet}</color>";
+                message = $"<color=\"red\">-{perfectPairBet:C0}</color>";
                 TakingChipsAway(index, WAGER_INDEX_BONUS_SPLITE_WAGER);
             }
             else
             {
-                message = $"<color=\"green\">+{perfectPairBet * multiplier}</color>";
+                message = $"<color=\"green\">+{perfectPairBet * multiplier:C0}</color>";
                 gameManager.players[index].EditPlayerChip(perfectPairBet * (multiplier + 1));
                 MultiplyWagerModel(index, WAGER_INDEX_BONUS_SPLITE_WAGER, multiplier) ;
             }
@@ -615,12 +765,12 @@ namespace Blackjack
 
             if (handIndex == 0)
             {
-                message = $"<color=\"red\">-{bet.anteWager}</color>";
+                message = $"<color=\"red\">-{bet.anteWager:C0}</color>";
                 TakingChipsAway(playerIndex, WAGER_INDEX_ANTE);
             }
             else if (handIndex == 1)
             {
-                message = $"<color=\"red\">-{bet.anteWagerSplit}</color>";
+                message = $"<color=\"red\">-{bet.anteWagerSplit:C0}</color>";
                 TakingChipsAway(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER);
             }
 
@@ -646,13 +796,13 @@ namespace Blackjack
 
             if (handIndex == 0) 
             {
-                message = $"<color=\"green\">+{bet.anteWager * REWARD_FIVECARDS}</color>";
+                message = $"<color=\"green\">+{bet.anteWager * REWARD_FIVECARDS:C0}</color>";
                 MultiplyWagerModel(playerIndex, WAGER_INDEX_ANTE, REWARD_FIVECARDS);
                 gameManager.players[playerIndex].EditPlayerChip(bet.anteWager * (REWARD_FIVECARDS + 1));
             }
             else if (handIndex == 1)
             {
-                message = $"<color=\"green\">+{bet.anteWagerSplit * REWARD_FIVECARDS}</color>";
+                message = $"<color=\"green\">+{bet.anteWagerSplit * REWARD_FIVECARDS:C0}</color>";
                 MultiplyWagerModel(playerIndex, WAGER_INDEX_DOUBLE, REWARD_FIVECARDS);
                 gameManager.players[playerIndex].EditPlayerChip(bet.anteWagerSplit * (REWARD_FIVECARDS + 1));
             }
@@ -678,8 +828,13 @@ namespace Blackjack
 
             // hide player's bet label and local hand panel
             labelController.betLabels[playerIndex].Switch(false);
-            labelController.playerHandLabel[playerIndex].Switch(false);
-            labelController.ResetLocalHandVisbility();
+            
+            // if the player is an actual player, hide its hand rank panel
+            if (!gameManager.players[playerIndex].isNPC)
+            {
+                labelController.playerHandLabel[playerIndex].Switch(false);
+                labelController.ResetLocalHandVisbility();
+            }
 
             // hide player's card objects
             for (int i = 0; i < playerCardsObj[playerIndex].Length; i++)
