@@ -20,6 +20,9 @@
         public const float REWARD_BLACKJACK = 1.5f;
         public const float REWARD_FIVECARDS = 5f;
         public const float REWARD_INSURANCE = 2f;
+
+        public const float TRANSPARENCE_NORMAL = 1f;
+        public const float TRANSPARENCE_STAND = 0.5f;
     }
 
     public enum HandRank

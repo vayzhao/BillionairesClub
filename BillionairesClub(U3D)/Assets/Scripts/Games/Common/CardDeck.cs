@@ -53,7 +53,7 @@ public class CardDeck
         for (int i = 0; i < 20; i++)
         {
             cards.Add(new Card(Suit.Heart, Value.ACE)); // player
-            cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer
+            cards.Add(new Card(Suit.Heart, Value.KING)); // dealer
             cards.Add(new Card(Suit.Heart, Value.ACE)); // player 
             cards.Add(new Card(Suit.Spade, Value.KING)); // dealer
             cards.Add(new Card(Suit.Diamond, Value.KING)); // player or dealer

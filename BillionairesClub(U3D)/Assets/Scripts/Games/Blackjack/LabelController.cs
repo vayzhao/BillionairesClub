@@ -82,6 +82,7 @@ namespace Blackjack
             for (int i = 0; i < MAX_HAND; i++)
             {
                 localHandLabels[i].Switch(false);
+                LocalPanelTransparency(i, TRANSPARENCE_NORMAL);
             }
 
             // also hide perfect pair label
@@ -196,6 +197,41 @@ namespace Blackjack
                 default:
                     break;
             }
+        }
+
+        /// <summary>
+        /// Method for a player to split his hand
+        /// </summary>
+        /// <param name="playerIndex">index of the player</param>
+        /// <param name="hand">player's current hand</param>
+        /// <param name="splittedCardSprite">the card being splitted to the second hand</param>
+        public void SplitHand(int playerIndex, Hand hand, Sprite splittedCardSprite)
+        {
+            // update local hand panel for the player
+            localHandLabels[0].tmp.text = hand.ToString(0);
+            localHandLabels[1].Display(hand.ToString(1));
+
+            // set the first hand panel to be half-transparent
+            LocalPanelTransparency(0, TRANSPARENCE_STAND);
+
+            // disable the second card in first hand panel
+            cardTextureOrigin[1].enabled = false;
+
+            // reveal the second card in the first hand 
+            RevealACard(splittedCardSprite, 0, 1);
+
+            // update player hand global label
+            playerHandLabel[playerIndex].tmp.text = hand.ToString();
+        }
+
+        /// <summary>
+        /// Method to adjust local hand panel's transparency
+        /// </summary>
+        /// <param name="handIndex">index of the player</param>
+        /// <param name="alphaValue">transparence value</param>
+        public void LocalPanelTransparency(int handIndex, float alphaValue)
+        {
+            localHandLabels[handIndex].bg.color = new Color(1f, 1f, 1f, alphaValue);
         }
     }
 }

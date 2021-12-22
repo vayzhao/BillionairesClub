@@ -31,6 +31,7 @@ namespace Blackjack
         [HideInInspector]
         public TableController tableController; // the label controller script
 
+        private int handIndex;                  // player's current hand index
         private bool triggerHit;                // a switchable trigger for hit function
         private bool triggerStand;              // a switchable trigger for stand function
         private bool triggerDouble;             // a switchable trigger for double function
@@ -151,7 +152,7 @@ namespace Blackjack
                 var hand = tableController.GetPlayerHand(playerIndex);
                 if (hand.GetCardCount() == 2) 
                 {
-                    var rank = hand.GetRank();
+                    var rank = hand.GetRank(handIndex);
                     if (rank >= 9 && rank <= 11)
                         btn_double.Switch(true);
                 }
@@ -209,7 +210,7 @@ namespace Blackjack
             }
 
             // after that add one card to the player
-            tableController.OnPlayerHit(playerIndex, 0);
+            tableController.OnPlayerHit(playerIndex, handIndex);
 
             // switch off the trigger and display the panel again
             SetDecisionPanelVisibility(ref triggerHit, true);
@@ -228,19 +229,33 @@ namespace Blackjack
             // get the player current hand
             var hand = tableController.GetPlayerHand(playerIndex);
 
-            if (hand.HasBust()) 
+            if (hand.HasBust(handIndex)) 
             {
                 SetDecisionPanelVisibility(ref triggerBust, false);
                 labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteRed;
             }
-            else if (hand.HasFiveCardCharlie())
+            else if (hand.HasFiveCardCharlie(handIndex))
             {
                 SetDecisionPanelVisibility(ref triggerFiveCards, false);
                 labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteGreen;
             }
-            else if (hand.HasBlackjack())
+            else if (hand.HasBlackjack(handIndex))
             {
                 SetDecisionPanelVisibility(ref triggerStand, false);
+            }
+        }
+
+        /// <summary>
+        /// Method to determine whether or not the player should finish his turn,
+        /// usually, the player will immediately finishes his turn when he gets 
+        /// bust, blackjack or five card charlie, except he has two hands to play
+        /// </summary>
+        void DetermineFinisher()
+        {
+            if (handIndex == 0)
+            {
+                FinishTurn();
+                tableController.ClearSinglePlayer(playerIndex);
             }
         }
 
@@ -262,34 +277,68 @@ namespace Blackjack
             triggerStand = false;
 
             // set player statu to be stand and play check sound effect
-            tableController.GetPlayerHand(playerIndex).stand[0] = true;
+            tableController.GetPlayerHand(playerIndex).stand[handIndex] = true;
             audioManager.PlayAudio(audioManager.clipCheck, AudioType.Sfx);
 
             // update hand rank panel text
             labelController.playerHandLabel[playerIndex].tmp.text = 
                 tableController.GetPlayerHand(playerIndex).ToString();
 
-            // finish the turn
-            FinishTurn();
-        }
+            // set local hand panel to be half-transparent
+            labelController.LocalPanelTransparency(handIndex, TRANSPARENCE_STAND);
 
-        public void Split()
-        {
-            if (!triggerSplit)
-            {
-                triggerSplit = true;
-                decisionPanel.SetActive(false);
-                return;
-            }
+            // if the player stands the first hand, finish the turn
+            if (handIndex == 0)
+                FinishTurn();
             else
             {
-                triggerSplit = false;
-                decisionPanel.SetActive(true);
+                // otherwise, set handIndex to be 0 and the player 
+                // start playing his second hand
+                handIndex = 0;
+                SetDecisionPanelVisibility(ref triggerStand, true);
+
+                // update local hand panel's transparency
+                labelController.LocalPanelTransparency(0, TRANSPARENCE_NORMAL);
             }
+        }
+
+        /// <summary>
+        /// Decision function for split button
+        /// </summary>
+        public void Split()
+        {
+            // this part is functioning when the player clicks the button
+            if (!triggerSplit)
+            {
+                // hide decision panel and switch on trigger
+                SetDecisionPanelVisibility(ref triggerSplit, false);
+                return;
+            }
+
+            // split player's hand
+            tableController.OnPlayerSplit(playerIndex);
+
+            // cost player's wager
+            bets[playerIndex].anteWagerSplit = bets[playerIndex].anteWager;
+            tableController.CloneAnteWagerStack(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER, false);
+            gameManager.players[playerIndex].EditPlayerChip(-bets[playerIndex].anteWagerSplit);
+
+            // update player's bet label and hand label
+            labelController.UpdateBetLabel(playerIndex, bets[playerIndex]);
+
+            // after that trigger will be switched off and display
+            // decision panel again
+            SetDecisionPanelVisibility(ref triggerSplit, true);
+
+            // set handIndex to be 1 
+            handIndex = 1;
         }
 
         public IEnumerator Deciding(int playerIndex)
         {
+            // initialize handIndex
+            handIndex = 0;
+
             DisplayDecisionPanel(playerIndex);
 
             while (isWaiting)
@@ -321,21 +370,20 @@ namespace Blackjack
                 if (triggerBust)
                 {
                     yield return new WaitForSeconds(WAIT_TIME_DECISION);
-                    tableController.Bust(playerIndex);
-                    triggerBust = false;
-                    FinishTurn();                    
+                    tableController.Bust(playerIndex, handIndex);
+                    triggerBust = false;            
                     yield return new WaitForSeconds(WAIT_TIME_COMPARE);
-                    tableController.ClearSinglePlayer(playerIndex);
+                    DetermineFinisher();    
                 }
 
                 if (triggerFiveCards)
                 {
                     yield return new WaitForSeconds(WAIT_TIME_DECISION);
-                    tableController.FiveCardCharlie(playerIndex);
+                    tableController.FiveCardCharlie(playerIndex, handIndex);
                     triggerFiveCards = false;
-                    FinishTurn();
                     yield return new WaitForSeconds(WAIT_TIME_COMPARE);
-                    tableController.ClearSinglePlayer(playerIndex);
+                    DetermineFinisher();
+                    
                 }
 
                 yield return new WaitForSeconds(Time.deltaTime);

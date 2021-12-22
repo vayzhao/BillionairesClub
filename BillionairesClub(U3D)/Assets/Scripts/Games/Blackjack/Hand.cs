@@ -65,6 +65,24 @@ namespace Blackjack
         }
 
         /// <summary>
+        /// Method for the player to split his hand
+        /// </summary>
+        public void SplitHand()
+        {
+            // move second card of first hand to first 
+            // card of second hand
+            cards[1][0] = cards[0][1];
+            cards[0][1] = null;
+
+            // reset card count for both hand and recompute
+            for (int i = 0; i < MAX_HAND; i++)
+            {
+                cardCount[i] = 1;
+                Recompute(i);
+            }
+        }
+
+        /// <summary>
         /// Method to obtain the strength for a specific hand
         /// </summary>
         /// <param name="handIndex">index of the hand</param>
@@ -75,6 +93,7 @@ namespace Blackjack
         public bool HasBlackjack(int handIndex = 0) => handRank[handIndex] == HandRank.Blackjack;
         public bool HasBust(int handIndex = 0) => handRank[handIndex] == HandRank.Bust;
         public bool HasFiveCardCharlie(int handIndex = 0) => handRank[handIndex] == HandRank.FiveCardCharlie;
+        public Card GetCard(int handIndex, int cardIndex) => cards[handIndex][cardIndex];
 
         /// <summary>
         /// Method to obtain the card count in a specific hand
@@ -91,7 +110,7 @@ namespace Blackjack
         {
             // detect blackjack if the hand currently has 2 cards only
             if (cardCount[handIndex] == 2)
-                DetectBlackjack();
+                DetectBlackjack(handIndex);
 
             // skip the recomputation if the player already has blackjack
             if (HasBlackjack(handIndex))
@@ -266,31 +285,28 @@ namespace Blackjack
                         result += "-";
                     else
                         break;
-
-                // check what combination the player has
-                if (HasBlackjack(i))
-                    result += "Blackjack";
-                else if (HasBust(i))
-                    result += "Bust";
-                else if (HasFiveCardCharlie(i))
-                    result += "5 Cards";
-                else
-                {
-                    // if this hand is value rank, check if it is stood.
-                    // when stood, only return the highest value
-                    if (stand[i])
-                    {
-                        result += $"{GetHighestRank(i)}";
-                    }
-                    else
-                    {
-                        result += $"{rank[i]}";
-                        if (rankSoft[i] > 0)
-                            result += $"/{rankSoft[i]}";
-                    }
-                }
+                result += ToString(i);
             }
             return result;
+        }
+        public string ToString(int handIndex)
+        {
+            // check what combination the player has
+            if (HasBlackjack(handIndex))
+                return "Blackjack";
+            else if (HasBust(handIndex))
+                return "Bust";
+            else if (HasFiveCardCharlie(handIndex))
+                return "5 Cards";
+            else
+            {
+                // if this hand is value rank, check if it is stood.
+                // when stood, only return the highest value
+                if (stand[handIndex])
+                    return $"{GetHighestRank(handIndex)}";
+                else
+                    return rankSoft[handIndex] > 0 ? $"{rank[handIndex]}/{rankSoft[handIndex]}" : $"{rank[handIndex]}";
+            }
         }
     }
 }

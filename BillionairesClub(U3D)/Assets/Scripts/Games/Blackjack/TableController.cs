@@ -61,8 +61,8 @@ namespace Blackjack
         {
             // setup card deck (notice that blackjack uses 6~8 decks of cards)
             cardDeck = new CardDeck(CARD_DECK_COUNT);
-            cardDeck.Shuffle();
-            //cardDeck.DebugDeck_Blackjack();
+            //cardDeck.Shuffle();
+            cardDeck.DebugDeck_Blackjack();
 
             // setup hand evaluator for dealer and players
             dealerHand = new Hand();
@@ -658,9 +658,28 @@ namespace Blackjack
             // update card sprite from local hand panel
             if (!gameManager.players[playerIndex].isNPC)
             {
-                labelController.RevealACard(GetCardSprite(card.GetCardIndex()), cardIndex, handIndex);
-                labelController.localHandLabels[handIndex].tmp.text = labelText;
+                labelController.RevealACard(GetCardSprite(card.GetCardIndex()), 
+                    cardIndex, handIndex);
+                labelController.localHandLabels[handIndex].tmp.text = 
+                    playerHands[playerIndex].ToString(handIndex);
             }
+        }
+
+        public void OnPlayerSplit(int playerIndex)
+        {
+            // split player's hand
+            playerHands[playerIndex].SplitHand();
+
+            // update card objects display on the table
+            var card = playerHands[playerIndex].GetCard(1, 0);
+            playerCardsObj[playerIndex][0][1].SetActive(false);
+            playerCardsObj[playerIndex][1][0].SetCard(card);
+
+
+
+            // update label display
+            labelController.SplitHand(playerIndex, playerHands[playerIndex], 
+                GetCardSprite(card.GetCardIndex()));
         }
 
         /// <summary>
