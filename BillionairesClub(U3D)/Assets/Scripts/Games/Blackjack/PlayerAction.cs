@@ -120,7 +120,7 @@ namespace Blackjack
             {
                 // check double down and split button validity
                 var hand = tableController.GetPlayerHand(playerIndex);
-                var rank = hand.GetRank();
+                var rank = hand.GetSum();
                 btn_double.Switch(rank >= 9 && rank <= 11);
                 btn_split.Switch(hand.IsPairSameValue());
             }
@@ -152,7 +152,7 @@ namespace Blackjack
                 var hand = tableController.GetPlayerHand(playerIndex);
                 if (hand.GetCardCount(handIndex) == 2) 
                 {
-                    var rank = hand.GetRank(handIndex);
+                    var rank = hand.GetSum(handIndex);
                     if (rank >= 9 && rank <= 11)
                         btn_double.Switch(true);
                 }

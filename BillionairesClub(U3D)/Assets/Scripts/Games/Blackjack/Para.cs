@@ -23,6 +23,21 @@
 
         public const float TRANSPARENCE_NORMAL = 1f;
         public const float TRANSPARENCE_STAND = 0.5f;
+
+        public static int ToInt(this Value value)
+        {
+            switch (value)
+            {
+                case Value.JACK:
+                case Value.QUEEN:
+                case Value.KING:
+                    return 10;
+                case Value.ACE:
+                    return 1;
+                default:
+                    return ((int)value) + 2;
+            }
+        }
     }
 
     public enum HandRank

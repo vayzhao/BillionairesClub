@@ -274,8 +274,8 @@ namespace Blackjack
                 if (i == 0)
                 {
                     CheckInsuranceTrigger(card.value == Value.ACE);
-                    labelController.dealerHandLabel.Display($"{dealerHand.GetRank()}" + 
-                        (dealerHand.GetRankSoft() > 0 ? $"/{dealerHand.GetRankSoft()}" : ""));
+                    labelController.dealerHandLabel.Display($"{dealerHand.GetSum()}" + 
+                        (dealerHand.GetSumSoft() > 0 ? $"/{dealerHand.GetSumSoft()}" : ""));
                 }
                 // in the second iteration, make dealer's second card face-down
                 else if (i == 1)
@@ -369,7 +369,7 @@ namespace Blackjack
         IEnumerator DealTill17()
         {
             // dealer keep drawing cards
-            while (dealerHand.GetHighestRank() < 17 && !dealerHand.HasFiveCardCharlie())
+            while (dealerHand.GetHighestSum() < 17 && !dealerHand.HasFiveCardCharlie())
             {
                 yield return new WaitForSeconds(WAIT_TIME_DEAL * 4);
 

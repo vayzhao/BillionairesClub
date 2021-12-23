@@ -8,25 +8,25 @@ namespace Blackjack
     using static Para;
     public class Hand 
     {
-        public bool[] stand;               // determine whether or not the player has stood
-        public bool[] clear;               // determine whether or not the player has been cleared
-        public HandRank[] rank;            // rank of a hand
-        private int[] sum;                 // sum of a hand
-        private int[] sumSoft;             // sum of a hand (with ace to be 11)
-        private int[] cardCount;           // card count of a hand
-        private Card[][] cards;            // cards data of a hand
-        private int perfectPairMultiplier; // reward multipier for perfect pair
+        public bool[] stand;                 // determine whether or not the player has stood
+        public bool[] clear;                 // determine whether or not the player has been cleared
+        public HandRank[] rank;              // rank of a hand
+        private int[] sum;                   // sum of a hand
+        private int[] sumSoft;               // sum of a hand (with ace to be 11)
+        private int[] cardCount;             // card count of a hand
+        private Card[][] cards;              // cards data of a hand
+        private float perfectPairMultiplier; // reward multipier for perfect pair
         
         public Hand()
         {
+            // initialize essential variables
             sum = new int[MAX_HAND];
             sumSoft = new int[MAX_HAND];
             cardCount = new int[MAX_HAND];
             stand = new bool[MAX_HAND];
             clear = new bool[MAX_HAND];
-            cards = new Card[MAX_HAND][];
             rank = new HandRank[MAX_HAND];
-
+            cards = new Card[MAX_HAND][];
             for (int i = 0; i < cards.Length; i++)
                 cards[i] = new Card[MAX_CARD_PER_HAND];
         }
@@ -37,8 +37,7 @@ namespace Blackjack
         /// </summary>
         public void Reset()
         {
-            perfectPairMultiplier = 0;
-
+            // reset all the essential variables
             for (int i = 0; i < MAX_HAND; i++)
             {
                 sum[i] = 0;
@@ -52,6 +51,10 @@ namespace Blackjack
             // set the second hand to be clear by default
             clear[1] = true;
 
+            // reset perfect pair reward multipiler
+            perfectPairMultiplier = 0;
+
+            // clean cache for all cards
             for (int i = 0; i < MAX_HAND; i++)
                 for (int j = 0; j < cards[i].Length; j++)
                     cards[i][j] = null;
@@ -96,9 +99,9 @@ namespace Blackjack
         /// </summary>
         /// <param name="handIndex">index of the hand</param>
         /// <returns></returns>
-        public int GetRank(int handIndex = 0) => sum[handIndex];
-        public int GetRankSoft(int handIndex = 0) => sumSoft[handIndex];
-        public int GetHighestRank(int handIndex = 0) => Mathf.Max(sum[handIndex], sumSoft[handIndex]);
+        public int GetSum(int handIndex = 0) => sum[handIndex];
+        public int GetSumSoft(int handIndex = 0) => sumSoft[handIndex];
+        public int GetHighestSum(int handIndex = 0) => Mathf.Max(sum[handIndex], sumSoft[handIndex]);
         public bool HasBlackjack(int handIndex = 0) => rank[handIndex] == HandRank.Blackjack;
         public bool HasBust(int handIndex = 0) => rank[handIndex] == HandRank.Bust;
         public bool HasFiveCardCharlie(int handIndex = 0) => rank[handIndex] == HandRank.FiveCardCharlie;
@@ -129,7 +132,7 @@ namespace Blackjack
             // otherwise, sum the player hand's cards
             sum[handIndex] = 0;
             for (int i = 0; i < cardCount[handIndex]; i++)
-                sum[handIndex] += GetPoint(cards[handIndex][i].value);
+                sum[handIndex] += cards[handIndex][i].value.ToInt();
 
             // check to see if this is a soft hand, if it is, add an
             // alternate option to the player
@@ -189,25 +192,21 @@ namespace Blackjack
         /// e.g: a soft hand contains an ace without the other card(s)
         /// totaling 10 or more
         /// </summary>
-        /// <param name="handIndex"></param>
+        /// <param name="handIndex">index of the hand</param>
         /// <returns></returns>
         bool IsSoftHand(int handIndex)
         {
-            int total = 0;
-            bool hasAce = false;
-
+            // run through all cards in the hand and sum their values,
+            // also check if there is an ace in the hand
+            var total = 0;
+            var hasAce = false;
             for (int i = 0; i < cardCount[handIndex]; i++)
             {
                 if (cards[handIndex][i].value == Value.ACE && !hasAce)
-                {
                     hasAce = true;
-                }
                 else
-                {
-                    total += GetPoint(cards[handIndex][i].value);
-                }
+                    total += cards[handIndex][i].value.ToInt();
             }
-
             return hasAce && total <= 10;
         }
 
@@ -222,28 +221,8 @@ namespace Blackjack
         /// <summary>
         /// Method to setup calculate & fetch perfect pair reward mutiplier
         /// </summary>
-        public void CalculatePerfectPairReward()=> perfectPairMultiplier = IsSameSuit() ? 30 : IsSameColor() ? 10 : 5;
-        public int GetPerfectPairMultiplier() => perfectPairMultiplier;
-
-        /// <summary>
-        /// Method to translate a card's value to point
-        /// </summary>
-        /// <param name="value">card's value</param>
-        /// <returns></returns>
-        int GetPoint(Value value)
-        {
-            switch (value)
-            {
-                case Value.JACK:
-                case Value.QUEEN:
-                case Value.KING:
-                    return 10;
-                case Value.ACE:
-                    return 1;
-                default:
-                    return ((int)value) + 2;
-            }
-        }
+        public void CalculatePerfectPairReward()=> perfectPairMultiplier = IsSameSuit() ? REWARD_PP_SAMESUIT : IsSameColor() ? REWARD_PP_SAMECOLOR : REWARD_PP_NORMAL;
+        public int GetPerfectPairMultiplier() => (int)perfectPairMultiplier;
 
         /// <summary>
         /// Method for a player to compare his hand to the dealer's hand
@@ -267,8 +246,8 @@ namespace Blackjack
             if (rank[handIndex] == HandRank.Value &&
                 dealer.rank[dealerHandIndex] == HandRank.Value)
             {
-                var playerValue = GetHighestRank(handIndex);
-                var dealerValue = dealer.GetHighestRank(handIndex);
+                var playerValue = GetHighestSum(handIndex);
+                var dealerValue = dealer.GetHighestSum(handIndex);
                 return playerValue > dealerValue ? Result.Win : playerValue < dealerValue ? Result.Lose : Result.Standoff;
             }
 
@@ -291,7 +270,7 @@ namespace Blackjack
                 // player has a second hand, it he does, add a prefix
                 // to the result, otherwise break the loop
                 if (i == 1)
-                    if (cardCount[i] > 0)
+                    if (!clear[i])
                         result += "-";
                     else
                         break;
@@ -313,7 +292,7 @@ namespace Blackjack
                 // if this hand is value rank, check if it is stood.
                 // when stood, only return the highest value
                 if (stand[handIndex])
-                    return $"{GetHighestRank(handIndex)}";
+                    return $"{GetHighestSum(handIndex)}";
                 else
                     return sumSoft[handIndex] > 0 ? $"{sum[handIndex]}/{sumSoft[handIndex]}" : $"{sum[handIndex]}";
             }
