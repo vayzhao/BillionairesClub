@@ -8,22 +8,24 @@ namespace Blackjack
     using static Para;
     public class Hand 
     {
-        public bool[] stand;               // 
-        public HandRank[] handRank;        //
-        private int[] rank;                //
-        private int[] rankSoft;            //
-        private int[] cardCount;           //
-        private Card[][] cards;            //
-        private int perfectPairMultiplier; //
+        public bool[] stand;               // determine whether or not the player has stood
+        public bool[] clear;               // determine whether or not the player has been cleared
+        public HandRank[] rank;            // rank of a hand
+        private int[] sum;                 // sum of a hand
+        private int[] sumSoft;             // sum of a hand (with ace to be 11)
+        private int[] cardCount;           // card count of a hand
+        private Card[][] cards;            // cards data of a hand
+        private int perfectPairMultiplier; // reward multipier for perfect pair
         
         public Hand()
         {
-            rank = new int[MAX_HAND];
-            rankSoft = new int[MAX_HAND];
+            sum = new int[MAX_HAND];
+            sumSoft = new int[MAX_HAND];
             cardCount = new int[MAX_HAND];
-            cards = new Card[MAX_HAND][];
             stand = new bool[MAX_HAND];
-            handRank = new HandRank[MAX_HAND];
+            clear = new bool[MAX_HAND];
+            cards = new Card[MAX_HAND][];
+            rank = new HandRank[MAX_HAND];
 
             for (int i = 0; i < cards.Length; i++)
                 cards[i] = new Card[MAX_CARD_PER_HAND];
@@ -39,12 +41,16 @@ namespace Blackjack
 
             for (int i = 0; i < MAX_HAND; i++)
             {
-                rank[i] = 0;
+                sum[i] = 0;
                 cardCount[i] = 0;
-                rankSoft[i] = 0;
+                sumSoft[i] = 0;
                 stand[i] = false;
-                handRank[i] = HandRank.Value;
+                clear[i] = false;
+                rank[i] = HandRank.Value;
             }
+
+            // set the second hand to be clear by default
+            clear[1] = true;
 
             for (int i = 0; i < MAX_HAND; i++)
                 for (int j = 0; j < cards[i].Length; j++)
@@ -74,6 +80,9 @@ namespace Blackjack
             cards[1][0] = cards[0][1];
             cards[0][1] = null;
 
+            // set the second hand to be unclear
+            clear[1] = false;
+
             // reset card count for both hand and recompute
             for (int i = 0; i < MAX_HAND; i++)
             {
@@ -87,13 +96,14 @@ namespace Blackjack
         /// </summary>
         /// <param name="handIndex">index of the hand</param>
         /// <returns></returns>
-        public int GetRank(int handIndex = 0) => rank[handIndex];
-        public int GetRankSoft(int handIndex = 0) => rankSoft[handIndex];
-        public int GetHighestRank(int handIndex = 0) => Mathf.Max(rank[handIndex], rankSoft[handIndex]);
-        public bool HasBlackjack(int handIndex = 0) => handRank[handIndex] == HandRank.Blackjack;
-        public bool HasBust(int handIndex = 0) => handRank[handIndex] == HandRank.Bust;
-        public bool HasFiveCardCharlie(int handIndex = 0) => handRank[handIndex] == HandRank.FiveCardCharlie;
+        public int GetRank(int handIndex = 0) => sum[handIndex];
+        public int GetRankSoft(int handIndex = 0) => sumSoft[handIndex];
+        public int GetHighestRank(int handIndex = 0) => Mathf.Max(sum[handIndex], sumSoft[handIndex]);
+        public bool HasBlackjack(int handIndex = 0) => rank[handIndex] == HandRank.Blackjack;
+        public bool HasBust(int handIndex = 0) => rank[handIndex] == HandRank.Bust;
+        public bool HasFiveCardCharlie(int handIndex = 0) => rank[handIndex] == HandRank.FiveCardCharlie;
         public Card GetCard(int handIndex, int cardIndex) => cards[handIndex][cardIndex];
+        public bool HasAllClear() => clear[0] && clear[1];
 
         /// <summary>
         /// Method to obtain the card count in a specific hand
@@ -117,25 +127,25 @@ namespace Blackjack
                 return;
 
             // otherwise, sum the player hand's cards
-            rank[handIndex] = 0;
+            sum[handIndex] = 0;
             for (int i = 0; i < cardCount[handIndex]; i++)
-                rank[handIndex] += GetPoint(cards[handIndex][i].value);
+                sum[handIndex] += GetPoint(cards[handIndex][i].value);
 
             // check to see if this is a soft hand, if it is, add an
             // alternate option to the player
             if (IsSoftHand(handIndex))
-                rankSoft[handIndex] = rank[handIndex] + 10;
+                sumSoft[handIndex] = sum[handIndex] + 10;
             else
-                rankSoft[handIndex] = 0;
+                sumSoft[handIndex] = 0;
 
             // if the rank is over 21, the hand is bust
-            if (rank[handIndex] > 21)
-                handRank[handIndex] = HandRank.Bust;
+            if (sum[handIndex] > 21)
+                rank[handIndex] = HandRank.Bust;
 
             // otherwise, if the player has 5 cards without exceeding 21
             // the player gets a five card charlie
             else if (cardCount[handIndex] == 5)
-                handRank[handIndex] = HandRank.FiveCardCharlie;
+                rank[handIndex] = HandRank.FiveCardCharlie;
         }
 
         /// <summary>
@@ -169,8 +179,8 @@ namespace Blackjack
             // if the player has blackjack, set rank to be 21
             if (hasAce && hasPicture)
             {
-                rank[handIndex] = 21;
-                handRank[handIndex] = HandRank.Blackjack;
+                sum[handIndex] = 21;
+                rank[handIndex] = HandRank.Blackjack;
             }
         }
 
@@ -250,12 +260,12 @@ namespace Blackjack
             var dealerHandIndex = 0;
 
             // when two hands are not equal, return either win or lose
-            if (handRank[handIndex] != dealer.handRank[dealerHandIndex])
-                return handRank[handIndex] > dealer.handRank[dealerHandIndex] ? Result.Win : Result.Lose;
+            if (rank[handIndex] != dealer.rank[dealerHandIndex])
+                return rank[handIndex] > dealer.rank[dealerHandIndex] ? Result.Win : Result.Lose;
 
             // if both hands are Rank.value, who ever has the higher value, wins
-            if (handRank[handIndex] == HandRank.Value &&
-                dealer.handRank[dealerHandIndex] == HandRank.Value)
+            if (rank[handIndex] == HandRank.Value &&
+                dealer.rank[dealerHandIndex] == HandRank.Value)
             {
                 var playerValue = GetHighestRank(handIndex);
                 var dealerValue = dealer.GetHighestRank(handIndex);
@@ -305,7 +315,7 @@ namespace Blackjack
                 if (stand[handIndex])
                     return $"{GetHighestRank(handIndex)}";
                 else
-                    return rankSoft[handIndex] > 0 ? $"{rank[handIndex]}/{rankSoft[handIndex]}" : $"{rank[handIndex]}";
+                    return sumSoft[handIndex] > 0 ? $"{sum[handIndex]}/{sumSoft[handIndex]}" : $"{sum[handIndex]}";
             }
         }
     }

@@ -150,7 +150,7 @@ namespace Blackjack
                 // if the  tplayer haswo cards only, detect whether or not
                 // we need to enable double down button again
                 var hand = tableController.GetPlayerHand(playerIndex);
-                if (hand.GetCardCount() == 2) 
+                if (hand.GetCardCount(handIndex) == 2) 
                 {
                     var rank = hand.GetRank(handIndex);
                     if (rank >= 9 && rank <= 11)
@@ -252,11 +252,24 @@ namespace Blackjack
         /// </summary>
         void DetermineFinisher()
         {
+            // check hand index
             if (handIndex == 0)
             {
+                // if this is the first hand, then the player finishes the turn
                 FinishTurn();
-                tableController.ClearSinglePlayer(playerIndex);
+
+                // before clearing the player, check to see if he has a second hand
+                // that is waiting to be checked
+                if (tableController.GetPlayerHand(playerIndex).stand[1])
+                    // if he doesn, then just clear the first hand and remain the second hand
+                    tableController.ClearSinglePlayerSingleHand(playerIndex, handIndex);
+                else
+                    // otherwise, clear everything from the player
+                    tableController.ClearSinglePlayer(playerIndex);
             }
+            else
+                // if this is not the first hand, then just clear the current hand
+                tableController.ClearSinglePlayerSingleHand(playerIndex, handIndex);
         }
 
         /// <summary>

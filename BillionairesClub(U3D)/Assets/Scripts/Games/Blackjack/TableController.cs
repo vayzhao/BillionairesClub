@@ -388,7 +388,7 @@ namespace Blackjack
             }
 
             // at the end if the dealer's hand is value ranked, display the highest value
-            if (dealerHand.handRank[0] == HandRank.Value) 
+            if (dealerHand.rank[0] == HandRank.Value) 
             {
                 dealerHand.stand[0] = true;
                 labelController.dealerHandLabel.tmp.text = dealerHand.ToString();
@@ -409,7 +409,7 @@ namespace Blackjack
                     continue;
 
                 // skip this iteration if 'n' player is already clear
-                if (playerAction.bets[i].isClear)
+                if (playerHands[i].HasAllClear())
                     continue;
 
                 // otherwise run through player hands,
@@ -457,7 +457,7 @@ namespace Blackjack
         {
             // calculate the reward multipiler 
             var multipiler = 0f;
-            switch (playerHands[playerIndex].handRank[handIndex])
+            switch (playerHands[playerIndex].rank[handIndex])
             {
                 case HandRank.Value:
                     multipiler = REWARD_NORMAL;
@@ -630,7 +630,7 @@ namespace Blackjack
                 if (playerAction.bets[i].insuranceWager > 0)
                     hasInsuranceBet = true;
 
-                if (!playerAction.bets[i].isClear)
+                if (!playerHands[i].HasAllClear())
                     hasUnclearPlayer = true;
             }
         }
@@ -847,7 +847,7 @@ namespace Blackjack
             else if (handIndex == 1)
             {
                 message = $"<color=\"green\">+{bet.anteWagerSplit * REWARD_FIVECARDS:C0}</color>";
-                MultiplyWagerModel(playerIndex, WAGER_INDEX_DOUBLE, REWARD_FIVECARDS);
+                MultiplyWagerModel(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER, REWARD_FIVECARDS);
                 gameManager.players[playerIndex].EditPlayerChip(bet.anteWagerSplit * (REWARD_FIVECARDS + 1));
             }
 
@@ -855,7 +855,7 @@ namespace Blackjack
             labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
             
             // hide the bet label
-            labelController.betLabels[playerIndex].Switch(false);
+            // labelController.betLabels[playerIndex].Switch(false);
 
             // play the wager animator
             wagerAnimator.Play();
@@ -867,29 +867,38 @@ namespace Blackjack
         /// <param name="playerIndex">index of the player</param>
         public void ClearSinglePlayer(int playerIndex)
         {
-            // set isClear to be true
-            playerAction.bets[playerIndex].isClear = true;
-
-            // hide player's bet label and local hand panel
+            // hide player's bet label and global hand panel
             labelController.betLabels[playerIndex].Switch(false);
-            
-            // if the player is an actual player, hide its hand rank panel
+            labelController.playerHandLabel[playerIndex].Switch(false);
+
+            // clear player's card object and wager stack object
+            for (int i = 0; i < MAX_HAND; i++)
+                ClearSinglePlayerSingleHand(playerIndex, i);
+        }
+        public void ClearSinglePlayerSingleHand(int playerIndex, int handIndex)
+        {
+            // clear the given hand
+            playerHands[playerIndex].clear[handIndex] = true;
+
+            // hide player's card object in the specific hand
+            for (int i = 0; i < playerCardsObj[playerIndex][handIndex].Length; i++)
+                playerCardsObj[playerIndex][handIndex][i].SetActive(false);
+
+            // hide user player's local hand panel 
             if (!gameManager.players[playerIndex].isNPC)
+                labelController.ResetLocalHandVisibilityForSingle(handIndex);
+
+            // hide player's wager stacks and edit bet label
+            if (handIndex == 0)
             {
-                labelController.playerHandLabel[playerIndex].Switch(false);
-                labelController.ResetLocalHandVisbility();
+                ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_ANTE);
+                ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_DOUBLE);
             }
-
-            // hide player's card objects
-            for (int i = 0; i < playerCardsObj[playerIndex].Length; i++)
-                for (int j = 0; j < playerCardsObj[playerIndex][i].Length; j++)
-                    playerCardsObj[playerIndex][i][j].SetActive(false);
-
-            // hide player's wager stacks (exclude insurance slot)
-            ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_ANTE);
-            ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER);
-            ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_DOUBLE);
-            ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_SPLIT_DOUBLE);
+            else if (handIndex == 1)
+            {
+                ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER);
+                ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_SPLIT_DOUBLE);
+            }
         }
     }
 }

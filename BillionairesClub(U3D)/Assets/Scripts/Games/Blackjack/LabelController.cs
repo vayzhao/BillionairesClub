@@ -71,22 +71,26 @@ namespace Blackjack
         /// </summary>
         public void ResetLocalHandVisbility()
         {
-            // hide all cards in local hand labels
-            for (int i = 0; i < cardTextureOrigin.Length; i++)
-            {
-                cardTextureOrigin[i].enabled = false;
-                cardTextureSplit[i].enabled = false;
-            }
-
             // hide all local hand panels
             for (int i = 0; i < MAX_HAND; i++)
-            {
-                localHandLabels[i].Switch(false);
-                LocalPanelTransparency(i, TRANSPARENCE_NORMAL);
-            }
+                ResetLocalHandVisibilityForSingle(i);
 
             // also hide perfect pair label
             perfectPairLabel.Switch(false);
+        }
+        public void ResetLocalHandVisibilityForSingle(int handIndex)
+        {
+            // hide the panel background
+            localHandLabels[handIndex].Switch(false);
+            LocalPanelTransparency(handIndex, TRANSPARENCE_NORMAL);
+
+            // hide each card sprite
+            if (handIndex == 0)
+                for (int i = 0; i < cardTextureOrigin.Length; i++)
+                    cardTextureOrigin[i].enabled = false;
+            else if (handIndex == 1)
+                for (int i = 0; i < cardTextureSplit.Length; i++)
+                    cardTextureSplit[i].enabled = false;
         }
 
         /// <summary>
@@ -128,6 +132,26 @@ namespace Blackjack
 
             // apply changes to the text component 
             betLabels[index].tmp.text = text;
+        }
+
+        /// <summary>
+        /// Method to update player's bet & hand label, it is often called after player gets 
+        /// a bust or five cards charlie when he has two hands. we use this update function 
+        /// to remain bet & hand label for a hand that has not been cleared
+        /// </summary>
+        /// <param name="playerIndex">index of the player</param>
+        /// <param name="handIndex">index of the hand</param>
+        /// <param name="hand">the hand data</param>
+        /// <param name="bet">the bet data</param>
+        public void UpdateBetAndHandLabels(int playerIndex, int handIndex, Hand hand, Bet bet)
+        {
+            // update player's hand panel text
+            playerHandLabel[playerIndex].tmp.text = hand.ToString(handIndex);
+
+            // update player's bet label text
+            betLabels[playerIndex].tmp.text = handIndex == 0 ?
+                $"{bet.anteWager + bet.doubleWager:C0}" :
+                $"{bet.anteWagerSplit + bet.doubleWagerSplit:C0}";
         }
 
         /// <summary>

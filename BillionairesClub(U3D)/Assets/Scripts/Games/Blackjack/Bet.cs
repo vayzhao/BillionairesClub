@@ -8,7 +8,6 @@
         public int doubleWagerSplit;
         public int perfectPairWager;
         public int insuranceWager;
-        public bool isClear;
 
         public void Reset()
         {
@@ -18,7 +17,6 @@
             doubleWagerSplit = 0;
             perfectPairWager = 0;
             insuranceWager = 0;
-            isClear = false;
         }
 
     }
