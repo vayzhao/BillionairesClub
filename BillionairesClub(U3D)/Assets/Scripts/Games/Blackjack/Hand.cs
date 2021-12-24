@@ -48,8 +48,9 @@ namespace Blackjack
                 rank[i] = HandRank.Value;
             }
 
-            // set the second hand to be clear by default
+            // set the second hand to be clear and stand by default
             clear[1] = true;
+            stand[1] = true;
 
             // reset perfect pair reward multipiler
             perfectPairMultiplier = 0;
@@ -83,8 +84,9 @@ namespace Blackjack
             cards[1][0] = cards[0][1];
             cards[0][1] = null;
 
-            // set the second hand to be unclear
+            // set the second hand to be unclear and no stand
             clear[1] = false;
+            stand[1] = false;
 
             // reset card count for both hand and recompute
             for (int i = 0; i < MAX_HAND; i++)
@@ -107,6 +109,7 @@ namespace Blackjack
         public bool HasFiveCardCharlie(int handIndex = 0) => rank[handIndex] == HandRank.FiveCardCharlie;
         public Card GetCard(int handIndex, int cardIndex) => cards[handIndex][cardIndex];
         public bool HasAllClear() => clear[0] && clear[1];
+        public bool HasAllStand() => stand[0] && stand[1];
 
         /// <summary>
         /// Method to obtain the card count in a specific hand

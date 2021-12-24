@@ -94,44 +94,36 @@ namespace Blackjack
         }
 
         /// <summary>
-        /// Method to activate bet label component and modify its text
+        /// Method to reset a player's global hand label and bet label
         /// </summary>
-        /// <param name="index">index of the player</param>
-        /// <param name="amount">amount of wagers</param>
-        /// <param name="perfectPair">amount of perfect pair wagers</param>
-        public void SetBetLabel(int index, int amount, int perfectPair = 0)
+        /// <param name="playerIndex">index of the player</param>
+        public void HideBetAndHandLabelForSingle(int playerIndex)
         {
-            betLabels[index].Switch(true);
-            betLabels[index].tmp.text = $"{amount:C0}" + (perfectPair > 0 ? $"<color=\"yellow\">({perfectPair:C0})</color>" : "");
+            betLabels[playerIndex].Switch(false);
+            playerHandLabel[playerIndex].Switch(false);
         }
-        
+
         /// <summary>
         /// Method to update player's bet label during the game,
         /// this function might be called when player decides to 
         /// double down or split
         /// </summary>
-        /// <param name="index">index of the player</param>
+        /// <param name="playerIndex">index of the player</param>
         /// <param name="bet">bet data from the player</param>
-        public void UpdateBetLabel(int index, Bet bet)
+        public void UpdateBetLabel(int playerIndex, Bet bet)
         {
             // initialize text 
-            var text = "";
+            var text = $"{ bet.anteWager + bet.doubleWager:C0}";
 
-            // setup bet label for first hand
-            if (bet.doubleWager == 0)
-                text = $"{bet.anteWager:C0}";
-            else
-                text = $"{bet.anteWager + bet.doubleWager:C0}";
-
-            // setup bet label for second hand
+            // expand the text if the player has second hand
             if (bet.anteWagerSplit > 0)
-                if (bet.doubleWagerSplit > 0)
-                    text += $"/<color=\"yellow\">({bet.anteWagerSplit + bet.doubleWagerSplit:C0})</color>";
-                else
-                    text += $"/<color=\"yellow\">({bet.anteWagerSplit:C0})</color>";
+                text += $"<color=\"yellow\">(" +
+                    $"{bet.anteWagerSplit + bet.doubleWagerSplit:C0})</color>";
+            else if (bet.perfectPairWager > 0)
+                text += $"<color=\"yellow\">({bet.perfectPairWager:C0})</color>";
 
             // apply changes to the text component 
-            betLabels[index].tmp.text = text;
+            betLabels[playerIndex].tmp.text = text;
         }
 
         /// <summary>
@@ -143,7 +135,7 @@ namespace Blackjack
         /// <param name="handIndex">index of the hand</param>
         /// <param name="hand">the hand data</param>
         /// <param name="bet">the bet data</param>
-        public void UpdateBetAndHandLabels(int playerIndex, int handIndex, Hand hand, Bet bet)
+        public void UpdateBetLabel(int playerIndex, int handIndex, Hand hand, Bet bet)
         {
             // update player's hand panel text
             playerHandLabel[playerIndex].tmp.text = hand.ToString(handIndex);
@@ -257,5 +249,7 @@ namespace Blackjack
         {
             localHandLabels[handIndex].bg.color = new Color(1f, 1f, 1f, alphaValue);
         }
+
+        
     }
 }

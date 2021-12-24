@@ -232,11 +232,13 @@ namespace Blackjack
             if (hand.HasBust(handIndex)) 
             {
                 SetDecisionPanelVisibility(ref triggerBust, false);
+                labelController.LocalPanelTransparency(handIndex, TRANSPARENCE_STAND);
                 labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteRed;
             }
             else if (hand.HasFiveCardCharlie(handIndex))
             {
                 SetDecisionPanelVisibility(ref triggerFiveCards, false);
+                labelController.LocalPanelTransparency(handIndex, TRANSPARENCE_STAND);
                 labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteGreen;
             }
             else if (hand.HasBlackjack(handIndex))
@@ -252,24 +254,28 @@ namespace Blackjack
         /// </summary>
         void DetermineFinisher()
         {
-            // check hand index
-            if (handIndex == 0)
-            {
-                // if this is the first hand, then the player finishes the turn
-                FinishTurn();
+            // clear current hand 
+            tableController.ClearSinglePlayerSingleHand(playerIndex, handIndex);
 
-                // before clearing the player, check to see if he has a second hand
-                // that is waiting to be checked
-                if (tableController.GetPlayerHand(playerIndex).stand[1])
-                    // if he doesn, then just clear the first hand and remain the second hand
-                    tableController.ClearSinglePlayerSingleHand(playerIndex, handIndex);
-                else
-                    // otherwise, clear everything from the player
-                    tableController.ClearSinglePlayer(playerIndex);
-            }
+            // get player's hand data
+            var hand = tableController.GetPlayerHand(playerIndex);
+
+            // if player's hands are all cleared or stood, finish the turn
+            if (hand.HasAllClear() || hand.HasAllStand())
+                FinishTurn();
             else
-                // if this is not the first hand, then just clear the current hand
-                tableController.ClearSinglePlayerSingleHand(playerIndex, handIndex);
+            {
+                // otherwise, set handIndex to be the remaining hand
+                handIndex = !hand.stand[0] ? 0 : 1;
+
+                // reset player's global hand label background
+                labelController.playerHandLabel[playerIndex].bg.sprite =
+                    labelController.labelSpriteTransparent;
+
+                // display decision panel and update local hand panel's transparency
+                SetDecisionPanelVisibility(ref triggerStand, true);
+                labelController.LocalPanelTransparency(handIndex, TRANSPARENCE_NORMAL);
+            }
         }
 
         /// <summary>
@@ -395,8 +401,7 @@ namespace Blackjack
                     tableController.FiveCardCharlie(playerIndex, handIndex);
                     triggerFiveCards = false;
                     yield return new WaitForSeconds(WAIT_TIME_COMPARE);
-                    DetermineFinisher();
-                    
+                    DetermineFinisher();                    
                 }
 
                 yield return new WaitForSeconds(Time.deltaTime);
@@ -428,7 +433,8 @@ namespace Blackjack
 
             // consume player's chip
             gameManager.players[playerIndex].EditPlayerChip(-value);
-            labelController.SetBetLabel(playerIndex, bets[playerIndex].anteWager);
+            labelController.betLabels[playerIndex].Switch(true);
+            labelController.UpdateBetLabel(playerIndex, bets[playerIndex]);
         }
 
         /// <summary>
@@ -443,7 +449,7 @@ namespace Blackjack
 
             // consume player's chip
             gameManager.players[playerIndex].EditPlayerChip(-value);
-            labelController.SetBetLabel(playerIndex, bets[playerIndex].anteWager, bets[playerIndex].perfectPairWager);
+            labelController.UpdateBetLabel(playerIndex, bets[playerIndex]);
         }
 
         /// <summary>

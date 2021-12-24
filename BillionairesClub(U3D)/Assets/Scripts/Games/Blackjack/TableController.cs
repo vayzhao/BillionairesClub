@@ -61,8 +61,8 @@ namespace Blackjack
         {
             // setup card deck (notice that blackjack uses 6~8 decks of cards)
             cardDeck = new CardDeck(CARD_DECK_COUNT);
-            //cardDeck.Shuffle();
-            cardDeck.DebugDeck_Blackjack();
+            cardDeck.Shuffle();
+            //cardDeck.DebugDeck_Blackjack();
 
             // setup hand evaluator for dealer and players
             dealerHand = new Hand();
@@ -416,8 +416,8 @@ namespace Blackjack
                 // each player has up to 2 hands
                 for (int j = 0; j < MAX_HAND; j++)
                 {
-                    // skip this iteration if 'n' hand is not stood
-                    if (!playerHands[i].stand[j])
+                    // skip this iteration if 'n' hand is already cleared
+                    if (playerHands[i].clear[j])
                         continue;
 
                     // compre the 'n' hand to dealer's hand
@@ -440,10 +440,10 @@ namespace Blackjack
                     // change the hand label background image to indicate who win and who lose
                     labelController.SetHandRankLabelColor(i, result);
                     yield return new WaitForSeconds(WAIT_TIME_COMPARE);
-                }
 
-                // clean the player after comparison
-                ClearSinglePlayer(i);
+                    // clear player's compared hand
+                    ClearSinglePlayerSingleHand(i, j);
+                }
             }
         }
 
@@ -665,6 +665,10 @@ namespace Blackjack
             }
         }
 
+        /// <summary>
+        /// Method for player splitting his hand
+        /// </summary>
+        /// <param name="playerIndex">index of the player</param>
         public void OnPlayerSplit(int playerIndex)
         {
             // split player's hand
@@ -674,8 +678,6 @@ namespace Blackjack
             var card = playerHands[playerIndex].GetCard(1, 0);
             playerCardsObj[playerIndex][0][1].SetActive(false);
             playerCardsObj[playerIndex][1][0].SetCard(card);
-
-
 
             // update label display
             labelController.SplitHand(playerIndex, playerHands[playerIndex], 
@@ -783,7 +785,8 @@ namespace Blackjack
                     continue;
 
                 // remove perfect pair wager number from bet label text
-                labelController.SetBetLabel(i, playerAction.bets[i].anteWager);
+                playerAction.bets[i].perfectPairWager = 0;
+                labelController.UpdateBetLabel(i, playerAction.bets[i]);
 
                 // reset player hand label color
                 labelController.playerHandLabel[i].bg.sprite = labelController.labelSpriteTransparent;
@@ -821,9 +824,6 @@ namespace Blackjack
             // display the result with floating text
             labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
 
-            // hide the bet label
-            labelController.betLabels[playerIndex].Switch(false);
-
             // play the wager animator
             wagerAnimator.Play();
         }
@@ -854,30 +854,22 @@ namespace Blackjack
             // display the result with floating text
             labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
             
-            // hide the bet label
-            // labelController.betLabels[playerIndex].Switch(false);
-
             // play the wager animator
             wagerAnimator.Play();
         }
 
         /// <summary>
-        /// Method to clear one single player out of the table
+        /// Method to clear a player's cards, wagers and labels according to 
+        /// a given hand index. Also detect if there is any remaining hand
+        /// after one hand is cleared, if all hands are cleared, hide 
+        /// player's bet and hand label
         /// </summary>
         /// <param name="playerIndex">index of the player</param>
-        public void ClearSinglePlayer(int playerIndex)
-        {
-            // hide player's bet label and global hand panel
-            labelController.betLabels[playerIndex].Switch(false);
-            labelController.playerHandLabel[playerIndex].Switch(false);
-
-            // clear player's card object and wager stack object
-            for (int i = 0; i < MAX_HAND; i++)
-                ClearSinglePlayerSingleHand(playerIndex, i);
-        }
+        /// <param name="handIndex">index of the hand</param>
         public void ClearSinglePlayerSingleHand(int playerIndex, int handIndex)
         {
             // clear the given hand
+            playerHands[playerIndex].stand[handIndex] = true;
             playerHands[playerIndex].clear[handIndex] = true;
 
             // hide player's card object in the specific hand
@@ -888,9 +880,9 @@ namespace Blackjack
             if (!gameManager.players[playerIndex].isNPC)
                 labelController.ResetLocalHandVisibilityForSingle(handIndex);
 
-            // hide player's wager stacks and edit bet label
+            // clear up the wager stack model
             if (handIndex == 0)
-            {
+            {   
                 ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_ANTE);
                 ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_DOUBLE);
             }
@@ -898,6 +890,27 @@ namespace Blackjack
             {
                 ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_BONUS_SPLITE_WAGER);
                 ClearWagerStackForSingleSlot(playerIndex, WAGER_INDEX_SPLIT_DOUBLE);
+            }
+
+            // when clearing the first hand, check to see if the second hand is cleared as
+            // well, if the second hand is not cleared, edit bet&hand label
+            if (handIndex == 0 && !playerHands[playerIndex].clear[1])
+            {
+                labelController.UpdateBetLabel(playerIndex, 1,
+                        playerHands[playerIndex], playerAction.bets[playerIndex]);
+            }
+            // when clearing the second hand, check to see if the first hand is cleared as
+            // well, if the first hand is not cleared, edit bet&hand label
+            else if (handIndex == 1 && !playerHands[playerIndex].clear[0])
+            {
+                labelController.UpdateBetLabel(playerIndex, 0,
+                        playerHands[playerIndex], playerAction.bets[playerIndex]);
+            }
+            // otherwise, this must be both of player's hand are cleared, we can safely
+            // hide player's bet and hand labels
+            else
+            {
+                labelController.HideBetAndHandLabelForSingle(playerIndex);
             }
         }
     }
