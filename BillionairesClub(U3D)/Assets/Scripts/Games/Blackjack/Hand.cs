@@ -250,7 +250,7 @@ namespace Blackjack
                 dealer.rank[dealerHandIndex] == HandRank.Value)
             {
                 var playerValue = GetHighestSum(handIndex);
-                var dealerValue = dealer.GetHighestSum(handIndex);
+                var dealerValue = dealer.GetHighestSum(0);
                 return playerValue > dealerValue ? Result.Win : playerValue < dealerValue ? Result.Lose : Result.Standoff;
             }
 

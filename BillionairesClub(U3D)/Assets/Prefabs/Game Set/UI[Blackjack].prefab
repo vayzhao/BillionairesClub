@@ -16046,7 +16046,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 203634330204331937}
         m_TargetAssemblyTypeName: Blackjack.PlayerAction, Assembly-CSharp
-        m_MethodName: Hit
+        m_MethodName: HitTrigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16581,7 +16581,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 203634330204331937}
         m_TargetAssemblyTypeName: Blackjack.PlayerAction, Assembly-CSharp
-        m_MethodName: DoubleDown
+        m_MethodName: DoubleDownTrigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23775,7 +23775,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 203634330204331937}
         m_TargetAssemblyTypeName: Blackjack.PlayerAction, Assembly-CSharp
-        m_MethodName: Split
+        m_MethodName: SplitTrigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24208,7 +24208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 203634330204331937}
         m_TargetAssemblyTypeName: Blackjack.PlayerAction, Assembly-CSharp
-        m_MethodName: Stand
+        m_MethodName: StandTrigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

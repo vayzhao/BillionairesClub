@@ -11,6 +11,7 @@ public static class Const
     public const float WAIT_TIME_DEAL = 0.25f;
     public const float WAIT_TIME_DECISION = 0.1f;
     public const float WAIT_TIME_COMPARE = 3f;
+    public const float WAIT_TIME_COMPARE_FAST = 1.5f;
     public const float WAIT_TIME_CHIP_TOTAL = 1f;
     public const float WAIT_TIME_CHIP_TRAVEL = 0.2f;
     public const float WAIT_TIME_LABEL_FLOAT = 1.5f;

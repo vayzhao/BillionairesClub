@@ -123,6 +123,7 @@ namespace Blackjack
 
                 // finally dealer decides whether or not to continue the game
                 yield return tableController.DealerDecision();
+                yield return new WaitForSeconds(WAIT_TIME_SHORTPAUSE);
             }
         }
 
@@ -158,7 +159,7 @@ namespace Blackjack
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    // TODO: call AI betting method
+                    playerAction.BetAnteWagerAI(checkIndex);
                     yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     continue;
                 }
@@ -189,7 +190,7 @@ namespace Blackjack
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    // TODO: call AI betting method
+                    playerAction.BetPerfectPairAI(checkIndex);
                     yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     continue;
                 }
@@ -220,7 +221,7 @@ namespace Blackjack
                 // bet automatically if the 'n' player is a NPC
                 if (players[checkIndex].isNPC)
                 {
-                    // TODO: call AI betting method
+                    playerAction.BetInsuranceWagerAI(checkIndex);
                     yield return new WaitForSeconds(WAIT_TIME_DECISION);
                     continue;
                 }
@@ -252,8 +253,7 @@ namespace Blackjack
                 // making decision for AI players
                 if (players[checkIndex].isNPC)
                 {
-                    // TODO: call AI betting method
-                    yield return new WaitForSeconds(WAIT_TIME_DECISION);
+                    yield return playerAction.DecidingAI(checkIndex);
                     continue;
                 }
 

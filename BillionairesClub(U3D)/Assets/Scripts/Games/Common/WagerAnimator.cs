@@ -72,7 +72,7 @@ public class WagerAnimator : MonoBehaviour
     {
         // compute the interval, more animations in the list, faster it plays
         var interval = Const.WAIT_TIME_CHIP_TOTAL / animations.Count;
-
+        
         // keep playing animations until there is none
         while (animations.Count > 0)
         {

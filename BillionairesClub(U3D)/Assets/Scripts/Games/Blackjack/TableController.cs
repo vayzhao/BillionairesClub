@@ -347,7 +347,7 @@ namespace Blackjack
                 labelController.insuranceBets[i].Switch(false);
                 labelController.FloatText(message, labelController.insuranceBets[i].transform.position, 60f, 3f, 0.3f);
 
-                yield return new WaitForSeconds(WAIT_TIME_COMPARE);
+                yield return new WaitForSeconds(WAIT_TIME_COMPARE_FAST);
             }
 
             // clear insurance relevent objects and UI
@@ -371,7 +371,7 @@ namespace Blackjack
             // dealer keep drawing cards
             while (dealerHand.GetHighestSum() < 17 && !dealerHand.HasFiveCardCharlie())
             {
-                yield return new WaitForSeconds(WAIT_TIME_DEAL * 4);
+                yield return new WaitForSeconds(WAIT_TIME_SHORTPAUSE);
 
                 // deal a card for dealer
                 var card = DrawACard();
@@ -439,7 +439,7 @@ namespace Blackjack
 
                     // change the hand label background image to indicate who win and who lose
                     labelController.SetHandRankLabelColor(i, result);
-                    yield return new WaitForSeconds(WAIT_TIME_COMPARE);
+                    yield return new WaitForSeconds(WAIT_TIME_COMPARE_FAST);
 
                     // clear player's compared hand
                     ClearSinglePlayerSingleHand(i, j);
@@ -679,9 +679,16 @@ namespace Blackjack
             playerCardsObj[playerIndex][0][1].SetActive(false);
             playerCardsObj[playerIndex][1][0].SetCard(card);
 
-            // update label display
-            labelController.SplitHand(playerIndex, playerHands[playerIndex], 
+            // update player hand label(local)
+            if (!gameManager.players[playerIndex].isNPC)
+            {
+                labelController.SplitHand(playerIndex, playerHands[playerIndex],
                 GetCardSprite(card.GetCardIndex()));
+            }
+
+            // update player hand label(global)
+            labelController.playerHandLabel[playerIndex].tmp.text =
+                playerHands[playerIndex].ToString();
         }
 
         /// <summary>
@@ -774,7 +781,7 @@ namespace Blackjack
                 // calculate 'n' player's win & loss
                 PerfectPairResult(i);
                 
-                yield return new WaitForSeconds(WAIT_TIME_COMPARE);
+                yield return new WaitForSeconds(WAIT_TIME_COMPARE_FAST);
             }
 
             // clear perfect pair relevent objects and UI
@@ -822,6 +829,7 @@ namespace Blackjack
             }
 
             // display the result with floating text
+            labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteRed;
             labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
 
             // play the wager animator
@@ -852,6 +860,7 @@ namespace Blackjack
             }
 
             // display the result with floating text
+            labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteGreen;
             labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
             
             // play the wager animator

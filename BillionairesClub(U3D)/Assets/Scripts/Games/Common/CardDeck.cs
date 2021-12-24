@@ -55,10 +55,10 @@ public class CardDeck
             cards.Add(new Card(Suit.Heart, Value.ACE)); // player
             cards.Add(new Card(Suit.Heart, Value.KING)); // dealer
             cards.Add(new Card(Suit.Heart, Value.ACE)); // player 
-            cards.Add(new Card(Suit.Spade, Value.KING)); // dealer
-            cards.Add(new Card(Suit.Diamond, Value.KING)); // player or dealer
-            cards.Add(new Card(Suit.Spade, Value.TWO)); // player or dealer
-            cards.Add(new Card(Suit.Diamond, Value.TWO)); // player or dealer
+            cards.Add(new Card(Suit.Spade, Value.SEVEN)); // dealer
+            cards.Add(new Card(Suit.Diamond, Value.SIX)); // player or dealer
+            cards.Add(new Card(Suit.Spade, Value.SEVEN)); // player or dealer
+            cards.Add(new Card(Suit.Diamond, Value.SIX)); // player or dealer
             cards.Add(new Card(Suit.Heart, Value.TWO)); // player or dealer
             cards.Add(new Card(Suit.Heart, Value.ACE)); // player or dealer
             cards.Add(new Card(Suit.Heart, Value.ACE)); // player or dealer

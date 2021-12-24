@@ -235,9 +235,6 @@ namespace Blackjack
 
             // reveal the second card in the first hand 
             RevealACard(splittedCardSprite, 0, 1);
-
-            // update player hand global label
-            playerHandLabel[playerIndex].tmp.text = hand.ToString();
         }
 
         /// <summary>
