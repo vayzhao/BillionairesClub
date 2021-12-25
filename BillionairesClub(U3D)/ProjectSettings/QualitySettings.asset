@@ -122,7 +122,7 @@ QualitySettings:
     PS4: 2
     PSP2: 1
     Stadia: 2
-    Standalone: 2
+    Standalone: 0
     WebGL: 1
     Windows Store Apps: 2
     XboxOne: 2

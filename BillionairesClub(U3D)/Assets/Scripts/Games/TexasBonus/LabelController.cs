@@ -109,7 +109,7 @@ namespace TexasBonus
                 $"<color=\"red\">{amountChange:C0}</color>";
 
             // display the text
-            FloatText(message, betLabels[index].transform.position, 60f, 3f, 0.3f);
+            FloatText(message, betLabels[index].transform.position);
         }
 
         /// <summary>

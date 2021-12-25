@@ -32,6 +32,7 @@ namespace Blackjack
         public TableController tableController; // the label controller script
 
         private int handIndex;                  // player's current hand index
+        private bool splitted;                  // determine if the player has splitted once
         private bool triggerHit;                // a switchable trigger for hit function
         private bool triggerStand;              // a switchable trigger for stand function
         private bool triggerDouble;             // a switchable trigger for double function
@@ -103,6 +104,7 @@ namespace Blackjack
         {
             // switch waiting state to be true and record the playerIndex and bet type
             this.isWaiting = true;
+            this.splitted = false;
             this.playerIndex = playerIndex;
 
             // if the player has blackjack, then automatically stand
@@ -122,7 +124,7 @@ namespace Blackjack
                 var hand = tableController.GetPlayerHand(playerIndex);
                 var rank = hand.GetSum();
                 btn_double.Switch(rank >= 9 && rank <= 11);
-                btn_split.Switch(hand.IsPairSameValue());
+                btn_split.Switch(hand.IsPairSameValue() && !splitted);
             }
         }
 
@@ -143,19 +145,12 @@ namespace Blackjack
             // when displaying the panel
             if (flag)
             {
-                // switch off the double down & split button
-                btn_double.Switch(false);
+                // switch off split button
                 btn_split.Switch(false);
 
-                // if the  tplayer haswo cards only, detect whether or not
-                // we need to enable double down button again
-                var hand = tableController.GetPlayerHand(playerIndex);
-                if (hand.GetCardCount(handIndex) == 2) 
-                {
-                    var rank = hand.GetSum(handIndex);
-                    if (rank >= 9 && rank <= 11)
-                        btn_double.Switch(true);
-                }
+                // check to see if double down button should be enabled
+                btn_double.Switch(IsDoubleDownable(
+                    tableController.GetPlayerHand(playerIndex), handIndex));
             }
         }
 
@@ -198,6 +193,10 @@ namespace Blackjack
             // get player's hand data
             var hand = tableController.GetPlayerHand(playerIndex);
 
+            // reset player's global hand label background
+            labelController.playerHandLabel[playerIndex].bg.sprite =
+                labelController.labelSpriteTransparent;
+
             // if player's hands are all cleared or stood, finish the turn
             if (hand.HasAllClear() || hand.HasAllStand())
                 FinishTurn();
@@ -206,10 +205,6 @@ namespace Blackjack
                 // otherwise, set handIndex to be the remaining hand
                 handIndex = !hand.stand[0] ? 0 : 1;
 
-                // reset player's global hand label background
-                labelController.playerHandLabel[playerIndex].bg.sprite =
-                    labelController.labelSpriteTransparent;
-
                 // display decision panel and update local hand panel's transparency
                 if (!gameManager.players[playerIndex].isNPC) 
                 {
@@ -217,6 +212,20 @@ namespace Blackjack
                     labelController.LocalPanelTransparency(handIndex, TRANSPARENCE_NORMAL);
                 }
             }
+        }
+
+        /// <summary>
+        /// Method to determine whether or not a specific hand is able to double down
+        /// </summary>
+        /// <param name="hand">hand data</param>
+        /// <param name="handIndex">hand index</param>
+        /// <returns></returns>
+        bool IsDoubleDownable(Hand hand, int handIndex)
+        {
+            var sum = hand.GetSum(handIndex);
+            var sumSoft = hand.GetSumSoft(handIndex);
+            var count = hand.GetCardCount(handIndex);
+            return count == 2 && ((sum >= 9 && sum <= 11) || (sumSoft >= 9 && sumSoft <= 11));
         }
 
         /// <summary>
@@ -276,11 +285,11 @@ namespace Blackjack
                 return;
             }
 
-            // switch off the trigger and display the panel again
-            SetDecisionPanelVisibility(ref triggerHit, true);
-
             // execute hit code
             Hit();
+
+            // switch off the trigger and display the panel again
+            SetDecisionPanelVisibility(ref triggerHit, true);
 
             // detect whether or not the player need to stop hitting
             DetectBreaker();
@@ -360,6 +369,7 @@ namespace Blackjack
 
             // set handIndex to be 1 
             handIndex = 1;
+            splitted = true;
         }
         public void SplitTrigger()
         {
@@ -450,6 +460,7 @@ namespace Blackjack
             // initialize playerIndex & handIndex
             handIndex = 0;
             this.isWaiting = true;
+            this.splitted = false;
             this.playerIndex = playerIndex;
 
             // get the AI player's hand
@@ -490,7 +501,7 @@ namespace Blackjack
                 // enum behaviour possibilities
                 var lookForFiveCard = count == 4 && sum <= 18;
                 var doubleDownAble = count == 2 && sum >= 9 && sum <= 11;
-                var splitAble = count == 2 && handIndex == 0 && hand.IsPairSameValue();
+                var splitAble = count == 2 && !splitted && hand.IsPairSameValue();
 
                 // double down when the sum is 10 or 11
                 if (doubleDownAble && (sum >= 10))
@@ -565,7 +576,7 @@ namespace Blackjack
         }
         public void BetPerfectPairAI(int playerIndex)
         {
-            // randomly select an value for ante wager ($5~$150)
+            // randomly select an value for perfect pair wager ($5~$150)
             var value = chipValues[0] * UnityEngine.Random.Range(1, 30);
 
             // create some poker chip models to represent the bot's wager
@@ -592,8 +603,9 @@ namespace Blackjack
         }
         public void BetInsuranceWagerAI(int playerIndex)
         {
-            // randomly select an value for ante wager ($5~$150)
-            var value = bets[playerIndex].anteWager / 2;
+            // randomly select an value for insurance wager (up to half of ante)
+            var maxQty = bets[playerIndex].anteWager / chipValues[0] / 2;
+            var value = chipValues[0] * UnityEngine.Random.Range(1, maxQty);
 
             // create some poker chip models to represent the bot's wager
             tableController.InstantiateWagerStack(playerIndex, WAGER_INDEX_INSURANCE, value);

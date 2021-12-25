@@ -134,10 +134,10 @@ public class Loading : MonoBehaviour
     {
         // setup a loader
         loader = new Loader();
-        loader.RegisterLoadingMethod(0.2f, LoadSceneEnvironment);
-        loader.RegisterLoadingMethod(0.4f, LoadCharacterController);
-        loader.RegisterLoadingMethod(0.6f, LoadCasinoManager);
-        loader.RegisterLoadingMethod(0.8f, LoadUIManager);
+        loader.RegisterLoadingMethod(0.1f, LoadSceneEnvironment);
+        loader.RegisterLoadingMethod(0.2f, LoadCharacterController);
+        loader.RegisterLoadingMethod(0.3f, LoadCasinoManager);
+        loader.RegisterLoadingMethod(0.4f, LoadUIManager);
 
         // set this scene to be active
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(SCENE_INCASINO));
@@ -153,10 +153,10 @@ public class Loading : MonoBehaviour
     {
         // setup a loader
         loader = new Loader();
-        loader.RegisterLoadingMethod(0.2f, LoadSceneEnvironment);
-        loader.RegisterLoadingMethod(0.4f, LoadTableCharacters);
-        loader.RegisterLoadingMethod(0.6f, LoadUIManager);
-        loader.RegisterLoadingMethod(0.8f, LoadTexasBonusManager);
+        loader.RegisterLoadingMethod(0.1f, LoadSceneEnvironment);
+        loader.RegisterLoadingMethod(0.2f, LoadTableCharacters);
+        loader.RegisterLoadingMethod(0.3f, LoadUIManager);
+        loader.RegisterLoadingMethod(0.4f, LoadTexasBonusManager);
 
         // set this scene to be active 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(SCENE_TEXAS));
@@ -172,10 +172,10 @@ public class Loading : MonoBehaviour
     {
         // setup a loader
         loader = new Loader();
-        loader.RegisterLoadingMethod(0.2f, LoadSceneEnvironment);
-        loader.RegisterLoadingMethod(0.4f, LoadTableCharacters);
-        loader.RegisterLoadingMethod(0.6f, LoadUIManager);
-        loader.RegisterLoadingMethod(0.8f, LoadBlackjackManager);
+        loader.RegisterLoadingMethod(0.1f, LoadSceneEnvironment);
+        loader.RegisterLoadingMethod(0.2f, LoadTableCharacters);
+        loader.RegisterLoadingMethod(0.3f, LoadUIManager);
+        loader.RegisterLoadingMethod(0.4f, LoadBlackjackManager);
 
         // set this scene to be active
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(SCENE_BLACKJACK));
@@ -429,8 +429,7 @@ public class Loading : MonoBehaviour
         var environment = Instantiate(pref_environment);
         environment.name = "Environmental Objects";
 
-        // setup canvas & spawn holder
-        SetupCanvas();
+        // setup spawn holder
         SetupSpawnHolder();
 
         // add the spawned object into the visible object list
@@ -623,7 +622,7 @@ public class Loading : MonoBehaviour
         obj_gameManager.GetComponent<Blackjack.GameManager>().FinishedLoading();
 
         // setup previous scene name
-        SCENE_PREVIOUS = SCENE_TEXAS;
+        SCENE_PREVIOUS = SCENE_BLACKJACK;
 
         // start the background music again
         audioManager.srcBgm.clip = audioManager.bgm1;

@@ -156,15 +156,15 @@ namespace Blackjack
 
         /// <summary>
         /// Method to detect whether or not the player has blackjack by
-        /// finding an ace and a picture from the first two cards
+        /// finding an ace and a ten from the first two cards
         /// </summary>
-        /// <param name="handIndex"></param>
+        /// <param name="handIndex">index of the hand</param>
         void DetectBlackjack(int handIndex = 0)
         {
             // run through the first two cards and see if there
-            // is an ace and a picture
+            // is an ace and a ten
             var hasAce = false;
-            var hasPicture = false;
+            var hasTen = false;
             for (int i = 0; i < cardCount[handIndex]; i++)
             {
                 switch (cards[handIndex][i].value)
@@ -172,10 +172,11 @@ namespace Blackjack
                     case Value.ACE:
                         hasAce = true;
                         break;
+                    case Value.TEN:
                     case Value.JACK:
                     case Value.QUEEN:
                     case Value.KING:
-                        hasPicture = true;
+                        hasTen = true;
                         break;
                     default:
                         break;
@@ -183,7 +184,7 @@ namespace Blackjack
             }
 
             // if the player has blackjack, set rank to be 21
-            if (hasAce && hasPicture)
+            if (hasAce && hasTen)
             {
                 sum[handIndex] = 21;
                 rank[handIndex] = HandRank.Blackjack;

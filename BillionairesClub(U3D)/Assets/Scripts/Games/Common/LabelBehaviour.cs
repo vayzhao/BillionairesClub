@@ -18,6 +18,8 @@ public class LabelBehaviour : MonoBehaviour
     [Tooltip("Default sprite for the card back")]
     public Sprite defaultTexture;
 
+    private Transform canvas;
+
     /// <summary>
     /// A method to spawn a text mesh pro object displaying a message 
     /// to players, and then constantly moving upward and fading out
@@ -27,13 +29,16 @@ public class LabelBehaviour : MonoBehaviour
     /// <param name="size">size of the text</param>
     /// <param name="duration">display time</param>
     /// <param name="speed">speed for upward movement</param>
-    public void FloatText(string str, Vector3 pos, float size, float duration, float speed)
+    public void FloatText(string str, Vector3 pos, float size = 60f, float duration = 3f, float speed = 50f)
     {
+        // setup canvas if it has not been setup
+        if (canvas == null)
+            canvas = GameObject.FindGameObjectWithTag("Canvas").transform;
+
         // first of all, create an empty game object in canvans
         // and then add text mesh pro component onto it
-        var obj = Instantiate(new GameObject(), Blackboard.canvas);
-        var tmp = obj.AddComponent<TextMeshProUGUI>();
-
+        var obj = Instantiate(new GameObject(), canvas);
+        var tmp = obj.AddComponent<TextMeshProUGUI>();        
         // modify the text
         tmp.text = str;
         tmp.fontSize = size;
@@ -58,7 +63,7 @@ public class LabelBehaviour : MonoBehaviour
             duration -= Time.deltaTime;
 
             // update position & color
-            tmp.transform.position += Vector3.up * speed;
+            tmp.transform.position += Vector3.up * speed * Time.deltaTime;
             tmp.color = new Color(1f, 1f, 1f, Mathf.Lerp(1f, 0f, timer / duration));
 
             yield return new WaitForSeconds(Time.deltaTime);

@@ -32,11 +32,6 @@ public static class Blackboard
     }
     #endregion
 
-    #region Canvas
-    public static Transform canvas;
-    public static void SetupCanvas() => canvas = GameObject.FindGameObjectWithTag("Canvas").transform;
-    #endregion
-
     #region Character Prefabs
     public static string[] modelName = new string[12]
     {

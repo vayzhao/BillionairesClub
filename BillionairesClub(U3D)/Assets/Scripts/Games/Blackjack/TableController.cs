@@ -263,31 +263,24 @@ namespace Blackjack
                     }
                 }
 
-                // and deal a card for dealer
-                card = DrawACard();
-                dealerHand.AddCard(card);
-                dealerCardsObj[i].SetCard(card);
-                audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
-
-                // in the first iteration, display dealer's hand label
-                // and detect insurance trigger
+                // at the end of the first iteration, deal 1 card to the dealer
                 if (i == 0)
                 {
-                    CheckInsuranceTrigger(card.value == Value.ACE);
-                    labelController.dealerHandLabel.Display($"{dealerHand.GetSum()}" + 
-                        (dealerHand.GetSumSoft() > 0 ? $"/{dealerHand.GetSumSoft()}" : ""));
-                }
-                // in the second iteration, make dealer's second card face-down
-                else if (i == 1)
-                {
-                    dealerCardsObj[i].transform.localEulerAngles = new Vector3(0f, 0f, 180f);
-                }
+                    // draw a card
+                    card = DrawACard();
+                    dealerHand.AddCard(card);
+                    dealerCardsObj[0].SetCard(card);
+                    audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
+                    labelController.dealerHandLabel.Display(dealerHand.ToString());
 
+                    // switch insurance trigger on when the dealer's first card is an ace
+                    CheckInsuranceTrigger(card.value == Value.ACE);
+                }
                 yield return new WaitForSeconds(WAIT_TIME_DEAL);
             }
 
             // check if anyone has a pair to start with
-            DetectPairHand();
+            DetectPairHand();            
         }
 
         /// <summary>
@@ -345,7 +338,7 @@ namespace Blackjack
                 // play wager animation and display the result with a floating text
                 wagerAnimator.Play();
                 labelController.insuranceBets[i].Switch(false);
-                labelController.FloatText(message, labelController.insuranceBets[i].transform.position, 60f, 3f, 0.3f);
+                labelController.FloatText(message, labelController.insuranceBets[i].transform.position);
 
                 yield return new WaitForSeconds(WAIT_TIME_COMPARE_FAST);
             }
@@ -366,6 +359,15 @@ namespace Blackjack
         /// Method for the dealer to continue draw cards until its hand reaches 17
         /// </summary>
         /// <returns></returns>
+        void DealerHit()
+        {
+            // draw a card for dealer
+            var card = DrawACard();
+            dealerHand.AddCard(card);
+            dealerCardsObj[dealerHand.GetCardCount() - 1].SetCard(card);
+            audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
+            labelController.dealerHandLabel.tmp.text = dealerHand.ToString();
+        }
         IEnumerator DealTill17()
         {
             // dealer keep drawing cards
@@ -374,11 +376,7 @@ namespace Blackjack
                 yield return new WaitForSeconds(WAIT_TIME_SHORTPAUSE);
 
                 // deal a card for dealer
-                var card = DrawACard();
-                dealerHand.AddCard(card);
-                dealerCardsObj[dealerHand.GetCardCount() - 1].SetCard(card);
-                audioManager.PlayAudio(audioManager.clipDealCards, AudioType.Sfx);
-                labelController.dealerHandLabel.tmp.text = dealerHand.ToString();
+                DealerHit();
 
                 // if the dealer busts, change dealer label background color to red
                 if (dealerHand.HasBust())
@@ -512,7 +510,7 @@ namespace Blackjack
             // play the wager animation and display float text
             wagerAnimator.Play();
             labelController.FloatText($"<color=\"green\">+{rewardDisplay:C0}</color>",
-                labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
+                labelController.betLabels[playerIndex].transform.position);
         }
 
         /// <summary>
@@ -555,7 +553,7 @@ namespace Blackjack
             // play the wager animation and display float text
             wagerAnimator.Play();
             labelController.FloatText($"<color=\"red\">+{loss:C0}</color>",
-                labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
+                labelController.betLabels[playerIndex].transform.position);
         }
 
         /// <summary>
@@ -593,9 +591,8 @@ namespace Blackjack
             if (!hasInsuranceBet && !hasUnclearPlayer)
                 yield break;
 
-            // otherwise, reveal dealer's second card
-            dealerCardsObj[1].transform.localEulerAngles = Vector3.zero;
-            labelController.dealerHandLabel.tmp.text = dealerHand.ToString();
+            // otherwise, draw a card for dealer
+            DealerHit();
 
             // compare player's win & lose in insurance section
             if (hasInsuranceBet)
@@ -757,7 +754,7 @@ namespace Blackjack
 
             // play wager animation and display the result with a floating text
             wagerAnimator.Play();
-            labelController.FloatText(message, labelController.betLabels[index].transform.position, 60f, 3f, 0.3f);
+            labelController.FloatText(message, labelController.betLabels[index].transform.position);
         }
 
         /// <summary>
@@ -830,7 +827,7 @@ namespace Blackjack
 
             // display the result with floating text
             labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteRed;
-            labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
+            labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position);
 
             // play the wager animator
             wagerAnimator.Play();
@@ -861,7 +858,7 @@ namespace Blackjack
 
             // display the result with floating text
             labelController.playerHandLabel[playerIndex].bg.sprite = labelController.labelSpriteGreen;
-            labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position, 60f, 3f, 0.3f);
+            labelController.FloatText(message, labelController.betLabels[playerIndex].transform.position);
             
             // play the wager animator
             wagerAnimator.Play();

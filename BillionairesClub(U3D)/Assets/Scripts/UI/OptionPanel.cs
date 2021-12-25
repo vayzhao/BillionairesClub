@@ -14,7 +14,7 @@ public class OptionPanel : MonoBehaviour
     public static float volEnvironment = 0f; // default value for environment volume
     public static float volSfx = 0f;         // default value for sfx volume
     public static float volUI = 0f;          // default value for UI
-    public static int qualityLevel = 2;      // default value for quality level
+    public static int qualityLevel = 0;      // default value for quality level
     public static int resolutionIndex = -1;  // default value for resolution index
 
     private const float VOL_MIN = -10f;  // minimum value for the volume slider

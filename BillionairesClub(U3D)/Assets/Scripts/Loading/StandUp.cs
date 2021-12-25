@@ -47,6 +47,7 @@ public class StandUp : MonoBehaviour
                 FindObjectOfType<TexasBonus.GameManager>().StopAllCoroutines();
                 break;
             case GameType.Blackjack:
+                FindObjectOfType<Blackjack.GameManager>().StopAllCoroutines();
                 break;
             default:
                 break;
