@@ -106,7 +106,7 @@ public class LoadingBar : MonoBehaviour
         // reset message refresh timer
         messageRefreshTimer = 0f;
 
-        // return if the loading message is ran out
+        // return if the there is no more message to display
         if (loadingMessages.Count == 0)
             return;
 

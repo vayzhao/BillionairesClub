@@ -3,17 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Buttons
-  - Option
-  - Seat
-  - CancelButton
-  - ChipBlack
-  - ChipBlue
-  - ChipPink
-  - ChipRed
-  - ChipYellow
-  - Canvas
+  tags: []
   layers:
   - Default
   - TransparentFX

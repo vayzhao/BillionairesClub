@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CardDeck
 { 
-    private List<Card> cards;     // list of card that repersent the card-deck
-    private int pointerIndex;     // the index of current drawing card
-    private System.Random rd;     // the random generator for card shuffling
+    private List<Card> cards; // list of card that repersent the card-deck
+    private int cardIndex;    // the index of current drawing card
+    private System.Random rd; // the random generator for card shuffling
     
     public CardDeck()
     {
@@ -35,7 +35,7 @@ public class CardDeck
     public void DebugDeck_TexasBonus()
     {
         cards = new List<Card>();
-        pointerIndex = 0;
+        cardIndex = 0;
         cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer hand 1
         cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer hand 2
         cards.Add(new Card(Suit.Heart, Value.ACE)); // flop1
@@ -49,7 +49,7 @@ public class CardDeck
     public void DebugDeck_Blackjack()
     {
         cards = new List<Card>();
-        pointerIndex = 0;
+        cardIndex = 0;
         for (int i = 0; i < 20; i++)
         {
             cards.Add(new Card(Suit.Heart, Value.ACE)); // player
@@ -71,8 +71,8 @@ public class CardDeck
     /// </summary>
     public void Shuffle()
     {
-        // reset pointer index
-        pointerIndex = 0;
+        // reset card index
+        cardIndex = 0;
 
         // play shuffle sound effect
         Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipShuffling, AudioType.Sfx);
@@ -97,10 +97,10 @@ public class CardDeck
     public Card DrawACard()
     {
         // find the 'n' card 
-        var card = cards[pointerIndex];
+        var card = cards[cardIndex];
 
-        // increment the pointer index
-        pointerIndex++;
+        // increment the card index
+        cardIndex++;
 
         return card;
     }
@@ -109,5 +109,5 @@ public class CardDeck
     /// Method to get number of remaining cards in the card deck
     /// </summary>
     /// <returns></returns>
-    public int GetRemaining() => cards.Count - pointerIndex;
+    public int GetRemaining() => cards.Count - cardIndex;
 }
