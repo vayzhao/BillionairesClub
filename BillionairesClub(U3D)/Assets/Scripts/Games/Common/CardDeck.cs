@@ -3,30 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CardDeck
-{ 
-    private List<Card> cards; // list of card that repersent the card-deck
-    private int cardIndex;    // the index of current drawing card
-    private System.Random rd; // the random generator for card shuffling
-    
+{
+    const int CARD_SUIT_COUNT = 4;      // number of suit in a card deck
+    const int CARD_VALUE_COUNT = 13;    // number of value in a suit
+    const int CARD_COUNT_PER_DECK = 52; // total number of cards in a card deck
+
+    private Card[] cards;               // array of card that repersent the card-deck
+    private int cardIndex;              // the index of current drawing card
+    private System.Random rd;           // the random generator for card shuffling
+
     public CardDeck()
     {
-        cards = new List<Card>();
+        // initialize the card deck array and random generator
+        cards = new Card[CARD_COUNT_PER_DECK];
         rd = new System.Random();
 
-        foreach (Suit suit in Enum.GetValues(typeof(Suit)))
-            foreach (Value value in Enum.GetValues(typeof(Value)))
-                cards.Add(new Card(suit, value));
+        // setting up every elemenet in the card deck
+        for (int i = 0; i < CARD_SUIT_COUNT; i++)
+            for (int j = 0; j < CARD_VALUE_COUNT; j++)
+                cards[i * CARD_VALUE_COUNT + j] = new Card((Suit)i, (Value)j);
     }
 
     public CardDeck(int multiplier)
     {
-        cards = new List<Card>();
+        // initialize the card deck array and random generator
+        cards = new Card[CARD_COUNT_PER_DECK * multiplier];
         rd = new System.Random();
 
-        for (int i = 0; i < multiplier; i++)
-            foreach (Suit suit in Enum.GetValues(typeof(Suit)))
-                foreach (Value value in Enum.GetValues(typeof(Value)))
-                    cards.Add(new Card(suit, value));
+        // setting up every elemenet in the card deck
+        for (int i = 0; i < multiplier; i++) 
+            for (int j = 0; j < CARD_SUIT_COUNT; j++)
+                for (int k = 0; k < CARD_VALUE_COUNT; k++)
+                    cards[j * CARD_VALUE_COUNT + k] = new Card((Suit)j, (Value)k);
     }
 
     /// <summary>
@@ -34,36 +42,31 @@ public class CardDeck
     /// </summary>
     public void DebugDeck_TexasBonus()
     {
-        cards = new List<Card>();
+        cards = new Card[9];
         cardIndex = 0;
-        cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer hand 1
-        cards.Add(new Card(Suit.Heart, Value.ACE)); // dealer hand 2
-        cards.Add(new Card(Suit.Heart, Value.ACE)); // flop1
-        cards.Add(new Card(Suit.Spade, Value.THREE)); // flop2
-        cards.Add(new Card(Suit.Diamond, Value.FOUR)); // flop3
-        cards.Add(new Card(Suit.Spade, Value.FIVE)); // turn
-        cards.Add(new Card(Suit.Diamond, Value.SIX)); // river
-        cards.Add(new Card(Suit.Heart, Value.SEVEN)); // player's hand 1
-        cards.Add(new Card(Suit.Heart, Value.ACE)); // player's hand 2
+        cards[0] = new Card(Suit.Heart, Value.ACE); // dealer's first card
+        cards[1] = new Card(Suit.Heart, Value.ACE); // dealer's second card
+        cards[2] = new Card(Suit.Heart, Value.ACE); // 1st community card
+        cards[3] = new Card(Suit.Heart, Value.ACE); // 2nd community card
+        cards[4] = new Card(Suit.Heart, Value.ACE); // 3rd community card
+        cards[5] = new Card(Suit.Heart, Value.ACE); // 4th community card
+        cards[6] = new Card(Suit.Heart, Value.ACE); // 5th community card
+        cards[7] = new Card(Suit.Heart, Value.ACE); // player's first card
+        cards[8] = new Card(Suit.Heart, Value.ACE); // player's second card
     }
     public void DebugDeck_Blackjack()
     {
-        cards = new List<Card>();
+        cards = new Card[9];
         cardIndex = 0;
-        for (int i = 0; i < 20; i++)
-        {
-            cards.Add(new Card(Suit.Heart, Value.ACE)); // player
-            cards.Add(new Card(Suit.Heart, Value.KING)); // dealer
-            cards.Add(new Card(Suit.Heart, Value.ACE)); // player 
-            cards.Add(new Card(Suit.Spade, Value.SEVEN)); // dealer
-            cards.Add(new Card(Suit.Diamond, Value.SIX)); // player or dealer
-            cards.Add(new Card(Suit.Spade, Value.SEVEN)); // player or dealer
-            cards.Add(new Card(Suit.Diamond, Value.SIX)); // player or dealer
-            cards.Add(new Card(Suit.Heart, Value.TWO)); // player or dealer
-            cards.Add(new Card(Suit.Heart, Value.ACE)); // player or dealer
-            cards.Add(new Card(Suit.Heart, Value.ACE)); // player or dealer
-        }
-        
+        cards[0] = new Card(Suit.Heart, Value.ACE); // player's first card
+        cards[1] = new Card(Suit.Heart, Value.ACE); // dealer's second card
+        cards[2] = new Card(Suit.Heart, Value.ACE); // player's second card
+        cards[3] = new Card(Suit.Heart, Value.ACE); // player or dealer's card
+        cards[4] = new Card(Suit.Heart, Value.ACE); // player or dealer's card
+        cards[5] = new Card(Suit.Heart, Value.ACE); // player or dealer's card
+        cards[6] = new Card(Suit.Heart, Value.ACE); // player or dealer's card
+        cards[7] = new Card(Suit.Heart, Value.ACE); // player or dealer's card
+        cards[8] = new Card(Suit.Heart, Value.ACE); // player or dealer's card
     }
 
     /// <summary>
@@ -78,7 +81,7 @@ public class CardDeck
         Blackboard.audioManager.PlayAudio(Blackboard.audioManager.clipShuffling, AudioType.Sfx);
 
         // shuffle the card deck
-        for (int i = cards.Count - 1; i > 0; i--)
+        for (int i = cards.Length - 1; i > 0; i--)
         {
             // randomly pick a card
             var j = rd.Next(0, i);
@@ -96,18 +99,16 @@ public class CardDeck
     /// <returns></returns>
     public Card DrawACard()
     {
-        // find the 'n' card 
-        var card = cards[cardIndex];
-
         // increment the card index
         cardIndex++;
 
-        return card;
+        // return the card 
+        return cards[cardIndex - 1];
     }
 
     /// <summary>
     /// Method to get number of remaining cards in the card deck
     /// </summary>
     /// <returns></returns>
-    public int GetRemaining() => cards.Count - cardIndex;
+    public int GetRemaining() => cards.Length - cardIndex;
 }
